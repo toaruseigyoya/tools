@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正規表現テスター | ツール集</title>
+    <style>
+        :root {
+            --indigo: #4f46e5;
+            --violet: #7c3aed;
+            --emerald: #059669;
+            --bg: #f5f6ff;
+            --surf: #fff;
+            --border: #e0e7ff;
+            --text: #1e1b4b;
+            --text2: #4c4980;
+            --muted: #8b87c0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e1b4b, #312e81);
+            color: #fff;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+        }
+
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: #e0e7ff;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #fff;
+        }
+
+        .container {
+            max-width: 860px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: var(--surf);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(79, 70, 229, 0.06);
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: monospace;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--indigo);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        input[type="text"] {
+            min-height: 40px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .flag-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .flag-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        input[type="checkbox"] {
+            cursor: pointer;
+            accent-color: var(--indigo);
+        }
+
+        .flag-item label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 400;
+        }
+
+        .pattern-presets {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .preset-btn {
+            padding: 6px 12px;
+            background: var(--surf);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            color: var(--text2);
+            transition: all 0.2s;
+        }
+
+        .preset-btn:hover {
+            background: #fafbff;
+            border-color: var(--indigo);
+            color: var(--indigo);
+        }
+
+        .result-section {
+            background: #fafbff;
+            border-left: 4px solid var(--indigo);
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .result-item {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            color: var(--text2);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .result-value {
+            font-size: 14px;
+            color: var(--indigo);
+            margin-top: 4px;
+            font-weight: 600;
+        }
+
+        .match-list {
+            background: var(--surf);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 10px;
+            margin-top: 8px;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .match-item {
+            padding: 6px;
+            border-bottom: 1px solid var(--border);
+            font-family: monospace;
+            word-break: break-all;
+        }
+
+        .match-item:last-child {
+            border-bottom: none;
+        }
+
+        .match-group {
+            color: var(--text2);
+            font-size: 11px;
+            margin-top: 2px;
+        }
+
+        .highlight {
+            background-color: #ffeb3b;
+            padding: 2px 4px;
+            border-radius: 2px;
+        }
+
+        .error-message {
+            background: #fee;
+            border: 1px solid #fcc;
+            color: #c33;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+            font-size: 13px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        footer {
+            background: var(--surf);
+            border-top: 1px solid var(--border);
+            padding: 20px;
+            text-align: center;
+            color: var(--text2);
+            font-size: 13px;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: var(--indigo);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: var(--violet);
+        }
+
+        @media (max-width: 860px) {
+            .container {
+                margin: 20px auto;
+            }
+
+            header h1 {
+                font-size: 22px;
+            }
+
+            .flag-group {
+                gap: 12px;
+            }
+
+            .pattern-presets {
+                gap: 6px;
+            }
+
+            .preset-btn {
+                padding: 5px 10px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>正規表現テスター</h1>
+        <a class="back-link" href="../">← ツール一覧へ戻る</a>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <div class="form-group">
+                <label for="pattern">正規表現パターン</label>
+                <input type="text" id="pattern" placeholder="^[a-zA-Z0-9]+$" oninput="test()">
+                <div class="flag-group">
+                    <div class="flag-item">
+                        <input type="checkbox" id="flagG" onchange="test()">
+                        <label for="flagG">グローバル (g)</label>
+                    </div>
+                    <div class="flag-item">
+                        <input type="checkbox" id="flagI" onchange="test()">
+                        <label for="flagI">大文字小文字区別なし (i)</label>
+                    </div>
+                    <div class="flag-item">
+                        <input type="checkbox" id="flagM" onchange="test()">
+                        <label for="flagM">複数行 (m)</label>
+                    </div>
+                    <div class="flag-item">
+                        <input type="checkbox" id="flagS" onchange="test()">
+                        <label for="flagS">任意文字 (s)</label>
+                    </div>
+                </div>
+
+                <label style="margin-top: 12px; margin-bottom: 6px;">よく使うパターン</label>
+                <div class="pattern-presets">
+                    <button class="preset-btn" onclick="setPattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')">メール</button>
+                    <button class="preset-btn" onclick="setPattern('^(0\\d{1,4}-?\\d{1,4}-?\\d{4}|0\\d{9,10})$')">電話番号</button>
+                    <button class="preset-btn" onclick="setPattern('^https?://[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}')">URL</button>
+                    <button class="preset-btn" onclick="setPattern('^\\d{3}-\\d{4}$')">郵便番号</button>
+                    <button class="preset-btn" onclick="setPattern('^\\d{4}-\\d{2}-\\d{2}$')">日付</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="testText">テスト対象テキスト</label>
+                <textarea id="testText" placeholder="テストするテキストを入力..." oninput="test()"></textarea>
+            </div>
+
+            <div id="error" class="error-message hidden"></div>
+
+            <div id="results" class="result-section hidden">
+                <div class="result-item">
+                    <span class="result-label">マッチ数</span>
+                    <span class="result-value" id="matchCount">-</span>
+                </div>
+
+                <div class="result-item" id="matchListSection" style="border-bottom: none;">
+                    <span class="result-label">マッチした文字列</span>
+                    <div class="match-list" id="matchList"></div>
+                </div>
+            </div>
+
+            <div id="highlightResult" style="margin-top: 20px; display: none;">
+                <label style="display: block; margin-bottom: 8px; font-weight: 500;">ハイライト表示</label>
+                <div style="background: var(--surf); border: 1px solid var(--border); border-radius: 8px; padding: 12px; font-size: 13px; font-family: monospace; word-break: break-word; line-height: 1.6; white-space: pre-wrap;" id="highlighted"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 とある制御屋のツール集</p>
+        <p>
+            <a href="../">ツール一覧</a> | <a href="https://toaruseigyoya.github.io/">サイト</a>
+        </p>
+    </footer>
+
+    <script>
+        function setPattern(pattern) {
+            document.getElementById('pattern').value = pattern;
+            test();
+        }
+
+        function test() {
+            const patternStr = document.getElementById('pattern').value;
+            const testText = document.getElementById('testText').value;
+            const flagG = document.getElementById('flagG').checked;
+            const flagI = document.getElementById('flagI').checked;
+            const flagM = document.getElementById('flagM').checked;
+            const flagS = document.getElementById('flagS').checked;
+
+            const errorDiv = document.getElementById('error');
+            const resultsDiv = document.getElementById('results');
+            const highlightDiv = document.getElementById('highlightResult');
+
+            errorDiv.classList.add('hidden');
+            resultsDiv.classList.add('hidden');
+            highlightDiv.style.display = 'none';
+
+            if (!patternStr || !testText) {
+                return;
+            }
+
+            try {
+                let flags = '';
+                if (flagG) flags += 'g';
+                if (flagI) flags += 'i';
+                if (flagM) flags += 'm';
+                if (flagS) flags += 's';
+
+                const regex = new RegExp(patternStr, flags);
+
+                let matches = [];
+                if (flagG) {
+                    let match;
+                    while ((match = regex.exec(testText)) !== null) {
+                        matches.push({
+                            text: match[0],
+                            groups: match.slice(1),
+                            index: match.index
+                        });
+                    }
+                } else {
+                    const match = regex.exec(testText);
+                    if (match) {
+                        matches.push({
+                            text: match[0],
+                            groups: match.slice(1),
+                            index: match.index
+                        });
+                    }
+                }
+
+                document.getElementById('matchCount').textContent = matches.length;
+
+                // マッチリスト表示
+                const matchListDiv = document.getElementById('matchList');
+                if (matches.length > 0) {
+                    matchListDiv.innerHTML = matches.map((m, i) => {
+                        let html = `<div class="match-item">
+                            <strong>#${i + 1}:</strong> ${escapeHtml(m.text)}`;
+                        if (m.groups.length > 0) {
+                            html += '<div class="match-group">';
+                            m.groups.forEach((g, idx) => {
+                                if (g !== undefined) {
+                                    html += `グループ ${idx + 1}: ${escapeHtml(g)}<br>`;
+                                }
+                            });
+                            html += '</div>';
+                        }
+                        html += '</div>';
+                        return html;
+                    }).join('');
+                } else {
+                    matchListDiv.innerHTML = '<div style="color: var(--text2); font-size: 12px;">マッチなし</div>';
+                }
+
+                // ハイライト表示
+                if (matches.length > 0 && flagG) {
+                    let highlighted = testText;
+                    let offset = 0;
+
+                    matches.forEach(m => {
+                        const startIdx = m.index + offset;
+                        const endIdx = startIdx + m.text.length;
+                        highlighted = highlighted.slice(0, startIdx) +
+                                    '<span class="highlight">' + escapeHtml(m.text) + '</span>' +
+                                    highlighted.slice(endIdx);
+                        offset += 27 + 7; // <span class="highlight"> と </span> の長さ
+                    });
+
+                    document.getElementById('highlighted').innerHTML = highlighted;
+                    highlightDiv.style.display = 'block';
+                }
+
+                resultsDiv.classList.remove('hidden');
+
+            } catch (e) {
+                errorDiv.textContent = 'エラー: ' + e.message;
+                errorDiv.classList.remove('hidden');
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>

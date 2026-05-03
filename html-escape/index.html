@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTMLエスケープ | ツール集</title>
+  <style>
+    :root {
+      --indigo: #4f46e5;
+      --violet: #7c3aed;
+      --emerald: #059669;
+      --bg: #f5f6ff;
+      --surf: #fff;
+      --border: #e0e7ff;
+      --text: #1e1b4b;
+      --text2: #4c4980;
+      --muted: #8b87c0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e1b4b, #312e81);
+      color: #fff;
+      padding: 24px 20px;
+      margin-bottom: 32px;
+    }
+
+    header h1 {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    header a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      opacity: 0.9;
+      transition: opacity 0.2s;
+    }
+
+    header a:hover {
+      opacity: 1;
+    }
+
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 20px 40px;
+    }
+
+    .card {
+      background: var(--surf);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(79, 70, 229, 0.06);
+      margin-bottom: 24px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+      font-size: 14px;
+      resize: vertical;
+      margin-bottom: 12px;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: var(--indigo);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+
+    .button-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--indigo), var(--violet));
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+    }
+
+    .btn-secondary {
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: #f3f4ff;
+      border-color: var(--text2);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .stat {
+      background: var(--bg);
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--text2);
+      margin-bottom: 4px;
+    }
+
+    .stat-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--indigo);
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px 20px;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+      font-size: 12px;
+      color: var(--text2);
+    }
+
+    footer a {
+      color: var(--indigo);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-links {
+      margin-top: 12px;
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 860px) {
+      header h1 {
+        font-size: 24px;
+      }
+
+      main {
+        padding: 0 16px 32px;
+      }
+
+      .card {
+        padding: 16px;
+      }
+
+      .button-group {
+        flex-direction: column;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>HTMLエスケープ</h1>
+    <a href="../">← ツール一覧へ戻る</a>
+  </header>
+
+  <main>
+    <div class="card">
+      <div class="card-title">入力テキスト</div>
+      <textarea id="inputText" placeholder="HTMLエスケープしたいテキストを入力してください"></textarea>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-label">入力文字数</div>
+          <div class="stat-value" id="inputLength">0</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">変換後文字数</div>
+          <div class="stat-value" id="outputLength">0</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-group">
+      <button class="btn-primary" onclick="escape_text()">エスケープ</button>
+      <button class="btn-primary" onclick="unescape_text()">アンエスケープ</button>
+      <button class="btn-secondary" onclick="swap_text()">入れ替え</button>
+      <button class="btn-secondary" onclick="copy_output()">コピー</button>
+      <button class="btn-secondary" onclick="clear_all()">クリア</button>
+    </div>
+
+    <div class="card">
+      <div class="card-title">変換結果</div>
+      <textarea id="outputText" placeholder="変換結果がここに表示されます" readonly></textarea>
+    </div>
+  </main>
+
+  <footer>
+    © 2026 とある制御屋のツール集
+    <div class="footer-links">
+      <a href="../">ツール一覧へ戻る</a>
+      <a href="https://toaruseigyoya.github.io/">公式サイト</a>
+    </div>
+  </footer>
+
+  <script>
+    const inputText = document.getElementById('inputText');
+    const outputText = document.getElementById('outputText');
+    const inputLengthSpan = document.getElementById('inputLength');
+    const outputLengthSpan = document.getElementById('outputLength');
+
+    function updateStats() {
+      inputLengthSpan.textContent = inputText.value.length;
+      outputLengthSpan.textContent = outputText.value.length;
+    }
+
+    function escape_text() {
+      const text = inputText.value;
+      outputText.value = text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+      updateStats();
+    }
+
+    function unescape_text() {
+      const text = inputText.value;
+      outputText.value = text
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'")
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&amp;/g, '&');
+      updateStats();
+    }
+
+    function swap_text() {
+      const temp = inputText.value;
+      inputText.value = outputText.value;
+      outputText.value = temp;
+      updateStats();
+    }
+
+    function copy_output() {
+      outputText.select();
+      document.execCommand('copy');
+      alert('変換結果をコピーしました');
+    }
+
+    function clear_all() {
+      inputText.value = '';
+      outputText.value = '';
+      updateStats();
+    }
+
+    inputText.addEventListener('input', updateStats);
+  </script>
+</body>
+</html>

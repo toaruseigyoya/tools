@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ダミーテキスト生成 | ツール集</title>
+    <style>
+        :root {
+            --indigo: #4f46e5;
+            --violet: #7c3aed;
+            --emerald: #059669;
+            --bg: #f5f6ff;
+            --surf: #fff;
+            --border: #e0e7ff;
+            --text: #1e1b4b;
+            --text2: #4c4980;
+            --muted: #8b87c0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e1b4b, #312e81);
+            color: #fff;
+            padding: 24px 20px;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        header a {
+            color: #a5b4fc;
+            text-decoration: none;
+            font-size: 14px;
+            display: inline-block;
+            margin-top: 8px;
+        }
+
+        header a:hover {
+            color: #fff;
+        }
+
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: var(--surf);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(79, 70, 229, 0.06);
+            margin-bottom: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tab-btn {
+            padding: 12px 16px;
+            background: none;
+            border: none;
+            color: var(--text2);
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s ease;
+            font-size: 14px;
+        }
+
+        .tab-btn.active {
+            color: var(--indigo);
+            border-bottom-color: var(--indigo);
+        }
+
+        .tab-btn:hover {
+            color: var(--text);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .control-group {
+            display: flex;
+            align-items: flex-end;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .input-group select {
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            background: var(--surf);
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        .input-group select:focus {
+            outline: none;
+            border-color: var(--indigo);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+        }
+
+        button {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--indigo), var(--violet));
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: var(--border);
+            color: var(--text);
+        }
+
+        .btn-secondary:hover {
+            background: #d5dce5;
+        }
+
+        .output-area {
+            position: relative;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: "Monaco", "Courier New", monospace;
+            font-size: 13px;
+            resize: vertical;
+            min-height: 300px;
+            color: var(--text);
+            background: #fafbff;
+            line-height: 1.6;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--indigo);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 8px 16px;
+            background: var(--border);
+            color: var(--text);
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            background: #d5dce5;
+        }
+
+        .copy-btn.copied {
+            background: var(--emerald);
+            color: #fff;
+        }
+
+        footer {
+            background: var(--surf);
+            border-top: 1px solid var(--border);
+            padding: 24px 20px;
+            margin-top: 48px;
+            text-align: center;
+            color: var(--text2);
+            font-size: 13px;
+        }
+
+        footer a {
+            color: var(--indigo);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 860px) {
+            .control-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+
+            .tabs {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>ダミーテキスト生成</h1>
+        <a href="../">← ツール一覧へ戻る</a>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('lorem')">Lorem Ipsum（英語）</button>
+                <button class="tab-btn" onclick="switchTab('japanese')">日本語ダミー</button>
+            </div>
+
+            <div id="lorem" class="tab-content active">
+                <div class="control-group">
+                    <div class="input-group" style="flex: 0 0 200px;">
+                        <label for="loremCount">段落数</label>
+                        <select id="loremCount">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3" selected>3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-primary" onclick="generateLorem()">生成</button>
+                    </div>
+                </div>
+
+                <div class="output-area">
+                    <button class="copy-btn" onclick="copyToClipboard('loremOutput')">コピー</button>
+                    <textarea id="loremOutput" readonly></textarea>
+                </div>
+            </div>
+
+            <div id="japanese" class="tab-content">
+                <div class="control-group">
+                    <div class="input-group" style="flex: 0 0 200px;">
+                        <label for="japaneseCount">段落数</label>
+                        <select id="japaneseCount">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3" selected>3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-primary" onclick="generateJapanese()">生成</button>
+                    </div>
+                </div>
+
+                <div class="output-area">
+                    <button class="copy-btn" onclick="copyToClipboard('japaneseOutput')">コピー</button>
+                    <textarea id="japaneseOutput" readonly></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 とある制御屋のツール集</p>
+        <p><a href="../">ツール一覧へ</a> | <a href="https://toaruseigyoya.github.io/">ホームサイト</a></p>
+    </footer>
+
+    <script>
+        const loremText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, sed ullamco. Mauris blandit ante. Sed accumsan pretium eros, ac hendrerit lorem.";
+
+        const japaneseSentences = [
+            "吾輩は猫である。名前はまだない。",
+            "どこで生れたかとんと見当がつかぬ。",
+            "何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。",
+            "吾輩はここで始めて人間というものを見た。",
+            "しかもあとで聞くところによるとそれは書生という人間中で一番獰悪な種族であったそうだ。",
+            "この書生というのは時々我々を捕えて煮て食うという話である。",
+            "しかしその当時は何という考えもなかったから別段恐しいとも思わなかった。",
+            "ただ彼の掌に載せられてスーと持ち上げられた時何だかふわふわした感じがあったばかりである。",
+            "掌の上で少し落ちついて書生の顔を見たのがこれが初めての人間観察であった。",
+            "この時妙なことに気がついた。",
+            "書生の顔の真中がぼんやりと白くなっている。",
+            "そこへ向けて書生が呼吸をしている。",
+            " srbずっと以前のことであるから記憶も定かでないが、おそらくは世話をしてくれた隣りの三毛猫から多くをきいたのであろう。",
+            "それはともかくとして、この書生という人間は、背が低い。",
+            "そして眼鏡をかけている。",
+            "この二つの特徴だけでも既にこの書生の将来の不幸は予知されるのである。",
+            "書生は我々猫族の天敵であるという事は既に述べた。",
+            "そのうえこの書生の如きは最下等の書生である。",
+            "頭の毛が薄い。",
+            "顔は長くて色が蒼白い。"
+        ];
+
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function generateLorem() {
+            const count = parseInt(document.getElementById('loremCount').value);
+            const paragraphs = [];
+
+            for (let i = 0; i < count; i++) {
+                paragraphs.push(loremText);
+            }
+
+            document.getElementById('loremOutput').value = paragraphs.join('\n\n');
+        }
+
+        function generateJapanese() {
+            const count = parseInt(document.getElementById('japaneseCount').value);
+            const paragraphs = [];
+
+            for (let i = 0; i < count; i++) {
+                const shuffled = [...japaneseSentences].sort(() => Math.random() - 0.5);
+                const selected = shuffled.slice(0, Math.floor(Math.random() * 5) + 3).join('');
+                paragraphs.push(selected);
+            }
+
+            document.getElementById('japaneseOutput').value = paragraphs.join('\n\n');
+        }
+
+        function copyToClipboard(elementId) {
+            const textarea = document.getElementById(elementId);
+            textarea.select();
+            document.execCommand('copy');
+
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = 'コピーしました！';
+            btn.classList.add('copied');
+
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+
+        // Generate initial Lorem Ipsum
+        generateLorem();
+    </script>
+</body>
+</html>

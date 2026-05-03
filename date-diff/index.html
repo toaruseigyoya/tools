@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>日数計算 | ツール集</title>
+  <style>
+    :root {
+      --indigo: #4f46e5;
+      --violet: #7c3aed;
+      --emerald: #059669;
+      --bg: #f5f6ff;
+      --surf: #fff;
+      --border: #e0e7ff;
+      --text: #1e1b4b;
+      --text2: #4c4980;
+      --muted: #8b87c0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e1b4b, #312e81);
+      color: #fff;
+      padding: 24px 20px;
+      margin-bottom: 32px;
+    }
+
+    header h1 {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    header a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      opacity: 0.9;
+      transition: opacity 0.2s;
+    }
+
+    header a:hover {
+      opacity: 1;
+    }
+
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 20px 40px;
+    }
+
+    .card {
+      background: var(--surf);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(79, 70, 229, 0.06);
+      margin-bottom: 24px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .date-group {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    input[type="date"] {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    input[type="date"]:focus {
+      outline: none;
+      border-color: var(--indigo);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+
+    button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--indigo), var(--violet));
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+    }
+
+    .btn-secondary {
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: #f3f4ff;
+      border-color: var(--text2);
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .result-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .result-label {
+      font-size: 13px;
+      color: var(--text2);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .result-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--indigo);
+      word-break: break-word;
+    }
+
+    .result-subtext {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px 20px;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+      font-size: 12px;
+      color: var(--text2);
+    }
+
+    footer a {
+      color: var(--indigo);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-links {
+      margin-top: 12px;
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 860px) {
+      header h1 {
+        font-size: 24px;
+      }
+
+      main {
+        padding: 0 16px 32px;
+      }
+
+      .card {
+        padding: 16px;
+      }
+
+      .date-group {
+        grid-template-columns: 1fr;
+      }
+
+      .results-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>日数計算</h1>
+    <a href="../">← ツール一覧へ戻る</a>
+  </header>
+
+  <main>
+    <div class="card">
+      <div class="card-title">日付を選択</div>
+      <div class="date-group">
+        <div>
+          <label style="display: block; font-size: 13px; color: var(--text2); margin-bottom: 4px;">開始日</label>
+          <input type="date" id="startDate" onchange="calculate()">
+        </div>
+        <div>
+          <label style="display: block; font-size: 13px; color: var(--text2); margin-bottom: 4px;">終了日</label>
+          <input type="date" id="endDate" onchange="calculate()">
+        </div>
+      </div>
+      <button class="btn-secondary" onclick="setToday()" style="width: 100%; margin-bottom: 12px;">今日を開始日に設定</button>
+    </div>
+
+    <div class="card">
+      <div class="card-title">計算結果</div>
+      <div class="results-grid" id="results">
+        <div class="result-card">
+          <div class="result-label">日数</div>
+          <div class="result-value" id="days">0</div>
+          <div class="result-subtext">日</div>
+        </div>
+        <div class="result-card">
+          <div class="result-label">週数</div>
+          <div class="result-value" id="weeks">0</div>
+          <div class="result-subtext" id="weekSubtext">週</div>
+        </div>
+        <div class="result-card">
+          <div class="result-label">年数</div>
+          <div class="result-value" id="years">0</div>
+          <div class="result-subtext" id="yearSubtext">年</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2026 とある制御屋のツール集
+    <div class="footer-links">
+      <a href="../">ツール一覧へ戻る</a>
+      <a href="https://toaruseigyoya.github.io/">公式サイト</a>
+    </div>
+  </footer>
+
+  <script>
+    function setToday() {
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('startDate').value = today;
+      calculate();
+    }
+
+    function getOneYearLater(dateStr) {
+      const date = new Date(dateStr);
+      date.setFullYear(date.getFullYear() + 1);
+      return date.toISOString().split('T')[0];
+    }
+
+    function calculate() {
+      const startStr = document.getElementById('startDate').value;
+      const endStr = document.getElementById('endDate').value;
+
+      if (!startStr || !endStr) return;
+
+      const start = new Date(startStr);
+      const end = new Date(endStr);
+
+      // 計算
+      const diffTime = Math.abs(end - start);
+      const days = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      const weeks = Math.floor(days / 7);
+      const remainDays = days % 7;
+
+      // 年数計算
+      let years = 0;
+      let tempDate = new Date(start);
+      while (new Date(tempDate.getFullYear() + 1, tempDate.getMonth(), tempDate.getDate()) <= end) {
+        years++;
+        tempDate.setFullYear(tempDate.getFullYear() + 1);
+      }
+      const remainDaysAfterYears = Math.ceil((end - tempDate) / (1000 * 60 * 60 * 24));
+
+      document.getElementById('days').textContent = days.toLocaleString('ja-JP');
+      document.getElementById('weeks').textContent = weeks;
+      document.getElementById('weekSubtext').textContent = remainDays > 0 ? `週 ${remainDays}日` : '週';
+      document.getElementById('years').textContent = years;
+      document.getElementById('yearSubtext').textContent = remainDaysAfterYears > 0 ? `年 ${remainDaysAfterYears}日` : '年';
+    }
+
+    // 初期化
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('startDate').value = today;
+    document.getElementById('endDate').value = getOneYearLater(today);
+    calculate();
+  </script>
+</body>
+</html>

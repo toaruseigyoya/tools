@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カラーコード変換 | ツール集</title>
+    <style>
+        :root {
+            --indigo: #4f46e5;
+            --violet: #7c3aed;
+            --emerald: #059669;
+            --bg: #f5f6ff;
+            --surf: #fff;
+            --border: #e0e7ff;
+            --text: #1e1b4b;
+            --text2: #4c4980;
+            --muted: #8b87c0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e1b4b, #312e81);
+            color: #fff;
+            padding: 24px 20px;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        header a {
+            color: #a5b4fc;
+            text-decoration: none;
+            font-size: 14px;
+            display: inline-block;
+            margin-top: 8px;
+        }
+
+        header a:hover {
+            color: #fff;
+        }
+
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: var(--surf);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(79, 70, 229, 0.06);
+            margin-bottom: 20px;
+        }
+
+        .preview-section {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .color-preview {
+            width: 160px;
+            height: 160px;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+        }
+
+        .picker-section {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        input[type="color"] {
+            width: 100px;
+            height: 100px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            background: #fff;
+        }
+
+        input[type="color"]::-webkit-color-swatch-wrapper {
+            padding: 4px;
+        }
+
+        input[type="color"]::-webkit-color-swatch {
+            border: none;
+            border-radius: 8px;
+        }
+
+        .input-section {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .format-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .format-group label {
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .format-inputs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .format-inputs input {
+            flex: 1;
+        }
+
+        .format-inputs.rgb input {
+            flex: 0 0 calc(33.33% - 6px);
+        }
+
+        .format-inputs.hsl input {
+            flex: 0 0 calc(33.33% - 6px);
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            padding: 10px 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            color: var(--text);
+            background: #fafbff;
+            transition: border-color 0.2s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--indigo);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .copy-btn {
+            padding: 8px 12px;
+            background: var(--border);
+            color: var(--text);
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .copy-btn:hover {
+            background: #d5dce5;
+        }
+
+        .copy-btn.copied {
+            background: var(--emerald);
+            color: #fff;
+        }
+
+        footer {
+            background: var(--surf);
+            border-top: 1px solid var(--border);
+            padding: 24px 20px;
+            margin-top: 48px;
+            text-align: center;
+            color: var(--text2);
+            font-size: 13px;
+        }
+
+        footer a {
+            color: var(--indigo);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .hex-input-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hex-input-group input {
+            flex: 1;
+        }
+
+        @media (max-width: 860px) {
+            .color-preview {
+                width: 120px;
+                height: 120px;
+            }
+
+            input[type="color"] {
+                width: 80px;
+                height: 80px;
+            }
+
+            .format-inputs {
+                flex-wrap: wrap;
+            }
+
+            .format-inputs input {
+                flex: 1 1 calc(50% - 4px);
+            }
+
+            .format-inputs.rgb input {
+                flex: 1 1 calc(50% - 4px);
+            }
+
+            .format-inputs.hsl input {
+                flex: 1 1 calc(50% - 4px);
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>カラーコード変換</h1>
+        <a href="../">← ツール一覧へ戻る</a>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <div class="picker-section">
+                <input type="color" id="colorPicker" value="#4f46e5" oninput="updateFromPicker()">
+            </div>
+
+            <div class="preview-section">
+                <div class="color-preview" id="colorPreview"></div>
+            </div>
+
+            <div class="input-section">
+                <div class="format-group">
+                    <label>HEX</label>
+                    <div class="hex-input-group">
+                        <input type="text" id="hexInput" placeholder="#FFFFFF" oninput="updateFromHex()">
+                        <button class="copy-btn" onclick="copyValue('hexInput')">コピー</button>
+                    </div>
+                </div>
+
+                <div class="format-group">
+                    <label>RGB</label>
+                    <div class="format-inputs rgb">
+                        <input type="number" id="rgbR" min="0" max="255" placeholder="R (0-255)" oninput="updateFromRGB()">
+                        <input type="number" id="rgbG" min="0" max="255" placeholder="G (0-255)" oninput="updateFromRGB()">
+                        <input type="number" id="rgbB" min="0" max="255" placeholder="B (0-255)" oninput="updateFromRGB()">
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <input type="text" id="rgbOutput" readonly style="flex: 1; background: #f5f5f5;">
+                        <button class="copy-btn" onclick="copyValue('rgbOutput')">コピー</button>
+                    </div>
+                </div>
+
+                <div class="format-group">
+                    <label>HSL</label>
+                    <div class="format-inputs hsl">
+                        <input type="number" id="hslH" min="0" max="360" placeholder="H (0-360°)" oninput="updateFromHSL()">
+                        <input type="number" id="hslS" min="0" max="100" placeholder="S (0-100%)" oninput="updateFromHSL()">
+                        <input type="number" id="hslL" min="0" max="100" placeholder="L (0-100%)" oninput="updateFromHSL()">
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <input type="text" id="hslOutput" readonly style="flex: 1; background: #f5f5f5;">
+                        <button class="copy-btn" onclick="copyValue('hslOutput')">コピー</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 とある制御屋のツール集</p>
+        <p><a href="../">ツール一覧へ</a> | <a href="https://toaruseigyoya.github.io/">ホームサイト</a></p>
+    </footer>
+
+    <script>
+        function updateFromPicker() {
+            const hex = document.getElementById('colorPicker').value;
+            updateAllFormats(hex);
+        }
+
+        function updateFromHex() {
+            let hex = document.getElementById('hexInput').value.trim();
+
+            // Handle shorthand hex (#fff -> #ffffff)
+            if (hex.match(/^#[0-9a-fA-F]{3}$/)) {
+                hex = '#' + hex.slice(1).split('').map(c => c + c).join('');
+            }
+
+            if (!hex.match(/^#[0-9a-fA-F]{6}$/i)) {
+                return;
+            }
+
+            updateAllFormats(hex);
+        }
+
+        function updateFromRGB() {
+            const r = parseInt(document.getElementById('rgbR').value) || 0;
+            const g = parseInt(document.getElementById('rgbG').value) || 0;
+            const b = parseInt(document.getElementById('rgbB').value) || 0;
+
+            if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {
+                return;
+            }
+
+            const hex = '#' + [r, g, b].map(x => {
+                const hex = x.toString(16);
+                return hex.length === 1 ? '0' + hex : hex;
+            }).join('').toUpperCase();
+
+            updateAllFormats(hex);
+        }
+
+        function updateFromHSL() {
+            const h = parseInt(document.getElementById('hslH').value) || 0;
+            const s = parseInt(document.getElementById('hslS').value) || 0;
+            const l = parseInt(document.getElementById('hslL').value) || 0;
+
+            if (h < 0 || h > 360 || s < 0 || s > 100 || l < 0 || l > 100) {
+                return;
+            }
+
+            const hex = hslToHex(h, s, l);
+            updateAllFormats(hex);
+        }
+
+        function updateAllFormats(hex) {
+            // Update hex
+            document.getElementById('hexInput').value = hex.toUpperCase();
+            document.getElementById('colorPicker').value = hex;
+
+            // Convert to RGB
+            const rgb = hexToRgb(hex);
+            document.getElementById('rgbR').value = rgb.r;
+            document.getElementById('rgbG').value = rgb.g;
+            document.getElementById('rgbB').value = rgb.b;
+            document.getElementById('rgbOutput').value = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+
+            // Convert to HSL
+            const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+            document.getElementById('hslH').value = hsl.h;
+            document.getElementById('hslS').value = hsl.s;
+            document.getElementById('hslL').value = hsl.l;
+            document.getElementById('hslOutput').value = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+
+            // Update preview
+            document.getElementById('colorPreview').style.backgroundColor = hex;
+        }
+
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            };
+        }
+
+        function rgbToHsl(r, g, b) {
+            r /= 255;
+            g /= 255;
+            b /= 255;
+
+            const max = Math.max(r, g, b);
+            const min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
+
+            if (max === min) {
+                h = s = 0;
+            } else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+
+                switch (max) {
+                    case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+                    case g: h = ((b - r) / d + 2) / 6; break;
+                    case b: h = ((r - g) / d + 4) / 6; break;
+                }
+            }
+
+            return {
+                h: Math.round(h * 360),
+                s: Math.round(s * 100),
+                l: Math.round(l * 100)
+            };
+        }
+
+        function hslToHex(h, s, l) {
+            h /= 360;
+            s /= 100;
+            l /= 100;
+
+            let r, g, b;
+
+            if (s === 0) {
+                r = g = b = l;
+            } else {
+                const hue2rgb = (p, q, t) => {
+                    if (t < 0) t += 1;
+                    if (t > 1) t -= 1;
+                    if (t < 1/6) return p + (q - p) * 6 * t;
+                    if (t < 1/2) return q;
+                    if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                    return p;
+                };
+
+                const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                const p = 2 * l - q;
+
+                r = hue2rgb(p, q, h + 1/3);
+                g = hue2rgb(p, q, h);
+                b = hue2rgb(p, q, h - 1/3);
+            }
+
+            const toHex = (x) => {
+                const hex = Math.round(x * 255).toString(16);
+                return hex.length === 1 ? '0' + hex : hex;
+            };
+
+            return '#' + (toHex(r) + toHex(g) + toHex(b)).toUpperCase();
+        }
+
+        function copyValue(elementId) {
+            const input = document.getElementById(elementId);
+            if (!input.value) return;
+
+            input.select();
+            document.execCommand('copy');
+
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = 'コピーしました！';
+            btn.classList.add('copied');
+
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+
+        // Initialize with default color
+        updateAllFormats('#4f46e5');
+    </script>
+</body>
+</html>

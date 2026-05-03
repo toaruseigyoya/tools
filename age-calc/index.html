@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>年齢計算 | ツール集</title>
+    <style>
+        :root {
+            --indigo: #4f46e5;
+            --violet: #7c3aed;
+            --emerald: #059669;
+            --bg: #f5f6ff;
+            --surf: #fff;
+            --border: #e0e7ff;
+            --text: #1e1b4b;
+            --text2: #4c4980;
+            --muted: #8b87c0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e1b4b, #312e81);
+            color: #fff;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+        }
+
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: #e0e7ff;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #fff;
+        }
+
+        .container {
+            max-width: 860px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: var(--surf);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(79, 70, 229, 0.06);
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        input[type="date"],
+        input[type="text"] {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        input[type="date"]:focus,
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--indigo);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--indigo), var(--violet));
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--surf);
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .btn-secondary:hover {
+            background: #fafbff;
+            border-color: var(--indigo);
+        }
+
+        .result-section {
+            background: #fafbff;
+            border-left: 4px solid var(--indigo);
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            color: var(--text2);
+            font-size: 14px;
+        }
+
+        .result-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--indigo);
+        }
+
+        .info-box {
+            background: #f0f4ff;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+            font-size: 13px;
+            color: var(--text2);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        footer {
+            background: var(--surf);
+            border-top: 1px solid var(--border);
+            padding: 20px;
+            text-align: center;
+            color: var(--text2);
+            font-size: 13px;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: var(--indigo);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: var(--violet);
+        }
+
+        @media (max-width: 860px) {
+            .container {
+                margin: 20px auto;
+            }
+
+            header h1 {
+                font-size: 22px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+
+            .result-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>年齢計算</h1>
+        <a class="back-link" href="../">← ツール一覧へ戻る</a>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <div class="form-group">
+                <label for="birthDate">生年月日</label>
+                <input type="date" id="birthDate" placeholder="例: 1990-01-15">
+            </div>
+
+            <div class="form-group">
+                <label for="baseDate">基準日</label>
+                <input type="date" id="baseDate">
+            </div>
+
+            <div class="button-group">
+                <button class="btn-primary" onclick="calculate()">計算</button>
+                <button class="btn-secondary" onclick="setTodayAsBase()">今日を基準日に</button>
+            </div>
+
+            <div id="results" class="result-section hidden">
+                <div class="result-item">
+                    <span class="result-label">満年齢</span>
+                    <span class="result-value" id="ageValue">-</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">生後日数</span>
+                    <span class="result-value" id="daysValue">-</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">生後週数</span>
+                    <span class="result-value" id="weeksValue">-</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">次の誕生日まで</span>
+                    <span class="result-value" id="nextBirthdayValue">-</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">干支</span>
+                    <span class="result-value" id="zodicValue">-</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">星座</span>
+                    <span class="result-value" id="constellationValue">-</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 とある制御屋のツール集</p>
+        <p>
+            <a href="../">ツール一覧</a> | <a href="https://toaruseigyoya.github.io/">サイト</a>
+        </p>
+    </footer>
+
+    <script>
+        // 初期化: 基準日を今日に設定
+        function initializeDate() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const day = String(today.getDate()).padStart(2, '0');
+            document.getElementById('baseDate').value = `${year}-${month}-${day}`;
+        }
+
+        // 今日を基準日に設定
+        function setTodayAsBase() {
+            initializeDate();
+            calculate();
+        }
+
+        // 干支計算
+        function getZodiac(year) {
+            const zodiacs = ['鼠', '牛', '虎', '兎', '龍', '蛇', '馬', '羊', '猴', '鶏', '犬', '豚'];
+            return zodiacs[(year - 1900) % 12];
+        }
+
+        // 星座計算
+        function getConstellation(month, day) {
+            const constellations = [
+                { name: '山羊座', start: [12, 22], end: [1, 19] },
+                { name: '水瓶座', start: [1, 20], end: [2, 18] },
+                { name: '魚座', start: [2, 19], end: [3, 20] },
+                { name: '牡羊座', start: [3, 21], end: [4, 19] },
+                { name: '牡牛座', start: [4, 20], end: [5, 20] },
+                { name: '双子座', start: [5, 21], end: [6, 20] },
+                { name: '蟹座', start: [6, 21], end: [7, 22] },
+                { name: '獅子座', start: [7, 23], end: [8, 22] },
+                { name: '乙女座', start: [8, 23], end: [9, 22] },
+                { name: '天秤座', start: [9, 23], end: [10, 22] },
+                { name: '蠍座', start: [10, 23], end: [11, 21] },
+                { name: '射手座', start: [11, 22], end: [12, 21] }
+            ];
+
+            for (const c of constellations) {
+                const [sM, sD] = c.start;
+                const [eM, eD] = c.end;
+
+                if (sM === eM) {
+                    if (month === sM && day >= sD && day <= eD) return c.name;
+                } else if (sM > eM) {
+                    if ((month === sM && day >= sD) || (month === eM && day <= eD)) return c.name;
+                } else {
+                    if (month === sM && day >= sD || month === eM && day <= eD) return c.name;
+                }
+            }
+            return '不明';
+        }
+
+        function calculate() {
+            const birthDateStr = document.getElementById('birthDate').value;
+            const baseDateStr = document.getElementById('baseDate').value;
+
+            if (!birthDateStr || !baseDateStr) {
+                document.getElementById('results').classList.add('hidden');
+                return;
+            }
+
+            const birthDate = new Date(birthDateStr);
+            const baseDate = new Date(baseDateStr);
+
+            // 基準日が生年月日より前の場合
+            if (baseDate < birthDate) {
+                document.getElementById('results').classList.add('hidden');
+                return;
+            }
+
+            // 満年齢計算
+            let age = baseDate.getFullYear() - birthDate.getFullYear();
+            const monthDiff = baseDate.getMonth() - birthDate.getMonth();
+            const dayDiff = baseDate.getDate() - birthDate.getDate();
+
+            if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+                age--;
+            }
+
+            // 生後日数計算
+            const daysElapsed = Math.floor((baseDate - birthDate) / (1000 * 60 * 60 * 24));
+
+            // 生後週数計算
+            const weeksElapsed = Math.floor(daysElapsed / 7);
+
+            // 次の誕生日計算
+            let nextBirthday = new Date(baseDate.getFullYear(), birthDate.getMonth(), birthDate.getDate());
+            if (nextBirthday <= baseDate) {
+                nextBirthday = new Date(baseDate.getFullYear() + 1, birthDate.getMonth(), birthDate.getDate());
+            }
+            const daysToNextBirthday = Math.ceil((nextBirthday - baseDate) / (1000 * 60 * 60 * 24));
+
+            // 干支と星座
+            const zodiac = getZodiac(birthDate.getFullYear());
+            const constellation = getConstellation(birthDate.getMonth() + 1, birthDate.getDate());
+
+            // 結果表示
+            document.getElementById('ageValue').textContent = age + '歳';
+            document.getElementById('daysValue').textContent = daysElapsed.toLocaleString() + '日';
+            document.getElementById('weeksValue').textContent = weeksElapsed.toLocaleString() + '週';
+            document.getElementById('nextBirthdayValue').textContent = daysToNextBirthday + '日';
+            document.getElementById('zodicValue').textContent = zodiac + '年生まれ';
+            document.getElementById('constellationValue').textContent = constellation;
+
+            document.getElementById('results').classList.remove('hidden');
+        }
+
+        // ページロード時に基準日を今日に設定
+        window.addEventListener('load', initializeDate);
+    </script>
+</body>
+</html>

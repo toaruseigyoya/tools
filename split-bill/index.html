@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>割り勘計算 | ツール集</title>
+    <style>
+        :root {
+            --indigo: #4f46e5;
+            --violet: #7c3aed;
+            --emerald: #059669;
+            --bg: #f5f6ff;
+            --surf: #fff;
+            --border: #e0e7ff;
+            --text: #1e1b4b;
+            --text2: #4c4980;
+            --muted: #8b87c0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e1b4b, #312e81);
+            color: #fff;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+        }
+
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: #e0e7ff;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #fff;
+        }
+
+        .container {
+            max-width: 860px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: var(--surf);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(79, 70, 229, 0.06);
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        input[type="number"],
+        input[type="text"] {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        input[type="number"]:focus,
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--indigo);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            cursor: pointer;
+            accent-color: var(--indigo);
+        }
+
+        .radio-item label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 400;
+        }
+
+        .toggle-group {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .toggle-btn {
+            padding: 8px 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--surf);
+            color: var(--text);
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .toggle-btn.active {
+            background: var(--indigo);
+            color: #fff;
+            border-color: var(--indigo);
+        }
+
+        .select-tax {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .tax-option {
+            padding: 8px 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--surf);
+            color: var(--text);
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .tax-option.selected {
+            background: var(--violet);
+            color: #fff;
+            border-color: var(--violet);
+        }
+
+        .result-section {
+            background: #fafbff;
+            border-left: 4px solid var(--indigo);
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            color: var(--text2);
+            font-size: 14px;
+        }
+
+        .result-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--indigo);
+        }
+
+        .breakdown {
+            background: #f0f4ff;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+            font-size: 13px;
+            color: var(--text2);
+        }
+
+        footer {
+            background: var(--surf);
+            border-top: 1px solid var(--border);
+            padding: 20px;
+            text-align: center;
+            color: var(--text2);
+            font-size: 13px;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: var(--indigo);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: var(--violet);
+        }
+
+        @media (max-width: 860px) {
+            .container {
+                margin: 20px auto;
+            }
+
+            header h1 {
+                font-size: 22px;
+            }
+
+            .radio-group {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .result-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>割り勘計算</h1>
+        <a class="back-link" href="../">← ツール一覧へ戻る</a>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <div class="form-group">
+                <label for="total">合計金額（円）</label>
+                <input type="number" id="total" placeholder="10000" min="0" step="1" oninput="calculate()">
+            </div>
+
+            <div class="form-group">
+                <label for="people">人数</label>
+                <input type="number" id="people" value="2" min="1" max="20" oninput="calculate()">
+            </div>
+
+            <div class="form-group">
+                <label>端数処理</label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" id="floor" name="rounding" value="floor" checked onchange="calculate()">
+                        <label for="floor">切り捨て</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="ceil" name="rounding" value="ceil" onchange="calculate()">
+                        <label for="ceil">切り上げ</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="round" name="rounding" value="round" onchange="calculate()">
+                        <label for="round">四捨五入</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>消費税</label>
+                <div class="toggle-group">
+                    <button class="toggle-btn active" id="notaxBtn" onclick="setTaxMode('notax')">税抜</button>
+                    <button class="toggle-btn" id="incltaxBtn" onclick="setTaxMode('incltax')">税込</button>
+                </div>
+
+                <div id="taxRateSection" class="hidden" style="margin-top: 12px;">
+                    <label style="margin-bottom: 10px;">税率選択</label>
+                    <div class="select-tax">
+                        <button class="tax-option selected" onclick="setTaxRate(10)">10%</button>
+                        <button class="tax-option" onclick="setTaxRate(8)">8%</button>
+                        <button class="tax-option" onclick="setTaxRate(5)">5%</button>
+                        <button class="tax-option" onclick="setTaxRate(3)">3%</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="results" class="result-section hidden">
+                <div class="result-item">
+                    <span class="result-label">1人あたり金額</span>
+                    <span class="result-value" id="perPersonValue">-</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">端数（あまり）</span>
+                    <span class="result-value" id="remainderValue">-</span>
+                </div>
+                <div id="breakdown" class="breakdown hidden"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 とある制御屋のツール集</p>
+        <p>
+            <a href="../">ツール一覧</a> | <a href="https://toaruseigyoya.github.io/">サイト</a>
+        </p>
+    </footer>
+
+    <script>
+        let taxMode = 'notax';
+        let taxRate = 10;
+
+        function setTaxMode(mode) {
+            taxMode = mode;
+            document.getElementById('notaxBtn').classList.toggle('active', mode === 'notax');
+            document.getElementById('incltaxBtn').classList.toggle('active', mode === 'incltax');
+            document.getElementById('taxRateSection').classList.toggle('hidden', mode === 'notax');
+            calculate();
+        }
+
+        function setTaxRate(rate) {
+            taxRate = rate;
+            document.querySelectorAll('.tax-option').forEach(btn => {
+                btn.classList.toggle('selected', parseInt(btn.textContent) === rate);
+            });
+            calculate();
+        }
+
+        function calculate() {
+            const total = parseFloat(document.getElementById('total').value) || 0;
+            const people = parseInt(document.getElementById('people').value) || 1;
+            const rounding = document.querySelector('input[name="rounding"]:checked').value;
+
+            if (total <= 0 || people <= 0) {
+                document.getElementById('results').classList.add('hidden');
+                return;
+            }
+
+            let amount = total;
+            if (taxMode === 'incltax') {
+                amount = total / (1 + taxRate / 100);
+            }
+
+            let perPerson;
+            if (rounding === 'floor') {
+                perPerson = Math.floor(amount / people);
+            } else if (rounding === 'ceil') {
+                perPerson = Math.ceil(amount / people);
+            } else {
+                perPerson = Math.round(amount / people);
+            }
+
+            const remainder = Math.round((amount % people) * 100) / 100;
+            const totalWithRounding = perPerson * people + remainder;
+
+            document.getElementById('perPersonValue').textContent = perPerson.toLocaleString() + '円';
+            document.getElementById('remainderValue').textContent = remainder.toLocaleString() + '円';
+
+            let breakdown = '';
+            if (remainder > 0) {
+                const onePersonExtra = perPerson + remainder;
+                breakdown = `<strong>端数がある場合の内訳:</strong><br>`;
+                breakdown += `${people - 1}人: ${perPerson.toLocaleString()}円<br>`;
+                breakdown += `1人: ${onePersonExtra.toLocaleString()}円（端数${remainder.toLocaleString()}円を含む）`;
+            }
+
+            const breakdownDiv = document.getElementById('breakdown');
+            if (breakdown) {
+                breakdownDiv.innerHTML = breakdown;
+                breakdownDiv.classList.remove('hidden');
+            } else {
+                breakdownDiv.classList.add('hidden');
+            }
+
+            document.getElementById('results').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ローン計算 | ツール集</title>
+  <style>
+    :root {
+      --indigo: #4f46e5;
+      --violet: #7c3aed;
+      --emerald: #059669;
+      --bg: #f5f6ff;
+      --surf: #fff;
+      --border: #e0e7ff;
+      --text: #1e1b4b;
+      --text2: #4c4980;
+      --muted: #8b87c0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e1b4b, #312e81);
+      color: #fff;
+      padding: 24px 20px;
+      margin-bottom: 32px;
+    }
+
+    header h1 {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    header a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      opacity: 0.9;
+      transition: opacity 0.2s;
+    }
+
+    header a:hover {
+      opacity: 1;
+    }
+
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 20px 40px;
+    }
+
+    .card {
+      background: var(--surf);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(79, 70, 229, 0.06);
+      margin-bottom: 24px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-label {
+      display: block;
+      font-size: 13px;
+      color: var(--text2);
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    .input-wrapper {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    input[type="number"],
+    input[type="text"] {
+      flex: 1;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    input[type="number"]:focus,
+    input[type="text"]:focus {
+      outline: none;
+      border-color: var(--indigo);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+
+    .input-unit {
+      font-size: 13px;
+      color: var(--text2);
+      font-weight: 500;
+      width: 40px;
+      text-align: right;
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .result-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+
+    .result-label {
+      font-size: 12px;
+      color: var(--text2);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .result-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--indigo);
+      word-break: break-word;
+      font-family: 'Monaco', 'Menlo', monospace;
+    }
+
+    .collapsible {
+      margin-top: 20px;
+    }
+
+    .collapsible-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      user-select: none;
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .collapsible-header:hover {
+      background: #f3f4ff;
+    }
+
+    .collapsible-header .arrow {
+      transition: transform 0.3s;
+    }
+
+    .collapsible-header.active .arrow {
+      transform: rotate(180deg);
+    }
+
+    .collapsible-content {
+      display: none;
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      padding: 16px;
+      background: var(--bg);
+      overflow-x: auto;
+    }
+
+    .collapsible-content.active {
+      display: block;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    table th {
+      background: var(--surf);
+      padding: 10px;
+      text-align: right;
+      font-weight: 600;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+    }
+
+    table th:first-child {
+      text-align: left;
+    }
+
+    table td {
+      padding: 10px;
+      text-align: right;
+      border-bottom: 1px solid #f0f0ff;
+      font-family: 'Monaco', 'Menlo', monospace;
+    }
+
+    table td:first-child {
+      text-align: left;
+      font-weight: 500;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px 20px;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+      font-size: 12px;
+      color: var(--text2);
+    }
+
+    footer a {
+      color: var(--indigo);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-links {
+      margin-top: 12px;
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 860px) {
+      header h1 {
+        font-size: 24px;
+      }
+
+      main {
+        padding: 0 16px 32px;
+      }
+
+      .card {
+        padding: 16px;
+      }
+
+      .results-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .input-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .input-unit {
+        text-align: left;
+        width: auto;
+      }
+
+      table {
+        font-size: 12px;
+      }
+
+      table th,
+      table td {
+        padding: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ローン計算</h1>
+    <a href="../">← ツール一覧へ戻る</a>
+  </header>
+
+  <main>
+    <div class="card">
+      <div class="card-title">ローン条件を入力</div>
+
+      <div class="input-group">
+        <label class="input-label">借入金額</label>
+        <div class="input-wrapper">
+          <input type="number" id="principal" value="30000000" min="0" step="100000" oninput="calculate()">
+          <span class="input-unit">円</span>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">年利</label>
+        <div class="input-wrapper">
+          <input type="number" id="annualRate" value="1.5" min="0" step="0.01" oninput="calculate()">
+          <span class="input-unit">%</span>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">返済期間</label>
+        <div class="input-wrapper">
+          <input type="number" id="years" value="35" min="1" step="1" oninput="calculate()">
+          <span class="input-unit">年</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">計算結果</div>
+      <div class="results-grid">
+        <div class="result-card">
+          <div class="result-label">月額返済額</div>
+          <div class="result-value" id="monthlyPayment">0</div>
+        </div>
+        <div class="result-card">
+          <div class="result-label">総返済額</div>
+          <div class="result-value" id="totalPayment">0</div>
+        </div>
+        <div class="result-card">
+          <div class="result-label">総利息額</div>
+          <div class="result-value" id="totalInterest">0</div>
+        </div>
+        <div class="result-card">
+          <div class="result-label">実質年利</div>
+          <div class="result-value" id="effectiveRate">0%</div>
+        </div>
+      </div>
+
+      <div class="collapsible">
+        <div class="collapsible-header" onclick="toggleCollapsible()">
+          返済シミュレーション表（年別）
+          <span class="arrow">▼</span>
+        </div>
+        <div class="collapsible-content">
+          <table id="simulationTable">
+            <thead>
+              <tr>
+                <th>年度</th>
+                <th>返済額</th>
+                <th>元金</th>
+                <th>利息</th>
+                <th>残高</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2026 とある制御屋のツール集
+    <div class="footer-links">
+      <a href="../">ツール一覧へ戻る</a>
+      <a href="https://toaruseigyoya.github.io/">公式サイト</a>
+    </div>
+  </footer>
+
+  <script>
+    function toggleCollapsible() {
+      const header = document.querySelector('.collapsible-header');
+      const content = document.querySelector('.collapsible-content');
+      header.classList.toggle('active');
+      content.classList.toggle('active');
+    }
+
+    function formatCurrency(num) {
+      return '¥' + Math.round(num).toLocaleString('ja-JP');
+    }
+
+    function calculate() {
+      const principal = parseFloat(document.getElementById('principal').value) || 0;
+      const annualRate = parseFloat(document.getElementById('annualRate').value) || 0;
+      const years = parseFloat(document.getElementById('years').value) || 0;
+
+      if (principal === 0 || years === 0) {
+        document.getElementById('monthlyPayment').textContent = '¥0';
+        document.getElementById('totalPayment').textContent = '¥0';
+        document.getElementById('totalInterest').textContent = '¥0';
+        document.getElementById('effectiveRate').textContent = '0%';
+        return;
+      }
+
+      const monthlyRate = annualRate / 100 / 12;
+      const months = years * 12;
+
+      // 月額返済額（元利均等返済）
+      let monthlyPayment;
+      if (monthlyRate === 0) {
+        monthlyPayment = principal / months;
+      } else {
+        monthlyPayment = principal * (monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+      }
+
+      const totalPayment = monthlyPayment * months;
+      const totalInterest = totalPayment - principal;
+
+      document.getElementById('monthlyPayment').textContent = formatCurrency(monthlyPayment);
+      document.getElementById('totalPayment').textContent = formatCurrency(totalPayment);
+      document.getElementById('totalInterest').textContent = formatCurrency(totalInterest);
+      document.getElementById('effectiveRate').textContent = (annualRate).toFixed(2) + '%';
+
+      // 返済シミュレーション
+      generateSimulation(principal, monthlyRate, monthlyPayment, months, years);
+    }
+
+    function generateSimulation(principal, monthlyRate, monthlyPayment, totalMonths, totalYears) {
+      const tbody = document.getElementById('tableBody');
+      tbody.innerHTML = '';
+
+      let balance = principal;
+      let totalAnnualPayment = 0;
+      let totalAnnualPrincipal = 0;
+      let totalAnnualInterest = 0;
+
+      for (let year = 1; year <= totalYears; year++) {
+        totalAnnualPayment = 0;
+        totalAnnualPrincipal = 0;
+        totalAnnualInterest = 0;
+
+        const monthsInYear = year === totalYears ? (totalMonths % 12 || 12) : 12;
+
+        for (let m = 0; m < monthsInYear; m++) {
+          const interest = balance * monthlyRate;
+          const principalPayment = monthlyPayment - interest;
+          balance -= principalPayment;
+
+          totalAnnualPayment += monthlyPayment;
+          totalAnnualPrincipal += principalPayment;
+          totalAnnualInterest += interest;
+        }
+
+        if (balance < 0) balance = 0;
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${year}年目</td>
+          <td>${formatCurrency(totalAnnualPayment)}</td>
+          <td>${formatCurrency(totalAnnualPrincipal)}</td>
+          <td>${formatCurrency(totalAnnualInterest)}</td>
+          <td>${formatCurrency(balance)}</td>
+        `;
+        tbody.appendChild(row);
+      }
+    }
+
+    calculate();
+  </script>
+</body>
+</html>
