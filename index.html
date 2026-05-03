@@ -20,13 +20,18 @@
     .hero { text-align:center; margin-bottom:28px; }
     .hero h1 { font-size:1.8rem; font-weight:800; line-height:1.3; margin-bottom:10px; }
     .hero p { color:var(--text2); font-size:.95rem; }
-    .search-wrap { position:relative; max-width:560px; margin:0 auto 14px; }
-    .search-icon { position:absolute; left:16px; top:50%; transform:translateY(-50%); color:var(--muted); pointer-events:none; }
-    .search-input { width:100%; padding:13px 16px 13px 44px; border:1.5px solid var(--border); border-radius:12px; font-size:.95rem; font-family:inherit; background:rgba(255,255,255,.9); color:var(--text); outline:none; }
-    .search-input:focus { border-color:var(--indigo); box-shadow:0 0 0 3px rgba(79,70,229,.12); }
-    .category-bar { max-width:760px; margin:0 auto 18px; display:flex; flex-wrap:wrap; justify-content:center; gap:8px; }
+    .top-tools { display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:18px; align-items:start; margin-bottom:18px; }
+    .panel-title { font-size:.82rem; font-weight:800; color:var(--text2); margin-bottom:8px; }
+    .category-panel, .ranking-panel { background:rgba(255,255,255,.6); border:1px solid var(--border); border-radius:12px; padding:12px; }
+    .category-bar { display:flex; flex-wrap:wrap; gap:8px; }
     .category-btn { border:1px solid var(--border); background:rgba(255,255,255,.82); color:var(--text2); border-radius:999px; padding:7px 12px; font:inherit; font-size:.82rem; font-weight:700; cursor:pointer; transition:background .15s,border-color .15s,color .15s; }
     .category-btn:hover, .category-btn.active { background:var(--indigo); border-color:var(--indigo); color:#fff; }
+    .ranking-list { list-style:none; display:grid; gap:6px; }
+    .ranking-item { display:grid; grid-template-columns:22px minmax(0,1fr) auto; align-items:center; gap:8px; min-height:28px; color:var(--text2); font-size:.8rem; }
+    .ranking-rank { width:22px; height:22px; border-radius:999px; display:inline-grid; place-items:center; background:rgba(79,70,229,.1); color:var(--indigo); font-size:.72rem; font-weight:800; }
+    .ranking-link { color:var(--text); text-decoration:none; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .ranking-link:hover { color:var(--indigo); }
+    .ranking-count { color:var(--muted); font-size:.72rem; white-space:nowrap; }
     .tools-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
     .tool-card { background:rgba(255,255,255,.78); border:1px solid var(--border); border-radius:10px; padding:12px 14px; display:block; box-shadow:0 2px 10px rgba(79,70,229,.06); transition:transform .15s,box-shadow .15s,border-color .15s; position:relative; overflow:hidden; min-height:74px; cursor:pointer; }
     .tool-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--indigo),var(--violet)); }
@@ -47,6 +52,7 @@
     .empty-state.visible { display:block; }
     footer { text-align:center; padding:24px 16px 32px; color:var(--muted); font-size:.82rem; border-top:1px solid var(--border); }
     footer a { color:var(--indigo); text-decoration:none; font-weight:600; }
+    @media (max-width:760px) { .top-tools { grid-template-columns:1fr; } }
     @media (max-width:600px) { main { padding:28px 16px 48px; } .hero h1 { font-size:1.42rem; } .tools-grid { grid-template-columns:1fr; } .tool-card { min-height:68px; } }
   </style>
 </head>
@@ -63,11 +69,16 @@
     <h1>無料 <span class="accent">Webツール集</span></h1>
     <p>登録不要・インストール不要。ブラウザですぐに使えるツールを揃えています。</p>
   </section>
-  <div class="search-wrap">
-    <span class="search-icon" aria-hidden="true">🔎</span>
-    <input type="search" class="search-input" id="searchInput" placeholder="ツールを検索… 例: CSV、日付、メール、Excel" aria-label="ツールを検索" autocomplete="off">
+  <div class="top-tools">
+    <section class="category-panel" aria-labelledby="categoryTitle">
+      <div class="panel-title" id="categoryTitle">カテゴリ</div>
+      <div class="category-bar" id="categoryBar" aria-label="カテゴリで絞り込み"></div>
+    </section>
+    <section class="ranking-panel" aria-labelledby="rankingTitle">
+      <div class="panel-title" id="rankingTitle">アクセスランキング</div>
+      <ol class="ranking-list" id="rankingList"></ol>
+    </section>
   </div>
-  <div class="category-bar" id="categoryBar" aria-label="ジャンルで絞り込み"></div>
   <div class="tools-grid" id="toolsGrid" role="list">
     <div class="tool-card" data-cat="テキスト" data-name="文字数カウンター" data-desc="テキストの文字数・行数・単語数・バイト数をリアルタイム計測" role="listitem">
       <span class="chip chip-indigo">テキスト</span>
@@ -3807,12 +3818,80 @@
 </footer>
 <script>
   (function () {
-    var searchInput = document.getElementById('searchInput');
     var grid = document.getElementById('toolsGrid');
     var categoryBar = document.getElementById('categoryBar');
+    var rankingList = document.getElementById('rankingList');
     var emptyState = document.getElementById('emptyState');
     var cards = Array.from(grid.querySelectorAll('.tool-card'));
     var activeCat = '';
+    var rankKey = 'tools-access-ranking';
+    var defaultRanking = [
+      '文字数カウンター',
+      'CSV・TSV変換',
+      'JSONフォーマッター',
+      'URLエンコード・デコード',
+      'パスワード生成'
+    ];
+    function loadRanking() {
+      try { return JSON.parse(localStorage.getItem(rankKey) || '{}'); }
+      catch (e) { return {}; }
+    }
+    function saveRanking(data) {
+      try { localStorage.setItem(rankKey, JSON.stringify(data)); }
+      catch (e) {}
+    }
+    function cardInfo(card) {
+      var link = card.querySelector('.card-link');
+      return {
+        name: card.getAttribute('data-name') || 'ツール',
+        href: link ? link.getAttribute('href') : '#'
+      };
+    }
+    function renderRanking() {
+      var ranking = loadRanking();
+      var items = cards.map(function (card) {
+        var info = cardInfo(card);
+        return {
+          name: info.name,
+          href: info.href,
+          count: ranking[info.href] || 0,
+          fallback: defaultRanking.indexOf(info.name)
+        };
+      }).filter(function (item) {
+        return item.count > 0 || item.fallback !== -1;
+      }).sort(function (a, b) {
+        if (b.count !== a.count) return b.count - a.count;
+        return (a.fallback === -1 ? 999 : a.fallback) - (b.fallback === -1 ? 999 : b.fallback);
+      }).slice(0, 5);
+      rankingList.innerHTML = '';
+      items.forEach(function (item, index) {
+        var li = document.createElement('li');
+        li.className = 'ranking-item';
+        var rank = document.createElement('span');
+        rank.className = 'ranking-rank';
+        rank.textContent = String(index + 1);
+        var link = document.createElement('a');
+        link.className = 'ranking-link';
+        link.href = item.href;
+        link.textContent = item.name;
+        link.addEventListener('click', function () {
+          recordAccess(item.href);
+        });
+        var count = document.createElement('span');
+        count.className = 'ranking-count';
+        count.textContent = item.count ? item.count + '回' : '定番';
+        li.appendChild(rank);
+        li.appendChild(link);
+        li.appendChild(count);
+        rankingList.appendChild(li);
+      });
+    }
+    function recordAccess(href) {
+      var ranking = loadRanking();
+      ranking[href] = (ranking[href] || 0) + 1;
+      saveRanking(ranking);
+      renderRanking();
+    }
     var categories = Array.from(new Set(cards.map(function (card) {
       return card.getAttribute('data-cat') || '';
     }).filter(Boolean))).sort(function (a, b) { return a.localeCompare(b, 'ja'); });
@@ -3826,7 +3905,7 @@
         Array.from(categoryBar.querySelectorAll('.category-btn')).forEach(function (btn) {
           btn.classList.toggle('active', btn === button);
         });
-        filterCards(searchInput.value);
+        filterCards();
       });
       return button;
     }
@@ -3841,34 +3920,30 @@
       card.setAttribute('role', 'link');
       card.setAttribute('aria-label', (card.getAttribute('data-name') || 'ツール') + 'を開く');
       card.addEventListener('click', function () {
-        window.location.href = link.getAttribute('href');
+        var href = link.getAttribute('href');
+        recordAccess(href);
+        window.location.href = href;
       });
       card.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          window.location.href = link.getAttribute('href');
+          var href = link.getAttribute('href');
+          recordAccess(href);
+          window.location.href = href;
         }
       });
     });
-    function filterCards(query) {
-      var q = query.trim().toLowerCase();
+    renderRanking();
+    function filterCards() {
       var count = 0;
       cards.forEach(function (card) {
         var cat = card.getAttribute('data-cat') || '';
-        var textMatch = q === '' ||
-          (card.getAttribute('data-name') || '').toLowerCase().indexOf(q) !== -1 ||
-          (card.getAttribute('data-desc') || '').toLowerCase().indexOf(q) !== -1 ||
-          cat.toLowerCase().indexOf(q) !== -1;
-        var match = textMatch && (activeCat === '' || cat === activeCat);
+        var match = activeCat === '' || cat === activeCat;
         card.classList.toggle('hidden', !match);
         if (match) count++;
       });
       emptyState.classList.toggle('visible', count === 0);
     }
-    searchInput.addEventListener('input', function () { filterCards(this.value); });
-    searchInput.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') { this.value = ''; filterCards(''); this.blur(); }
-    });
   })();
 </script>
 </body>
