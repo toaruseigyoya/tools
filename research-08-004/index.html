@@ -17,7 +17,7 @@
 <body>
 <header><div class="hdr"><a href="../">← ツール一覧</a><div class="hdr-title">Unicodeエスケープ変換</div><div class="hdr-sub">文字列と\uXXXX表記を相互変換します</div></div></header>
 <main>
-  <div class="card"><div class="card-title">入力</div><textarea id="input" placeholder="テキスト、コード、CSV、JSON、数値などを入力してください。"></textarea><div class="grid" style="margin-top:12px"><input id="opt1" placeholder="補助入力A"><input id="opt2" placeholder="補助入力B"></div><div class="btn-row"><button class="btn btn-primary" onclick="run()">実行</button><button class="btn btn-outline" onclick="sample()">サンプル</button><button class="btn btn-outline" onclick="clearAll()">クリア</button></div><p class="hint">ブラウザ内で処理します。外部通信が必要な処理は、作業メモやコマンド雛形を生成します。</p></div>
+  <div class="card"><div class="card-title">入力</div><textarea id="input" placeholder="テキスト、コード、CSV、JSON、数値などを入力してください。"></textarea><div class="grid" style="margin-top:12px"><input id="opt1" placeholder="補助入力A（単位・条件など）"><input id="opt2" placeholder="補助入力B（変換先・比較値など）"></div><div class="btn-row"><button class="btn btn-primary" onclick="run()">実行</button><button class="btn btn-outline" onclick="sample()">サンプル</button><button class="btn btn-outline" onclick="clearAll()">クリア</button></div><p class="hint">ブラウザ内で処理します。補助入力は必要な場合だけ使用します。外部通信が必要な処理は、作業メモやコマンド雛形を生成します。</p></div>
   <div class="card"><div class="card-title">結果</div><textarea id="output" readonly></textarea><div id="preview" class="preview"></div><div class="btn-row"><button class="btn btn-outline" onclick="copy()">コピー</button><button class="btn btn-outline" onclick="download()">txt保存</button></div></div>
 </main>
 <footer><a href="../">← ツール一覧へ戻る</a></footer>
@@ -46,3 +46,4 @@ function download(){const blob=new Blob([$('output').value],{type:'text/plain;ch
 </script>
 </body>
 </html>
+

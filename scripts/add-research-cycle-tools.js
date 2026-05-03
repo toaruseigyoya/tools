@@ -180,7 +180,7 @@ function page(tool) {
 <body>
 <header><div class="hdr"><a href="../">← ツール一覧</a><div class="hdr-title">${esc(tool.title)}</div><div class="hdr-sub">${esc(tool.desc)}</div></div></header>
 <main>
-  <div class="card"><div class="card-title">入力</div><textarea id="input" placeholder="テキスト、コード、CSV、JSON、数値などを入力してください。"></textarea><div class="grid" style="margin-top:12px"><input id="opt1" placeholder="補助入力A"><input id="opt2" placeholder="補助入力B"></div><div class="btn-row"><button class="btn btn-primary" onclick="run()">実行</button><button class="btn btn-outline" onclick="sample()">サンプル</button><button class="btn btn-outline" onclick="clearAll()">クリア</button></div><p class="hint">ブラウザ内で処理します。外部通信が必要な処理は、作業メモやコマンド雛形を生成します。</p></div>
+  <div class="card"><div class="card-title">入力</div><textarea id="input" placeholder="テキスト、コード、CSV、JSON、数値などを入力してください。"></textarea><div class="grid" style="margin-top:12px"><input id="opt1" placeholder="補助入力A（単位・条件など）"><input id="opt2" placeholder="補助入力B（変換先・比較値など）"></div><div class="btn-row"><button class="btn btn-primary" onclick="run()">実行</button><button class="btn btn-outline" onclick="sample()">サンプル</button><button class="btn btn-outline" onclick="clearAll()">クリア</button></div><p class="hint">ブラウザ内で処理します。補助入力は必要な場合だけ使用します。外部通信が必要な処理は、作業メモやコマンド雛形を生成します。</p></div>
   <div class="card"><div class="card-title">結果</div><textarea id="output" readonly></textarea><div id="preview" class="preview"></div><div class="btn-row"><button class="btn btn-outline" onclick="copy()">コピー</button><button class="btn btn-outline" onclick="download()">txt保存</button></div></div>
 </main>
 <footer><a href="../">← ツール一覧へ戻る</a></footer>
@@ -204,7 +204,7 @@ function runSync(title,input,a,b){if(/SQL/.test(title))return input.replace(/\\b
 async function run(){let out='';try{if(/SHA/.test(TOOL.title))out=await sha($('input').value,TOOL.title.includes('512')?'SHA-512':'SHA-256');else out=runSync(TOOL.title,$('input').value,$('opt1').value,$('opt2').value)}catch(e){out='処理できませんでした: '+e.message}$('output').value=out;if(/^<svg|<section|<table|<h/.test(out.trim())){$('preview').innerHTML=out;$('preview').style.display='block'}else{$('preview').style.display='none'}}
 function sample(){$('input').value=/JSON|TypeScript|Go|Zod|PHP|JavaScriptオブジェクト|Table/.test(TOOL.title)?'{"name":"sample","count":1}':/CSV|SQL INSERT/.test(TOOL.title)?'name,count\\na,1\\nb,2':/URL/.test(TOOL.title)?'https://example.com/path?a=1':'サンプル1\\nサンプル2';$('opt1').value='';$('opt2').value='';run()}
 function clearAll(){$('input').value='';$('opt1').value='';$('opt2').value='';$('output').value='';$('preview').style.display='none'}
-async function copy(){await navigator.clipboard.writeText($('output').value)}
+async function copy(){const text=$('output').value;try{await navigator.clipboard.writeText(text)}catch(e){$('output').focus();$('output').select();document.execCommand('copy')}}
 function download(){const blob=new Blob([$('output').value],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=TOOL.slug+'.txt';a.click();URL.revokeObjectURL(a.href)}
 </script>
 </body>

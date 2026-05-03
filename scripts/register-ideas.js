@@ -130,15 +130,15 @@ function pageTemplate(tool) {
     <div class="card-title">入力</div>
     <textarea id="inputText" placeholder="ここにテキスト、CSV、メモ、数値、日付などを入力してください。"></textarea>
     <div class="grid" style="margin-top:12px">
-      <input id="optionA" placeholder="補助入力A（必要な場合）">
-      <input id="optionB" placeholder="補助入力B（必要な場合）">
+      <input id="optionA" placeholder="補助入力A（単位・条件など）">
+      <input id="optionB" placeholder="補助入力B（変換先・比較値など）">
     </div>
     <div class="btn-row">
       <button class="btn btn-primary" onclick="runTool()">実行</button>
       <button class="btn btn-outline" onclick="loadSample()">サンプル</button>
       <button class="btn btn-outline" onclick="clearAll()">クリア</button>
     </div>
-    <p class="hint">このページはブラウザ内だけで処理します。入力内容は外部へ送信されません。</p>
+    <p class="hint">このページはブラウザ内だけで処理します。入力内容は外部へ送信されません。補助入力は必要な場合だけ使用します。</p>
   </div>
   <div class="card">
     <div class="card-title">結果</div>
@@ -264,7 +264,7 @@ function pageTemplate(tool) {
     runTool();
   }
   function clearAll() { $('inputText').value = ''; $('optionA').value = ''; $('optionB').value = ''; $('outputText').value = ''; updateStats(''); }
-  async function copyResult() { await navigator.clipboard.writeText($('outputText').value); }
+  async function copyResult() { const text = $('outputText').value; try { await navigator.clipboard.writeText(text); } catch (e) { $('outputText').focus(); $('outputText').select(); document.execCommand('copy'); } }
   function downloadResult() {
     const blob = new Blob([$('outputText').value], { type:'text/plain;charset=utf-8' });
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = TOOL.slug + '.txt'; a.click(); URL.revokeObjectURL(a.href);

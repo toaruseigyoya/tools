@@ -226,15 +226,15 @@ function page(tool) {
     <div class="card-title">入力</div>
     <textarea id="input" placeholder="テキスト、URL、CSV、JSON、数値、メモなどを入力してください。"></textarea>
     <div class="grid" style="margin-top:12px">
-      <input id="opt1" placeholder="補助入力A">
-      <input id="opt2" placeholder="補助入力B">
+      <input id="opt1" placeholder="補助入力A（単位・条件など）">
+      <input id="opt2" placeholder="補助入力B（変換先・比較値など）">
     </div>
     <div class="btn-row">
       <button class="btn btn-primary" onclick="run()">実行</button>
       <button class="btn btn-outline" onclick="sample()">サンプル</button>
       <button class="btn btn-outline" onclick="clearAll()">クリア</button>
     </div>
-    <p class="hint">ブラウザ内で処理します。通信が必要な種類は、確認用URLやコマンドを生成します。</p>
+    <p class="hint">ブラウザ内で処理します。補助入力は必要な場合だけ使用します。通信が必要な種類は、確認用URLやコマンドを生成します。</p>
   </div>
   <div class="card">
     <div class="card-title">結果</div>
@@ -303,7 +303,7 @@ async function run(){const title=TOOL.title,input=$('input').value,a=$('opt1').v
 function stats(s){$('chars').textContent=s.length.toLocaleString();$('lines').textContent=(s?lines(s).length:0).toLocaleString();$('bytes').textContent=new TextEncoder().encode(s).length.toLocaleString()}
 function sample(){ $('input').value=/JSON/.test(TOOL.title)?'{"name":"sample","value":1}':/CSV|表/.test(TOOL.title)?'name,value\\na,1\\nb,2':/URL|HTTP|Sitemap|UTM/.test(TOOL.title)?'https://example.com/?a=1&b=2':'サンプル1\\nサンプル2\\nサンプル3'; run() }
 function clearAll(){ $('input').value='';$('opt1').value='';$('opt2').value='';$('output').value='';$('preview').style.display='none';stats('') }
-async function copy(){ await navigator.clipboard.writeText($('output').value) }
+async function copy(){const text=$('output').value;try{await navigator.clipboard.writeText(text)}catch(e){$('output').focus();$('output').select();document.execCommand('copy')}}
 function download(){ const blob=new Blob([$('output').value],{type:'text/plain;charset=utf-8'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=TOOL.slug+'.txt'; a.click(); URL.revokeObjectURL(a.href) }
 </script>
 </body>

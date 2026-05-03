@@ -24,15 +24,15 @@
     <div class="card-title">入力</div>
     <textarea id="input" placeholder="テキスト、URL、CSV、JSON、数値、メモなどを入力してください。"></textarea>
     <div class="grid" style="margin-top:12px">
-      <input id="opt1" placeholder="補助入力A">
-      <input id="opt2" placeholder="補助入力B">
+      <input id="opt1" placeholder="補助入力A（単位・条件など）">
+      <input id="opt2" placeholder="補助入力B（変換先・比較値など）">
     </div>
     <div class="btn-row">
       <button class="btn btn-primary" onclick="run()">実行</button>
       <button class="btn btn-outline" onclick="sample()">サンプル</button>
       <button class="btn btn-outline" onclick="clearAll()">クリア</button>
     </div>
-    <p class="hint">ブラウザ内で処理します。通信が必要な種類は、確認用URLやコマンドを生成します。</p>
+    <p class="hint">ブラウザ内で処理します。補助入力は必要な場合だけ使用します。通信が必要な種類は、確認用URLやコマンドを生成します。</p>
   </div>
   <div class="card">
     <div class="card-title">結果</div>
@@ -106,3 +106,4 @@ function download(){ const blob=new Blob([$('output').value],{type:'text/plain;c
 </script>
 </body>
 </html>
+

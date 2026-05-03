@@ -29,12 +29,14 @@
     .ranking-tabs { display:grid; grid-template-columns:repeat(5,1fr); gap:4px; margin-bottom:8px; }
     .ranking-tab { border:1px solid var(--border); background:rgba(255,255,255,.82); color:var(--text2); border-radius:7px; padding:5px 4px; font:inherit; font-size:.7rem; font-weight:800; cursor:pointer; }
     .ranking-tab.active { background:var(--indigo); border-color:var(--indigo); color:#fff; }
+    .category-btn:focus-visible, .ranking-tab:focus-visible, .ranking-link:focus-visible, .header-back:focus-visible { outline:3px solid rgba(79,70,229,.35); outline-offset:2px; }
     .ranking-list { list-style:none; display:grid; gap:6px; }
     .ranking-item { display:grid; grid-template-columns:22px minmax(0,1fr) auto; align-items:center; gap:8px; min-height:28px; color:var(--text2); font-size:.8rem; }
     .ranking-rank { width:22px; height:22px; border-radius:999px; display:inline-grid; place-items:center; background:rgba(79,70,229,.1); color:var(--indigo); font-size:.72rem; font-weight:800; }
     .ranking-link { color:var(--text); text-decoration:none; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     .ranking-link:hover { color:var(--indigo); }
     .ranking-count { color:var(--muted); font-size:.72rem; white-space:nowrap; }
+    .panel-note { margin-top:8px; color:var(--muted); font-size:.72rem; line-height:1.45; }
     .tools-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
     .category-heading { grid-column:1/-1; padding:18px 4px 4px; font-size:1rem; font-weight:900; color:var(--text); border-bottom:1px solid var(--border); scroll-margin-top:84px; }
     .tool-card { background:rgba(255,255,255,.78); border:1px solid var(--border); border-radius:10px; padding:12px 14px; display:block; box-shadow:0 2px 10px rgba(79,70,229,.06); transition:transform .15s,box-shadow .15s,border-color .15s; position:relative; overflow:hidden; min-height:74px; cursor:pointer; }
@@ -76,12 +78,14 @@
   <div class="top-tools">
     <section class="category-panel" aria-labelledby="categoryTitle">
       <div class="panel-title" id="categoryTitle">カテゴリ</div>
-      <div class="category-bar" id="categoryBar" aria-label="カテゴリで絞り込み"></div>
+      <div class="category-bar" id="categoryBar" aria-label="カテゴリ見出しへ移動"></div>
+      <p class="panel-note">カテゴリを選ぶと、該当する分類の先頭へ移動します。</p>
     </section>
     <section class="ranking-panel" aria-labelledby="rankingTitle">
       <div class="panel-title" id="rankingTitle">アクセスランキング</div>
       <div class="ranking-tabs" id="rankingTabs" aria-label="ランキング期間"></div>
       <ol class="ranking-list" id="rankingList"></ol>
+      <p class="panel-note">この端末でのクリック履歴を集計します。履歴が少ない期間は基本ツールを優先表示します。</p>
     </section>
   </div>
   <div class="tools-grid" id="toolsGrid" role="list">
@@ -3989,12 +3993,21 @@
       });
     });
     grid.appendChild(emptyState);
+    function setActiveCategory(button) {
+      Array.from(categoryBar.querySelectorAll('.category-btn')).forEach(function (tab) {
+        var isActive = tab === button;
+        tab.classList.toggle('active', isActive);
+        tab.setAttribute('aria-current', isActive ? 'true' : 'false');
+      });
+    }
     function makeCategoryButton(label, targetId) {
       var button = document.createElement('button');
       button.type = 'button';
       button.className = 'category-btn';
       button.textContent = label;
+      button.setAttribute('aria-controls', targetId);
       button.addEventListener('click', function () {
+        setActiveCategory(button);
         var target = document.getElementById(targetId);
         if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
@@ -4003,15 +4016,20 @@
     groupedCards.forEach(function (group) {
       categoryBar.appendChild(makeCategoryButton(group.category, 'category-' + categoryOrder.indexOf(group.category)));
     });
+    var firstCategoryButton = categoryBar.querySelector('.category-btn');
+    if (firstCategoryButton) setActiveCategory(firstCategoryButton);
     periods.forEach(function (period) {
       var button = document.createElement('button');
       button.type = 'button';
       button.className = 'ranking-tab' + (period[0] === currentPeriod ? ' active' : '');
       button.textContent = period[1];
+      button.setAttribute('aria-pressed', period[0] === currentPeriod ? 'true' : 'false');
       button.addEventListener('click', function () {
         currentPeriod = period[0];
         Array.from(rankingTabs.querySelectorAll('.ranking-tab')).forEach(function (tab) {
-          tab.classList.toggle('active', tab === button);
+          var isActive = tab === button;
+          tab.classList.toggle('active', isActive);
+          tab.setAttribute('aria-pressed', isActive ? 'true' : 'false');
         });
         renderRanking();
       });
