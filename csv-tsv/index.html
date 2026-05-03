@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSV・TSV変換 | ツール集</title>
+  <meta name="description" content="CSVとTSVを相互変換。引用符付きセル、改行入りセル、カンマを含む値にも対応した無料Webツール">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --indigo: #4f46e5; --violet: #7c3aed; --emerald: #059669; --red: #dc2626;
+      --bg: #f5f6ff; --surf: #fff;
+      --border: #e0e7ff; --text: #1e1b4b; --text2: #4c4980; --muted: #8b87c0;
+    }
+    body { font-family: 'Segoe UI','Yu Gothic UI','Hiragino Sans',sans-serif; background: var(--bg); color: var(--text); }
+    header { background: linear-gradient(135deg,#1e1b4b,#312e81); color:#fff; }
+    .hdr { max-width:960px; margin:0 auto; padding:18px 24px; }
+    .hdr-back { display:inline-flex; align-items:center; gap:5px; font-size:.78rem; color:rgba(255,255,255,.55); text-decoration:none; margin-bottom:8px; transition:color .15s; }
+    .hdr-back:hover { color:rgba(255,255,255,.9); }
+    .hdr-title { font-size:1.4rem; font-weight:900; margin-bottom:4px; }
+    .hdr-sub { font-size:.82rem; color:rgba(255,255,255,.65); }
+    main { max-width:960px; margin:0 auto; padding:24px; }
+    .card { background:var(--surf); border:1px solid var(--border); border-radius:14px; padding:20px; margin-bottom:16px; box-shadow:0 2px 10px rgba(79,70,229,.06); }
+    .card-title { font-size:.88rem; font-weight:800; color:#3730a3; margin-bottom:12px; }
+    .mode-row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:14px; }
+    .mode-group { display:inline-flex; border:1.5px solid var(--border); border-radius:10px; overflow:hidden; background:var(--bg); }
+    .mode-btn { padding:8px 16px; border:none; background:transparent; color:var(--text2); font-size:.84rem; font-weight:800; cursor:pointer; font-family:inherit; }
+    .mode-btn.active { background:linear-gradient(135deg,var(--indigo),var(--violet)); color:#fff; }
+    .mode-sep { width:1px; background:var(--border); }
+    .option-row { display:flex; gap:14px; flex-wrap:wrap; margin-top:10px; color:var(--text2); font-size:.82rem; }
+    label { display:inline-flex; align-items:center; gap:6px; cursor:pointer; }
+    textarea { width:100%; padding:12px; border:1.5px solid var(--border); border-radius:9px; font-size:.84rem; font-family:'Consolas','Courier New',monospace; background:var(--bg); color:var(--text); resize:vertical; min-height:180px; }
+    textarea:focus { outline:none; border-color:#818cf8; box-shadow:0 0 0 3px rgba(79,70,229,.1); }
+    .grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .btn-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+    .btn { padding:9px 18px; border:none; border-radius:9px; font-size:.84rem; font-weight:700; cursor:pointer; font-family:inherit; transition:all .15s; }
+    .btn-primary { background:linear-gradient(135deg,var(--indigo),var(--violet)); color:#fff; box-shadow:0 3px 10px rgba(79,70,229,.25); }
+    .btn-primary:hover { transform:translateY(-1px); }
+    .btn-outline { background:transparent; border:1.5px solid var(--border); color:var(--text2); }
+    .btn-outline:hover { border-color:#818cf8; color:var(--indigo); }
+    .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px; margin-top:12px; }
+    .stat { background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:10px; text-align:center; }
+    .stat-val { font-size:1.2rem; font-weight:900; color:var(--indigo); font-family:'Consolas',monospace; }
+    .stat-lbl { font-size:.72rem; color:var(--muted); margin-top:2px; }
+    .message { font-size:.78rem; margin-top:8px; min-height:1.2em; }
+    .message.ok { color:var(--emerald); }
+    .message.err { color:var(--red); }
+    .hint { color:var(--muted); font-size:.76rem; line-height:1.6; margin-top:10px; }
+    footer { text-align:center; padding:20px; font-size:.73rem; color:var(--muted); border-top:1px solid var(--border); margin-top:8px; }
+    footer a { color:#818cf8; text-decoration:none; }
+    @media (max-width:760px) {
+      main { padding:16px; }
+      .grid { grid-template-columns:1fr; }
+      textarea { min-height:150px; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="hdr">
+    <a class="hdr-back" href="../">&#8592; ツール一覧に戻る</a>
+    <div class="hdr-title">&#128202; CSV・TSV変換</div>
+    <div class="hdr-sub">CSVとTSVを相互変換。引用符付きセル、改行入りセル、カンマを含む値にも対応</div>
+  </div>
+</header>
+
+<main>
+  <div class="card">
+    <div class="card-title">変換設定</div>
+    <div class="mode-row">
+      <div class="mode-group" role="group" aria-label="変換方向">
+        <button class="mode-btn active" id="csvToTsvBtn" onclick="setMode('csv-tsv')">CSV → TSV</button>
+        <div class="mode-sep"></div>
+        <button class="mode-btn" id="tsvToCsvBtn" onclick="setMode('tsv-csv')">TSV → CSV</button>
+      </div>
+      <button class="btn btn-outline" onclick="loadSample()">サンプル入力</button>
+    </div>
+    <div class="option-row">
+      <label><input type="checkbox" id="quoteAll"> CSV出力時に全セルを引用符で囲む</label>
+      <label><input type="checkbox" id="trimCells"> 各セルの前後空白を削除</label>
+    </div>
+    <div class="hint">CSVは RFC 4180 に近い形式で読み取ります。値に含まれる引用符は二重引用符として扱います。</div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="card-title">入力</div>
+      <textarea id="inputText" placeholder="ここにCSVまたはTSVを貼り付けてください"></textarea>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="convert()">変換</button>
+        <button class="btn btn-outline" onclick="clearAll()">クリア</button>
+      </div>
+      <div class="message" id="message"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">出力</div>
+      <textarea id="outputText" readonly placeholder="変換結果がここに表示されます"></textarea>
+      <div class="btn-row">
+        <button class="btn btn-outline" onclick="copyOutput()">コピー</button>
+        <button class="btn btn-outline" onclick="swapOutput()">出力を入力へ移す</button>
+      </div>
+      <div class="message ok" id="copyMessage"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">変換情報</div>
+    <div class="stats">
+      <div class="stat"><div class="stat-val" id="rowCount">0</div><div class="stat-lbl">行数</div></div>
+      <div class="stat"><div class="stat-val" id="colCount">0</div><div class="stat-lbl">最大列数</div></div>
+      <div class="stat"><div class="stat-val" id="inputChars">0</div><div class="stat-lbl">入力文字数</div></div>
+      <div class="stat"><div class="stat-val" id="outputChars">0</div><div class="stat-lbl">出力文字数</div></div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <a href="../">ツール一覧</a> &nbsp;|&nbsp;
+  <a href="https://toaruseigyoya.github.io/" target="_blank" rel="noopener">ホームページ</a>
+  <div style="margin-top:6px;">入力内容はブラウザ内で処理され、外部に送信されません。</div>
+</footer>
+
+<script>
+  let mode = 'csv-tsv';
+
+  function setMode(nextMode) {
+    mode = nextMode;
+    document.getElementById('csvToTsvBtn').classList.toggle('active', mode === 'csv-tsv');
+    document.getElementById('tsvToCsvBtn').classList.toggle('active', mode === 'tsv-csv');
+    document.getElementById('message').textContent = '';
+    document.getElementById('copyMessage').textContent = '';
+  }
+
+  function parseDelimited(text, delimiter) {
+    const rows = [];
+    let row = [];
+    let cell = '';
+    let inQuotes = false;
+
+    for (let i = 0; i < text.length; i++) {
+      const ch = text[i];
+      const next = text[i + 1];
+
+      if (inQuotes) {
+        if (ch === '"' && next === '"') {
+          cell += '"';
+          i++;
+        } else if (ch === '"') {
+          inQuotes = false;
+        } else {
+          cell += ch;
+        }
+        continue;
+      }
+
+      if (ch === '"') {
+        inQuotes = true;
+      } else if (ch === delimiter) {
+        row.push(cell);
+        cell = '';
+      } else if (ch === '\n') {
+        row.push(cell);
+        rows.push(row);
+        row = [];
+        cell = '';
+      } else if (ch === '\r') {
+        row.push(cell);
+        rows.push(row);
+        row = [];
+        cell = '';
+        if (next === '\n') i++;
+      } else {
+        cell += ch;
+      }
+    }
+
+    if (inQuotes) {
+      throw new Error('引用符が閉じられていません。');
+    }
+
+    if (cell !== '' || row.length > 0 || text.endsWith(delimiter)) {
+      row.push(cell);
+      rows.push(row);
+    }
+    return rows;
+  }
+
+  function formatDelimited(rows, delimiter) {
+    const quoteAll = document.getElementById('quoteAll').checked;
+    const trimCells = document.getElementById('trimCells').checked;
+    return rows.map(function(row) {
+      return row.map(function(value) {
+        let cell = trimCells ? value.trim() : value;
+        if (delimiter === '\t') {
+          return cell.replace(/\t/g, ' ');
+        }
+        const needsQuote = quoteAll || /[",\r\n]/.test(cell);
+        if (!needsQuote) return cell;
+        return '"' + cell.replace(/"/g, '""') + '"';
+      }).join(delimiter);
+    }).join('\n');
+  }
+
+  function convert() {
+    const input = document.getElementById('inputText').value;
+    const message = document.getElementById('message');
+    const output = document.getElementById('outputText');
+    document.getElementById('copyMessage').textContent = '';
+
+    if (!input.trim()) {
+      output.value = '';
+      updateStats([], input, '');
+      message.className = 'message err';
+      message.textContent = '入力してください。';
+      return;
+    }
+
+    try {
+      const inputDelimiter = mode === 'csv-tsv' ? ',' : '\t';
+      const outputDelimiter = mode === 'csv-tsv' ? '\t' : ',';
+      const rows = parseDelimited(input, inputDelimiter);
+      const result = formatDelimited(rows, outputDelimiter);
+      output.value = result;
+      updateStats(rows, input, result);
+      message.className = 'message ok';
+      message.textContent = '変換しました。';
+    } catch (err) {
+      output.value = '';
+      updateStats([], input, '');
+      message.className = 'message err';
+      message.textContent = err.message;
+    }
+  }
+
+  function updateStats(rows, input, output) {
+    document.getElementById('rowCount').textContent = rows.length.toLocaleString();
+    document.getElementById('colCount').textContent = rows.reduce(function(max, row) {
+      return Math.max(max, row.length);
+    }, 0).toLocaleString();
+    document.getElementById('inputChars').textContent = input.length.toLocaleString();
+    document.getElementById('outputChars').textContent = output.length.toLocaleString();
+  }
+
+  function copyOutput() {
+    const output = document.getElementById('outputText').value;
+    if (!output) return;
+    navigator.clipboard.writeText(output).then(function() {
+      const msg = document.getElementById('copyMessage');
+      msg.textContent = 'コピーしました。';
+      setTimeout(function() { msg.textContent = ''; }, 2000);
+    });
+  }
+
+  function swapOutput() {
+    const output = document.getElementById('outputText').value;
+    if (!output) return;
+    document.getElementById('inputText').value = output;
+    document.getElementById('outputText').value = '';
+    document.getElementById('message').textContent = '';
+    document.getElementById('copyMessage').textContent = '';
+    updateStats([], output, '');
+  }
+
+  function clearAll() {
+    document.getElementById('inputText').value = '';
+    document.getElementById('outputText').value = '';
+    document.getElementById('message').textContent = '';
+    document.getElementById('copyMessage').textContent = '';
+    updateStats([], '', '');
+  }
+
+  function loadSample() {
+    if (mode === 'csv-tsv') {
+      document.getElementById('inputText').value = '名前,部署,メモ\n"山田 太郎",制御,"カンマ, を含むメモ"\n佐藤 花子,品質,"複数行\nメモ"';
+    } else {
+      document.getElementById('inputText').value = '名前\t部署\tメモ\n山田 太郎\t制御\tタブ区切りのデータ\n佐藤 花子\t品質\tCSVへ変換';
+    }
+    convert();
+  }
+
+  document.getElementById('inputText').addEventListener('input', function() {
+    document.getElementById('inputChars').textContent = this.value.length.toLocaleString();
+  });
+</script>
+</body>
+</html>
