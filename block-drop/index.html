@@ -34,8 +34,15 @@
     .primary { background:linear-gradient(135deg,#16a34a,#059669); }
     .primary:hover { background:linear-gradient(135deg,#22c55e,#10b981); }
     .wide { grid-column:1/-1; }
+    .center { grid-column:2; grid-row:2; }
+    .row3-left { grid-column:1; grid-row:3; }
+    .row3-right { grid-column:3; grid-row:3; }
     .keys { display:grid; gap:6px; color:var(--muted); font-size:.8rem; line-height:1.45; }
     .status { color:#fde68a; min-height:1.4em; font-size:.85rem; }
+    .board-wrap { position:relative; }
+    .line-flash { position:absolute; inset:0; display:grid; place-items:center; pointer-events:none; color:#fef08a; font-size:2.4rem; font-weight:1000; text-shadow:0 3px 18px rgba(250,204,21,.55); opacity:0; transform:scale(.86); }
+    .line-flash.show { animation:lineFlash .72s ease-out; }
+    @keyframes lineFlash { 0%{opacity:0;transform:scale(.86)} 18%{opacity:1;transform:scale(1.08)} 74%{opacity:.95;transform:scale(1)} 100%{opacity:0;transform:scale(1.16)} }
     footer { text-align:center; padding:18px; border-top:1px solid rgba(255,255,255,.08); color:var(--muted); font-size:.75rem; }
     footer a { color:#9ec5ff; text-decoration:none; }
     @media (max-width:760px) {
@@ -61,6 +68,7 @@
   <section class="game-shell" aria-label="ゲーム画面">
     <div class="board-wrap">
       <canvas id="board" width="360" height="540" aria-label="ブロックドロップの盤面"></canvas>
+      <div class="line-flash" id="lineFlash" aria-live="polite"></div>
     </div>
   </section>
   <aside class="side">
@@ -83,9 +91,9 @@
         <button onclick="move(-1)">←</button>
         <button onclick="rotatePiece()">回転</button>
         <button onclick="move(1)">→</button>
-        <button onclick="softDrop()">下</button>
-        <button onclick="hardDrop()">落下</button>
-        <button onclick="togglePause()">停止</button>
+        <button class="center" onclick="softDrop()">↓</button>
+        <button class="row3-left" onclick="hardDrop()">落下</button>
+        <button class="row3-right" onclick="togglePause()">一時停止</button>
         <button class="primary wide" onclick="newGame()">新規ゲーム</button>
       </div>
       <p class="status" id="status"></p>
@@ -124,7 +132,7 @@
     [[1,1,1,1]],
     [[1,1,1],[1,0,0]]
   ];
-  let board, current, nextPiece, score, lines, level, best, dropMs, last, acc, paused, over, raf;
+  let board, current, nextPiece, score, lines, level, best, dropMs, last, acc, paused, over, raf, clearingRows, clearFlashUntil;
 
   function cloneShape(shape) {
     return shape.map(row => row.slice());
@@ -139,7 +147,7 @@
   function newGame() {
     cancelAnimationFrame(raf);
     resetBoard();
-    score = 0; lines = 0; level = 1; dropMs = 720; acc = 0; last = performance.now(); paused = false; over = false;
+    score = 0; lines = 0; level = 1; dropMs = 720; acc = 0; last = performance.now(); paused = false; over = false; clearingRows = []; clearFlashUntil = 0;
     best = Number(localStorage.getItem('block-drop-best') || '0');
     current = makePiece();
     nextPiece = makePiece();
@@ -172,11 +180,11 @@
       });
     });
     clearLines();
-    current = nextPiece;
-    current.x = Math.floor(cols / 2) - 1;
-    current.y = 0;
+    const spawned = nextPiece;
+    spawned.x = Math.floor(cols / 2) - 1;
+    spawned.y = 0;
     nextPiece = makePiece();
-    if (collide(current)) {
+    if (collide(spawned)) {
       over = true;
       document.getElementById('status').textContent = 'ゲーム終了';
       if (score > best) {
@@ -184,21 +192,39 @@
         localStorage.setItem('block-drop-best', String(best));
       }
       updateStats();
+      draw();
+      return;
     }
+    current = spawned;
   }
   function clearLines() {
-    let cleared = 0;
-    board = board.filter(row => {
-      if (row.every(Boolean)) { cleared++; return false; }
+    const fullRows = [];
+    board.forEach((row, index) => {
+      if (row.every(Boolean)) fullRows.push(index);
+    });
+    let cleared = fullRows.length;
+    if (!cleared) return;
+    clearingRows = fullRows;
+    clearFlashUntil = performance.now() + 420;
+    showLineMessage(cleared);
+    board = board.filter((row, index) => {
+      if (fullRows.includes(index)) return false;
       return true;
     });
     while (board.length < rows) board.unshift(Array(cols).fill(null));
-    if (!cleared) return;
     lines += cleared;
     score += [0, 120, 280, 520, 860][cleared] * level;
     level = Math.floor(lines / 8) + 1;
     dropMs = Math.max(120, 720 - (level - 1) * 58);
     updateStats();
+  }
+  function showLineMessage(cleared) {
+    const el = document.getElementById('lineFlash');
+    el.textContent = cleared + 'LINE';
+    el.classList.remove('show');
+    void el.offsetWidth;
+    el.classList.add('show');
+    window.setTimeout(() => el.classList.remove('show'), 760);
   }
   function rotate(shape) {
     return shape[0].map((_, x) => shape.map(row => row[x]).reverse());
@@ -252,6 +278,10 @@
     for (let x = 1; x < cols; x++) { ctx.beginPath(); ctx.moveTo(x * cell, 0); ctx.lineTo(x * cell, rows * cell); ctx.stroke(); }
     for (let y = 1; y < rows; y++) { ctx.beginPath(); ctx.moveTo(0, y * cell); ctx.lineTo(cols * cell, y * cell); ctx.stroke(); }
     board.forEach((row, y) => row.forEach((color, x) => color && drawCell(ctx, x, y, color)));
+    if (performance.now() < clearFlashUntil) {
+      ctx.fillStyle = 'rgba(250,204,21,.36)';
+      clearingRows.forEach(y => ctx.fillRect(0, y * cell, cols * cell, cell));
+    }
     if (!over && current) current.shape.forEach((row, y) => row.forEach((filled, x) => filled && drawCell(ctx, current.x + x, current.y + y, current.color)));
     drawNext();
   }
