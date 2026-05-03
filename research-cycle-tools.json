@@ -1,0 +1,366 @@
+{
+  "generatedAt": "2026-05-03T12:06:52.091Z",
+  "cycles": [
+    {
+      "cycle": 1,
+      "source": "https://devbench.site/",
+      "candidates": 5,
+      "added": 3,
+      "skipped": 2
+    },
+    {
+      "cycle": 2,
+      "source": "https://www.quill.tools/",
+      "candidates": 5,
+      "added": 3,
+      "skipped": 2
+    },
+    {
+      "cycle": 3,
+      "source": "https://azweb.tools/",
+      "candidates": 5,
+      "added": 4,
+      "skipped": 1
+    },
+    {
+      "cycle": 4,
+      "source": "https://onedev.tools/",
+      "candidates": 5,
+      "added": 2,
+      "skipped": 3
+    },
+    {
+      "cycle": 5,
+      "source": "https://tooloo.net/",
+      "candidates": 5,
+      "added": 5,
+      "skipped": 0
+    },
+    {
+      "cycle": 6,
+      "source": "https://webdevutility.com/",
+      "candidates": 5,
+      "added": 2,
+      "skipped": 3
+    },
+    {
+      "cycle": 7,
+      "source": "https://devtoolsdesk.com/",
+      "candidates": 5,
+      "added": 1,
+      "skipped": 4
+    },
+    {
+      "cycle": 8,
+      "source": "https://tool-place.net/",
+      "candidates": 6,
+      "added": 4,
+      "skipped": 2
+    },
+    {
+      "cycle": 9,
+      "source": "https://www.alldevtool.com/",
+      "candidates": 5,
+      "added": 5,
+      "skipped": 0
+    },
+    {
+      "cycle": 10,
+      "source": "https://crecel.jp/",
+      "candidates": 5,
+      "added": 3,
+      "skipped": 2
+    }
+  ],
+  "added": 32,
+  "additions": [
+    {
+      "cycle": 1,
+      "source": "https://devbench.site/",
+      "category": "開発",
+      "title": "SQLフォーマッター",
+      "desc": "SQLクエリを読みやすく整形します",
+      "slug": "research-01-001",
+      "icon": "{}"
+    },
+    {
+      "cycle": 1,
+      "source": "https://devbench.site/",
+      "category": "開発",
+      "title": "XMLフォーマッター",
+      "desc": "XMLを整形し、タグ構造を見やすくします",
+      "slug": "research-01-002",
+      "icon": "{}"
+    },
+    {
+      "cycle": 1,
+      "source": "https://devbench.site/",
+      "category": "開発",
+      "title": "SHAチェックサム生成",
+      "desc": "SHA-1/SHA-256/SHA-512のチェックサムを生成します",
+      "slug": "research-01-005",
+      "icon": "⇄"
+    },
+    {
+      "cycle": 2,
+      "source": "https://www.quill.tools/",
+      "category": "変換",
+      "title": "Base64画像エンコード／デコード",
+      "desc": "画像データURIとBase64文字列の変換を補助します",
+      "slug": "research-02-003",
+      "icon": "▣"
+    },
+    {
+      "cycle": 2,
+      "source": "https://www.quill.tools/",
+      "category": "テキスト",
+      "title": "単語頻度カウンター",
+      "desc": "文章内の単語出現回数を集計します",
+      "slug": "research-02-004",
+      "icon": "⇄"
+    },
+    {
+      "cycle": 2,
+      "source": "https://www.quill.tools/",
+      "category": "テキスト",
+      "title": "文章要約メモ整形",
+      "desc": "長文メモから短い要約用の箇条書きを作ります",
+      "slug": "research-02-005",
+      "icon": "☑"
+    },
+    {
+      "cycle": 3,
+      "source": "https://azweb.tools/",
+      "category": "開発",
+      "title": "CRC32チェックサム生成",
+      "desc": "テキストのCRC32チェックサムを生成します",
+      "slug": "research-03-001",
+      "icon": "⇄"
+    },
+    {
+      "cycle": 3,
+      "source": "https://azweb.tools/",
+      "category": "開発",
+      "title": "ASCIIエンコード／デコード",
+      "desc": "文字列とASCIIコード列を相互変換します",
+      "slug": "research-03-002",
+      "icon": "⇄"
+    },
+    {
+      "cycle": 3,
+      "source": "https://azweb.tools/",
+      "category": "開発",
+      "title": "RSA鍵メモ生成",
+      "desc": "RSA鍵作成に必要なコマンド雛形を生成します",
+      "slug": "research-03-003",
+      "icon": "☑"
+    },
+    {
+      "cycle": 3,
+      "source": "https://azweb.tools/",
+      "category": "SEO",
+      "title": "SEO監査チェックリスト",
+      "desc": "ページURLからSEO確認項目を作成します",
+      "slug": "research-03-004",
+      "icon": "☑"
+    },
+    {
+      "cycle": 4,
+      "source": "https://onedev.tools/",
+      "category": "開発",
+      "title": "GraphQL整形ツール",
+      "desc": "GraphQLクエリを読みやすく整形します",
+      "slug": "research-04-004",
+      "icon": "{}"
+    },
+    {
+      "cycle": 4,
+      "source": "https://onedev.tools/",
+      "category": "開発",
+      "title": "環境変数サンプル生成",
+      "desc": ".envから.env.exampleを生成します",
+      "slug": "research-04-005",
+      "icon": "⇄"
+    },
+    {
+      "cycle": 5,
+      "source": "https://tooloo.net/",
+      "category": "計算",
+      "title": "アスペクト比計算",
+      "desc": "幅と高さから比率を計算します",
+      "slug": "research-05-001",
+      "icon": "∑"
+    },
+    {
+      "cycle": 5,
+      "source": "https://tooloo.net/",
+      "category": "計算",
+      "title": "商品単価比較",
+      "desc": "複数商品の内容量と価格から単価を比較します",
+      "slug": "research-05-002",
+      "icon": "∑"
+    },
+    {
+      "cycle": 5,
+      "source": "https://tooloo.net/",
+      "category": "変換",
+      "title": "バナーサイズ一覧",
+      "desc": "主要バナーサイズの一覧とCSS雛形を出力します",
+      "slug": "research-05-003",
+      "icon": "▣"
+    },
+    {
+      "cycle": 5,
+      "source": "https://tooloo.net/",
+      "category": "変換",
+      "title": "ダミー画像SVG生成",
+      "desc": "指定サイズのダミーSVG画像コードを生成します",
+      "slug": "research-05-004",
+      "icon": "▣"
+    },
+    {
+      "cycle": 5,
+      "source": "https://tooloo.net/",
+      "category": "開発",
+      "title": "ユーザーエージェント解析メモ",
+      "desc": "UA文字列を整理し確認項目を出力します",
+      "slug": "research-05-005",
+      "icon": "☑"
+    },
+    {
+      "cycle": 6,
+      "source": "https://webdevutility.com/",
+      "category": "開発",
+      "title": "JWT生成メモ",
+      "desc": "JWT作成用のヘッダー・ペイロード雛形を生成します",
+      "slug": "research-06-003",
+      "icon": "{}"
+    },
+    {
+      "cycle": 6,
+      "source": "https://webdevutility.com/",
+      "category": "開発",
+      "title": "Unix chmod計算",
+      "desc": "Linux権限の数値表記と記号表記を変換します",
+      "slug": "research-06-005",
+      "icon": "{}"
+    },
+    {
+      "cycle": 7,
+      "source": "https://devtoolsdesk.com/",
+      "category": "変換",
+      "title": "PDF作業メモ生成",
+      "desc": "PDF圧縮・抽出作業のチェックリストを生成します",
+      "slug": "research-07-004",
+      "icon": "▣"
+    },
+    {
+      "cycle": 8,
+      "source": "https://tool-place.net/",
+      "category": "計算",
+      "title": "BPMカウンター",
+      "desc": "タップ間隔または拍数と秒数からBPMを計算します",
+      "slug": "research-08-001",
+      "icon": "∑"
+    },
+    {
+      "cycle": 8,
+      "source": "https://tool-place.net/",
+      "category": "開発",
+      "title": "コメント除去ツール",
+      "desc": "ソースコードから行コメントとブロックコメントを除去します",
+      "slug": "research-08-002",
+      "icon": "⇄"
+    },
+    {
+      "cycle": 8,
+      "source": "https://tool-place.net/",
+      "category": "開発",
+      "title": "Unicodeエスケープ変換",
+      "desc": "文字列と\\uXXXX表記を相互変換します",
+      "slug": "research-08-004",
+      "icon": "{}"
+    },
+    {
+      "cycle": 8,
+      "source": "https://tool-place.net/",
+      "category": "計算",
+      "title": "楽天買い回りポイント計算",
+      "desc": "購入金額と倍率からポイント目安を計算します",
+      "slug": "research-08-006",
+      "icon": "∑"
+    },
+    {
+      "cycle": 9,
+      "source": "https://www.alldevtool.com/",
+      "category": "変換",
+      "title": "音声トリムメモ生成",
+      "desc": "音声トリミングの開始・終了時刻メモを生成します",
+      "slug": "research-09-001",
+      "icon": "▣"
+    },
+    {
+      "cycle": 9,
+      "source": "https://www.alldevtool.com/",
+      "category": "変換",
+      "title": "音声ピッチ変更計算",
+      "desc": "半音数から周波数倍率を計算します",
+      "slug": "research-09-002",
+      "icon": "▣"
+    },
+    {
+      "cycle": 9,
+      "source": "https://www.alldevtool.com/",
+      "category": "変換",
+      "title": "ノイズ除去チェックリスト",
+      "desc": "音声ノイズ除去の確認項目を生成します",
+      "slug": "research-09-003",
+      "icon": "☑"
+    },
+    {
+      "cycle": 9,
+      "source": "https://www.alldevtool.com/",
+      "category": "変換",
+      "title": "イコライザー設定メモ",
+      "desc": "周波数帯ごとのEQ設定表を生成します",
+      "slug": "research-09-004",
+      "icon": "▣"
+    },
+    {
+      "cycle": 9,
+      "source": "https://www.alldevtool.com/",
+      "category": "変換",
+      "title": "動画サムネ候補表",
+      "desc": "動画の秒数指定からサムネ候補表を作ります",
+      "slug": "research-09-005",
+      "icon": "▣"
+    },
+    {
+      "cycle": 10,
+      "source": "https://crecel.jp/",
+      "category": "開発",
+      "title": "Punycode変換メモ",
+      "desc": "日本語ドメインのPunycode確認用メモを生成します",
+      "slug": "research-10-003",
+      "icon": "☑"
+    },
+    {
+      "cycle": 10,
+      "source": "https://crecel.jp/",
+      "category": "開発",
+      "title": "IPレンジCIDRメモ",
+      "desc": "IPレンジ確認用のCIDR整理メモを生成します",
+      "slug": "research-10-004",
+      "icon": "{}"
+    },
+    {
+      "cycle": 10,
+      "source": "https://crecel.jp/",
+      "category": "テキスト",
+      "title": "敬語変換メモ",
+      "desc": "メモ文を丁寧な表現に整える雛形を生成します",
+      "slug": "research-10-005",
+      "icon": "☑"
+    }
+  ]
+}
