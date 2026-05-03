@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Markdown表作成 | ツール集</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --indigo:#4f46e5; --violet:#7c3aed; --emerald:#059669; --bg:#f5f6ff; --surf:#fff; --border:#e0e7ff; --text:#1e1b4b; --text2:#4c4980; --muted:#8b87c0; }
+    body { font-family:'Segoe UI','Yu Gothic UI','Hiragino Sans',sans-serif; background:var(--bg); color:var(--text); }
+    header { background:linear-gradient(135deg,#1e1b4b,#312e81); color:#fff; }
+    .hdr { max-width:900px; margin:0 auto; padding:18px 24px; }
+    .hdr-back { display:inline-flex; color:rgba(255,255,255,.62); text-decoration:none; font-size:.78rem; margin-bottom:8px; }
+    .hdr-back:hover { color:#fff; }
+    .hdr-title { font-size:1.4rem; font-weight:900; margin-bottom:4px; line-height:1.35; }
+    .hdr-sub { color:rgba(255,255,255,.72); font-size:.84rem; line-height:1.55; }
+    main { max-width:900px; margin:0 auto; padding:24px; }
+    .card { background:var(--surf); border:1px solid var(--border); border-radius:14px; padding:20px; margin-bottom:16px; box-shadow:0 2px 10px rgba(79,70,229,.06); }
+    .card-title { font-size:.88rem; font-weight:800; color:#3730a3; margin-bottom:12px; }
+    textarea, input, select { width:100%; padding:10px 12px; border:1.5px solid var(--border); border-radius:9px; font-size:.86rem; font-family:'Consolas','Yu Gothic UI',monospace; background:var(--bg); color:var(--text); }
+    textarea { min-height:180px; resize:vertical; line-height:1.55; }
+    textarea:focus, input:focus, select:focus { outline:none; border-color:#818cf8; }
+    .btn { padding:9px 18px; border:none; border-radius:9px; font-size:.84rem; font-weight:700; cursor:pointer; font-family:inherit; transition:all .15s; }
+    .btn-primary { background:linear-gradient(135deg,var(--indigo),var(--violet)); color:#fff; box-shadow:0 3px 10px rgba(79,70,229,.25); }
+    .btn-primary:hover { transform:translateY(-1px); }
+    .btn-outline { background:transparent; border:1.5px solid var(--border); color:var(--text2); }
+    .btn-outline:hover { border-color:#818cf8; color:var(--indigo); }
+    .btn-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:10px; }
+    .hint { color:var(--muted); font-size:.78rem; margin-top:8px; line-height:1.6; }
+    .stat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px; margin-top:12px; }
+    .stat-box { background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:12px; text-align:center; }
+    .stat-val { font-size:1.3rem; font-weight:900; color:var(--indigo); font-family:'Consolas',monospace; }
+    .stat-lbl { font-size:.72rem; color:var(--muted); margin-top:2px; }
+    footer { text-align:center; padding:20px; font-size:.73rem; color:var(--muted); border-top:1px solid var(--border); margin-top:8px; }
+    footer a { color:#818cf8; text-decoration:none; }
+  </style>
+</head>
+<body>
+<header>
+  <div class="hdr">
+    <a href="../" class="hdr-back">← ツール一覧</a>
+    <div class="hdr-title">Markdown表作成</div>
+    <div class="hdr-sub">入力内容からMarkdown表を生成する。</div>
+  </div>
+</header>
+<main>
+  <div class="card">
+    <div class="card-title">入力</div>
+    <textarea id="inputText" placeholder="ここにテキスト、CSV、メモ、数値、日付などを入力してください。"></textarea>
+    <div class="grid" style="margin-top:12px">
+      <input id="optionA" placeholder="補助入力A（必要な場合）">
+      <input id="optionB" placeholder="補助入力B（必要な場合）">
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="runTool()">実行</button>
+      <button class="btn btn-outline" onclick="loadSample()">サンプル</button>
+      <button class="btn btn-outline" onclick="clearAll()">クリア</button>
+    </div>
+    <p class="hint">このページはブラウザ内だけで処理します。入力内容は外部へ送信されません。</p>
+  </div>
+  <div class="card">
+    <div class="card-title">結果</div>
+    <textarea id="outputText" readonly></textarea>
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="copyResult()">コピー</button>
+      <button class="btn btn-outline" onclick="downloadResult()">txt保存</button>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-box"><div class="stat-val" id="statChars">0</div><div class="stat-lbl">文字</div></div>
+      <div class="stat-box"><div class="stat-val" id="statLines">0</div><div class="stat-lbl">行</div></div>
+      <div class="stat-box"><div class="stat-val" id="statBytes">0</div><div class="stat-lbl">UTF-8 bytes</div></div>
+    </div>
+  </div>
+</main>
+<footer>
+  <a href="../">← ツール一覧へ戻る</a>
+  &nbsp;|&nbsp;
+  <a href="../../index.html">ホームへ</a>
+</footer>
+<script>
+  const TOOL = {"no":35,"title":"Markdown表作成","desc":"入力内容からMarkdown表を生成する。","sourceCategory":"汎用ツール","category":"テキスト","slug":"tool-035","icon":"📊"};
+  const $ = (id) => document.getElementById(id);
+  const lines = (text) => text.replace(/\r\n/g, '\n').split('\n');
+  function csvRows(text) {
+    const rows = []; let row = [], cell = '', quote = false;
+    for (let i = 0; i < text.length; i++) {
+      const ch = text[i], next = text[i + 1];
+      if (ch === '"' && quote && next === '"') { cell += '"'; i++; }
+      else if (ch === '"') quote = !quote;
+      else if (ch === ',' && !quote) { row.push(cell); cell = ''; }
+      else if ((ch === '\n' || ch === '\r') && !quote) {
+        if (ch === '\r' && next === '\n') i++;
+        row.push(cell); rows.push(row); row = []; cell = '';
+      } else cell += ch;
+    }
+    row.push(cell); rows.push(row);
+    return rows.filter(r => r.some(c => c !== ''));
+  }
+  function toCsv(rows) {
+    return rows.map(r => r.map(c => /[",\n]/.test(c) ? '"' + c.replace(/"/g, '""') + '"' : c).join(',')).join('\n');
+  }
+  function mdTable(rows) {
+    if (!rows.length) return '';
+    const width = Math.max(...rows.map(r => r.length));
+    const padded = rows.map(r => Array.from({ length: width }, (_, i) => r[i] || ''));
+    return [padded[0], Array(width).fill('---'), ...padded.slice(1)]
+      .map(r => '| ' + r.map(c => String(c).replace(/\|/g, '\\|')).join(' | ') + ' |').join('\n');
+  }
+  function normalizeFullHalf(text, toFull) {
+    if (!toFull) return text.normalize('NFKC');
+    return text.replace(/[!-~]/g, ch => String.fromCharCode(ch.charCodeAt(0) + 0xFEE0)).replace(/ /g, '　');
+  }
+  function template(title, input) {
+    const items = lines(input).map(v => v.trim()).filter(Boolean);
+    if (/議事録/.test(title)) return '会議名：' + (items[0] || '') + '\n日時：\n参加者：\n\n議題：\n- \n\n決定事項：\n- \n\nTODO：\n- [ ] ';
+    if (/報告/.test(title)) return '件名：' + (items[0] || '作業報告') + '\n\n背景：\n\n実施内容：\n' + items.map(v => '- ' + v).join('\n') + '\n\n結果：\n\n課題：\n\n次回予定：';
+    if (/謝罪/.test(title)) return 'このたびは' + (items[0] || 'ご迷惑') + 'をおかけし、申し訳ございません。\n原因を確認のうえ、再発防止に努めます。\n何卒よろしくお願いいたします。';
+    if (/お礼/.test(title)) return 'お世話になっております。\n' + (items[0] || 'ご対応') + 'いただき、ありがとうございます。\n引き続きよろしくお願いいたします。';
+    if (/催促/.test(title)) return 'お世話になっております。\n先日お願いしておりました件について、状況をご確認いただけますでしょうか。\nお忙しいところ恐れ入りますが、よろしくお願いいたします。';
+    if (/メール|本文化/.test(title)) return '件名：' + (items[0] || 'ご確認のお願い') + '\n\nお世話になっております。\n' + items.join('\n') + '\n\nご確認のほど、よろしくお願いいたします。';
+    if (/チェック|TODO/.test(title)) return items.map(v => '- [ ] ' + v).join('\n');
+    if (/表|台帳|一覧|Excel/.test(title)) return toCsv([['No','項目','内容','担当','期限','状態'], ...items.map((v, i) => [String(i + 1), v, '', '', '', '未'])]);
+    return items.length ? items.join('\n') : input;
+  }
+  function process(title, input, a, b) {
+    try {
+      if (/バイト数/.test(title)) return 'UTF-8 bytes: ' + new TextEncoder().encode(input).length + '\n文字数: ' + input.length + '\n行数: ' + (input ? lines(input).length : 0);
+      if (/全角.*半角|半角.*全角/.test(title)) return normalizeFullHalf(input, /全角/.test(a));
+      if (/空行削除/.test(title)) return lines(input).filter(v => v.trim() !== '').join('\n');
+      if (/連続スペース/.test(title)) return input.replace(/[ \t　]+/g, ' ');
+      if (/句読点/.test(title)) return input.includes('，') || input.includes('．') ? input.replace(/，/g, '、').replace(/．/g, '。') : input.replace(/、/g, '，').replace(/。/g, '．');
+      if (/カッコ/.test(title)) return input.includes('（') || input.includes('）') ? input.replace(/（/g, '(').replace(/）/g, ')') : input.replace(/\(/g, '（').replace(/\)/g, '）');
+      if (/引用符/.test(title)) return input.replace(/"([^"]*)"/g, '“$1”').replace(/'([^']*)'/g, '‘$1’');
+      if (/文章逆順/.test(title)) return lines(input).reverse().join('\n');
+      if (/文字列逆順/.test(title)) return Array.from(input).reverse().join('');
+      if (/重複行削除/.test(title)) return [...new Set(lines(input))].join('\n');
+      if (/重複行抽出/.test(title)) { const seen = new Set(), dup = new Set(); lines(input).forEach(v => seen.has(v) ? dup.add(v) : seen.add(v)); return [...dup].join('\n'); }
+      if (/行番号追加/.test(title)) return lines(input).map((v, i) => (i + 1) + '. ' + v).join('\n');
+      if (/行番号削除/.test(title)) return lines(input).map(v => v.replace(/^\s*\d+[.)、:：\-\s]+/, '')).join('\n');
+      if (/シャッフル/.test(title)) return lines(input).sort(() => Math.random() - .5).join('\n');
+      if (/五十音|英字ソート|ソート/.test(title)) return lines(input).sort((x, y) => x.localeCompare(y, 'ja')).join('\n');
+      if (/CSV整形/.test(title)) return csvRows(input).map(r => r.join(' | ')).join('\n');
+      if (/CSV.*JSON/.test(title)) { const rows = csvRows(input), head = rows.shift() || []; return JSON.stringify(rows.map(r => Object.fromEntries(head.map((h, i) => [h, r[i] || '']))), null, 2); }
+      if (/JSON.*CSV/.test(title)) { const arr = JSON.parse(input); const rows = Array.isArray(arr) ? arr : [arr]; const keys = [...new Set(rows.flatMap(o => Object.keys(o)))]; return toCsv([keys, ...rows.map(o => keys.map(k => String(o[k] ?? '')))]); }
+      if (/JSON整形/.test(title)) return JSON.stringify(JSON.parse(input), null, 2);
+      if (/JSON圧縮/.test(title)) return JSON.stringify(JSON.parse(input));
+      if (/URLエンコード/.test(title)) return encodeURIComponent(input);
+      if (/URLデコード/.test(title)) return decodeURIComponent(input);
+      if (/Base64エンコード/.test(title)) return btoa(unescape(encodeURIComponent(input)));
+      if (/Base64デコード/.test(title)) return decodeURIComponent(escape(atob(input)));
+      if (/HTMLアンエスケープ/.test(title)) { const el = document.createElement('textarea'); el.innerHTML = input; return el.value; }
+      if (/Markdown表|CSV→表/.test(title)) return mdTable(csvRows(input));
+      if (/Markdownリンク/.test(title)) return '[' + (a || input || 'リンク') + '](' + (b || input || '') + ')';
+      if (/箇条書き/.test(title)) return lines(input).filter(Boolean).map(v => '- ' + v).join('\n');
+      if (/カンマ区切り/.test(title)) return lines(input).map(v => v.trim()).filter(Boolean).join(', ');
+      if (/改行区切り/.test(title)) return input.split(',').map(v => v.trim()).filter(Boolean).join('\n');
+      if (/ファイル名安全化/.test(title)) return input.replace(/[\\/:*?"<>|]/g, '').replace(/\s+/g, '_');
+      if (/曜日/.test(title)) return new Date(input || a).toLocaleDateString('ja-JP', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+      if (/日付加算|カウントダウン/.test(title)) { const d = new Date(input || new Date()); d.setDate(d.getDate() + Number(a || 0)); return d.toLocaleDateString('ja-JP'); }
+      if (/時間差/.test(title)) return String((new Date(b) - new Date(a || input)) / 60000) + ' 分';
+      if (/合計|平均|最大|最小|割合|割引/.test(title)) { const nums = input.match(/-?\d+(\.\d+)?/g)?.map(Number) || []; if (!nums.length) return ''; const sum = nums.reduce((x,y)=>x+y,0); return '合計: ' + sum + '\n平均: ' + (sum / nums.length) + '\n最大: ' + Math.max(...nums) + '\n最小: ' + Math.min(...nums); }
+      return template(title, input);
+    } catch (err) {
+      return '処理できませんでした: ' + err.message;
+    }
+  }
+  function runTool() {
+    const input = $('inputText').value;
+    const result = process(TOOL.title, input, $('optionA').value, $('optionB').value);
+    $('outputText').value = result;
+    updateStats(result);
+  }
+  function updateStats(text) {
+    $('statChars').textContent = text.length.toLocaleString();
+    $('statLines').textContent = (text ? lines(text).length : 0).toLocaleString();
+    $('statBytes').textContent = new TextEncoder().encode(text).length.toLocaleString();
+  }
+  function loadSample() {
+    $('inputText').value = /CSV|表|Excel/.test(TOOL.title) ? '項目,内容\nA,確認\nB,対応' : 'サンプル1\nサンプル2\nサンプル1';
+    $('optionA').value = '';
+    $('optionB').value = '';
+    runTool();
+  }
+  function clearAll() { $('inputText').value = ''; $('optionA').value = ''; $('optionB').value = ''; $('outputText').value = ''; updateStats(''); }
+  async function copyResult() { await navigator.clipboard.writeText($('outputText').value); }
+  function downloadResult() {
+    const blob = new Blob([$('outputText').value], { type:'text/plain;charset=utf-8' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = TOOL.slug + '.txt'; a.click(); URL.revokeObjectURL(a.href);
+  }
+</script>
+</body>
+</html>

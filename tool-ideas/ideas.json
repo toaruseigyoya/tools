@@ -1,3210 +1,3210 @@
 {
-    "generatedAt":  "2026-05-03T11:21:01.4466533Z",
-    "sourceTotal":  400,
-    "registered":  383,
-    "omittedExisting":  17,
-    "ideas":  [
-                  {
-                      "no":  2,
-                      "title":  "バイト数カウンター",
-                      "desc":  "UTF-8などのバイト数を確認する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  4,
-                      "title":  "全角・半角変換",
-                      "desc":  "英数字・カタカナを全角/半角に変換する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  6,
-                      "title":  "空行削除ツール",
-                      "desc":  "空白行だけ削除する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  7,
-                      "title":  "連続スペース削除",
-                      "desc":  "余分なスペースを1つにまとめる。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  9,
-                      "title":  "句読点変換",
-                      "desc":  "「、。」と「，．」などを相互変換する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  10,
-                      "title":  "日本語カッコ変換",
-                      "desc":  "() と （） などを相互変換する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  11,
-                      "title":  "引用符変換",
-                      "desc":  "\" \" と “ ”、\u0027 \u0027 と ‘ ’ を変換する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  12,
-                      "title":  "文章逆順ツール",
-                      "desc":  "行の順番を逆にする。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  13,
-                      "title":  "文字列逆順ツール",
-                      "desc":  "入力文字を逆から並べる。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  14,
-                      "title":  "重複行削除",
-                      "desc":  "同じ行を削除する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  15,
-                      "title":  "重複行抽出",
-                      "desc":  "重複している行だけ表示する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  16,
-                      "title":  "行番号追加",
-                      "desc":  "各行の先頭に番号を付ける。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  17,
-                      "title":  "行番号削除",
-                      "desc":  "先頭の番号を削除する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  18,
-                      "title":  "行シャッフル",
-                      "desc":  "行の順番をランダムに並べ替える。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  19,
-                      "title":  "五十音ソート",
-                      "desc":  "行を五十音順に並べ替える。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  20,
-                      "title":  "英字ソート",
-                      "desc":  "行をA-Z順に並べ替える。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  21,
-                      "title":  "CSV整形ツール",
-                      "desc":  "カンマ区切りを見やすく整形する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  22,
-                      "title":  "CSV→表変換",
-                      "desc":  "CSVをHTML表やMarkdown表に変換する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  23,
-                      "title":  "表→CSV変換",
-                      "desc":  "表形式テキストをCSVに変換する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  25,
-                      "title":  "CSV→JSON変換",
-                      "desc":  "CSVをJSON配列に変換する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  26,
-                      "title":  "JSON→CSV変換",
-                      "desc":  "JSONをCSVに変換する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  27,
-                      "title":  "JSON整形",
-                      "desc":  "JSONを見やすくインデントする。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  28,
-                      "title":  "JSON圧縮",
-                      "desc":  "JSONの改行・空白を削除する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  29,
-                      "title":  "URLエンコード",
-                      "desc":  "日本語URLなどをエンコードする。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  30,
-                      "title":  "URLデコード",
-                      "desc":  "%E3%81%82 などを日本語に戻す。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  31,
-                      "title":  "Base64エンコード",
-                      "desc":  "テキストをBase64化する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  32,
-                      "title":  "Base64デコード",
-                      "desc":  "Base64を元の文字に戻す。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  34,
-                      "title":  "HTMLアンエスケープ",
-                      "desc":  "\u0026lt; などを元に戻す。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  35,
-                      "title":  "Markdown表作成",
-                      "desc":  "入力内容からMarkdown表を生成する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  36,
-                      "title":  "Markdownリンク作成",
-                      "desc":  "URLとタイトルからリンク形式を生成する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  37,
-                      "title":  "箇条書き整形",
-                      "desc":  "改行テキストを「-」付きリストに変換する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  38,
-                      "title":  "カンマ区切り変換",
-                      "desc":  "改行リストをカンマ区切りに変換する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  39,
-                      "title":  "改行区切り変換",
-                      "desc":  "カンマ区切りを改行リストに変換する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  40,
-                      "title":  "ファイル名安全化",
-                      "desc":  "禁止文字を削除して安全なファイル名に変換する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  42,
-                      "title":  "営業日計算",
-                      "desc":  "土日祝を除いた日数を計算する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  43,
-                      "title":  "日付加算",
-                      "desc":  "今日から〇日後、〇営業日後を計算する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  45,
-                      "title":  "和暦・西暦変換",
-                      "desc":  "令和/平成/昭和と西暦を相互変換する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  46,
-                      "title":  "曜日計算",
-                      "desc":  "指定日の曜日を表示する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  48,
-                      "title":  "時間差計算",
-                      "desc":  "開始時刻と終了時刻の差を計算する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  49,
-                      "title":  "作業時間合計",
-                      "desc":  "複数の作業時間を合計する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  50,
-                      "title":  "カウントダウン作成",
-                      "desc":  "指定日まであと何日か表示する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  51,
-                      "title":  "メール件名作成",
-                      "desc":  "用件から件名候補を作る。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  52,
-                      "title":  "ビジネス挨拶文生成",
-                      "desc":  "「お世話になっております」系の定型文を生成する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  53,
-                      "title":  "催促文テンプレ作成",
-                      "desc":  "柔らかい催促文を作る。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  54,
-                      "title":  "お礼文テンプレ作成",
-                      "desc":  "社内/社外向けのお礼文を生成する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  55,
-                      "title":  "謝罪文テンプレ作成",
-                      "desc":  "軽め/重めの謝罪文を生成する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  56,
-                      "title":  "議事録フォーマット作成",
-                      "desc":  "会議名・日付から議事録枠を作成する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  57,
-                      "title":  "作業報告テンプレ作成",
-                      "desc":  "背景/内容/結果/課題/予定の枠を作成する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  58,
-                      "title":  "TODOリスト整形",
-                      "desc":  "メモをチェックリスト形式に変換する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  59,
-                      "title":  "優先度ラベル付け",
-                      "desc":  "タスクに高/中/低を付ける欄を追加する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  60,
-                      "title":  "進捗表作成",
-                      "desc":  "タスクを「未/中/済」表に変換する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  62,
-                      "title":  "ランダムパスワード生成",
-                      "desc":  "桁数・記号ありなしで生成する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  65,
-                      "title":  "IPアドレス確認メモ",
-                      "desc":  "IP/サブネット/ゲートウェイを整理する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  66,
-                      "title":  "サブネット計算",
-                      "desc":  "IPとCIDRから範囲を計算する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  67,
-                      "title":  "ポート番号メモ",
-                      "desc":  "よく使うポート番号を検索する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  68,
-                      "title":  "HTTPステータス早見",
-                      "desc":  "404/500などの意味を表示する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  69,
-                      "title":  "QRコード生成",
-                      "desc":  "テキストやURLからQRコードを生成する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  70,
-                      "title":  "QRコード読み取り",
-                      "desc":  "画像からQRコードを読み取る。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  71,
-                      "title":  "画像リサイズ",
-                      "desc":  "指定サイズに画像を縮小する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  72,
-                      "title":  "画像圧縮",
-                      "desc":  "画質を下げて容量を削減する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  73,
-                      "title":  "画像形式変換",
-                      "desc":  "PNG/JPG/WebPを変換する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  74,
-                      "title":  "画像トリミング",
-                      "desc":  "指定範囲で切り抜く。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  75,
-                      "title":  "画像の余白追加",
-                      "desc":  "周囲に白余白を追加する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  76,
-                      "title":  "画像の角丸化",
-                      "desc":  "角丸画像を作成する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  77,
-                      "title":  "画像をBase64化",
-                      "desc":  "画像をBase64文字列に変換する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  78,
-                      "title":  "カラーピッカー",
-                      "desc":  "色コードを取得する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  80,
-                      "title":  "文字色コントラスト確認",
-                      "desc":  "背景色と文字色の見やすさを確認する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  82,
-                      "title":  "割引計算",
-                      "desc":  "〇%OFF後の価格を計算する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  83,
-                      "title":  "割合計算",
-                      "desc":  "AはBの何%か計算する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  84,
-                      "title":  "平均値計算",
-                      "desc":  "複数数値の平均を計算する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  85,
-                      "title":  "合計計算",
-                      "desc":  "改行ごとの数値を合計する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  86,
-                      "title":  "最大・最小値抽出",
-                      "desc":  "数値リストから最大/最小を表示する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  88,
-                      "title":  "面積計算",
-                      "desc":  "縦×横、㎡と坪などを計算する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  89,
-                      "title":  "体積計算",
-                      "desc":  "縦×横×高さを計算する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  90,
-                      "title":  "速度変換",
-                      "desc":  "m/s と km/h を変換する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  91,
-                      "title":  "乱数生成",
-                      "desc":  "指定範囲のランダム数を生成する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  92,
-                      "title":  "抽選ツール",
-                      "desc":  "リストからランダムに1つ選ぶ。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  93,
-                      "title":  "チーム分けツール",
-                      "desc":  "名前リストをランダムにグループ分けする。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  94,
-                      "title":  "あみだくじ生成",
-                      "desc":  "簡易あみだくじを作る。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  95,
-                      "title":  "ルーレット",
-                      "desc":  "候補からランダム選択する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  96,
-                      "title":  "メモ帳",
-                      "desc":  "ブラウザ内で一時メモする。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  97,
-                      "title":  "クリップボード履歴風メモ",
-                      "desc":  "コピー候補を複数保持する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  99,
-                      "title":  "ダミー個人情報生成",
-                      "desc":  "架空の名前・住所・電話番号を生成する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  100,
-                      "title":  "チェックリスト作成",
-                      "desc":  "入力行をチェックボックス付きに変換する。",
-                      "category":  "汎用ツール",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  101,
-                      "title":  "文章の敬語変換",
-                      "desc":  "普通の文章を丁寧語・ビジネス文に変換",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  102,
-                      "title":  "文章のやわらか変換",
-                      "desc":  "きつい表現をやわらかい表現に変換",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  103,
-                      "title":  "文章の短縮ツール",
-                      "desc":  "長い文章を短く要約",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  104,
-                      "title":  "文章の言い換えツール",
-                      "desc":  "同じ意味で別表現に変換",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  105,
-                      "title":  "箇条書き変換",
-                      "desc":  "文章を箇条書きに整形",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  106,
-                      "title":  "箇条書き文章化",
-                      "desc":  "箇条書きを自然な文章に変換",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  107,
-                      "title":  "表記ゆれチェック",
-                      "desc":  "「サーバ/サーバー」などを検出",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  108,
-                      "title":  "禁止ワードチェック",
-                      "desc":  "指定したNGワードが含まれるか確認",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  109,
-                      "title":  "誤字っぽい表現チェック",
-                      "desc":  "よくある誤字・変換ミスを検出",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  110,
-                      "title":  "ですます調統一",
-                      "desc":  "文末を「です・ます」に統一",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  111,
-                      "title":  "だである調統一",
-                      "desc":  "文末を「だ・である」に統一",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  112,
-                      "title":  "語尾連続チェック",
-                      "desc":  "「ます」が連続していないか確認",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  113,
-                      "title":  "1文の長さチェック",
-                      "desc":  "長すぎる文章を検出",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  114,
-                      "title":  "読点多すぎチェック",
-                      "desc":  "「、」が多い文章を検出",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  115,
-                      "title":  "半角カナ検出",
-                      "desc":  "半角カナだけ抽出・変換候補表示",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  116,
-                      "title":  "環境依存文字チェック",
-                      "desc":  "①㈱髙などを検出",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  117,
-                      "title":  "機種依存文字置換",
-                      "desc":  "環境依存文字を一般文字へ置換",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  118,
-                      "title":  "URL抽出",
-                      "desc":  "文章中のURLだけ抜き出す",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  119,
-                      "title":  "メールアドレス抽出",
-                      "desc":  "文章中のメールアドレスを抽出",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  120,
-                      "title":  "電話番号抽出",
-                      "desc":  "文章中の電話番号を抽出",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  121,
-                      "title":  "件名チェック",
-                      "desc":  "メール件名が分かりやすいか確認",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  122,
-                      "title":  "宛名テンプレ作成",
-                      "desc":  "会社名・氏名から宛名を生成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  123,
-                      "title":  "締め文生成",
-                      "desc":  "メール末尾の締め文を作成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  124,
-                      "title":  "依頼文生成",
-                      "desc":  "「確認してください」を丁寧に変換",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  125,
-                      "title":  "断り文生成",
-                      "desc":  "角が立たない断り文を作成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  126,
-                      "title":  "日程調整文生成",
-                      "desc":  "候補日を入れて日程調整メール作成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  127,
-                      "title":  "リマインド文生成",
-                      "desc":  "期限前の確認連絡文を作成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  128,
-                      "title":  "お詫び＋再依頼文生成",
-                      "desc":  "謝罪しつつ再依頼する文章を作成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  129,
-                      "title":  "社内連絡文テンプレ",
-                      "desc":  "社内向けの短い連絡文を作成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  130,
-                      "title":  "社外連絡文テンプレ",
-                      "desc":  "社外向けの丁寧な連絡文を作成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  131,
-                      "title":  "議事録要点抽出",
-                      "desc":  "メモから決定事項・宿題を抽出",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  132,
-                      "title":  "議事録タイトル生成",
-                      "desc":  "内容から会議タイトルを作成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  133,
-                      "title":  "報告書タイトル生成",
-                      "desc":  "作業内容から報告書タイトルを作成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  134,
-                      "title":  "作業内容の整形",
-                      "desc":  "雑な作業メモを報告書風に整形",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  135,
-                      "title":  "トラブル報告テンプレ",
-                      "desc":  "現象・原因・対策の枠を作成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  136,
-                      "title":  "問い合わせ文作成",
-                      "desc":  "メーカー・社内向け問い合わせ文を作成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  137,
-                      "title":  "回答文整形",
-                      "desc":  "受け取った回答を見やすく整形",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  138,
-                      "title":  "返信文下書き",
-                      "desc":  "受信メール本文から返信文を作成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  139,
-                      "title":  "メール敬称チェック",
-                      "desc":  "「様」「御中」などの使い方を確認",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  140,
-                      "title":  "メール改行整形",
-                      "desc":  "読みやすい位置で改行を入れる",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  141,
-                      "title":  "ファイル名一括変換案作成",
-                      "desc":  "元ファイル名から整理後の名前を提案",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  142,
-                      "title":  "日付付きファイル名生成",
-                      "desc":  "20260503_資料名 の形式で生成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  143,
-                      "title":  "連番ファイル名生成",
-                      "desc":  "001_, 002_ の連番名を作成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  144,
-                      "title":  "ファイル拡張子抽出",
-                      "desc":  "ファイル名リストから拡張子を抽出",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  145,
-                      "title":  "拡張子別分類",
-                      "desc":  "ファイル一覧を .docx, .xlsx などで分類",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  146,
-                      "title":  "フォルダ構成案作成",
-                      "desc":  "案件名からフォルダ構成を提案",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  147,
-                      "title":  "パス区切り変換",
-                      "desc":  "Windowsパス⇔URL風パスへ変換",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  148,
-                      "title":  "ファイル名禁止文字チェック",
-                      "desc":  "\\ / : * ? などを検出",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  149,
-                      "title":  "ファイル名短縮",
-                      "desc":  "長すぎるファイル名を短くする",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  150,
-                      "title":  "ファイル名から日付抽出",
-                      "desc":  "ファイル名中の日付を抜き出す",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  151,
-                      "title":  "Excel列番号変換",
-                      "desc":  "A列⇔1、AA列⇔27を変換",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  152,
-                      "title":  "セル範囲作成",
-                      "desc":  "開始セル・終了セルから範囲文字列を生成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  153,
-                      "title":  "CSV列抽出",
-                      "desc":  "指定列だけ取り出す",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  154,
-                      "title":  "CSV列入れ替え",
-                      "desc":  "列順を指定して並べ替える",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  155,
-                      "title":  "CSV重複チェック",
-                      "desc":  "指定列の重複を検出",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  156,
-                      "title":  "CSV差分比較",
-                      "desc":  "2つのCSVの違いを確認",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  157,
-                      "title":  "表の空欄チェック",
-                      "desc":  "空欄セルを検出",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  158,
-                      "title":  "表の縦横変換",
-                      "desc":  "行列を入れ替える",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  159,
-                      "title":  "リスト突合",
-                      "desc":  "AリストにあってBリストにないものを抽出",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  160,
-                      "title":  "プルダウン候補作成",
-                      "desc":  "改行リストをExcel入力規則用に整形",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  161,
-                      "title":  "条件付き書式案作成",
-                      "desc":  "状態に応じた色分けルールを提案",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  162,
-                      "title":  "Excel数式説明",
-                      "desc":  "数式を貼ると意味を説明",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  163,
-                      "title":  "Excel関数生成",
-                      "desc":  "やりたい処理から関数を作成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  164,
-                      "title":  "VLOOKUP/XLOOKUP補助",
-                      "desc":  "参照表から必要な式を生成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  165,
-                      "title":  "表タイトル自動生成",
-                      "desc":  "表の内容からタイトルを提案",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  166,
-                      "title":  "Markdown表チェック",
-                      "desc":  "Markdown表の崩れを検出",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  167,
-                      "title":  "テーブル列幅案",
-                      "desc":  "内容に応じた列幅案を出す",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  168,
-                      "title":  "状態管理表作成",
-                      "desc":  "未/中/済/保留の表を生成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  169,
-                      "title":  "チェック欄付き表作成",
-                      "desc":  "タスクにチェック欄を追加",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  170,
-                      "title":  "日付別集計表作成",
-                      "desc":  "日付ごとの件数集計表を作る",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  171,
-                      "title":  "SNS文字数チェック",
-                      "desc":  "Xなどの投稿文字数を確認",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  172,
-                      "title":  "ハッシュタグ生成",
-                      "desc":  "キーワードからタグ候補を作成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  173,
-                      "title":  "タイトル案生成",
-                      "desc":  "記事や動画のタイトル案を作成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  174,
-                      "title":  "メタディスクリプション作成",
-                      "desc":  "SEO用の説明文を生成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  175,
-                      "title":  "URLスラッグ生成",
-                      "desc":  "日本語タイトルをURL向け英数字に変換",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  176,
-                      "title":  "OGP確認メモ作成",
-                      "desc":  "タイトル・説明・画像URLを整理",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  177,
-                      "title":  "ブログ見出し作成",
-                      "desc":  "キーワードから見出し構成を作成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  178,
-                      "title":  "投稿予約メモ作成",
-                      "desc":  "投稿内容・日時・媒体を整理",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  179,
-                      "title":  "アイキャッチ文生成",
-                      "desc":  "記事冒頭の短い紹介文を作成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  180,
-                      "title":  "YouTube概要欄整形",
-                      "desc":  "説明文・リンク・タグを整える",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  181,
-                      "title":  "買い物リスト整形",
-                      "desc":  "メモをカテゴリ別に整理",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  182,
-                      "title":  "献立候補作成",
-                      "desc":  "食材から料理候補を出す",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  183,
-                      "title":  "冷蔵庫メモ",
-                      "desc":  "食材と期限を一覧化",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  184,
-                      "title":  "賞味期限カウント",
-                      "desc":  "期限まであと何日か表示",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  185,
-                      "title":  "家計メモ整形",
-                      "desc":  "支出メモをカテゴリ別に整理",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  187,
-                      "title":  "燃費計算",
-                      "desc":  "走行距離と給油量から燃費計算",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  188,
-                      "title":  "電気代概算",
-                      "desc":  "W数と使用時間から電気代を概算",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  189,
-                      "title":  "荷物チェックリスト",
-                      "desc":  "旅行・出張の持ち物リストを作成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  190,
-                      "title":  "住所分割",
-                      "desc":  "郵便番号・都道府県・市区町村を分ける",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  191,
-                      "title":  "IP設定表作成",
-                      "desc":  "機器名・IP・用途の表を生成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  192,
-                      "title":  "I/Oリスト整形",
-                      "desc":  "入出力メモを表形式に変換",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  193,
-                      "title":  "アラーム一覧整形",
-                      "desc":  "アラーム名と詳細を表に変換",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  194,
-                      "title":  "ラダーコメント整形",
-                      "desc":  "デバイスコメントを表記統一",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  195,
-                      "title":  "機器リスト作成",
-                      "desc":  "型式・メーカー・用途を一覧化",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  196,
-                      "title":  "配線チェックリスト",
-                      "desc":  "電源・LAN・I/Oなどの確認項目を作成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  197,
-                      "title":  "現地作業チェックリスト",
-                      "desc":  "持ち物・確認事項・作業順を作成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  198,
-                      "title":  "不具合メモ整理",
-                      "desc":  "現象・条件・再現性・対策に分解",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  199,
-                      "title":  "通信設定メモ作成",
-                      "desc":  "IP、ポート、プロトコルを整理",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  200,
-                      "title":  "作業前後確認表",
-                      "desc":  "作業前確認・作業後確認の表を作成",
-                      "category":  "文章補助",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  201,
-                      "title":  "文章トーン判定",
-                      "desc":  "文章が固い・柔らかい・冷たいなどを判定",
-                      "category":  "AI・文章補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  202,
-                      "title":  "社内向け変換",
-                      "desc":  "社外向け文を社内向けの簡潔な文に変換",
-                      "category":  "AI・文章補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  203,
-                      "title":  "社外向け変換",
-                      "desc":  "社内メモを社外向けの丁寧な文に変換",
-                      "category":  "AI・文章補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  204,
-                      "title":  "クレーム返信補助",
-                      "desc":  "クレーム内容から返信文の下書きを作成",
-                      "category":  "AI・文章補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  205,
-                      "title":  "依頼内容抽出",
-                      "desc":  "長文メールから依頼事項だけ抽出",
-                      "category":  "AI・文章補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  206,
-                      "title":  "期限抽出",
-                      "desc":  "文章中の日付・期限だけ抜き出す",
-                      "category":  "AI・文章補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  207,
-                      "title":  "担当者抽出",
-                      "desc":  "文章中の担当者名だけ抜き出す",
-                      "category":  "AI・文章補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  208,
-                      "title":  "決定事項抽出",
-                      "desc":  "会議メモから決定事項だけ抽出",
-                      "category":  "AI・文章補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  209,
-                      "title":  "未決事項抽出",
-                      "desc":  "会議メモから未決事項だけ抽出",
-                      "category":  "AI・文章補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  210,
-                      "title":  "宿題リスト抽出",
-                      "desc":  "会議メモからToDoだけ抽出",
-                      "category":  "AI・文章補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  211,
-                      "title":  "文章の危険表現チェック",
-                      "desc":  "誤解・失礼になりそうな表現を検出",
-                      "category":  "AI・文章補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  212,
-                      "title":  "二重敬語チェック",
-                      "desc":  "「おっしゃられる」などを検出",
-                      "category":  "AI・文章補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  213,
-                      "title":  "主語抜けチェック",
-                      "desc":  "誰が実施するか不明な文を検出",
-                      "category":  "AI・文章補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  214,
-                      "title":  "あいまい表現チェック",
-                      "desc":  "「なるべく」「適宜」などを検出",
-                      "category":  "AI・文章補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  215,
-                      "title":  "結論先出し変換",
-                      "desc":  "理由から始まる文を結論先出しに並べ替え",
-                      "category":  "AI・文章補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  216,
-                      "title":  "報告文の所感生成",
-                      "desc":  "原因・改善点から所感を作成",
-                      "category":  "AI・文章補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  217,
-                      "title":  "トラブル原因候補整理",
-                      "desc":  "現象から原因候補を箇条書き化",
-                      "category":  "AI・文章補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  218,
-                      "title":  "メモから報告書構成化",
-                      "desc":  "雑メモを背景・結果・課題に分類",
-                      "category":  "AI・文章補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  219,
-                      "title":  "説明文かんたん化",
-                      "desc":  "難しい説明を初心者向けに変換",
-                      "category":  "AI・文章補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  220,
-                      "title":  "専門用語抽出",
-                      "desc":  "文章中の専門用語だけ抜き出す",
-                      "category":  "AI・文章補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  221,
-                      "title":  "HTMLタグ除去",
-                      "desc":  "HTMLからテキストだけ抽出",
-                      "category":  "Web制作・HTML/CSS系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  222,
-                      "title":  "HTML整形",
-                      "desc":  "HTMLをインデント付きで整形",
-                      "category":  "Web制作・HTML/CSS系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  223,
-                      "title":  "CSS整形",
-                      "desc":  "CSSを見やすく整形",
-                      "category":  "Web制作・HTML/CSS系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  224,
-                      "title":  "CSS圧縮",
-                      "desc":  "CSSの改行・空白を削除",
-                      "category":  "Web制作・HTML/CSS系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  225,
-                      "title":  "JavaScript整形",
-                      "desc":  "JSコードをインデント付きで整形",
-                      "category":  "Web制作・HTML/CSS系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  226,
-                      "title":  "JavaScript圧縮",
-                      "desc":  "JSコードを圧縮",
-                      "category":  "Web制作・HTML/CSS系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  227,
-                      "title":  "HTML色確認",
-                      "desc":  "HTMLカラーコードをプレビュー",
-                      "category":  "Web制作・HTML/CSS系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  228,
-                      "title":  "CSSグラデーション生成",
-                      "desc":  "2色からグラデーションCSSを作成",
-                      "category":  "Web制作・HTML/CSS系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  229,
-                      "title":  "box-shadow生成",
-                      "desc":  "影のCSSを画面で調整して生成",
-                      "category":  "Web制作・HTML/CSS系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  230,
-                      "title":  "border-radius生成",
-                      "desc":  "角丸CSSを画面で調整して生成",
-                      "category":  "Web制作・HTML/CSS系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  231,
-                      "title":  "CSSボタン生成",
-                      "desc":  "色・角丸・影からボタンCSSを作成",
-                      "category":  "Web制作・HTML/CSS系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  232,
-                      "title":  "HTMLテーブル生成",
-                      "desc":  "入力データからHTML表を作成",
-                      "category":  "Web制作・HTML/CSS系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  233,
-                      "title":  "favicon確認",
-                      "desc":  "favicon画像の見え方を確認",
-                      "category":  "Web制作・HTML/CSS系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  234,
-                      "title":  "レスポンシブ確認メモ",
-                      "desc":  "PC/スマホ表示確認項目を作成",
-                      "category":  "Web制作・HTML/CSS系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  235,
-                      "title":  "文字装飾CSS生成",
-                      "desc":  "太字・下線・色などのCSSを生成",
-                      "category":  "Web制作・HTML/CSS系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  236,
-                      "title":  "Flexbox補助",
-                      "desc":  "配置イメージからflex CSSを生成",
-                      "category":  "Web制作・HTML/CSS系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  237,
-                      "title":  "Grid補助",
-                      "desc":  "行列数からCSS Gridを生成",
-                      "category":  "Web制作・HTML/CSS系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  238,
-                      "title":  "メディアクエリ生成",
-                      "desc":  "画面幅ごとのCSS雛形を作成",
-                      "category":  "Web制作・HTML/CSS系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  239,
-                      "title":  "HTML特殊文字一覧",
-                      "desc":  "よく使う特殊文字を検索・コピー",
-                      "category":  "Web制作・HTML/CSS系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  240,
-                      "title":  "metaタグ生成",
-                      "desc":  "title/description/OGPのmetaタグを作成",
-                      "category":  "Web制作・HTML/CSS系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  241,
-                      "title":  "README雛形生成",
-                      "desc":  "プロジェクト名からREADMEの枠を作成",
-                      "category":  "GitHub・開発作業系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  242,
-                      "title":  ".gitignore生成",
-                      "desc":  "言語を選んで.gitignoreを作成",
-                      "category":  "GitHub・開発作業系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  243,
-                      "title":  "コミットメッセージ生成",
-                      "desc":  "変更内容からcommit文を作成",
-                      "category":  "GitHub・開発作業系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  244,
-                      "title":  "ブランチ名生成",
-                      "desc":  "作業内容から安全なブランチ名を作成",
-                      "category":  "GitHub・開発作業系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  245,
-                      "title":  "Pull Request説明生成",
-                      "desc":  "変更内容からPR説明文を作成",
-                      "category":  "GitHub・開発作業系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  246,
-                      "title":  "Issueテンプレ生成",
-                      "desc":  "バグ報告・要望のテンプレを作成",
-                      "category":  "GitHub・開発作業系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  247,
-                      "title":  "CHANGELOG生成",
-                      "desc":  "更新メモから変更履歴を作成",
-                      "category":  "GitHub・開発作業系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  248,
-                      "title":  "バージョン番号補助",
-                      "desc":  "major/minor/patchの更新判断を補助",
-                      "category":  "GitHub・開発作業系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  249,
-                      "title":  "ライセンス選択補助",
-                      "desc":  "MIT/Apache/GPLなどの違いを簡単比較",
-                      "category":  "GitHub・開発作業系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  250,
-                      "title":  "Markdown目次生成",
-                      "desc":  "見出しから目次を作成",
-                      "category":  "GitHub・開発作業系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  251,
-                      "title":  "Markdownリンク切れ候補チェック",
-                      "desc":  "リンク一覧から怪しいものを検出",
-                      "category":  "GitHub・開発作業系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  252,
-                      "title":  "コードコメント整形",
-                      "desc":  "コメント文を統一した文体に変換",
-                      "category":  "GitHub・開発作業系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  253,
-                      "title":  "TODOコメント抽出",
-                      "desc":  "コード中のTODO/FIXMEだけ抽出",
-                      "category":  "GitHub・開発作業系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  254,
-                      "title":  "ログ整形",
-                      "desc":  "アプリログを見やすく整形",
-                      "category":  "GitHub・開発作業系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  255,
-                      "title":  "エラーメッセージ整形",
-                      "desc":  "エラー文を原因・対策欄に分解",
-                      "category":  "GitHub・開発作業系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  256,
-                      "title":  "JSON Schema生成",
-                      "desc":  "JSONサンプルからSchemaを作成",
-                      "category":  "GitHub・開発作業系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  257,
-                      "title":  "APIレスポンス整形",
-                      "desc":  "APIの戻り値を見やすく整形",
-                      "category":  "GitHub・開発作業系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  258,
-                      "title":  "curlコマンド生成",
-                      "desc":  "URL/ヘッダー/bodyからcurlを作成",
-                      "category":  "GitHub・開発作業系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  259,
-                      "title":  "HTTPヘッダー整形",
-                      "desc":  "ヘッダー情報を表形式に変換",
-                      "category":  "GitHub・開発作業系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  260,
-                      "title":  "簡易JWTデコード",
-                      "desc":  "JWTのheader/payloadを確認",
-                      "category":  "GitHub・開発作業系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  261,
-                      "title":  "パスワード強度チェック",
-                      "desc":  "文字数・記号・推測しやすさを判定",
-                      "category":  "セキュリティ・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  262,
-                      "title":  "秘密情報っぽい文字列チェック",
-                      "desc":  "APIキーやトークンらしき文字列を検出",
-                      "category":  "セキュリティ・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  263,
-                      "title":  "メール誤送信チェック",
-                      "desc":  "宛先・添付・敬称の確認リストを作成",
-                      "category":  "セキュリティ・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  264,
-                      "title":  "個人情報マスク",
-                      "desc":  "氏名・電話番号・メールを伏せ字に変換",
-                      "category":  "セキュリティ・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  265,
-                      "title":  "URL安全確認メモ",
-                      "desc":  "ドメイン・短縮URL・怪しい文字を確認",
-                      "category":  "セキュリティ・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  266,
-                      "title":  "QRコード内容確認",
-                      "desc":  "QRコードのリンク先文字列を表示",
-                      "category":  "セキュリティ・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  267,
-                      "title":  "添付ファイル確認リスト",
-                      "desc":  "送付前の添付漏れ防止チェック",
-                      "category":  "セキュリティ・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  268,
-                      "title":  "公開前チェックリスト",
-                      "desc":  "Webページ公開前の確認項目を作成",
-                      "category":  "セキュリティ・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  269,
-                      "title":  "権限設定メモ作成",
-                      "desc":  "誰に何の権限を付けるか整理",
-                      "category":  "セキュリティ・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  270,
-                      "title":  "セキュリティ注意文生成",
-                      "desc":  "社内共有用の注意文を作成",
-                      "category":  "セキュリティ・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  271,
-                      "title":  "アンケート集計",
-                      "desc":  "回答リストから件数を集計",
-                      "category":  "データ分析・集計補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  272,
-                      "title":  "自由記述分類",
-                      "desc":  "コメントを似た内容ごとに分類",
-                      "category":  "データ分析・集計補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  273,
-                      "title":  "頻出語抽出",
-                      "desc":  "文章中によく出る単語を抽出",
-                      "category":  "データ分析・集計補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  274,
-                      "title":  "ランキング作成",
-                      "desc":  "数値データを順位付け",
-                      "category":  "データ分析・集計補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  275,
-                      "title":  "パレート表作成",
-                      "desc":  "件数から累積比率を計算",
-                      "category":  "データ分析・集計補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  276,
-                      "title":  "ABC分析",
-                      "desc":  "売上・件数からA/B/C分類",
-                      "category":  "データ分析・集計補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  277,
-                      "title":  "クロス集計表作成",
-                      "desc":  "2項目の組み合わせで集計",
-                      "category":  "データ分析・集計補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  278,
-                      "title":  "外れ値候補検出",
-                      "desc":  "数値リストから極端な値を検出",
-                      "category":  "データ分析・集計補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  279,
-                      "title":  "移動平均計算",
-                      "desc":  "時系列データの移動平均を計算",
-                      "category":  "データ分析・集計補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  280,
-                      "title":  "前年比・前月比計算",
-                      "desc":  "数値の増減率を計算",
-                      "category":  "データ分析・集計補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  281,
-                      "title":  "デバイス割付表作成",
-                      "desc":  "X/Y/M/Dなどの割付を表に整理",
-                      "category":  "設備・現場・制御系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  282,
-                      "title":  "PLCコメント一括整形",
-                      "desc":  "デバイスコメントの表記を統一",
-                      "category":  "設備・現場・制御系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  283,
-                      "title":  "アラーム分類ツール",
-                      "desc":  "アラームを非常停止・サーボ・センサ等に分類",
-                      "category":  "設備・現場・制御系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  284,
-                      "title":  "インターロック条件整理",
-                      "desc":  "条件メモをAND/OR形式に整理",
-                      "category":  "設備・現場・制御系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  285,
-                      "title":  "運転条件チェック表",
-                      "desc":  "自動運転開始条件を一覧化",
-                      "category":  "設備・現場・制御系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  286,
-                      "title":  "原点復帰条件表作成",
-                      "desc":  "軸・シリンダごとの原点条件を整理",
-                      "category":  "設備・現場・制御系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  287,
-                      "title":  "エア機器チェックリスト",
-                      "desc":  "圧力・電磁弁・シリンダ確認項目を作成",
-                      "category":  "設備・現場・制御系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  288,
-                      "title":  "センサ確認リスト",
-                      "desc":  "ON/OFF状態確認表を作成",
-                      "category":  "設備・現場・制御系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  289,
-                      "title":  "モータ確認リスト",
-                      "desc":  "回転方向・過負荷・異音確認表を作成",
-                      "category":  "設備・現場・制御系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  290,
-                      "title":  "サーボパラメータメモ",
-                      "desc":  "軸名・型式・電子ギヤ等を整理",
-                      "category":  "設備・現場・制御系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  291,
-                      "title":  "通信異常切り分け表",
-                      "desc":  "IP・ケーブル・ポート・相手機器を確認",
-                      "category":  "設備・現場・制御系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  292,
-                      "title":  "Ethernet設定表",
-                      "desc":  "IP/サブネット/ゲートウェイ/ポートを表にする",
-                      "category":  "設備・現場・制御系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  293,
-                      "title":  "CC-Link設定表",
-                      "desc":  "局番・占有点数・リモートI/Oを整理",
-                      "category":  "設備・現場・制御系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  294,
-                      "title":  "I/Oチェック進捗表",
-                      "desc":  "点数ごとの未/済/NGを管理",
-                      "category":  "設備・現場・制御系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  295,
-                      "title":  "試運転チェック表",
-                      "desc":  "単動・自動・異常・復帰の確認表を作成",
-                      "category":  "設備・現場・制御系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  296,
-                      "title":  "客先確認項目表",
-                      "desc":  "現地でお客様に確認する項目を整理",
-                      "category":  "設備・現場・制御系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  297,
-                      "title":  "残項目一覧生成",
-                      "desc":  "メモから残項目表を作成",
-                      "category":  "設備・現場・制御系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  298,
-                      "title":  "作業リスク洗い出し",
-                      "desc":  "作業内容からリスクと対策を整理",
-                      "category":  "設備・現場・制御系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  299,
-                      "title":  "復旧手順書雛形",
-                      "desc":  "トラブル復旧手順の枠を作成",
-                      "category":  "設備・現場・制御系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  300,
-                      "title":  "バックアップ取得記録表",
-                      "desc":  "PLC/GOT/ロボット等のバックアップ履歴を管理",
-                      "category":  "設備・現場・制御系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  301,
-                      "title":  "Word文章下書き生成",
-                      "desc":  "タイトル・目的から本文のたたき台を作成",
-                      "category":  "## Word文章作成・整形系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  302,
-                      "title":  "Word見出し構成作成",
-                      "desc":  "内容から1章、2章、3章の構成を作成",
-                      "category":  "## Word文章作成・整形系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  303,
-                      "title":  "見出し番号整形",
-                      "desc":  "1.、1.1、(1)などを統一",
-                      "category":  "## Word文章作成・整形系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  304,
-                      "title":  "章立てチェック",
-                      "desc":  "章の抜け・番号ズレを確認",
-                      "category":  "## Word文章作成・整形系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  305,
-                      "title":  "目次用見出し抽出",
-                      "desc":  "文章中の見出しだけ抜き出す",
-                      "category":  "## Word文章作成・整形系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  306,
-                      "title":  "文書タイトル案生成",
-                      "desc":  "内容からWord文書のタイトル候補を作成",
-                      "category":  "## Word文章作成・整形系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  307,
-                      "title":  "表紙文言生成",
-                      "desc":  "表紙用のタイトル・副題・作成日を整形",
-                      "category":  "## Word文章作成・整形系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  308,
-                      "title":  "改訂履歴表作成",
-                      "desc":  "版数・日付・変更内容の表を作成",
-                      "category":  "## Word文章作成・整形系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  309,
-                      "title":  "文書目的文生成",
-                      "desc":  "「本書は〜を目的とする」の文章を作成",
-                      "category":  "## Word文章作成・整形系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  310,
-                      "title":  "適用範囲文生成",
-                      "desc":  "「本資料の適用範囲は〜」の文章を作成",
-                      "category":  "## Word文章作成・整形系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  311,
-                      "title":  "注意事項文生成",
-                      "desc":  "注意・警告・補足の文章を作成",
-                      "category":  "## Word文章作成・整形系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  312,
-                      "title":  "操作手順文生成",
-                      "desc":  "メモから手順書形式の文章を作成",
-                      "category":  "## Word文章作成・整形系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  313,
-                      "title":  "手順番号整形",
-                      "desc":  "手順を 1、2、3 形式に整える",
-                      "category":  "## Word文章作成・整形系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  314,
-                      "title":  "箇条書き階層整理",
-                      "desc":  "大項目・小項目の階層を整える",
-                      "category":  "## Word文章作成・整形系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  315,
-                      "title":  "長文の段落分割",
-                      "desc":  "長い文章を読みやすい段落に分ける",
-                      "category":  "## Word文章作成・整形系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  316,
-                      "title":  "段落の順序整理",
-                      "desc":  "結論・理由・詳細の順に並べ替える",
-                      "category":  "## Word文章作成・整形系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  317,
-                      "title":  "文末表現統一",
-                      "desc":  "「します」「行います」などを統一",
-                      "category":  "## Word文章作成・整形系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  318,
-                      "title":  "用語統一チェック",
-                      "desc":  "文書内の同じ意味の用語を検出",
-                      "category":  "## Word文章作成・整形系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  319,
-                      "title":  "表記ゆれ置換リスト作成",
-                      "desc":  "置換前・置換後の一覧を作る",
-                      "category":  "## Word文章作成・整形系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  320,
-                      "title":  "Word貼り付け用テキスト整形",
-                      "desc":  "余計な改行・空白を整えて貼り付けやすくする",
-                      "category":  "## Word文章作成・整形系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  321,
-                      "title":  "報告書テンプレ生成",
-                      "desc":  "背景・内容・結果・課題・予定の枠を作成",
-                      "category":  "## ビジネス文書・報告書系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  322,
-                      "title":  "作業報告文生成",
-                      "desc":  "作業メモから報告書向け文章を作成",
-                      "category":  "## ビジネス文書・報告書系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  323,
-                      "title":  "不具合報告文生成",
-                      "desc":  "現象・原因・対策を報告文に変換",
-                      "category":  "## ビジネス文書・報告書系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  324,
-                      "title":  "原因調査報告文生成",
-                      "desc":  "調査結果を原因・推定原因・対策に整理",
-                      "category":  "## ビジネス文書・報告書系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  325,
-                      "title":  "対策内容文生成",
-                      "desc":  "実施した対策を簡潔な文章にする",
-                      "category":  "## ビジネス文書・報告書系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  326,
-                      "title":  "今後の予定文生成",
-                      "desc":  "残作業や予定を文章化",
-                      "category":  "## ビジネス文書・報告書系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  327,
-                      "title":  "所感文生成",
-                      "desc":  "原因・改善点から所感を作成",
-                      "category":  "## ビジネス文書・報告書系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  328,
-                      "title":  "課題欄整形",
-                      "desc":  "課題を「現象→影響→対応」に整理",
-                      "category":  "## ビジネス文書・報告書系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  329,
-                      "title":  "結果欄整形",
-                      "desc":  "作業結果を「実施内容＋結果」に整える",
-                      "category":  "## ビジネス文書・報告書系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  330,
-                      "title":  "進捗報告文生成",
-                      "desc":  "現在状況を社内向け・社外向けに変換",
-                      "category":  "## ビジネス文書・報告書系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  331,
-                      "title":  "完了報告文生成",
-                      "desc":  "作業完了時の報告文を作成",
-                      "category":  "## ビジネス文書・報告書系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  332,
-                      "title":  "未完了理由文生成",
-                      "desc":  "未完了の理由を角が立たない文章にする",
-                      "category":  "## ビジネス文書・報告書系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  333,
-                      "title":  "保留理由文生成",
-                      "desc":  "保留・確認待ちの理由文を作成",
-                      "category":  "## ビジネス文書・報告書系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  334,
-                      "title":  "依頼事項欄生成",
-                      "desc":  "相手に依頼する内容を明確化",
-                      "category":  "## ビジネス文書・報告書系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  335,
-                      "title":  "確認事項欄生成",
-                      "desc":  "確認すべき項目を一覧化",
-                      "category":  "## ビジネス文書・報告書系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  336,
-                      "title":  "議事録から報告書変換",
-                      "desc":  "会議メモを報告書形式に変換",
-                      "category":  "## ビジネス文書・報告書系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  337,
-                      "title":  "日報文生成",
-                      "desc":  "作業内容から日報形式に整形",
-                      "category":  "## ビジネス文書・報告書系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  338,
-                      "title":  "週報文生成",
-                      "desc":  "1週間の作業メモを週報に変換",
-                      "category":  "## ビジネス文書・報告書系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  339,
-                      "title":  "月報文生成",
-                      "desc":  "月ごとの作業内容を月報に変換",
-                      "category":  "## ビジネス文書・報告書系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  340,
-                      "title":  "上司向け要約生成",
-                      "desc":  "詳細メモを上司向けの短文に要約",
-                      "category":  "## ビジネス文書・報告書系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  341,
-                      "title":  "誤字脱字チェック",
-                      "desc":  "よくある誤字・変換ミスを検出",
-                      "category":  "## Word校正・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  342,
-                      "title":  "句読点チェック",
-                      "desc":  "句読点の多すぎ・少なすぎを確認",
-                      "category":  "## Word校正・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  343,
-                      "title":  "一文長すぎチェック",
-                      "desc":  "長すぎる文を検出して分割案を出す",
-                      "category":  "## Word校正・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  344,
-                      "title":  "主語述語チェック",
-                      "desc":  "主語と述語が合っているか確認",
-                      "category":  "## Word校正・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  345,
-                      "title":  "係り受けチェック",
-                      "desc":  "意味が取りにくい文を検出",
-                      "category":  "## Word校正・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  346,
-                      "title":  "二重否定チェック",
-                      "desc":  "「〜しないわけではない」などを検出",
-                      "category":  "## Word校正・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  347,
-                      "title":  "曖昧語チェック",
-                      "desc":  "「適宜」「必要に応じて」などを検出",
-                      "category":  "## Word校正・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  348,
-                      "title":  "指示語チェック",
-                      "desc":  "「これ」「それ」が多い文を検出",
-                      "category":  "## Word校正・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  349,
-                      "title":  "冗長表現チェック",
-                      "desc":  "「することができます」などを簡潔化",
-                      "category":  "## Word校正・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  350,
-                      "title":  "重複表現チェック",
-                      "desc":  "「まず最初に」などを検出",
-                      "category":  "## Word校正・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  351,
-                      "title":  "口語表現チェック",
-                      "desc":  "ビジネス文書に不向きな表現を検出",
-                      "category":  "## Word校正・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  352,
-                      "title":  "敬語レベルチェック",
-                      "desc":  "丁寧すぎ・くだけすぎを判定",
-                      "category":  "## Word校正・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  353,
-                      "title":  "社外提出向けチェック",
-                      "desc":  "社外に出せる文面か確認",
-                      "category":  "## Word校正・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  354,
-                      "title":  "社内共有向けチェック",
-                      "desc":  "社内向けに簡潔か確認",
-                      "category":  "## Word校正・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  355,
-                      "title":  "NGワードチェック",
-                      "desc":  "指定した禁止表現を検出",
-                      "category":  "## Word校正・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  356,
-                      "title":  "漢字ひらく候補抽出",
-                      "desc":  "「出来る→できる」などの候補を表示",
-                      "category":  "## Word校正・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  357,
-                      "title":  "数字表記統一",
-                      "desc":  "半角数字・漢数字の使い分けを整える",
-                      "category":  "## Word校正・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  358,
-                      "title":  "単位表記統一",
-                      "desc":  "mm、ｍｍ、ミリなどを統一",
-                      "category":  "## Word校正・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  359,
-                      "title":  "日付表記統一",
-                      "desc":  "2026/5/3、2026年5月3日を統一",
-                      "category":  "## Word校正・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  360,
-                      "title":  "全角半角混在チェック",
-                      "desc":  "英数字・記号の混在を検出",
-                      "category":  "## Word校正・チェック系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  361,
-                      "title":  "Excel表タイトル生成",
-                      "desc":  "表の内容からタイトルを作成",
-                      "category":  "## Excel文章・表作成補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  362,
-                      "title":  "列見出し案生成",
-                      "desc":  "表の目的から列名を提案",
-                      "category":  "## Excel文章・表作成補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  363,
-                      "title":  "表レイアウト案作成",
-                      "desc":  "入力内容から見やすい列構成を作成",
-                      "category":  "## Excel文章・表作成補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  364,
-                      "title":  "Excel貼り付け用TSV生成",
-                      "desc":  "WordやメモからExcel貼り付け用に整形",
-                      "category":  "## Excel文章・表作成補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  365,
-                      "title":  "セル内改行整形",
-                      "desc":  "長い文章をセル内で読みやすく改行",
-                      "category":  "## Excel文章・表作成補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  366,
-                      "title":  "セル文章短縮",
-                      "desc":  "長すぎるセル内容を短くする",
-                      "category":  "## Excel文章・表作成補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  367,
-                      "title":  "セル文章丁寧化",
-                      "desc":  "メモ調の文章を表向きに整える",
-                      "category":  "## Excel文章・表作成補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  368,
-                      "title":  "状態欄候補生成",
-                      "desc":  "未/済/保留/確認中などの候補を作る",
-                      "category":  "## Excel文章・表作成補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  369,
-                      "title":  "優先度欄候補生成",
-                      "desc":  "高/中/低などの基準を作成",
-                      "category":  "## Excel文章・表作成補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  370,
-                      "title":  "対応期限欄生成",
-                      "desc":  "タスク表に期限列を追加する案を出す",
-                      "category":  "## Excel文章・表作成補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  371,
-                      "title":  "担当者欄生成",
-                      "desc":  "担当者・確認者・承認者の列案を作る",
-                      "category":  "## Excel文章・表作成補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  372,
-                      "title":  "備考欄整形",
-                      "desc":  "備考メモを簡潔に整える",
-                      "category":  "## Excel文章・表作成補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  373,
-                      "title":  "課題一覧表生成",
-                      "desc":  "課題メモをExcel表に変換",
-                      "category":  "## Excel文章・表作成補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  374,
-                      "title":  "残項目表生成",
-                      "desc":  "残項目をNo・内容・担当・期限・状態で表化",
-                      "category":  "## Excel文章・表作成補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  375,
-                      "title":  "問い合わせ一覧表生成",
-                      "desc":  "質問・回答・状態の管理表を作る",
-                      "category":  "## Excel文章・表作成補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  376,
-                      "title":  "確認事項一覧表生成",
-                      "desc":  "確認項目を表形式に変換",
-                      "category":  "## Excel文章・表作成補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  377,
-                      "title":  "作業チェック表生成",
-                      "desc":  "作業内容をチェックリスト表に変換",
-                      "category":  "## Excel文章・表作成補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  378,
-                      "title":  "リスク管理表生成",
-                      "desc":  "リスク・影響・対策・状態の表を作成",
-                      "category":  "## Excel文章・表作成補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  379,
-                      "title":  "改善案一覧表生成",
-                      "desc":  "改善案を効果・難易度・優先度で整理",
-                      "category":  "## Excel文章・表作成補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  380,
-                      "title":  "比較表生成",
-                      "desc":  "A案/B案のメリット・デメリット表を作成",
-                      "category":  "## Excel文章・表作成補助系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  381,
-                      "title":  "文書管理台帳生成",
-                      "desc":  "文書名・版数・作成者・更新日を表化",
-                      "category":  "## Excel文書管理・台帳系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  382,
-                      "title":  "改訂履歴台帳生成",
-                      "desc":  "改訂日・版数・変更内容を一覧化",
-                      "category":  "## Excel文書管理・台帳系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  383,
-                      "title":  "提出資料一覧生成",
-                      "desc":  "提出先・提出日・資料名・状態を表化",
-                      "category":  "## Excel文書管理・台帳系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  384,
-                      "title":  "受領資料一覧生成",
-                      "desc":  "受領日・資料名・確認状態を表化",
-                      "category":  "## Excel文書管理・台帳系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  385,
-                      "title":  "図面管理表生成",
-                      "desc":  "図番・名称・版数・状態を整理",
-                      "category":  "## Excel文書管理・台帳系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  386,
-                      "title":  "取説章構成表生成",
-                      "desc":  "章番号・見出し・内容・状態を表化",
-                      "category":  "## Excel文書管理・台帳系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  387,
-                      "title":  "用語集表生成",
-                      "desc":  "用語・読み・意味・備考の表を作る",
-                      "category":  "## Excel文書管理・台帳系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  388,
-                      "title":  "略語一覧表生成",
-                      "desc":  "略語・正式名称・説明を表化",
-                      "category":  "## Excel文書管理・台帳系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  389,
-                      "title":  "関係者一覧表生成",
-                      "desc":  "会社名・氏名・役割・連絡先を整理",
-                      "category":  "## Excel文書管理・台帳系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  390,
-                      "title":  "打合せ履歴表生成",
-                      "desc":  "日付・相手・議題・決定事項を表化",
-                      "category":  "## Excel文書管理・台帳系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  391,
-                      "title":  "Word表→Excel整形",
-                      "desc":  "Wordの表をExcelに貼りやすい形へ変換",
-                      "category":  "## Excel文書管理・台帳系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  392,
-                      "title":  "Excel表→Word文章化",
-                      "desc":  "Excel表の内容を文章説明に変換",
-                      "category":  "## Excel文書管理・台帳系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  393,
-                      "title":  "Excel表→Word表紙文生成",
-                      "desc":  "台帳情報からWord表紙文言を作成",
-                      "category":  "## Excel文書管理・台帳系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  394,
-                      "title":  "Excel一覧→メール本文化",
-                      "desc":  "表の内容をメール文に変換",
-                      "category":  "## Excel文書管理・台帳系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  395,
-                      "title":  "Excel一覧→報告文生成",
-                      "desc":  "残項目表から進捗報告文を作成",
-                      "category":  "## Excel文書管理・台帳系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  396,
-                      "title":  "Word本文→Excel抽出",
-                      "desc":  "Word文章から項目・内容を表に抽出",
-                      "category":  "## Excel文書管理・台帳系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  397,
-                      "title":  "Word手順→Excelチェック表",
-                      "desc":  "手順書を確認チェック表に変換",
-                      "category":  "## Excel文書管理・台帳系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  398,
-                      "title":  "Excelチェック表→Word報告書",
-                      "desc":  "チェック結果から報告書文章を作成",
-                      "category":  "## Excel文書管理・台帳系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  399,
-                      "title":  "文書レビュー指摘表生成",
-                      "desc":  "Wordレビュー結果を指摘一覧に変換",
-                      "category":  "## Excel文書管理・台帳系",
-                      "status":  "idea",
-                      "link":  ""
-                  },
-                  {
-                      "no":  400,
-                      "title":  "指摘一覧→修正文案生成",
-                      "desc":  "Excelの指摘表から修正文案を作成",
-                      "category":  "## Excel文書管理・台帳系",
-                      "status":  "idea",
-                      "link":  ""
-                  }
-              ],
-    "omitted":  [
-                    {
-                        "no":  1,
-                        "title":  "文字数カウンター",
-                        "desc":  "文字数、行数、単語数を数える。",
-                        "category":  "汎用ツール",
-                        "status":  "implemented",
-                        "link":  "char-count"
-                    },
-                    {
-                        "no":  3,
-                        "title":  "大文字・小文字変換",
-                        "desc":  "英字を大文字、小文字、先頭大文字に変換する。",
-                        "category":  "汎用ツール",
-                        "status":  "implemented",
-                        "link":  "case-convert"
-                    },
-                    {
-                        "no":  5,
-                        "title":  "改行削除ツール",
-                        "desc":  "改行を削除して1行にする。",
-                        "category":  "汎用ツール",
-                        "status":  "implemented",
-                        "link":  "line-break"
-                    },
-                    {
-                        "no":  8,
-                        "title":  "前後スペース削除",
-                        "desc":  "各行の先頭・末尾の空白を削除する。",
-                        "category":  "汎用ツール",
-                        "status":  "implemented",
-                        "link":  "line-break"
-                    },
-                    {
-                        "no":  10,
-                        "title":  "消費税計算",
-                        "desc":  "サイト名案",
-                        "category":  "汎用ツール",
-                        "status":  "implemented",
-                        "link":  "tax-calc"
-                    },
-                    {
-                        "no":  24,
-                        "title":  "TSV→CSV変換",
-                        "desc":  "タブ区切りをカンマ区切りに変換する。",
-                        "category":  "汎用ツール",
-                        "status":  "implemented",
-                        "link":  "csv-tsv"
-                    },
-                    {
-                        "no":  33,
-                        "title":  "HTMLエスケープ",
-                        "desc":  "\u0026 \" などを安全な文字に変換する。",
-                        "category":  "汎用ツール",
-                        "status":  "implemented",
-                        "link":  "html-escape"
-                    },
-                    {
-                        "no":  41,
-                        "title":  "日数計算",
-                        "desc":  "2つの日付の差を計算する。",
-                        "category":  "汎用ツール",
-                        "status":  "implemented",
-                        "link":  "date-diff"
-                    },
-                    {
-                        "no":  44,
-                        "title":  "年齢計算",
-                        "desc":  "生年月日から年齢を計算する。",
-                        "category":  "汎用ツール",
-                        "status":  "implemented",
-                        "link":  "age-calc"
-                    },
-                    {
-                        "no":  47,
-                        "title":  "タイムスタンプ変換",
-                        "desc":  "Unix時間と日時を相互変換する。",
-                        "category":  "汎用ツール",
-                        "status":  "implemented",
-                        "link":  "timestamp"
-                    },
-                    {
-                        "no":  61,
-                        "title":  "UUID生成",
-                        "desc":  "ランダムUUIDを生成する。",
-                        "category":  "汎用ツール",
-                        "status":  "implemented",
-                        "link":  "uuid-gen"
-                    },
-                    {
-                        "no":  63,
-                        "title":  "ハッシュ生成",
-                        "desc":  "MD5/SHA-256などを生成する。",
-                        "category":  "汎用ツール",
-                        "status":  "implemented",
-                        "link":  "hash-gen"
-                    },
-                    {
-                        "no":  64,
-                        "title":  "正規表現テスター",
-                        "desc":  "入力文字に正規表現がマッチするか確認する。",
-                        "category":  "汎用ツール",
-                        "status":  "implemented",
-                        "link":  "regex-test"
-                    },
-                    {
-                        "no":  81,
-                        "title":  "消費税計算",
-                        "desc":  "税抜/税込を相互変換する。",
-                        "category":  "汎用ツール",
-                        "status":  "implemented",
-                        "link":  "tax-calc"
-                    },
-                    {
-                        "no":  87,
-                        "title":  "単位変換",
-                        "desc":  "mm/cm/m、g/kgなどを変換する。",
-                        "category":  "汎用ツール",
-                        "status":  "implemented",
-                        "link":  "unit-convert"
-                    },
-                    {
-                        "no":  98,
-                        "title":  "ダミーテキスト生成",
-                        "desc":  "テスト用文章を生成する。",
-                        "category":  "汎用ツール",
-                        "status":  "implemented",
-                        "link":  "lorem-ipsum"
-                    },
-                    {
-                        "no":  186,
-                        "title":  "割り勘計算",
-                        "desc":  "人数・金額から一人あたりを計算",
-                        "category":  "文章補助",
-                        "status":  "implemented",
-                        "link":  "split-bill"
-                    }
-                ]
+  "generatedAt": "2026-05-03T11:21:01.4466533Z",
+  "sourceTotal": 400,
+  "registered": 383,
+  "omittedExisting": 17,
+  "ideas": [
+    {
+      "no": 2,
+      "title": "バイト数カウンター",
+      "desc": "UTF-8などのバイト数を確認する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-002"
+    },
+    {
+      "no": 4,
+      "title": "全角・半角変換",
+      "desc": "英数字・カタカナを全角/半角に変換する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-004"
+    },
+    {
+      "no": 6,
+      "title": "空行削除ツール",
+      "desc": "空白行だけ削除する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-006"
+    },
+    {
+      "no": 7,
+      "title": "連続スペース削除",
+      "desc": "余分なスペースを1つにまとめる。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-007"
+    },
+    {
+      "no": 9,
+      "title": "句読点変換",
+      "desc": "「、。」と「，．」などを相互変換する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-009"
+    },
+    {
+      "no": 10,
+      "title": "日本語カッコ変換",
+      "desc": "() と （） などを相互変換する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-010"
+    },
+    {
+      "no": 11,
+      "title": "引用符変換",
+      "desc": "\" \" と “ ”、' ' と ‘ ’ を変換する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-011"
+    },
+    {
+      "no": 12,
+      "title": "文章逆順ツール",
+      "desc": "行の順番を逆にする。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-012"
+    },
+    {
+      "no": 13,
+      "title": "文字列逆順ツール",
+      "desc": "入力文字を逆から並べる。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-013"
+    },
+    {
+      "no": 14,
+      "title": "重複行削除",
+      "desc": "同じ行を削除する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-014"
+    },
+    {
+      "no": 15,
+      "title": "重複行抽出",
+      "desc": "重複している行だけ表示する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-015"
+    },
+    {
+      "no": 16,
+      "title": "行番号追加",
+      "desc": "各行の先頭に番号を付ける。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-016"
+    },
+    {
+      "no": 17,
+      "title": "行番号削除",
+      "desc": "先頭の番号を削除する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-017"
+    },
+    {
+      "no": 18,
+      "title": "行シャッフル",
+      "desc": "行の順番をランダムに並べ替える。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-018"
+    },
+    {
+      "no": 19,
+      "title": "五十音ソート",
+      "desc": "行を五十音順に並べ替える。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-019"
+    },
+    {
+      "no": 20,
+      "title": "英字ソート",
+      "desc": "行をA-Z順に並べ替える。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-020"
+    },
+    {
+      "no": 21,
+      "title": "CSV整形ツール",
+      "desc": "カンマ区切りを見やすく整形する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-021"
+    },
+    {
+      "no": 22,
+      "title": "CSV→表変換",
+      "desc": "CSVをHTML表やMarkdown表に変換する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-022"
+    },
+    {
+      "no": 23,
+      "title": "表→CSV変換",
+      "desc": "表形式テキストをCSVに変換する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-023"
+    },
+    {
+      "no": 25,
+      "title": "CSV→JSON変換",
+      "desc": "CSVをJSON配列に変換する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-025"
+    },
+    {
+      "no": 26,
+      "title": "JSON→CSV変換",
+      "desc": "JSONをCSVに変換する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-026"
+    },
+    {
+      "no": 27,
+      "title": "JSON整形",
+      "desc": "JSONを見やすくインデントする。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-027"
+    },
+    {
+      "no": 28,
+      "title": "JSON圧縮",
+      "desc": "JSONの改行・空白を削除する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-028"
+    },
+    {
+      "no": 29,
+      "title": "URLエンコード",
+      "desc": "日本語URLなどをエンコードする。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-029"
+    },
+    {
+      "no": 30,
+      "title": "URLデコード",
+      "desc": "%E3%81%82 などを日本語に戻す。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-030"
+    },
+    {
+      "no": 31,
+      "title": "Base64エンコード",
+      "desc": "テキストをBase64化する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-031"
+    },
+    {
+      "no": 32,
+      "title": "Base64デコード",
+      "desc": "Base64を元の文字に戻す。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-032"
+    },
+    {
+      "no": 34,
+      "title": "HTMLアンエスケープ",
+      "desc": "&lt; などを元に戻す。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-034"
+    },
+    {
+      "no": 35,
+      "title": "Markdown表作成",
+      "desc": "入力内容からMarkdown表を生成する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-035"
+    },
+    {
+      "no": 36,
+      "title": "Markdownリンク作成",
+      "desc": "URLとタイトルからリンク形式を生成する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-036"
+    },
+    {
+      "no": 37,
+      "title": "箇条書き整形",
+      "desc": "改行テキストを「-」付きリストに変換する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-037"
+    },
+    {
+      "no": 38,
+      "title": "カンマ区切り変換",
+      "desc": "改行リストをカンマ区切りに変換する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-038"
+    },
+    {
+      "no": 39,
+      "title": "改行区切り変換",
+      "desc": "カンマ区切りを改行リストに変換する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-039"
+    },
+    {
+      "no": 40,
+      "title": "ファイル名安全化",
+      "desc": "禁止文字を削除して安全なファイル名に変換する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-040"
+    },
+    {
+      "no": 42,
+      "title": "営業日計算",
+      "desc": "土日祝を除いた日数を計算する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-042"
+    },
+    {
+      "no": 43,
+      "title": "日付加算",
+      "desc": "今日から〇日後、〇営業日後を計算する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-043"
+    },
+    {
+      "no": 45,
+      "title": "和暦・西暦変換",
+      "desc": "令和/平成/昭和と西暦を相互変換する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-045"
+    },
+    {
+      "no": 46,
+      "title": "曜日計算",
+      "desc": "指定日の曜日を表示する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-046"
+    },
+    {
+      "no": 48,
+      "title": "時間差計算",
+      "desc": "開始時刻と終了時刻の差を計算する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-048"
+    },
+    {
+      "no": 49,
+      "title": "作業時間合計",
+      "desc": "複数の作業時間を合計する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-049"
+    },
+    {
+      "no": 50,
+      "title": "カウントダウン作成",
+      "desc": "指定日まであと何日か表示する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-050"
+    },
+    {
+      "no": 51,
+      "title": "メール件名作成",
+      "desc": "用件から件名候補を作る。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-051"
+    },
+    {
+      "no": 52,
+      "title": "ビジネス挨拶文生成",
+      "desc": "「お世話になっております」系の定型文を生成する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-052"
+    },
+    {
+      "no": 53,
+      "title": "催促文テンプレ作成",
+      "desc": "柔らかい催促文を作る。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-053"
+    },
+    {
+      "no": 54,
+      "title": "お礼文テンプレ作成",
+      "desc": "社内/社外向けのお礼文を生成する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-054"
+    },
+    {
+      "no": 55,
+      "title": "謝罪文テンプレ作成",
+      "desc": "軽め/重めの謝罪文を生成する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-055"
+    },
+    {
+      "no": 56,
+      "title": "議事録フォーマット作成",
+      "desc": "会議名・日付から議事録枠を作成する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-056"
+    },
+    {
+      "no": 57,
+      "title": "作業報告テンプレ作成",
+      "desc": "背景/内容/結果/課題/予定の枠を作成する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-057"
+    },
+    {
+      "no": 58,
+      "title": "TODOリスト整形",
+      "desc": "メモをチェックリスト形式に変換する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-058"
+    },
+    {
+      "no": 59,
+      "title": "優先度ラベル付け",
+      "desc": "タスクに高/中/低を付ける欄を追加する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-059"
+    },
+    {
+      "no": 60,
+      "title": "進捗表作成",
+      "desc": "タスクを「未/中/済」表に変換する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-060"
+    },
+    {
+      "no": 62,
+      "title": "ランダムパスワード生成",
+      "desc": "桁数・記号ありなしで生成する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-062"
+    },
+    {
+      "no": 65,
+      "title": "IPアドレス確認メモ",
+      "desc": "IP/サブネット/ゲートウェイを整理する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-065"
+    },
+    {
+      "no": 66,
+      "title": "サブネット計算",
+      "desc": "IPとCIDRから範囲を計算する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-066"
+    },
+    {
+      "no": 67,
+      "title": "ポート番号メモ",
+      "desc": "よく使うポート番号を検索する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-067"
+    },
+    {
+      "no": 68,
+      "title": "HTTPステータス早見",
+      "desc": "404/500などの意味を表示する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-068"
+    },
+    {
+      "no": 69,
+      "title": "QRコード生成",
+      "desc": "テキストやURLからQRコードを生成する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-069"
+    },
+    {
+      "no": 70,
+      "title": "QRコード読み取り",
+      "desc": "画像からQRコードを読み取る。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-070"
+    },
+    {
+      "no": 71,
+      "title": "画像リサイズ",
+      "desc": "指定サイズに画像を縮小する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-071"
+    },
+    {
+      "no": 72,
+      "title": "画像圧縮",
+      "desc": "画質を下げて容量を削減する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-072"
+    },
+    {
+      "no": 73,
+      "title": "画像形式変換",
+      "desc": "PNG/JPG/WebPを変換する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-073"
+    },
+    {
+      "no": 74,
+      "title": "画像トリミング",
+      "desc": "指定範囲で切り抜く。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-074"
+    },
+    {
+      "no": 75,
+      "title": "画像の余白追加",
+      "desc": "周囲に白余白を追加する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-075"
+    },
+    {
+      "no": 76,
+      "title": "画像の角丸化",
+      "desc": "角丸画像を作成する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-076"
+    },
+    {
+      "no": 77,
+      "title": "画像をBase64化",
+      "desc": "画像をBase64文字列に変換する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-077"
+    },
+    {
+      "no": 78,
+      "title": "カラーピッカー",
+      "desc": "色コードを取得する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-078"
+    },
+    {
+      "no": 80,
+      "title": "文字色コントラスト確認",
+      "desc": "背景色と文字色の見やすさを確認する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-080"
+    },
+    {
+      "no": 82,
+      "title": "割引計算",
+      "desc": "〇%OFF後の価格を計算する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-082"
+    },
+    {
+      "no": 83,
+      "title": "割合計算",
+      "desc": "AはBの何%か計算する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-083"
+    },
+    {
+      "no": 84,
+      "title": "平均値計算",
+      "desc": "複数数値の平均を計算する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-084"
+    },
+    {
+      "no": 85,
+      "title": "合計計算",
+      "desc": "改行ごとの数値を合計する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-085"
+    },
+    {
+      "no": 86,
+      "title": "最大・最小値抽出",
+      "desc": "数値リストから最大/最小を表示する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-086"
+    },
+    {
+      "no": 88,
+      "title": "面積計算",
+      "desc": "縦×横、㎡と坪などを計算する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-088"
+    },
+    {
+      "no": 89,
+      "title": "体積計算",
+      "desc": "縦×横×高さを計算する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-089"
+    },
+    {
+      "no": 90,
+      "title": "速度変換",
+      "desc": "m/s と km/h を変換する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-090"
+    },
+    {
+      "no": 91,
+      "title": "乱数生成",
+      "desc": "指定範囲のランダム数を生成する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-091"
+    },
+    {
+      "no": 92,
+      "title": "抽選ツール",
+      "desc": "リストからランダムに1つ選ぶ。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-092"
+    },
+    {
+      "no": 93,
+      "title": "チーム分けツール",
+      "desc": "名前リストをランダムにグループ分けする。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-093"
+    },
+    {
+      "no": 94,
+      "title": "あみだくじ生成",
+      "desc": "簡易あみだくじを作る。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-094"
+    },
+    {
+      "no": 95,
+      "title": "ルーレット",
+      "desc": "候補からランダム選択する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-095"
+    },
+    {
+      "no": 96,
+      "title": "メモ帳",
+      "desc": "ブラウザ内で一時メモする。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-096"
+    },
+    {
+      "no": 97,
+      "title": "クリップボード履歴風メモ",
+      "desc": "コピー候補を複数保持する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-097"
+    },
+    {
+      "no": 99,
+      "title": "ダミー個人情報生成",
+      "desc": "架空の名前・住所・電話番号を生成する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-099"
+    },
+    {
+      "no": 100,
+      "title": "チェックリスト作成",
+      "desc": "入力行をチェックボックス付きに変換する。",
+      "category": "汎用ツール",
+      "status": "idea",
+      "link": "tool-100"
+    },
+    {
+      "no": 101,
+      "title": "文章の敬語変換",
+      "desc": "普通の文章を丁寧語・ビジネス文に変換",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-101"
+    },
+    {
+      "no": 102,
+      "title": "文章のやわらか変換",
+      "desc": "きつい表現をやわらかい表現に変換",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-102"
+    },
+    {
+      "no": 103,
+      "title": "文章の短縮ツール",
+      "desc": "長い文章を短く要約",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-103"
+    },
+    {
+      "no": 104,
+      "title": "文章の言い換えツール",
+      "desc": "同じ意味で別表現に変換",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-104"
+    },
+    {
+      "no": 105,
+      "title": "箇条書き変換",
+      "desc": "文章を箇条書きに整形",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-105"
+    },
+    {
+      "no": 106,
+      "title": "箇条書き文章化",
+      "desc": "箇条書きを自然な文章に変換",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-106"
+    },
+    {
+      "no": 107,
+      "title": "表記ゆれチェック",
+      "desc": "「サーバ/サーバー」などを検出",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-107"
+    },
+    {
+      "no": 108,
+      "title": "禁止ワードチェック",
+      "desc": "指定したNGワードが含まれるか確認",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-108"
+    },
+    {
+      "no": 109,
+      "title": "誤字っぽい表現チェック",
+      "desc": "よくある誤字・変換ミスを検出",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-109"
+    },
+    {
+      "no": 110,
+      "title": "ですます調統一",
+      "desc": "文末を「です・ます」に統一",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-110"
+    },
+    {
+      "no": 111,
+      "title": "だである調統一",
+      "desc": "文末を「だ・である」に統一",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-111"
+    },
+    {
+      "no": 112,
+      "title": "語尾連続チェック",
+      "desc": "「ます」が連続していないか確認",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-112"
+    },
+    {
+      "no": 113,
+      "title": "1文の長さチェック",
+      "desc": "長すぎる文章を検出",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-113"
+    },
+    {
+      "no": 114,
+      "title": "読点多すぎチェック",
+      "desc": "「、」が多い文章を検出",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-114"
+    },
+    {
+      "no": 115,
+      "title": "半角カナ検出",
+      "desc": "半角カナだけ抽出・変換候補表示",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-115"
+    },
+    {
+      "no": 116,
+      "title": "環境依存文字チェック",
+      "desc": "①㈱髙などを検出",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-116"
+    },
+    {
+      "no": 117,
+      "title": "機種依存文字置換",
+      "desc": "環境依存文字を一般文字へ置換",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-117"
+    },
+    {
+      "no": 118,
+      "title": "URL抽出",
+      "desc": "文章中のURLだけ抜き出す",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-118"
+    },
+    {
+      "no": 119,
+      "title": "メールアドレス抽出",
+      "desc": "文章中のメールアドレスを抽出",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-119"
+    },
+    {
+      "no": 120,
+      "title": "電話番号抽出",
+      "desc": "文章中の電話番号を抽出",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-120"
+    },
+    {
+      "no": 121,
+      "title": "件名チェック",
+      "desc": "メール件名が分かりやすいか確認",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-121"
+    },
+    {
+      "no": 122,
+      "title": "宛名テンプレ作成",
+      "desc": "会社名・氏名から宛名を生成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-122"
+    },
+    {
+      "no": 123,
+      "title": "締め文生成",
+      "desc": "メール末尾の締め文を作成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-123"
+    },
+    {
+      "no": 124,
+      "title": "依頼文生成",
+      "desc": "「確認してください」を丁寧に変換",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-124"
+    },
+    {
+      "no": 125,
+      "title": "断り文生成",
+      "desc": "角が立たない断り文を作成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-125"
+    },
+    {
+      "no": 126,
+      "title": "日程調整文生成",
+      "desc": "候補日を入れて日程調整メール作成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-126"
+    },
+    {
+      "no": 127,
+      "title": "リマインド文生成",
+      "desc": "期限前の確認連絡文を作成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-127"
+    },
+    {
+      "no": 128,
+      "title": "お詫び＋再依頼文生成",
+      "desc": "謝罪しつつ再依頼する文章を作成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-128"
+    },
+    {
+      "no": 129,
+      "title": "社内連絡文テンプレ",
+      "desc": "社内向けの短い連絡文を作成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-129"
+    },
+    {
+      "no": 130,
+      "title": "社外連絡文テンプレ",
+      "desc": "社外向けの丁寧な連絡文を作成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-130"
+    },
+    {
+      "no": 131,
+      "title": "議事録要点抽出",
+      "desc": "メモから決定事項・宿題を抽出",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-131"
+    },
+    {
+      "no": 132,
+      "title": "議事録タイトル生成",
+      "desc": "内容から会議タイトルを作成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-132"
+    },
+    {
+      "no": 133,
+      "title": "報告書タイトル生成",
+      "desc": "作業内容から報告書タイトルを作成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-133"
+    },
+    {
+      "no": 134,
+      "title": "作業内容の整形",
+      "desc": "雑な作業メモを報告書風に整形",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-134"
+    },
+    {
+      "no": 135,
+      "title": "トラブル報告テンプレ",
+      "desc": "現象・原因・対策の枠を作成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-135"
+    },
+    {
+      "no": 136,
+      "title": "問い合わせ文作成",
+      "desc": "メーカー・社内向け問い合わせ文を作成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-136"
+    },
+    {
+      "no": 137,
+      "title": "回答文整形",
+      "desc": "受け取った回答を見やすく整形",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-137"
+    },
+    {
+      "no": 138,
+      "title": "返信文下書き",
+      "desc": "受信メール本文から返信文を作成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-138"
+    },
+    {
+      "no": 139,
+      "title": "メール敬称チェック",
+      "desc": "「様」「御中」などの使い方を確認",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-139"
+    },
+    {
+      "no": 140,
+      "title": "メール改行整形",
+      "desc": "読みやすい位置で改行を入れる",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-140"
+    },
+    {
+      "no": 141,
+      "title": "ファイル名一括変換案作成",
+      "desc": "元ファイル名から整理後の名前を提案",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-141"
+    },
+    {
+      "no": 142,
+      "title": "日付付きファイル名生成",
+      "desc": "20260503_資料名 の形式で生成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-142"
+    },
+    {
+      "no": 143,
+      "title": "連番ファイル名生成",
+      "desc": "001_, 002_ の連番名を作成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-143"
+    },
+    {
+      "no": 144,
+      "title": "ファイル拡張子抽出",
+      "desc": "ファイル名リストから拡張子を抽出",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-144"
+    },
+    {
+      "no": 145,
+      "title": "拡張子別分類",
+      "desc": "ファイル一覧を .docx, .xlsx などで分類",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-145"
+    },
+    {
+      "no": 146,
+      "title": "フォルダ構成案作成",
+      "desc": "案件名からフォルダ構成を提案",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-146"
+    },
+    {
+      "no": 147,
+      "title": "パス区切り変換",
+      "desc": "Windowsパス⇔URL風パスへ変換",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-147"
+    },
+    {
+      "no": 148,
+      "title": "ファイル名禁止文字チェック",
+      "desc": "\\ / : * ? などを検出",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-148"
+    },
+    {
+      "no": 149,
+      "title": "ファイル名短縮",
+      "desc": "長すぎるファイル名を短くする",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-149"
+    },
+    {
+      "no": 150,
+      "title": "ファイル名から日付抽出",
+      "desc": "ファイル名中の日付を抜き出す",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-150"
+    },
+    {
+      "no": 151,
+      "title": "Excel列番号変換",
+      "desc": "A列⇔1、AA列⇔27を変換",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-151"
+    },
+    {
+      "no": 152,
+      "title": "セル範囲作成",
+      "desc": "開始セル・終了セルから範囲文字列を生成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-152"
+    },
+    {
+      "no": 153,
+      "title": "CSV列抽出",
+      "desc": "指定列だけ取り出す",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-153"
+    },
+    {
+      "no": 154,
+      "title": "CSV列入れ替え",
+      "desc": "列順を指定して並べ替える",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-154"
+    },
+    {
+      "no": 155,
+      "title": "CSV重複チェック",
+      "desc": "指定列の重複を検出",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-155"
+    },
+    {
+      "no": 156,
+      "title": "CSV差分比較",
+      "desc": "2つのCSVの違いを確認",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-156"
+    },
+    {
+      "no": 157,
+      "title": "表の空欄チェック",
+      "desc": "空欄セルを検出",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-157"
+    },
+    {
+      "no": 158,
+      "title": "表の縦横変換",
+      "desc": "行列を入れ替える",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-158"
+    },
+    {
+      "no": 159,
+      "title": "リスト突合",
+      "desc": "AリストにあってBリストにないものを抽出",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-159"
+    },
+    {
+      "no": 160,
+      "title": "プルダウン候補作成",
+      "desc": "改行リストをExcel入力規則用に整形",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-160"
+    },
+    {
+      "no": 161,
+      "title": "条件付き書式案作成",
+      "desc": "状態に応じた色分けルールを提案",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-161"
+    },
+    {
+      "no": 162,
+      "title": "Excel数式説明",
+      "desc": "数式を貼ると意味を説明",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-162"
+    },
+    {
+      "no": 163,
+      "title": "Excel関数生成",
+      "desc": "やりたい処理から関数を作成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-163"
+    },
+    {
+      "no": 164,
+      "title": "VLOOKUP/XLOOKUP補助",
+      "desc": "参照表から必要な式を生成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-164"
+    },
+    {
+      "no": 165,
+      "title": "表タイトル自動生成",
+      "desc": "表の内容からタイトルを提案",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-165"
+    },
+    {
+      "no": 166,
+      "title": "Markdown表チェック",
+      "desc": "Markdown表の崩れを検出",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-166"
+    },
+    {
+      "no": 167,
+      "title": "テーブル列幅案",
+      "desc": "内容に応じた列幅案を出す",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-167"
+    },
+    {
+      "no": 168,
+      "title": "状態管理表作成",
+      "desc": "未/中/済/保留の表を生成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-168"
+    },
+    {
+      "no": 169,
+      "title": "チェック欄付き表作成",
+      "desc": "タスクにチェック欄を追加",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-169"
+    },
+    {
+      "no": 170,
+      "title": "日付別集計表作成",
+      "desc": "日付ごとの件数集計表を作る",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-170"
+    },
+    {
+      "no": 171,
+      "title": "SNS文字数チェック",
+      "desc": "Xなどの投稿文字数を確認",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-171"
+    },
+    {
+      "no": 172,
+      "title": "ハッシュタグ生成",
+      "desc": "キーワードからタグ候補を作成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-172"
+    },
+    {
+      "no": 173,
+      "title": "タイトル案生成",
+      "desc": "記事や動画のタイトル案を作成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-173"
+    },
+    {
+      "no": 174,
+      "title": "メタディスクリプション作成",
+      "desc": "SEO用の説明文を生成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-174"
+    },
+    {
+      "no": 175,
+      "title": "URLスラッグ生成",
+      "desc": "日本語タイトルをURL向け英数字に変換",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-175"
+    },
+    {
+      "no": 176,
+      "title": "OGP確認メモ作成",
+      "desc": "タイトル・説明・画像URLを整理",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-176"
+    },
+    {
+      "no": 177,
+      "title": "ブログ見出し作成",
+      "desc": "キーワードから見出し構成を作成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-177"
+    },
+    {
+      "no": 178,
+      "title": "投稿予約メモ作成",
+      "desc": "投稿内容・日時・媒体を整理",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-178"
+    },
+    {
+      "no": 179,
+      "title": "アイキャッチ文生成",
+      "desc": "記事冒頭の短い紹介文を作成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-179"
+    },
+    {
+      "no": 180,
+      "title": "YouTube概要欄整形",
+      "desc": "説明文・リンク・タグを整える",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-180"
+    },
+    {
+      "no": 181,
+      "title": "買い物リスト整形",
+      "desc": "メモをカテゴリ別に整理",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-181"
+    },
+    {
+      "no": 182,
+      "title": "献立候補作成",
+      "desc": "食材から料理候補を出す",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-182"
+    },
+    {
+      "no": 183,
+      "title": "冷蔵庫メモ",
+      "desc": "食材と期限を一覧化",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-183"
+    },
+    {
+      "no": 184,
+      "title": "賞味期限カウント",
+      "desc": "期限まであと何日か表示",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-184"
+    },
+    {
+      "no": 185,
+      "title": "家計メモ整形",
+      "desc": "支出メモをカテゴリ別に整理",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-185"
+    },
+    {
+      "no": 187,
+      "title": "燃費計算",
+      "desc": "走行距離と給油量から燃費計算",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-187"
+    },
+    {
+      "no": 188,
+      "title": "電気代概算",
+      "desc": "W数と使用時間から電気代を概算",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-188"
+    },
+    {
+      "no": 189,
+      "title": "荷物チェックリスト",
+      "desc": "旅行・出張の持ち物リストを作成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-189"
+    },
+    {
+      "no": 190,
+      "title": "住所分割",
+      "desc": "郵便番号・都道府県・市区町村を分ける",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-190"
+    },
+    {
+      "no": 191,
+      "title": "IP設定表作成",
+      "desc": "機器名・IP・用途の表を生成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-191"
+    },
+    {
+      "no": 192,
+      "title": "I/Oリスト整形",
+      "desc": "入出力メモを表形式に変換",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-192"
+    },
+    {
+      "no": 193,
+      "title": "アラーム一覧整形",
+      "desc": "アラーム名と詳細を表に変換",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-193"
+    },
+    {
+      "no": 194,
+      "title": "ラダーコメント整形",
+      "desc": "デバイスコメントを表記統一",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-194"
+    },
+    {
+      "no": 195,
+      "title": "機器リスト作成",
+      "desc": "型式・メーカー・用途を一覧化",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-195"
+    },
+    {
+      "no": 196,
+      "title": "配線チェックリスト",
+      "desc": "電源・LAN・I/Oなどの確認項目を作成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-196"
+    },
+    {
+      "no": 197,
+      "title": "現地作業チェックリスト",
+      "desc": "持ち物・確認事項・作業順を作成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-197"
+    },
+    {
+      "no": 198,
+      "title": "不具合メモ整理",
+      "desc": "現象・条件・再現性・対策に分解",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-198"
+    },
+    {
+      "no": 199,
+      "title": "通信設定メモ作成",
+      "desc": "IP、ポート、プロトコルを整理",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-199"
+    },
+    {
+      "no": 200,
+      "title": "作業前後確認表",
+      "desc": "作業前確認・作業後確認の表を作成",
+      "category": "文章補助",
+      "status": "idea",
+      "link": "tool-200"
+    },
+    {
+      "no": 201,
+      "title": "文章トーン判定",
+      "desc": "文章が固い・柔らかい・冷たいなどを判定",
+      "category": "AI・文章補助系",
+      "status": "idea",
+      "link": "tool-201"
+    },
+    {
+      "no": 202,
+      "title": "社内向け変換",
+      "desc": "社外向け文を社内向けの簡潔な文に変換",
+      "category": "AI・文章補助系",
+      "status": "idea",
+      "link": "tool-202"
+    },
+    {
+      "no": 203,
+      "title": "社外向け変換",
+      "desc": "社内メモを社外向けの丁寧な文に変換",
+      "category": "AI・文章補助系",
+      "status": "idea",
+      "link": "tool-203"
+    },
+    {
+      "no": 204,
+      "title": "クレーム返信補助",
+      "desc": "クレーム内容から返信文の下書きを作成",
+      "category": "AI・文章補助系",
+      "status": "idea",
+      "link": "tool-204"
+    },
+    {
+      "no": 205,
+      "title": "依頼内容抽出",
+      "desc": "長文メールから依頼事項だけ抽出",
+      "category": "AI・文章補助系",
+      "status": "idea",
+      "link": "tool-205"
+    },
+    {
+      "no": 206,
+      "title": "期限抽出",
+      "desc": "文章中の日付・期限だけ抜き出す",
+      "category": "AI・文章補助系",
+      "status": "idea",
+      "link": "tool-206"
+    },
+    {
+      "no": 207,
+      "title": "担当者抽出",
+      "desc": "文章中の担当者名だけ抜き出す",
+      "category": "AI・文章補助系",
+      "status": "idea",
+      "link": "tool-207"
+    },
+    {
+      "no": 208,
+      "title": "決定事項抽出",
+      "desc": "会議メモから決定事項だけ抽出",
+      "category": "AI・文章補助系",
+      "status": "idea",
+      "link": "tool-208"
+    },
+    {
+      "no": 209,
+      "title": "未決事項抽出",
+      "desc": "会議メモから未決事項だけ抽出",
+      "category": "AI・文章補助系",
+      "status": "idea",
+      "link": "tool-209"
+    },
+    {
+      "no": 210,
+      "title": "宿題リスト抽出",
+      "desc": "会議メモからToDoだけ抽出",
+      "category": "AI・文章補助系",
+      "status": "idea",
+      "link": "tool-210"
+    },
+    {
+      "no": 211,
+      "title": "文章の危険表現チェック",
+      "desc": "誤解・失礼になりそうな表現を検出",
+      "category": "AI・文章補助系",
+      "status": "idea",
+      "link": "tool-211"
+    },
+    {
+      "no": 212,
+      "title": "二重敬語チェック",
+      "desc": "「おっしゃられる」などを検出",
+      "category": "AI・文章補助系",
+      "status": "idea",
+      "link": "tool-212"
+    },
+    {
+      "no": 213,
+      "title": "主語抜けチェック",
+      "desc": "誰が実施するか不明な文を検出",
+      "category": "AI・文章補助系",
+      "status": "idea",
+      "link": "tool-213"
+    },
+    {
+      "no": 214,
+      "title": "あいまい表現チェック",
+      "desc": "「なるべく」「適宜」などを検出",
+      "category": "AI・文章補助系",
+      "status": "idea",
+      "link": "tool-214"
+    },
+    {
+      "no": 215,
+      "title": "結論先出し変換",
+      "desc": "理由から始まる文を結論先出しに並べ替え",
+      "category": "AI・文章補助系",
+      "status": "idea",
+      "link": "tool-215"
+    },
+    {
+      "no": 216,
+      "title": "報告文の所感生成",
+      "desc": "原因・改善点から所感を作成",
+      "category": "AI・文章補助系",
+      "status": "idea",
+      "link": "tool-216"
+    },
+    {
+      "no": 217,
+      "title": "トラブル原因候補整理",
+      "desc": "現象から原因候補を箇条書き化",
+      "category": "AI・文章補助系",
+      "status": "idea",
+      "link": "tool-217"
+    },
+    {
+      "no": 218,
+      "title": "メモから報告書構成化",
+      "desc": "雑メモを背景・結果・課題に分類",
+      "category": "AI・文章補助系",
+      "status": "idea",
+      "link": "tool-218"
+    },
+    {
+      "no": 219,
+      "title": "説明文かんたん化",
+      "desc": "難しい説明を初心者向けに変換",
+      "category": "AI・文章補助系",
+      "status": "idea",
+      "link": "tool-219"
+    },
+    {
+      "no": 220,
+      "title": "専門用語抽出",
+      "desc": "文章中の専門用語だけ抜き出す",
+      "category": "AI・文章補助系",
+      "status": "idea",
+      "link": "tool-220"
+    },
+    {
+      "no": 221,
+      "title": "HTMLタグ除去",
+      "desc": "HTMLからテキストだけ抽出",
+      "category": "Web制作・HTML/CSS系",
+      "status": "idea",
+      "link": "tool-221"
+    },
+    {
+      "no": 222,
+      "title": "HTML整形",
+      "desc": "HTMLをインデント付きで整形",
+      "category": "Web制作・HTML/CSS系",
+      "status": "idea",
+      "link": "tool-222"
+    },
+    {
+      "no": 223,
+      "title": "CSS整形",
+      "desc": "CSSを見やすく整形",
+      "category": "Web制作・HTML/CSS系",
+      "status": "idea",
+      "link": "tool-223"
+    },
+    {
+      "no": 224,
+      "title": "CSS圧縮",
+      "desc": "CSSの改行・空白を削除",
+      "category": "Web制作・HTML/CSS系",
+      "status": "idea",
+      "link": "tool-224"
+    },
+    {
+      "no": 225,
+      "title": "JavaScript整形",
+      "desc": "JSコードをインデント付きで整形",
+      "category": "Web制作・HTML/CSS系",
+      "status": "idea",
+      "link": "tool-225"
+    },
+    {
+      "no": 226,
+      "title": "JavaScript圧縮",
+      "desc": "JSコードを圧縮",
+      "category": "Web制作・HTML/CSS系",
+      "status": "idea",
+      "link": "tool-226"
+    },
+    {
+      "no": 227,
+      "title": "HTML色確認",
+      "desc": "HTMLカラーコードをプレビュー",
+      "category": "Web制作・HTML/CSS系",
+      "status": "idea",
+      "link": "tool-227"
+    },
+    {
+      "no": 228,
+      "title": "CSSグラデーション生成",
+      "desc": "2色からグラデーションCSSを作成",
+      "category": "Web制作・HTML/CSS系",
+      "status": "idea",
+      "link": "tool-228"
+    },
+    {
+      "no": 229,
+      "title": "box-shadow生成",
+      "desc": "影のCSSを画面で調整して生成",
+      "category": "Web制作・HTML/CSS系",
+      "status": "idea",
+      "link": "tool-229"
+    },
+    {
+      "no": 230,
+      "title": "border-radius生成",
+      "desc": "角丸CSSを画面で調整して生成",
+      "category": "Web制作・HTML/CSS系",
+      "status": "idea",
+      "link": "tool-230"
+    },
+    {
+      "no": 231,
+      "title": "CSSボタン生成",
+      "desc": "色・角丸・影からボタンCSSを作成",
+      "category": "Web制作・HTML/CSS系",
+      "status": "idea",
+      "link": "tool-231"
+    },
+    {
+      "no": 232,
+      "title": "HTMLテーブル生成",
+      "desc": "入力データからHTML表を作成",
+      "category": "Web制作・HTML/CSS系",
+      "status": "idea",
+      "link": "tool-232"
+    },
+    {
+      "no": 233,
+      "title": "favicon確認",
+      "desc": "favicon画像の見え方を確認",
+      "category": "Web制作・HTML/CSS系",
+      "status": "idea",
+      "link": "tool-233"
+    },
+    {
+      "no": 234,
+      "title": "レスポンシブ確認メモ",
+      "desc": "PC/スマホ表示確認項目を作成",
+      "category": "Web制作・HTML/CSS系",
+      "status": "idea",
+      "link": "tool-234"
+    },
+    {
+      "no": 235,
+      "title": "文字装飾CSS生成",
+      "desc": "太字・下線・色などのCSSを生成",
+      "category": "Web制作・HTML/CSS系",
+      "status": "idea",
+      "link": "tool-235"
+    },
+    {
+      "no": 236,
+      "title": "Flexbox補助",
+      "desc": "配置イメージからflex CSSを生成",
+      "category": "Web制作・HTML/CSS系",
+      "status": "idea",
+      "link": "tool-236"
+    },
+    {
+      "no": 237,
+      "title": "Grid補助",
+      "desc": "行列数からCSS Gridを生成",
+      "category": "Web制作・HTML/CSS系",
+      "status": "idea",
+      "link": "tool-237"
+    },
+    {
+      "no": 238,
+      "title": "メディアクエリ生成",
+      "desc": "画面幅ごとのCSS雛形を作成",
+      "category": "Web制作・HTML/CSS系",
+      "status": "idea",
+      "link": "tool-238"
+    },
+    {
+      "no": 239,
+      "title": "HTML特殊文字一覧",
+      "desc": "よく使う特殊文字を検索・コピー",
+      "category": "Web制作・HTML/CSS系",
+      "status": "idea",
+      "link": "tool-239"
+    },
+    {
+      "no": 240,
+      "title": "metaタグ生成",
+      "desc": "title/description/OGPのmetaタグを作成",
+      "category": "Web制作・HTML/CSS系",
+      "status": "idea",
+      "link": "tool-240"
+    },
+    {
+      "no": 241,
+      "title": "README雛形生成",
+      "desc": "プロジェクト名からREADMEの枠を作成",
+      "category": "GitHub・開発作業系",
+      "status": "idea",
+      "link": "tool-241"
+    },
+    {
+      "no": 242,
+      "title": ".gitignore生成",
+      "desc": "言語を選んで.gitignoreを作成",
+      "category": "GitHub・開発作業系",
+      "status": "idea",
+      "link": "tool-242"
+    },
+    {
+      "no": 243,
+      "title": "コミットメッセージ生成",
+      "desc": "変更内容からcommit文を作成",
+      "category": "GitHub・開発作業系",
+      "status": "idea",
+      "link": "tool-243"
+    },
+    {
+      "no": 244,
+      "title": "ブランチ名生成",
+      "desc": "作業内容から安全なブランチ名を作成",
+      "category": "GitHub・開発作業系",
+      "status": "idea",
+      "link": "tool-244"
+    },
+    {
+      "no": 245,
+      "title": "Pull Request説明生成",
+      "desc": "変更内容からPR説明文を作成",
+      "category": "GitHub・開発作業系",
+      "status": "idea",
+      "link": "tool-245"
+    },
+    {
+      "no": 246,
+      "title": "Issueテンプレ生成",
+      "desc": "バグ報告・要望のテンプレを作成",
+      "category": "GitHub・開発作業系",
+      "status": "idea",
+      "link": "tool-246"
+    },
+    {
+      "no": 247,
+      "title": "CHANGELOG生成",
+      "desc": "更新メモから変更履歴を作成",
+      "category": "GitHub・開発作業系",
+      "status": "idea",
+      "link": "tool-247"
+    },
+    {
+      "no": 248,
+      "title": "バージョン番号補助",
+      "desc": "major/minor/patchの更新判断を補助",
+      "category": "GitHub・開発作業系",
+      "status": "idea",
+      "link": "tool-248"
+    },
+    {
+      "no": 249,
+      "title": "ライセンス選択補助",
+      "desc": "MIT/Apache/GPLなどの違いを簡単比較",
+      "category": "GitHub・開発作業系",
+      "status": "idea",
+      "link": "tool-249"
+    },
+    {
+      "no": 250,
+      "title": "Markdown目次生成",
+      "desc": "見出しから目次を作成",
+      "category": "GitHub・開発作業系",
+      "status": "idea",
+      "link": "tool-250"
+    },
+    {
+      "no": 251,
+      "title": "Markdownリンク切れ候補チェック",
+      "desc": "リンク一覧から怪しいものを検出",
+      "category": "GitHub・開発作業系",
+      "status": "idea",
+      "link": "tool-251"
+    },
+    {
+      "no": 252,
+      "title": "コードコメント整形",
+      "desc": "コメント文を統一した文体に変換",
+      "category": "GitHub・開発作業系",
+      "status": "idea",
+      "link": "tool-252"
+    },
+    {
+      "no": 253,
+      "title": "TODOコメント抽出",
+      "desc": "コード中のTODO/FIXMEだけ抽出",
+      "category": "GitHub・開発作業系",
+      "status": "idea",
+      "link": "tool-253"
+    },
+    {
+      "no": 254,
+      "title": "ログ整形",
+      "desc": "アプリログを見やすく整形",
+      "category": "GitHub・開発作業系",
+      "status": "idea",
+      "link": "tool-254"
+    },
+    {
+      "no": 255,
+      "title": "エラーメッセージ整形",
+      "desc": "エラー文を原因・対策欄に分解",
+      "category": "GitHub・開発作業系",
+      "status": "idea",
+      "link": "tool-255"
+    },
+    {
+      "no": 256,
+      "title": "JSON Schema生成",
+      "desc": "JSONサンプルからSchemaを作成",
+      "category": "GitHub・開発作業系",
+      "status": "idea",
+      "link": "tool-256"
+    },
+    {
+      "no": 257,
+      "title": "APIレスポンス整形",
+      "desc": "APIの戻り値を見やすく整形",
+      "category": "GitHub・開発作業系",
+      "status": "idea",
+      "link": "tool-257"
+    },
+    {
+      "no": 258,
+      "title": "curlコマンド生成",
+      "desc": "URL/ヘッダー/bodyからcurlを作成",
+      "category": "GitHub・開発作業系",
+      "status": "idea",
+      "link": "tool-258"
+    },
+    {
+      "no": 259,
+      "title": "HTTPヘッダー整形",
+      "desc": "ヘッダー情報を表形式に変換",
+      "category": "GitHub・開発作業系",
+      "status": "idea",
+      "link": "tool-259"
+    },
+    {
+      "no": 260,
+      "title": "簡易JWTデコード",
+      "desc": "JWTのheader/payloadを確認",
+      "category": "GitHub・開発作業系",
+      "status": "idea",
+      "link": "tool-260"
+    },
+    {
+      "no": 261,
+      "title": "パスワード強度チェック",
+      "desc": "文字数・記号・推測しやすさを判定",
+      "category": "セキュリティ・チェック系",
+      "status": "idea",
+      "link": "tool-261"
+    },
+    {
+      "no": 262,
+      "title": "秘密情報っぽい文字列チェック",
+      "desc": "APIキーやトークンらしき文字列を検出",
+      "category": "セキュリティ・チェック系",
+      "status": "idea",
+      "link": "tool-262"
+    },
+    {
+      "no": 263,
+      "title": "メール誤送信チェック",
+      "desc": "宛先・添付・敬称の確認リストを作成",
+      "category": "セキュリティ・チェック系",
+      "status": "idea",
+      "link": "tool-263"
+    },
+    {
+      "no": 264,
+      "title": "個人情報マスク",
+      "desc": "氏名・電話番号・メールを伏せ字に変換",
+      "category": "セキュリティ・チェック系",
+      "status": "idea",
+      "link": "tool-264"
+    },
+    {
+      "no": 265,
+      "title": "URL安全確認メモ",
+      "desc": "ドメイン・短縮URL・怪しい文字を確認",
+      "category": "セキュリティ・チェック系",
+      "status": "idea",
+      "link": "tool-265"
+    },
+    {
+      "no": 266,
+      "title": "QRコード内容確認",
+      "desc": "QRコードのリンク先文字列を表示",
+      "category": "セキュリティ・チェック系",
+      "status": "idea",
+      "link": "tool-266"
+    },
+    {
+      "no": 267,
+      "title": "添付ファイル確認リスト",
+      "desc": "送付前の添付漏れ防止チェック",
+      "category": "セキュリティ・チェック系",
+      "status": "idea",
+      "link": "tool-267"
+    },
+    {
+      "no": 268,
+      "title": "公開前チェックリスト",
+      "desc": "Webページ公開前の確認項目を作成",
+      "category": "セキュリティ・チェック系",
+      "status": "idea",
+      "link": "tool-268"
+    },
+    {
+      "no": 269,
+      "title": "権限設定メモ作成",
+      "desc": "誰に何の権限を付けるか整理",
+      "category": "セキュリティ・チェック系",
+      "status": "idea",
+      "link": "tool-269"
+    },
+    {
+      "no": 270,
+      "title": "セキュリティ注意文生成",
+      "desc": "社内共有用の注意文を作成",
+      "category": "セキュリティ・チェック系",
+      "status": "idea",
+      "link": "tool-270"
+    },
+    {
+      "no": 271,
+      "title": "アンケート集計",
+      "desc": "回答リストから件数を集計",
+      "category": "データ分析・集計補助系",
+      "status": "idea",
+      "link": "tool-271"
+    },
+    {
+      "no": 272,
+      "title": "自由記述分類",
+      "desc": "コメントを似た内容ごとに分類",
+      "category": "データ分析・集計補助系",
+      "status": "idea",
+      "link": "tool-272"
+    },
+    {
+      "no": 273,
+      "title": "頻出語抽出",
+      "desc": "文章中によく出る単語を抽出",
+      "category": "データ分析・集計補助系",
+      "status": "idea",
+      "link": "tool-273"
+    },
+    {
+      "no": 274,
+      "title": "ランキング作成",
+      "desc": "数値データを順位付け",
+      "category": "データ分析・集計補助系",
+      "status": "idea",
+      "link": "tool-274"
+    },
+    {
+      "no": 275,
+      "title": "パレート表作成",
+      "desc": "件数から累積比率を計算",
+      "category": "データ分析・集計補助系",
+      "status": "idea",
+      "link": "tool-275"
+    },
+    {
+      "no": 276,
+      "title": "ABC分析",
+      "desc": "売上・件数からA/B/C分類",
+      "category": "データ分析・集計補助系",
+      "status": "idea",
+      "link": "tool-276"
+    },
+    {
+      "no": 277,
+      "title": "クロス集計表作成",
+      "desc": "2項目の組み合わせで集計",
+      "category": "データ分析・集計補助系",
+      "status": "idea",
+      "link": "tool-277"
+    },
+    {
+      "no": 278,
+      "title": "外れ値候補検出",
+      "desc": "数値リストから極端な値を検出",
+      "category": "データ分析・集計補助系",
+      "status": "idea",
+      "link": "tool-278"
+    },
+    {
+      "no": 279,
+      "title": "移動平均計算",
+      "desc": "時系列データの移動平均を計算",
+      "category": "データ分析・集計補助系",
+      "status": "idea",
+      "link": "tool-279"
+    },
+    {
+      "no": 280,
+      "title": "前年比・前月比計算",
+      "desc": "数値の増減率を計算",
+      "category": "データ分析・集計補助系",
+      "status": "idea",
+      "link": "tool-280"
+    },
+    {
+      "no": 281,
+      "title": "デバイス割付表作成",
+      "desc": "X/Y/M/Dなどの割付を表に整理",
+      "category": "設備・現場・制御系",
+      "status": "idea",
+      "link": "tool-281"
+    },
+    {
+      "no": 282,
+      "title": "PLCコメント一括整形",
+      "desc": "デバイスコメントの表記を統一",
+      "category": "設備・現場・制御系",
+      "status": "idea",
+      "link": "tool-282"
+    },
+    {
+      "no": 283,
+      "title": "アラーム分類ツール",
+      "desc": "アラームを非常停止・サーボ・センサ等に分類",
+      "category": "設備・現場・制御系",
+      "status": "idea",
+      "link": "tool-283"
+    },
+    {
+      "no": 284,
+      "title": "インターロック条件整理",
+      "desc": "条件メモをAND/OR形式に整理",
+      "category": "設備・現場・制御系",
+      "status": "idea",
+      "link": "tool-284"
+    },
+    {
+      "no": 285,
+      "title": "運転条件チェック表",
+      "desc": "自動運転開始条件を一覧化",
+      "category": "設備・現場・制御系",
+      "status": "idea",
+      "link": "tool-285"
+    },
+    {
+      "no": 286,
+      "title": "原点復帰条件表作成",
+      "desc": "軸・シリンダごとの原点条件を整理",
+      "category": "設備・現場・制御系",
+      "status": "idea",
+      "link": "tool-286"
+    },
+    {
+      "no": 287,
+      "title": "エア機器チェックリスト",
+      "desc": "圧力・電磁弁・シリンダ確認項目を作成",
+      "category": "設備・現場・制御系",
+      "status": "idea",
+      "link": "tool-287"
+    },
+    {
+      "no": 288,
+      "title": "センサ確認リスト",
+      "desc": "ON/OFF状態確認表を作成",
+      "category": "設備・現場・制御系",
+      "status": "idea",
+      "link": "tool-288"
+    },
+    {
+      "no": 289,
+      "title": "モータ確認リスト",
+      "desc": "回転方向・過負荷・異音確認表を作成",
+      "category": "設備・現場・制御系",
+      "status": "idea",
+      "link": "tool-289"
+    },
+    {
+      "no": 290,
+      "title": "サーボパラメータメモ",
+      "desc": "軸名・型式・電子ギヤ等を整理",
+      "category": "設備・現場・制御系",
+      "status": "idea",
+      "link": "tool-290"
+    },
+    {
+      "no": 291,
+      "title": "通信異常切り分け表",
+      "desc": "IP・ケーブル・ポート・相手機器を確認",
+      "category": "設備・現場・制御系",
+      "status": "idea",
+      "link": "tool-291"
+    },
+    {
+      "no": 292,
+      "title": "Ethernet設定表",
+      "desc": "IP/サブネット/ゲートウェイ/ポートを表にする",
+      "category": "設備・現場・制御系",
+      "status": "idea",
+      "link": "tool-292"
+    },
+    {
+      "no": 293,
+      "title": "CC-Link設定表",
+      "desc": "局番・占有点数・リモートI/Oを整理",
+      "category": "設備・現場・制御系",
+      "status": "idea",
+      "link": "tool-293"
+    },
+    {
+      "no": 294,
+      "title": "I/Oチェック進捗表",
+      "desc": "点数ごとの未/済/NGを管理",
+      "category": "設備・現場・制御系",
+      "status": "idea",
+      "link": "tool-294"
+    },
+    {
+      "no": 295,
+      "title": "試運転チェック表",
+      "desc": "単動・自動・異常・復帰の確認表を作成",
+      "category": "設備・現場・制御系",
+      "status": "idea",
+      "link": "tool-295"
+    },
+    {
+      "no": 296,
+      "title": "客先確認項目表",
+      "desc": "現地でお客様に確認する項目を整理",
+      "category": "設備・現場・制御系",
+      "status": "idea",
+      "link": "tool-296"
+    },
+    {
+      "no": 297,
+      "title": "残項目一覧生成",
+      "desc": "メモから残項目表を作成",
+      "category": "設備・現場・制御系",
+      "status": "idea",
+      "link": "tool-297"
+    },
+    {
+      "no": 298,
+      "title": "作業リスク洗い出し",
+      "desc": "作業内容からリスクと対策を整理",
+      "category": "設備・現場・制御系",
+      "status": "idea",
+      "link": "tool-298"
+    },
+    {
+      "no": 299,
+      "title": "復旧手順書雛形",
+      "desc": "トラブル復旧手順の枠を作成",
+      "category": "設備・現場・制御系",
+      "status": "idea",
+      "link": "tool-299"
+    },
+    {
+      "no": 300,
+      "title": "バックアップ取得記録表",
+      "desc": "PLC/GOT/ロボット等のバックアップ履歴を管理",
+      "category": "設備・現場・制御系",
+      "status": "idea",
+      "link": "tool-300"
+    },
+    {
+      "no": 301,
+      "title": "Word文章下書き生成",
+      "desc": "タイトル・目的から本文のたたき台を作成",
+      "category": "Word文章作成・整形系",
+      "status": "idea",
+      "link": "tool-301"
+    },
+    {
+      "no": 302,
+      "title": "Word見出し構成作成",
+      "desc": "内容から1章、2章、3章の構成を作成",
+      "category": "Word文章作成・整形系",
+      "status": "idea",
+      "link": "tool-302"
+    },
+    {
+      "no": 303,
+      "title": "見出し番号整形",
+      "desc": "1.、1.1、(1)などを統一",
+      "category": "Word文章作成・整形系",
+      "status": "idea",
+      "link": "tool-303"
+    },
+    {
+      "no": 304,
+      "title": "章立てチェック",
+      "desc": "章の抜け・番号ズレを確認",
+      "category": "Word文章作成・整形系",
+      "status": "idea",
+      "link": "tool-304"
+    },
+    {
+      "no": 305,
+      "title": "目次用見出し抽出",
+      "desc": "文章中の見出しだけ抜き出す",
+      "category": "Word文章作成・整形系",
+      "status": "idea",
+      "link": "tool-305"
+    },
+    {
+      "no": 306,
+      "title": "文書タイトル案生成",
+      "desc": "内容からWord文書のタイトル候補を作成",
+      "category": "Word文章作成・整形系",
+      "status": "idea",
+      "link": "tool-306"
+    },
+    {
+      "no": 307,
+      "title": "表紙文言生成",
+      "desc": "表紙用のタイトル・副題・作成日を整形",
+      "category": "Word文章作成・整形系",
+      "status": "idea",
+      "link": "tool-307"
+    },
+    {
+      "no": 308,
+      "title": "改訂履歴表作成",
+      "desc": "版数・日付・変更内容の表を作成",
+      "category": "Word文章作成・整形系",
+      "status": "idea",
+      "link": "tool-308"
+    },
+    {
+      "no": 309,
+      "title": "文書目的文生成",
+      "desc": "「本書は〜を目的とする」の文章を作成",
+      "category": "Word文章作成・整形系",
+      "status": "idea",
+      "link": "tool-309"
+    },
+    {
+      "no": 310,
+      "title": "適用範囲文生成",
+      "desc": "「本資料の適用範囲は〜」の文章を作成",
+      "category": "Word文章作成・整形系",
+      "status": "idea",
+      "link": "tool-310"
+    },
+    {
+      "no": 311,
+      "title": "注意事項文生成",
+      "desc": "注意・警告・補足の文章を作成",
+      "category": "Word文章作成・整形系",
+      "status": "idea",
+      "link": "tool-311"
+    },
+    {
+      "no": 312,
+      "title": "操作手順文生成",
+      "desc": "メモから手順書形式の文章を作成",
+      "category": "Word文章作成・整形系",
+      "status": "idea",
+      "link": "tool-312"
+    },
+    {
+      "no": 313,
+      "title": "手順番号整形",
+      "desc": "手順を 1、2、3 形式に整える",
+      "category": "Word文章作成・整形系",
+      "status": "idea",
+      "link": "tool-313"
+    },
+    {
+      "no": 314,
+      "title": "箇条書き階層整理",
+      "desc": "大項目・小項目の階層を整える",
+      "category": "Word文章作成・整形系",
+      "status": "idea",
+      "link": "tool-314"
+    },
+    {
+      "no": 315,
+      "title": "長文の段落分割",
+      "desc": "長い文章を読みやすい段落に分ける",
+      "category": "Word文章作成・整形系",
+      "status": "idea",
+      "link": "tool-315"
+    },
+    {
+      "no": 316,
+      "title": "段落の順序整理",
+      "desc": "結論・理由・詳細の順に並べ替える",
+      "category": "Word文章作成・整形系",
+      "status": "idea",
+      "link": "tool-316"
+    },
+    {
+      "no": 317,
+      "title": "文末表現統一",
+      "desc": "「します」「行います」などを統一",
+      "category": "Word文章作成・整形系",
+      "status": "idea",
+      "link": "tool-317"
+    },
+    {
+      "no": 318,
+      "title": "用語統一チェック",
+      "desc": "文書内の同じ意味の用語を検出",
+      "category": "Word文章作成・整形系",
+      "status": "idea",
+      "link": "tool-318"
+    },
+    {
+      "no": 319,
+      "title": "表記ゆれ置換リスト作成",
+      "desc": "置換前・置換後の一覧を作る",
+      "category": "Word文章作成・整形系",
+      "status": "idea",
+      "link": "tool-319"
+    },
+    {
+      "no": 320,
+      "title": "Word貼り付け用テキスト整形",
+      "desc": "余計な改行・空白を整えて貼り付けやすくする",
+      "category": "Word文章作成・整形系",
+      "status": "idea",
+      "link": "tool-320"
+    },
+    {
+      "no": 321,
+      "title": "報告書テンプレ生成",
+      "desc": "背景・内容・結果・課題・予定の枠を作成",
+      "category": "ビジネス文書・報告書系",
+      "status": "idea",
+      "link": "tool-321"
+    },
+    {
+      "no": 322,
+      "title": "作業報告文生成",
+      "desc": "作業メモから報告書向け文章を作成",
+      "category": "ビジネス文書・報告書系",
+      "status": "idea",
+      "link": "tool-322"
+    },
+    {
+      "no": 323,
+      "title": "不具合報告文生成",
+      "desc": "現象・原因・対策を報告文に変換",
+      "category": "ビジネス文書・報告書系",
+      "status": "idea",
+      "link": "tool-323"
+    },
+    {
+      "no": 324,
+      "title": "原因調査報告文生成",
+      "desc": "調査結果を原因・推定原因・対策に整理",
+      "category": "ビジネス文書・報告書系",
+      "status": "idea",
+      "link": "tool-324"
+    },
+    {
+      "no": 325,
+      "title": "対策内容文生成",
+      "desc": "実施した対策を簡潔な文章にする",
+      "category": "ビジネス文書・報告書系",
+      "status": "idea",
+      "link": "tool-325"
+    },
+    {
+      "no": 326,
+      "title": "今後の予定文生成",
+      "desc": "残作業や予定を文章化",
+      "category": "ビジネス文書・報告書系",
+      "status": "idea",
+      "link": "tool-326"
+    },
+    {
+      "no": 327,
+      "title": "所感文生成",
+      "desc": "原因・改善点から所感を作成",
+      "category": "ビジネス文書・報告書系",
+      "status": "idea",
+      "link": "tool-327"
+    },
+    {
+      "no": 328,
+      "title": "課題欄整形",
+      "desc": "課題を「現象→影響→対応」に整理",
+      "category": "ビジネス文書・報告書系",
+      "status": "idea",
+      "link": "tool-328"
+    },
+    {
+      "no": 329,
+      "title": "結果欄整形",
+      "desc": "作業結果を「実施内容＋結果」に整える",
+      "category": "ビジネス文書・報告書系",
+      "status": "idea",
+      "link": "tool-329"
+    },
+    {
+      "no": 330,
+      "title": "進捗報告文生成",
+      "desc": "現在状況を社内向け・社外向けに変換",
+      "category": "ビジネス文書・報告書系",
+      "status": "idea",
+      "link": "tool-330"
+    },
+    {
+      "no": 331,
+      "title": "完了報告文生成",
+      "desc": "作業完了時の報告文を作成",
+      "category": "ビジネス文書・報告書系",
+      "status": "idea",
+      "link": "tool-331"
+    },
+    {
+      "no": 332,
+      "title": "未完了理由文生成",
+      "desc": "未完了の理由を角が立たない文章にする",
+      "category": "ビジネス文書・報告書系",
+      "status": "idea",
+      "link": "tool-332"
+    },
+    {
+      "no": 333,
+      "title": "保留理由文生成",
+      "desc": "保留・確認待ちの理由文を作成",
+      "category": "ビジネス文書・報告書系",
+      "status": "idea",
+      "link": "tool-333"
+    },
+    {
+      "no": 334,
+      "title": "依頼事項欄生成",
+      "desc": "相手に依頼する内容を明確化",
+      "category": "ビジネス文書・報告書系",
+      "status": "idea",
+      "link": "tool-334"
+    },
+    {
+      "no": 335,
+      "title": "確認事項欄生成",
+      "desc": "確認すべき項目を一覧化",
+      "category": "ビジネス文書・報告書系",
+      "status": "idea",
+      "link": "tool-335"
+    },
+    {
+      "no": 336,
+      "title": "議事録から報告書変換",
+      "desc": "会議メモを報告書形式に変換",
+      "category": "ビジネス文書・報告書系",
+      "status": "idea",
+      "link": "tool-336"
+    },
+    {
+      "no": 337,
+      "title": "日報文生成",
+      "desc": "作業内容から日報形式に整形",
+      "category": "ビジネス文書・報告書系",
+      "status": "idea",
+      "link": "tool-337"
+    },
+    {
+      "no": 338,
+      "title": "週報文生成",
+      "desc": "1週間の作業メモを週報に変換",
+      "category": "ビジネス文書・報告書系",
+      "status": "idea",
+      "link": "tool-338"
+    },
+    {
+      "no": 339,
+      "title": "月報文生成",
+      "desc": "月ごとの作業内容を月報に変換",
+      "category": "ビジネス文書・報告書系",
+      "status": "idea",
+      "link": "tool-339"
+    },
+    {
+      "no": 340,
+      "title": "上司向け要約生成",
+      "desc": "詳細メモを上司向けの短文に要約",
+      "category": "ビジネス文書・報告書系",
+      "status": "idea",
+      "link": "tool-340"
+    },
+    {
+      "no": 341,
+      "title": "誤字脱字チェック",
+      "desc": "よくある誤字・変換ミスを検出",
+      "category": "Word校正・チェック系",
+      "status": "idea",
+      "link": "tool-341"
+    },
+    {
+      "no": 342,
+      "title": "句読点チェック",
+      "desc": "句読点の多すぎ・少なすぎを確認",
+      "category": "Word校正・チェック系",
+      "status": "idea",
+      "link": "tool-342"
+    },
+    {
+      "no": 343,
+      "title": "一文長すぎチェック",
+      "desc": "長すぎる文を検出して分割案を出す",
+      "category": "Word校正・チェック系",
+      "status": "idea",
+      "link": "tool-343"
+    },
+    {
+      "no": 344,
+      "title": "主語述語チェック",
+      "desc": "主語と述語が合っているか確認",
+      "category": "Word校正・チェック系",
+      "status": "idea",
+      "link": "tool-344"
+    },
+    {
+      "no": 345,
+      "title": "係り受けチェック",
+      "desc": "意味が取りにくい文を検出",
+      "category": "Word校正・チェック系",
+      "status": "idea",
+      "link": "tool-345"
+    },
+    {
+      "no": 346,
+      "title": "二重否定チェック",
+      "desc": "「〜しないわけではない」などを検出",
+      "category": "Word校正・チェック系",
+      "status": "idea",
+      "link": "tool-346"
+    },
+    {
+      "no": 347,
+      "title": "曖昧語チェック",
+      "desc": "「適宜」「必要に応じて」などを検出",
+      "category": "Word校正・チェック系",
+      "status": "idea",
+      "link": "tool-347"
+    },
+    {
+      "no": 348,
+      "title": "指示語チェック",
+      "desc": "「これ」「それ」が多い文を検出",
+      "category": "Word校正・チェック系",
+      "status": "idea",
+      "link": "tool-348"
+    },
+    {
+      "no": 349,
+      "title": "冗長表現チェック",
+      "desc": "「することができます」などを簡潔化",
+      "category": "Word校正・チェック系",
+      "status": "idea",
+      "link": "tool-349"
+    },
+    {
+      "no": 350,
+      "title": "重複表現チェック",
+      "desc": "「まず最初に」などを検出",
+      "category": "Word校正・チェック系",
+      "status": "idea",
+      "link": "tool-350"
+    },
+    {
+      "no": 351,
+      "title": "口語表現チェック",
+      "desc": "ビジネス文書に不向きな表現を検出",
+      "category": "Word校正・チェック系",
+      "status": "idea",
+      "link": "tool-351"
+    },
+    {
+      "no": 352,
+      "title": "敬語レベルチェック",
+      "desc": "丁寧すぎ・くだけすぎを判定",
+      "category": "Word校正・チェック系",
+      "status": "idea",
+      "link": "tool-352"
+    },
+    {
+      "no": 353,
+      "title": "社外提出向けチェック",
+      "desc": "社外に出せる文面か確認",
+      "category": "Word校正・チェック系",
+      "status": "idea",
+      "link": "tool-353"
+    },
+    {
+      "no": 354,
+      "title": "社内共有向けチェック",
+      "desc": "社内向けに簡潔か確認",
+      "category": "Word校正・チェック系",
+      "status": "idea",
+      "link": "tool-354"
+    },
+    {
+      "no": 355,
+      "title": "NGワードチェック",
+      "desc": "指定した禁止表現を検出",
+      "category": "Word校正・チェック系",
+      "status": "idea",
+      "link": "tool-355"
+    },
+    {
+      "no": 356,
+      "title": "漢字ひらく候補抽出",
+      "desc": "「出来る→できる」などの候補を表示",
+      "category": "Word校正・チェック系",
+      "status": "idea",
+      "link": "tool-356"
+    },
+    {
+      "no": 357,
+      "title": "数字表記統一",
+      "desc": "半角数字・漢数字の使い分けを整える",
+      "category": "Word校正・チェック系",
+      "status": "idea",
+      "link": "tool-357"
+    },
+    {
+      "no": 358,
+      "title": "単位表記統一",
+      "desc": "mm、ｍｍ、ミリなどを統一",
+      "category": "Word校正・チェック系",
+      "status": "idea",
+      "link": "tool-358"
+    },
+    {
+      "no": 359,
+      "title": "日付表記統一",
+      "desc": "2026/5/3、2026年5月3日を統一",
+      "category": "Word校正・チェック系",
+      "status": "idea",
+      "link": "tool-359"
+    },
+    {
+      "no": 360,
+      "title": "全角半角混在チェック",
+      "desc": "英数字・記号の混在を検出",
+      "category": "Word校正・チェック系",
+      "status": "idea",
+      "link": "tool-360"
+    },
+    {
+      "no": 361,
+      "title": "Excel表タイトル生成",
+      "desc": "表の内容からタイトルを作成",
+      "category": "Excel文章・表作成補助系",
+      "status": "idea",
+      "link": "tool-361"
+    },
+    {
+      "no": 362,
+      "title": "列見出し案生成",
+      "desc": "表の目的から列名を提案",
+      "category": "Excel文章・表作成補助系",
+      "status": "idea",
+      "link": "tool-362"
+    },
+    {
+      "no": 363,
+      "title": "表レイアウト案作成",
+      "desc": "入力内容から見やすい列構成を作成",
+      "category": "Excel文章・表作成補助系",
+      "status": "idea",
+      "link": "tool-363"
+    },
+    {
+      "no": 364,
+      "title": "Excel貼り付け用TSV生成",
+      "desc": "WordやメモからExcel貼り付け用に整形",
+      "category": "Excel文章・表作成補助系",
+      "status": "idea",
+      "link": "tool-364"
+    },
+    {
+      "no": 365,
+      "title": "セル内改行整形",
+      "desc": "長い文章をセル内で読みやすく改行",
+      "category": "Excel文章・表作成補助系",
+      "status": "idea",
+      "link": "tool-365"
+    },
+    {
+      "no": 366,
+      "title": "セル文章短縮",
+      "desc": "長すぎるセル内容を短くする",
+      "category": "Excel文章・表作成補助系",
+      "status": "idea",
+      "link": "tool-366"
+    },
+    {
+      "no": 367,
+      "title": "セル文章丁寧化",
+      "desc": "メモ調の文章を表向きに整える",
+      "category": "Excel文章・表作成補助系",
+      "status": "idea",
+      "link": "tool-367"
+    },
+    {
+      "no": 368,
+      "title": "状態欄候補生成",
+      "desc": "未/済/保留/確認中などの候補を作る",
+      "category": "Excel文章・表作成補助系",
+      "status": "idea",
+      "link": "tool-368"
+    },
+    {
+      "no": 369,
+      "title": "優先度欄候補生成",
+      "desc": "高/中/低などの基準を作成",
+      "category": "Excel文章・表作成補助系",
+      "status": "idea",
+      "link": "tool-369"
+    },
+    {
+      "no": 370,
+      "title": "対応期限欄生成",
+      "desc": "タスク表に期限列を追加する案を出す",
+      "category": "Excel文章・表作成補助系",
+      "status": "idea",
+      "link": "tool-370"
+    },
+    {
+      "no": 371,
+      "title": "担当者欄生成",
+      "desc": "担当者・確認者・承認者の列案を作る",
+      "category": "Excel文章・表作成補助系",
+      "status": "idea",
+      "link": "tool-371"
+    },
+    {
+      "no": 372,
+      "title": "備考欄整形",
+      "desc": "備考メモを簡潔に整える",
+      "category": "Excel文章・表作成補助系",
+      "status": "idea",
+      "link": "tool-372"
+    },
+    {
+      "no": 373,
+      "title": "課題一覧表生成",
+      "desc": "課題メモをExcel表に変換",
+      "category": "Excel文章・表作成補助系",
+      "status": "idea",
+      "link": "tool-373"
+    },
+    {
+      "no": 374,
+      "title": "残項目表生成",
+      "desc": "残項目をNo・内容・担当・期限・状態で表化",
+      "category": "Excel文章・表作成補助系",
+      "status": "idea",
+      "link": "tool-374"
+    },
+    {
+      "no": 375,
+      "title": "問い合わせ一覧表生成",
+      "desc": "質問・回答・状態の管理表を作る",
+      "category": "Excel文章・表作成補助系",
+      "status": "idea",
+      "link": "tool-375"
+    },
+    {
+      "no": 376,
+      "title": "確認事項一覧表生成",
+      "desc": "確認項目を表形式に変換",
+      "category": "Excel文章・表作成補助系",
+      "status": "idea",
+      "link": "tool-376"
+    },
+    {
+      "no": 377,
+      "title": "作業チェック表生成",
+      "desc": "作業内容をチェックリスト表に変換",
+      "category": "Excel文章・表作成補助系",
+      "status": "idea",
+      "link": "tool-377"
+    },
+    {
+      "no": 378,
+      "title": "リスク管理表生成",
+      "desc": "リスク・影響・対策・状態の表を作成",
+      "category": "Excel文章・表作成補助系",
+      "status": "idea",
+      "link": "tool-378"
+    },
+    {
+      "no": 379,
+      "title": "改善案一覧表生成",
+      "desc": "改善案を効果・難易度・優先度で整理",
+      "category": "Excel文章・表作成補助系",
+      "status": "idea",
+      "link": "tool-379"
+    },
+    {
+      "no": 380,
+      "title": "比較表生成",
+      "desc": "A案/B案のメリット・デメリット表を作成",
+      "category": "Excel文章・表作成補助系",
+      "status": "idea",
+      "link": "tool-380"
+    },
+    {
+      "no": 381,
+      "title": "文書管理台帳生成",
+      "desc": "文書名・版数・作成者・更新日を表化",
+      "category": "Excel文書管理・台帳系",
+      "status": "idea",
+      "link": "tool-381"
+    },
+    {
+      "no": 382,
+      "title": "改訂履歴台帳生成",
+      "desc": "改訂日・版数・変更内容を一覧化",
+      "category": "Excel文書管理・台帳系",
+      "status": "idea",
+      "link": "tool-382"
+    },
+    {
+      "no": 383,
+      "title": "提出資料一覧生成",
+      "desc": "提出先・提出日・資料名・状態を表化",
+      "category": "Excel文書管理・台帳系",
+      "status": "idea",
+      "link": "tool-383"
+    },
+    {
+      "no": 384,
+      "title": "受領資料一覧生成",
+      "desc": "受領日・資料名・確認状態を表化",
+      "category": "Excel文書管理・台帳系",
+      "status": "idea",
+      "link": "tool-384"
+    },
+    {
+      "no": 385,
+      "title": "図面管理表生成",
+      "desc": "図番・名称・版数・状態を整理",
+      "category": "Excel文書管理・台帳系",
+      "status": "idea",
+      "link": "tool-385"
+    },
+    {
+      "no": 386,
+      "title": "取説章構成表生成",
+      "desc": "章番号・見出し・内容・状態を表化",
+      "category": "Excel文書管理・台帳系",
+      "status": "idea",
+      "link": "tool-386"
+    },
+    {
+      "no": 387,
+      "title": "用語集表生成",
+      "desc": "用語・読み・意味・備考の表を作る",
+      "category": "Excel文書管理・台帳系",
+      "status": "idea",
+      "link": "tool-387"
+    },
+    {
+      "no": 388,
+      "title": "略語一覧表生成",
+      "desc": "略語・正式名称・説明を表化",
+      "category": "Excel文書管理・台帳系",
+      "status": "idea",
+      "link": "tool-388"
+    },
+    {
+      "no": 389,
+      "title": "関係者一覧表生成",
+      "desc": "会社名・氏名・役割・連絡先を整理",
+      "category": "Excel文書管理・台帳系",
+      "status": "idea",
+      "link": "tool-389"
+    },
+    {
+      "no": 390,
+      "title": "打合せ履歴表生成",
+      "desc": "日付・相手・議題・決定事項を表化",
+      "category": "Excel文書管理・台帳系",
+      "status": "idea",
+      "link": "tool-390"
+    },
+    {
+      "no": 391,
+      "title": "Word表→Excel整形",
+      "desc": "Wordの表をExcelに貼りやすい形へ変換",
+      "category": "Excel文書管理・台帳系",
+      "status": "idea",
+      "link": "tool-391"
+    },
+    {
+      "no": 392,
+      "title": "Excel表→Word文章化",
+      "desc": "Excel表の内容を文章説明に変換",
+      "category": "Excel文書管理・台帳系",
+      "status": "idea",
+      "link": "tool-392"
+    },
+    {
+      "no": 393,
+      "title": "Excel表→Word表紙文生成",
+      "desc": "台帳情報からWord表紙文言を作成",
+      "category": "Excel文書管理・台帳系",
+      "status": "idea",
+      "link": "tool-393"
+    },
+    {
+      "no": 394,
+      "title": "Excel一覧→メール本文化",
+      "desc": "表の内容をメール文に変換",
+      "category": "Excel文書管理・台帳系",
+      "status": "idea",
+      "link": "tool-394"
+    },
+    {
+      "no": 395,
+      "title": "Excel一覧→報告文生成",
+      "desc": "残項目表から進捗報告文を作成",
+      "category": "Excel文書管理・台帳系",
+      "status": "idea",
+      "link": "tool-395"
+    },
+    {
+      "no": 396,
+      "title": "Word本文→Excel抽出",
+      "desc": "Word文章から項目・内容を表に抽出",
+      "category": "Excel文書管理・台帳系",
+      "status": "idea",
+      "link": "tool-396"
+    },
+    {
+      "no": 397,
+      "title": "Word手順→Excelチェック表",
+      "desc": "手順書を確認チェック表に変換",
+      "category": "Excel文書管理・台帳系",
+      "status": "idea",
+      "link": "tool-397"
+    },
+    {
+      "no": 398,
+      "title": "Excelチェック表→Word報告書",
+      "desc": "チェック結果から報告書文章を作成",
+      "category": "Excel文書管理・台帳系",
+      "status": "idea",
+      "link": "tool-398"
+    },
+    {
+      "no": 399,
+      "title": "文書レビュー指摘表生成",
+      "desc": "Wordレビュー結果を指摘一覧に変換",
+      "category": "Excel文書管理・台帳系",
+      "status": "idea",
+      "link": "tool-399"
+    },
+    {
+      "no": 400,
+      "title": "指摘一覧→修正文案生成",
+      "desc": "Excelの指摘表から修正文案を作成",
+      "category": "Excel文書管理・台帳系",
+      "status": "idea",
+      "link": "tool-400"
+    }
+  ],
+  "omitted": [
+    {
+      "no": 1,
+      "title": "文字数カウンター",
+      "desc": "文字数、行数、単語数を数える。",
+      "category": "汎用ツール",
+      "status": "implemented",
+      "link": "char-count"
+    },
+    {
+      "no": 3,
+      "title": "大文字・小文字変換",
+      "desc": "英字を大文字、小文字、先頭大文字に変換する。",
+      "category": "汎用ツール",
+      "status": "implemented",
+      "link": "case-convert"
+    },
+    {
+      "no": 5,
+      "title": "改行削除ツール",
+      "desc": "改行を削除して1行にする。",
+      "category": "汎用ツール",
+      "status": "implemented",
+      "link": "line-break"
+    },
+    {
+      "no": 8,
+      "title": "前後スペース削除",
+      "desc": "各行の先頭・末尾の空白を削除する。",
+      "category": "汎用ツール",
+      "status": "implemented",
+      "link": "line-break"
+    },
+    {
+      "no": 10,
+      "title": "消費税計算",
+      "desc": "サイト名案",
+      "category": "汎用ツール",
+      "status": "implemented",
+      "link": "tax-calc"
+    },
+    {
+      "no": 24,
+      "title": "TSV→CSV変換",
+      "desc": "タブ区切りをカンマ区切りに変換する。",
+      "category": "汎用ツール",
+      "status": "implemented",
+      "link": "csv-tsv"
+    },
+    {
+      "no": 33,
+      "title": "HTMLエスケープ",
+      "desc": "& \" などを安全な文字に変換する。",
+      "category": "汎用ツール",
+      "status": "implemented",
+      "link": "html-escape"
+    },
+    {
+      "no": 41,
+      "title": "日数計算",
+      "desc": "2つの日付の差を計算する。",
+      "category": "汎用ツール",
+      "status": "implemented",
+      "link": "date-diff"
+    },
+    {
+      "no": 44,
+      "title": "年齢計算",
+      "desc": "生年月日から年齢を計算する。",
+      "category": "汎用ツール",
+      "status": "implemented",
+      "link": "age-calc"
+    },
+    {
+      "no": 47,
+      "title": "タイムスタンプ変換",
+      "desc": "Unix時間と日時を相互変換する。",
+      "category": "汎用ツール",
+      "status": "implemented",
+      "link": "timestamp"
+    },
+    {
+      "no": 61,
+      "title": "UUID生成",
+      "desc": "ランダムUUIDを生成する。",
+      "category": "汎用ツール",
+      "status": "implemented",
+      "link": "uuid-gen"
+    },
+    {
+      "no": 63,
+      "title": "ハッシュ生成",
+      "desc": "MD5/SHA-256などを生成する。",
+      "category": "汎用ツール",
+      "status": "implemented",
+      "link": "hash-gen"
+    },
+    {
+      "no": 64,
+      "title": "正規表現テスター",
+      "desc": "入力文字に正規表現がマッチするか確認する。",
+      "category": "汎用ツール",
+      "status": "implemented",
+      "link": "regex-test"
+    },
+    {
+      "no": 81,
+      "title": "消費税計算",
+      "desc": "税抜/税込を相互変換する。",
+      "category": "汎用ツール",
+      "status": "implemented",
+      "link": "tax-calc"
+    },
+    {
+      "no": 87,
+      "title": "単位変換",
+      "desc": "mm/cm/m、g/kgなどを変換する。",
+      "category": "汎用ツール",
+      "status": "implemented",
+      "link": "unit-convert"
+    },
+    {
+      "no": 98,
+      "title": "ダミーテキスト生成",
+      "desc": "テスト用文章を生成する。",
+      "category": "汎用ツール",
+      "status": "implemented",
+      "link": "lorem-ipsum"
+    },
+    {
+      "no": 186,
+      "title": "割り勘計算",
+      "desc": "人数・金額から一人あたりを計算",
+      "category": "文章補助",
+      "status": "implemented",
+      "link": "split-bill"
+    }
+  ]
 }
