@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ツール集 | とある制御屋の備忘録</title>
-  <meta name="description" content="登録不要・無料で使えるWebツール集。文字、変換、計算、開発、文章補助、表作成、ゲームなど534件のツールを揃えています。">
+  <meta name="description" content="登録不要・無料で使えるWebツール集。文字、変換、計算、開発、文章補助、表作成など533件のツールを揃えています。">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root { --indigo:#4f46e5; --violet:#7c3aed; --emerald:#059669; --rose:#e11d48; --bg:#f5f6ff; --surf:#fff; --border:#e0e7ff; --text:#1e1b4b; --text2:#4c4980; --muted:#8b87c0; --radius:16px; --shadow:0 4px 24px rgba(79,70,229,.08); }
@@ -3813,12 +3813,6 @@
       <p class="card-desc">メモ文を丁寧な表現に整える雛形を生成します</p>
       <a href="./research-10-005/" class="card-link">開く →</a>
     </div>
-    <div class="tool-card" data-cat="ゲーム" data-name="ブロックドロップ" data-desc="独自ブロックを積んで列をそろえるブラウザ落ち物パズルゲーム" role="listitem">
-      <span class="chip chip-indigo">ゲーム</span>
-      <div class="card-title-row"><span class="card-icon">■</span><span class="card-name">ブロックドロップ</span></div>
-      <p class="card-desc">独自ブロックを積んで列をそろえるブラウザ落ち物パズルゲーム</p>
-      <a href="./block-drop/" class="card-link">開く →</a>
-    </div>
     <div class="empty-state" id="emptyState" aria-live="polite">
       <p>見つかりませんでした</p>
     </div>
@@ -3846,7 +3840,6 @@
       '画像・メディア系',
       'SEO・Web運用系',
       '時間管理・タスク系',
-      'ゲーム系',
       'ランダム・便利系'
     ];
     var periods = [
@@ -3914,7 +3907,6 @@
       if (/画像|png|jpg|jpeg|webp|gif|svg|色|カラー|バナー|サムネ|動画|音声|pdf|exif|favicon|ピッチ|イコライザー|ノイズ/.test(text)) return '画像・メディア系';
       if (/seo|og|meta|メタ|utm|canonical|robots|sitemap|whois|リンク切れ/.test(text)) return 'SEO・Web運用系';
       if (/日付|時間|タイマー|ポモドーロ|タスク|todo|進捗|期限|カウントダウン|曜日|営業日|セッション|ルーチン|アラーム/.test(text)) return '時間管理・タスク系';
-      if (/ゲーム|ブロック|パズル|落ち物|スコア/.test(text)) return 'ゲーム系';
       if (/計算|換算|単位|税|bmi|ローン|割り勘|割合|平均|合計|最大|最小|面積|体積|速度|温度|圧力|電気|燃費|金利|単価|ポイント|bpm|周波数|アスペクト/.test(text)) return '計算・単位換算系';
       if (/文字|テキスト|行|空白|スペース|句読点|カッコ|引用|ソート|重複|単語|頻度|ひらがな|カタカナ|ローマ字|タイポ|禁止語/.test(text)) return 'テキスト整形系';
       return 'ランダム・便利系';
