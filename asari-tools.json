@@ -1,0 +1,752 @@
+{
+  "source": "https://tools.studioasari.co.jp/",
+  "sourceTotal": 146,
+  "added": 93,
+  "skippedAsExisting": 53,
+  "additions": [
+    {
+      "title": "Lorem Ipsumジェネレーター",
+      "desc": "ダミーテキスト自動生成",
+      "sourceCategory": "テキスト・文章系",
+      "category": "テキスト",
+      "slug": "asari-006",
+      "icon": "⇄"
+    },
+    {
+      "title": "テキスト読み上げ（TTS）",
+      "desc": "テキストを音声で再生",
+      "sourceCategory": "テキスト・文章系",
+      "category": "テキスト",
+      "slug": "asari-009",
+      "icon": "⇄"
+    },
+    {
+      "title": "禁止語チェック",
+      "desc": "NGワード・不適切語の検出",
+      "sourceCategory": "テキスト・文章系",
+      "category": "テキスト",
+      "slug": "asari-011",
+      "icon": "⇄"
+    },
+    {
+      "title": "改行コード変換",
+      "desc": "CRLF/LF/CRの統一改行へ変換",
+      "sourceCategory": "テキスト・文章系",
+      "category": "テキスト",
+      "slug": "asari-012",
+      "icon": "⇄"
+    },
+    {
+      "title": "重複行・ユニーク抽出",
+      "desc": "テキストの重複削除・ユニーク抽出",
+      "sourceCategory": "テキスト・文章系",
+      "category": "テキスト",
+      "slug": "asari-013",
+      "icon": "⇄"
+    },
+    {
+      "title": "ニックネームメーカー",
+      "desc": "名前から愛称・あだ名を生成",
+      "sourceCategory": "テキスト・文章系",
+      "category": "テキスト",
+      "slug": "asari-014",
+      "icon": "⇄"
+    },
+    {
+      "title": "ランダム名ジェネレーター",
+      "desc": "人名・ニックネーム・ID生成",
+      "sourceCategory": "テキスト・文章系",
+      "category": "テキスト",
+      "slug": "asari-015",
+      "icon": "★"
+    },
+    {
+      "title": "タイポグリフ交換",
+      "desc": "引用符・ダッシュ等の記号を適正化",
+      "sourceCategory": "テキスト・文章系",
+      "category": "テキスト",
+      "slug": "asari-016",
+      "icon": "⇄"
+    },
+    {
+      "title": "ROT13変換",
+      "desc": "簡易的な文字置換暗号",
+      "sourceCategory": "暗号化・エンコード",
+      "category": "開発",
+      "slug": "asari-019",
+      "icon": "{}"
+    },
+    {
+      "title": "テキスト暗号化／復号",
+      "desc": "パスフレーズ付きAESで暗号化・復号",
+      "sourceCategory": "暗号化・エンコード",
+      "category": "開発",
+      "slug": "asari-020",
+      "icon": "{}"
+    },
+    {
+      "title": "JWTデコード／検証",
+      "desc": "JWTのヘッダ・ペイロード解析",
+      "sourceCategory": "暗号化・エンコード",
+      "category": "開発",
+      "slug": "asari-023",
+      "icon": "{}"
+    },
+    {
+      "title": "URL短縮ツール",
+      "desc": "長いURLを短く生成",
+      "sourceCategory": "Web・開発者向け",
+      "category": "開発",
+      "slug": "asari-027",
+      "icon": "{}"
+    },
+    {
+      "title": "JS圧縮ツール",
+      "desc": "JavaScriptをミニファイ",
+      "sourceCategory": "Web・開発者向け",
+      "category": "開発",
+      "slug": "asari-031",
+      "icon": "{}"
+    },
+    {
+      "title": "URLパラメータ解析ツール",
+      "desc": "GETパラメータを分解して一覧表示",
+      "sourceCategory": "Web・開発者向け",
+      "category": "開発",
+      "slug": "asari-033",
+      "icon": "{}"
+    },
+    {
+      "title": "OpenAPI（Swagger）検証",
+      "desc": "OpenAPI定義の構文検証",
+      "sourceCategory": "Web・開発者向け",
+      "category": "開発",
+      "slug": "asari-036",
+      "icon": "{}"
+    },
+    {
+      "title": ".envパーサー",
+      "desc": ".envのキー重複や書式ミス検出",
+      "sourceCategory": "Web・開発者向け",
+      "category": "開発",
+      "slug": "asari-037",
+      "icon": "{}"
+    },
+    {
+      "title": "WHOIS検索",
+      "desc": "ドメイン名からWHOIS検索用リンクを生成",
+      "sourceCategory": "Web・開発者向け",
+      "category": "開発",
+      "slug": "asari-039",
+      "icon": "{}"
+    },
+    {
+      "title": "メールアドレス空きチェック",
+      "desc": "メール形式とDNS確認コマンドを生成",
+      "sourceCategory": "Web・開発者向け",
+      "category": "開発",
+      "slug": "asari-040",
+      "icon": "{}"
+    },
+    {
+      "title": "コードスニペット整形",
+      "desc": "コードのインデント整形を補助",
+      "sourceCategory": "Web・開発者向け",
+      "category": "開発",
+      "slug": "asari-043",
+      "icon": "{}"
+    },
+    {
+      "title": "依存関係ライセンス一覧",
+      "desc": "OSSライセンス表の整形補助",
+      "sourceCategory": "Web・開発者向け",
+      "category": "開発",
+      "slug": "asari-044",
+      "icon": "{}"
+    },
+    {
+      "title": "差分パッチ生成",
+      "desc": "2テキストから.patch形式を作成",
+      "sourceCategory": "Web・開発者向け",
+      "category": "開発",
+      "slug": "asari-047",
+      "icon": "{}"
+    },
+    {
+      "title": "URL正規化",
+      "desc": "不要パラメータ除去・スキーム統一",
+      "sourceCategory": "Web・開発者向け",
+      "category": "開発",
+      "slug": "asari-048",
+      "icon": "{}"
+    },
+    {
+      "title": "Sitemap.xmlジェネレーター",
+      "desc": "URLリストからサイトマップ生成",
+      "sourceCategory": "Web・開発者向け",
+      "category": "開発",
+      "slug": "asari-049",
+      "icon": "{}"
+    },
+    {
+      "title": "robots.txtジェネレーター",
+      "desc": "クローラ制御ファイルを生成",
+      "sourceCategory": "Web・開発者向け",
+      "category": "開発",
+      "slug": "asari-050",
+      "icon": "{}"
+    },
+    {
+      "title": "robots許可チェッカー",
+      "desc": "URLがrobotsで許可されるか判定補助",
+      "sourceCategory": "Web・開発者向け",
+      "category": "開発",
+      "slug": "asari-051",
+      "icon": "{}"
+    },
+    {
+      "title": "HTTPリクエスト送信",
+      "desc": "GET/POST等のリクエスト内容を作成",
+      "sourceCategory": "Web・開発者向け",
+      "category": "開発",
+      "slug": "asari-053",
+      "icon": "{}"
+    },
+    {
+      "title": "カラーパレット抽出ツール",
+      "desc": "入力色から調和パレットを生成",
+      "sourceCategory": "デザイン・画像系",
+      "category": "変換",
+      "slug": "asari-058",
+      "icon": "▣"
+    },
+    {
+      "title": "透明度付きカラー変換",
+      "desc": "RGBA / HSLA の相互変換",
+      "sourceCategory": "デザイン・画像系",
+      "category": "変換",
+      "slug": "asari-059",
+      "icon": "▣"
+    },
+    {
+      "title": "ファビコンジェネレーター",
+      "desc": "画像からfaviconコード生成",
+      "sourceCategory": "デザイン・画像系",
+      "category": "変換",
+      "slug": "asari-060",
+      "icon": "⇄"
+    },
+    {
+      "title": "WebP変換",
+      "desc": "JPG/PNG ⇄ WebPに相互変換",
+      "sourceCategory": "デザイン・画像系",
+      "category": "変換",
+      "slug": "asari-061",
+      "icon": "▣"
+    },
+    {
+      "title": "PNG⇄JPG変換ツール",
+      "desc": "PNG ⇄ JPG 変換",
+      "sourceCategory": "デザイン・画像系",
+      "category": "変換",
+      "slug": "asari-062",
+      "icon": "▣"
+    },
+    {
+      "title": "動画サムネイル抽出",
+      "desc": "指定秒の静止画サムネを生成",
+      "sourceCategory": "デザイン・画像系",
+      "category": "変換",
+      "slug": "asari-063",
+      "icon": "▣"
+    },
+    {
+      "title": "SVG最適化",
+      "desc": "SVGコードの整形・最小化",
+      "sourceCategory": "デザイン・画像系",
+      "category": "変換",
+      "slug": "asari-064",
+      "icon": "▣"
+    },
+    {
+      "title": "画像モザイク／ぼかし",
+      "desc": "指定領域のモザイク・ぼかし加工",
+      "sourceCategory": "デザイン・画像系",
+      "category": "変換",
+      "slug": "asari-065",
+      "icon": "▣"
+    },
+    {
+      "title": "アニメGIF結合",
+      "desc": "複数GIFの連結・順序入替補助",
+      "sourceCategory": "デザイン・画像系",
+      "category": "変換",
+      "slug": "asari-066",
+      "icon": "▣"
+    },
+    {
+      "title": "サムネ画像メーカー",
+      "desc": "テキスト＋背景でOGP用画像作成",
+      "sourceCategory": "デザイン・画像系",
+      "category": "変換",
+      "slug": "asari-067",
+      "icon": "▣"
+    },
+    {
+      "title": "カラー弱視シミュレーター",
+      "desc": "色覚特性別の見え方を簡易再現",
+      "sourceCategory": "デザイン・画像系",
+      "category": "変換",
+      "slug": "asari-068",
+      "icon": "▣"
+    },
+    {
+      "title": "透過PNG最適化",
+      "desc": "アルファ付きPNGのサイズ最適化補助",
+      "sourceCategory": "デザイン・画像系",
+      "category": "変換",
+      "slug": "asari-069",
+      "icon": "▣"
+    },
+    {
+      "title": "画像解像度チェッカー",
+      "desc": "解像度・縦横比を表示",
+      "sourceCategory": "デザイン・画像系",
+      "category": "変換",
+      "slug": "asari-070",
+      "icon": "▣"
+    },
+    {
+      "title": "動画 → GIF変換",
+      "desc": "動画ファイルの一部をGIF化補助",
+      "sourceCategory": "デザイン・画像系",
+      "category": "変換",
+      "slug": "asari-071",
+      "icon": "▣"
+    },
+    {
+      "title": "EXIF表示・削除",
+      "desc": "画像のEXIFメタ情報を閲覧",
+      "sourceCategory": "デザイン・画像系",
+      "category": "変換",
+      "slug": "asari-074",
+      "icon": "▣"
+    },
+    {
+      "title": "目標カウントダウン画像",
+      "desc": "日付入りカウント画像を生成",
+      "sourceCategory": "デザイン・画像系",
+      "category": "変換",
+      "slug": "asari-075",
+      "icon": "▣"
+    },
+    {
+      "title": "メタタグジェネレーター",
+      "desc": "SEO用metaタグを作成",
+      "sourceCategory": "SEO・Web解析",
+      "category": "開発",
+      "slug": "asari-076",
+      "icon": "{}"
+    },
+    {
+      "title": "OG画像プレビュー",
+      "desc": "SNSカード用のOGPを確認",
+      "sourceCategory": "SEO・Web解析",
+      "category": "開発",
+      "slug": "asari-077",
+      "icon": "▣"
+    },
+    {
+      "title": "タイトル文字数チェッカー",
+      "desc": "検索結果タイトル最適化確認",
+      "sourceCategory": "SEO・Web解析",
+      "category": "開発",
+      "slug": "asari-078",
+      "icon": "{}"
+    },
+    {
+      "title": "メタディスクリプション長さチェッカー",
+      "desc": "説明文の長さを確認",
+      "sourceCategory": "SEO・Web解析",
+      "category": "開発",
+      "slug": "asari-079",
+      "icon": "{}"
+    },
+    {
+      "title": "OGタグチェッカー",
+      "desc": "OGP設定を解析",
+      "sourceCategory": "SEO・Web解析",
+      "category": "開発",
+      "slug": "asari-080",
+      "icon": "▣"
+    },
+    {
+      "title": "キーワード密度チェッカー",
+      "desc": "特定キーワードの出現率を計算",
+      "sourceCategory": "SEO・Web解析",
+      "category": "開発",
+      "slug": "asari-081",
+      "icon": "{}"
+    },
+    {
+      "title": "UTMパラメータ生成",
+      "desc": "キャンペーン用UTMを付与",
+      "sourceCategory": "SEO・Web解析",
+      "category": "開発",
+      "slug": "asari-082",
+      "icon": "{}"
+    },
+    {
+      "title": "canonical判定",
+      "desc": "重複URLの正規URL候補を提示",
+      "sourceCategory": "SEO・Web解析",
+      "category": "開発",
+      "slug": "asari-083",
+      "icon": "{}"
+    },
+    {
+      "title": "ランダム文字列生成",
+      "desc": "任意の桁数の英数字を生成",
+      "sourceCategory": "開発者ツール",
+      "category": "開発",
+      "slug": "asari-085",
+      "icon": "★"
+    },
+    {
+      "title": "Cron式シミュレーター",
+      "desc": "Cron式の次回実行日時を簡易計算",
+      "sourceCategory": "開発者ツール",
+      "category": "開発",
+      "slug": "asari-087",
+      "icon": "{}"
+    },
+    {
+      "title": "Diff3（3方向差分）",
+      "desc": "3ファイルの差分を同時表示",
+      "sourceCategory": "開発者ツール",
+      "category": "開発",
+      "slug": "asari-088",
+      "icon": "{}"
+    },
+    {
+      "title": "ソースコード行数カウント",
+      "desc": "言語別LoCを概算",
+      "sourceCategory": "開発者ツール",
+      "category": "開発",
+      "slug": "asari-089",
+      "icon": "⏱"
+    },
+    {
+      "title": "バイトサイズ計算ツール",
+      "desc": "テキストやファイルサイズを概算",
+      "sourceCategory": "計算・変換系",
+      "category": "計算",
+      "slug": "asari-092",
+      "icon": "∑"
+    },
+    {
+      "title": "為替レート換算",
+      "desc": "主要通貨の相互換算",
+      "sourceCategory": "計算・変換系",
+      "category": "計算",
+      "slug": "asari-093",
+      "icon": "∑"
+    },
+    {
+      "title": "日付差計算",
+      "desc": "2つの日付の差を計算",
+      "sourceCategory": "計算・変換系",
+      "category": "計算",
+      "slug": "asari-094",
+      "icon": "⏱"
+    },
+    {
+      "title": "金利シミュレーター",
+      "desc": "元利均等・元金均等の返済計算",
+      "sourceCategory": "計算・変換系",
+      "category": "計算",
+      "slug": "asari-095",
+      "icon": "∑"
+    },
+    {
+      "title": "税込／税抜計算",
+      "desc": "消費税の加算・減算",
+      "sourceCategory": "計算・変換系",
+      "category": "計算",
+      "slug": "asari-096",
+      "icon": "∑"
+    },
+    {
+      "title": "音階⇄周波数換算",
+      "desc": "A4=440Hz等の周波数換算",
+      "sourceCategory": "計算・変換系",
+      "category": "計算",
+      "slug": "asari-098",
+      "icon": "∑"
+    },
+    {
+      "title": "時差計算",
+      "desc": "都市間の時差・世界時計比較",
+      "sourceCategory": "計算・変換系",
+      "category": "計算",
+      "slug": "asari-100",
+      "icon": "∑"
+    },
+    {
+      "title": "エネルギー換算",
+      "desc": "ジュール ⇄ kcal ⇄ Whなどを変換",
+      "sourceCategory": "計算・変換系",
+      "category": "計算",
+      "slug": "asari-101",
+      "icon": "∑"
+    },
+    {
+      "title": "熱量換算",
+      "desc": "cal ⇄ J ⇄ BTUなどを変換",
+      "sourceCategory": "計算・変換系",
+      "category": "計算",
+      "slug": "asari-102",
+      "icon": "∑"
+    },
+    {
+      "title": "圧力換算",
+      "desc": "Pa ⇄ atm ⇄ mmHg ⇄ barを変換",
+      "sourceCategory": "計算・変換系",
+      "category": "計算",
+      "slug": "asari-103",
+      "icon": "∑"
+    },
+    {
+      "title": "光度換算",
+      "desc": "ルーメン・カンデラ・ルクス換算",
+      "sourceCategory": "計算・変換系",
+      "category": "計算",
+      "slug": "asari-104",
+      "icon": "∑"
+    },
+    {
+      "title": "放射線換算",
+      "desc": "シーベルト・グレイ・ベクレル換算",
+      "sourceCategory": "計算・変換系",
+      "category": "計算",
+      "slug": "asari-105",
+      "icon": "∑"
+    },
+    {
+      "title": "電気換算",
+      "desc": "ボルト・アンペア・ワット・オーム換算",
+      "sourceCategory": "計算・変換系",
+      "category": "計算",
+      "slug": "asari-106",
+      "icon": "∑"
+    },
+    {
+      "title": "流量換算",
+      "desc": "L/min ⇄ m³/h ⇄ GPMを変換",
+      "sourceCategory": "計算・変換系",
+      "category": "計算",
+      "slug": "asari-107",
+      "icon": "∑"
+    },
+    {
+      "title": "仕事率換算",
+      "desc": "ワット・馬力・カロリー/時を変換",
+      "sourceCategory": "計算・変換系",
+      "category": "計算",
+      "slug": "asari-108",
+      "icon": "∑"
+    },
+    {
+      "title": "長さ換算",
+      "desc": "m ⇄ inch ⇄ mile ⇄ yard",
+      "sourceCategory": "計算・変換系",
+      "category": "計算",
+      "slug": "asari-112",
+      "icon": "∑"
+    },
+    {
+      "title": "重量／質量換算",
+      "desc": "g ⇄ kg ⇄ lb ⇄ oz",
+      "sourceCategory": "計算・変換系",
+      "category": "計算",
+      "slug": "asari-113",
+      "icon": "∑"
+    },
+    {
+      "title": "温度換算",
+      "desc": "℃ ⇄ ℉ ⇄ K",
+      "sourceCategory": "計算・変換系",
+      "category": "計算",
+      "slug": "asari-115",
+      "icon": "∑"
+    },
+    {
+      "title": "角度換算",
+      "desc": "° ⇄ rad ⇄ grad",
+      "sourceCategory": "計算・変換系",
+      "category": "計算",
+      "slug": "asari-116",
+      "icon": "∑"
+    },
+    {
+      "title": "起磁力換算",
+      "desc": "アンペアターン等の磁気単位換算",
+      "sourceCategory": "計算・変換系",
+      "category": "計算",
+      "slug": "asari-119",
+      "icon": "∑"
+    },
+    {
+      "title": "ひらがな⇄カタカナ変換",
+      "desc": "日本語のひらがな・カタカナ相互変換",
+      "sourceCategory": "日本語変換系",
+      "category": "計算",
+      "slug": "asari-126",
+      "icon": "⇄"
+    },
+    {
+      "title": "日本語⇄ローマ字変換",
+      "desc": "日本語のローマ字化と逆変換",
+      "sourceCategory": "日本語変換系",
+      "category": "計算",
+      "slug": "asari-127",
+      "icon": "⇄"
+    },
+    {
+      "title": "画像一括リネーム",
+      "desc": "連番やルールで一括改名",
+      "sourceCategory": "ファイル操作",
+      "category": "変換",
+      "slug": "asari-129",
+      "icon": "▣"
+    },
+    {
+      "title": "ZIP圧縮／解凍",
+      "desc": "複数ファイルのZIP化・展開",
+      "sourceCategory": "ファイル操作",
+      "category": "変換",
+      "slug": "asari-130",
+      "icon": "{}"
+    },
+    {
+      "title": "ポモドーロタイマー",
+      "desc": "作業25分＋休憩5分の集中タイマー",
+      "sourceCategory": "時間管理",
+      "category": "計算",
+      "slug": "asari-131",
+      "icon": "⏱"
+    },
+    {
+      "title": "ラップタイマー",
+      "desc": "周回計測に特化した簡易タイマー",
+      "sourceCategory": "時間管理",
+      "category": "計算",
+      "slug": "asari-132",
+      "icon": "⏱"
+    },
+    {
+      "title": "GANNT風カウントダウン",
+      "desc": "複数イベントの残り時間を一覧表示",
+      "sourceCategory": "時間管理",
+      "category": "計算",
+      "slug": "asari-133",
+      "icon": "⏱"
+    },
+    {
+      "title": "集中モードタイマー",
+      "desc": "静かな集中タイマー",
+      "sourceCategory": "時間管理",
+      "category": "計算",
+      "slug": "asari-134",
+      "icon": "⏱"
+    },
+    {
+      "title": "タスクチェッカー",
+      "desc": "タスクリストと進捗バーを管理",
+      "sourceCategory": "時間管理",
+      "category": "計算",
+      "slug": "asari-135",
+      "icon": "⇄"
+    },
+    {
+      "title": "作業セッション記録",
+      "desc": "作業履歴を保存・集計",
+      "sourceCategory": "時間管理",
+      "category": "計算",
+      "slug": "asari-136",
+      "icon": "⇄"
+    },
+    {
+      "title": "スクリーンブレイク通知",
+      "desc": "長時間作業時の休憩リマインダー",
+      "sourceCategory": "時間管理",
+      "category": "計算",
+      "slug": "asari-137",
+      "icon": "⇄"
+    },
+    {
+      "title": "目標タイムトラッカー",
+      "desc": "目標時間に対する実績を集計",
+      "sourceCategory": "時間管理",
+      "category": "計算",
+      "slug": "asari-138",
+      "icon": "⇄"
+    },
+    {
+      "title": "デイリールーチン管理",
+      "desc": "毎日の習慣・作業時間をチェック",
+      "sourceCategory": "時間管理",
+      "category": "計算",
+      "slug": "asari-139",
+      "icon": "⇄"
+    },
+    {
+      "title": "カウントダウンアラーム",
+      "desc": "任意の時間でアラーム通知",
+      "sourceCategory": "時間管理",
+      "category": "計算",
+      "slug": "asari-140",
+      "icon": "⏱"
+    },
+    {
+      "title": "集中セッション共有リンク",
+      "desc": "集中セッションをURLで共有",
+      "sourceCategory": "時間管理",
+      "category": "計算",
+      "slug": "asari-141",
+      "icon": "⇄"
+    },
+    {
+      "title": "おみくじメーカー",
+      "desc": "今日の運勢をランダム表示",
+      "sourceCategory": "エンタメ・雑学",
+      "category": "テキスト",
+      "slug": "asari-142",
+      "icon": "★"
+    },
+    {
+      "title": "診断メーカー（汎用）",
+      "desc": "質問項目を自作して診断を作成",
+      "sourceCategory": "エンタメ・雑学",
+      "category": "テキスト",
+      "slug": "asari-143",
+      "icon": "★"
+    },
+    {
+      "title": "ランダムプロンプト生成",
+      "desc": "創作・学習向けお題を生成",
+      "sourceCategory": "エンタメ・雑学",
+      "category": "テキスト",
+      "slug": "asari-145",
+      "icon": "★"
+    },
+    {
+      "title": "絵文字ミキサー",
+      "desc": "複数絵文字をテキスト合成表示",
+      "sourceCategory": "エンタメ・雑学",
+      "category": "テキスト",
+      "slug": "asari-146",
+      "icon": "★"
+    }
+  ]
+}
