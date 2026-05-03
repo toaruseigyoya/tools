@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URLエンコード/デコード | ツール集</title>
+  <meta name="description" content="URLの特殊文字をパーセントエンコード・デコード変換">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --indigo: #4f46e5; --violet: #7c3aed; --emerald: #059669;
+      --bg: #f5f6ff; --surf: #fff;
+      --border: #e0e7ff; --text: #1e1b4b; --text2: #4c4980; --muted: #8b87c0;
+    }
+    body { font-family: 'Segoe UI','Yu Gothic UI','Hiragino Sans',sans-serif; background: var(--bg); color: var(--text); }
+    header { background: linear-gradient(135deg,#1e1b4b,#312e81); color:#fff; }
+    .hdr { max-width:860px; margin:0 auto; padding:18px 24px; }
+    .hdr-back { display:inline-flex; align-items:center; gap:5px; font-size:.78rem; color:rgba(255,255,255,.55); text-decoration:none; margin-bottom:8px; transition:color .15s; }
+    .hdr-back:hover { color:rgba(255,255,255,.9); }
+    .hdr-title { font-size:1.4rem; font-weight:900; margin-bottom:4px; }
+    .hdr-sub { font-size:.82rem; color:rgba(255,255,255,.65); }
+    main { max-width:860px; margin:0 auto; padding:24px; }
+    .card { background:var(--surf); border:1px solid var(--border); border-radius:14px; padding:20px; margin-bottom:16px; box-shadow:0 2px 10px rgba(79,70,229,.06); }
+    .card-title { font-size:.88rem; font-weight:800; color:#3730a3; margin-bottom:12px; }
+    .btn { padding:9px 18px; border:none; border-radius:9px; font-size:.84rem; font-weight:700; cursor:pointer; font-family:inherit; transition:all .15s; }
+    .btn-primary { background:linear-gradient(135deg,var(--indigo),var(--violet)); color:#fff; box-shadow:0 3px 10px rgba(79,70,229,.25); }
+    .btn-primary:hover { transform:translateY(-1px); }
+    .btn-outline { background:transparent; border:1.5px solid var(--border); color:var(--text2); }
+    .btn-outline:hover { border-color:#818cf8; color:var(--indigo); }
+    .btn-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+    textarea { width:100%; padding:10px 12px; border:1.5px solid var(--border); border-radius:9px; font-size:.84rem; font-family:'Consolas',monospace; background:var(--bg); color:var(--text); resize:vertical; }
+    textarea:focus { outline:none; border-color:#818cf8; }
+    .err { color:#dc2626; font-size:.78rem; margin-top:6px; }
+    .result-box { background:var(--bg); border:1px solid var(--border); border-radius:9px; padding:12px; font-family:'Consolas',monospace; font-size:.84rem; min-height:60px; white-space:pre-wrap; word-break:break-all; }
+    footer { text-align:center; padding:20px; font-size:.73rem; color:var(--muted); border-top:1px solid var(--border); margin-top:8px; }
+    footer a { color:#818cf8; text-decoration:none; }
+
+    .section-label { font-size:.8rem; font-weight:700; color:var(--text2); margin-bottom:6px; }
+    .output-wrapper { position:relative; margin-top:16px; }
+    .copy-inline { position:absolute; top:8px; right:8px; padding:4px 10px; font-size:.75rem; }
+    .copy-success { background: linear-gradient(135deg, var(--emerald), #047857) !important; }
+    .char-count { font-size:.73rem; color:var(--muted); text-align:right; margin-top:4px; }
+
+    /* モード選択 */
+    .mode-row { display:flex; gap:16px; flex-wrap:wrap; margin-bottom:14px; }
+    .mode-option { display:flex; align-items:center; gap:6px; cursor:pointer; }
+    .mode-option input[type="radio"] { accent-color: var(--indigo); width:15px; height:15px; cursor:pointer; }
+    .mode-option span { font-size:.82rem; color:var(--text2); font-weight:600; }
+    .mode-option input[type="radio"]:checked + span { color:var(--indigo); }
+    .mode-badge { display:inline-block; font-size:.68rem; background:var(--bg); border:1px solid var(--border); border-radius:5px; padding:1px 6px; margin-left:4px; font-family:Consolas,monospace; color:var(--muted); }
+
+    /* 比較表 */
+    .diff-table { width:100%; border-collapse:collapse; font-size:.78rem; margin-top:8px; }
+    .diff-table th { background:var(--bg); color:var(--text2); font-weight:700; padding:7px 10px; border:1px solid var(--border); text-align:left; }
+    .diff-table td { padding:6px 10px; border:1px solid var(--border); font-family:Consolas,monospace; }
+    .diff-table tr:hover td { background:#f0f1ff; }
+    .encode-result { color:#059669; }
+    .keep-result { color:#9333ea; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="hdr">
+    <a class="hdr-back" href="../">← ツール一覧へ戻る</a>
+    <div class="hdr-title">URL エンコード / デコード</div>
+    <div class="hdr-sub">URLの特殊文字をパーセントエンコード・デコード変換</div>
+  </div>
+</header>
+
+<main>
+
+  <!-- モード選択カード -->
+  <div class="card">
+    <div class="card-title">エンコードモード</div>
+    <div class="mode-row">
+      <label class="mode-option">
+        <input type="radio" name="mode" value="component" checked>
+        <span>encodeURIComponent <span class="mode-badge">推奨</span></span>
+      </label>
+      <label class="mode-option">
+        <input type="radio" name="mode" value="uri">
+        <span>encodeURI <span class="mode-badge">URL全体</span></span>
+      </label>
+    </div>
+    <div id="modeDesc" style="font-size:.78rem; color:var(--text2); line-height:1.6;"></div>
+  </div>
+
+  <!-- 入力カード -->
+  <div class="card">
+    <div class="card-title">入力</div>
+    <div class="section-label">変換したいテキストまたはURLを入力してください</div>
+    <textarea id="inputText" rows="4" placeholder="例: https://example.com/検索?q=日本語&page=1"></textarea>
+    <div class="char-count"><span id="inputCount">0</span> 文字</div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="doEncode()">エンコード</button>
+      <button class="btn btn-primary" onclick="doDecode()">デコード</button>
+      <button class="btn btn-outline" onclick="clearAll()">クリア</button>
+      <button class="btn btn-outline" onclick="swapInOut()">⇅ 入出力を入れ替え</button>
+    </div>
+    <div id="errMsg" class="err" style="display:none;"></div>
+  </div>
+
+  <!-- 出力カード -->
+  <div class="card">
+    <div class="card-title">変換結果</div>
+    <div class="output-wrapper">
+      <textarea id="outputText" rows="4" readonly placeholder="変換結果がここに表示されます..."></textarea>
+      <button class="btn btn-outline copy-inline" id="copyBtn" onclick="copyOutput()">コピー</button>
+    </div>
+    <div class="char-count"><span id="outputCount">0</span> 文字</div>
+  </div>
+
+  <!-- 比較カード -->
+  <div class="card">
+    <div class="card-title">モード比較：エンコードされる文字</div>
+    <table class="diff-table">
+      <thead>
+        <tr>
+          <th>文字</th>
+          <th>encodeURIComponent</th>
+          <th>encodeURI</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>スペース</td><td class="encode-result">%20</td><td class="encode-result">%20</td></tr>
+        <tr><td>! ' ( ) *</td><td class="keep-result">そのまま</td><td class="encode-result">%21 %27 %28 %29 %2A</td></tr>
+        <tr><td># $ & + , / : ; = ? @</td><td class="encode-result">エンコード</td><td class="keep-result">そのまま</td></tr>
+        <tr><td>- _ . ~</td><td class="keep-result">そのまま</td><td class="keep-result">そのまま</td></tr>
+        <tr><td>日本語 / 漢字 / 記号</td><td class="encode-result">%XX%XX...</td><td class="encode-result">%XX%XX...</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:.75rem; color:var(--muted); margin-top:10px;">
+      ヒント: クエリパラメータの値をエンコードするには <code style="font-family:Consolas,monospace;">encodeURIComponent</code>、URL全体をエンコードするには <code style="font-family:Consolas,monospace;">encodeURI</code> を使用します。
+    </p>
+  </div>
+
+</main>
+
+<footer>
+  <a href="../">← ツール一覧</a> &nbsp;|&nbsp;
+  <a href="https://toaruseigyoya.github.io/" target="_blank" rel="noopener">ホームページ</a>
+  <br><br>
+  &copy; 2025 とある制御屋のツール集
+</footer>
+
+<script>
+  const inputEl  = document.getElementById('inputText');
+  const outputEl = document.getElementById('outputText');
+  const errEl    = document.getElementById('errMsg');
+  const inputCnt = document.getElementById('inputCount');
+  const outputCnt= document.getElementById('outputCount');
+  const copyBtn  = document.getElementById('copyBtn');
+  const modeDesc = document.getElementById('modeDesc');
+
+  const modeDescriptions = {
+    component: 'encodeURIComponent: URLのクエリパラメータ値など、URLの一部をエンコードするのに適しています。<br><code style="font-family:Consolas,monospace;">: / ? # [ ] @ ! $ & \' ( ) * + , ; =</code> などの記号もすべてエンコードします。',
+    uri:       'encodeURI: URL全体をエンコードするのに適しています。<br>URLの構造に使われる <code style="font-family:Consolas,monospace;">: / ? # @ ! $ & \' ( ) * + , ; =</code> などはエンコードしません。'
+  };
+
+  function updateModeDesc() {
+    const mode = document.querySelector('input[name="mode"]:checked').value;
+    modeDesc.innerHTML = modeDescriptions[mode];
+  }
+  document.querySelectorAll('input[name="mode"]').forEach(r => r.addEventListener('change', updateModeDesc));
+  updateModeDesc();
+
+  inputEl.addEventListener('input', () => {
+    inputCnt.textContent = inputEl.value.length;
+    clearError();
+  });
+
+  function getMode() {
+    return document.querySelector('input[name="mode"]:checked').value;
+  }
+
+  function clearError() {
+    errEl.style.display = 'none';
+    errEl.textContent = '';
+  }
+
+  function showError(msg) {
+    errEl.textContent = msg;
+    errEl.style.display = 'block';
+  }
+
+  function setOutput(val) {
+    outputEl.value = val;
+    outputCnt.textContent = val.length;
+  }
+
+  function doEncode() {
+    clearError();
+    const text = inputEl.value;
+    if (!text) { showError('テキストを入力してください。'); return; }
+    try {
+      const result = getMode() === 'component'
+        ? encodeURIComponent(text)
+        : encodeURI(text);
+      setOutput(result);
+    } catch (e) {
+      showError('エンコードに失敗しました: ' + e.message);
+    }
+  }
+
+  function doDecode() {
+    clearError();
+    const text = inputEl.value.trim();
+    if (!text) { showError('テキストを入力してください。'); return; }
+    try {
+      // decodeURIComponent handles both modes on decode
+      const result = decodeURIComponent(text);
+      setOutput(result);
+    } catch (e) {
+      // Try decodeURI as fallback
+      try {
+        const result = decodeURI(text);
+        setOutput(result);
+      } catch (e2) {
+        showError('無効なURLエンコード文字列です。入力内容を確認してください。（例: %の後に16進数2桁が必要）');
+      }
+    }
+  }
+
+  function clearAll() {
+    inputEl.value = '';
+    setOutput('');
+    clearError();
+    inputCnt.textContent = '0';
+  }
+
+  function swapInOut() {
+    const tmp = inputEl.value;
+    inputEl.value = outputEl.value;
+    setOutput(tmp);
+    inputCnt.textContent = inputEl.value.length;
+    clearError();
+  }
+
+  function copyOutput() {
+    const text = outputEl.value;
+    if (!text) return;
+    navigator.clipboard.writeText(text).then(() => {
+      copyBtn.textContent = 'コピー完了！';
+      copyBtn.classList.add('copy-success');
+      setTimeout(() => {
+        copyBtn.textContent = 'コピー';
+        copyBtn.classList.remove('copy-success');
+      }, 1800);
+    }).catch(() => {
+      outputEl.select();
+      document.execCommand('copy');
+      copyBtn.textContent = 'コピー完了！';
+      setTimeout(() => { copyBtn.textContent = 'コピー'; }, 1800);
+    });
+  }
+</script>
+</body>
+</html>

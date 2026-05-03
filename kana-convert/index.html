@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ひらがな↔カタカナ変換 | ツール集</title>
+  <meta name="description" content="日本語のひらがな・カタカナを相互変換。全角・半角カタカナにも対応">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --indigo: #4f46e5; --violet: #7c3aed; --emerald: #059669;
+      --bg: #f5f6ff; --surf: #fff;
+      --border: #e0e7ff; --text: #1e1b4b; --text2: #4c4980; --muted: #8b87c0;
+    }
+    body { font-family: 'Segoe UI','Yu Gothic UI','Hiragino Sans',sans-serif; background: var(--bg); color: var(--text); }
+    header { background: linear-gradient(135deg,#1e1b4b,#312e81); color:#fff; }
+    .hdr { max-width:860px; margin:0 auto; padding:18px 24px; }
+    .hdr-back { display:inline-flex; align-items:center; gap:5px; font-size:.78rem; color:rgba(255,255,255,.55); text-decoration:none; margin-bottom:8px; transition:color .15s; }
+    .hdr-back:hover { color:rgba(255,255,255,.9); }
+    .hdr-title { font-size:1.4rem; font-weight:900; margin-bottom:4px; }
+    .hdr-sub { font-size:.82rem; color:rgba(255,255,255,.65); }
+    main { max-width:860px; margin:0 auto; padding:24px; }
+    .card { background:var(--surf); border:1px solid var(--border); border-radius:14px; padding:20px; margin-bottom:16px; box-shadow:0 2px 10px rgba(79,70,229,.06); }
+    .card-title { font-size:.88rem; font-weight:800; color:#3730a3; margin-bottom:12px; }
+    .btn { padding:9px 18px; border:none; border-radius:9px; font-size:.84rem; font-weight:700; cursor:pointer; font-family:inherit; transition:all .15s; }
+    .btn-primary { background:linear-gradient(135deg,var(--indigo),var(--violet)); color:#fff; box-shadow:0 3px 10px rgba(79,70,229,.25); }
+    .btn-primary:hover { transform:translateY(-1px); }
+    .btn-outline { background:transparent; border:1.5px solid var(--border); color:var(--text2); }
+    .btn-outline:hover { border-color:#818cf8; color:var(--indigo); }
+    .btn-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+    textarea { width:100%; padding:10px 12px; border:1.5px solid var(--border); border-radius:9px; font-size:.84rem; font-family:'Segoe UI','Yu Gothic UI','Hiragino Sans',sans-serif; background:var(--bg); color:var(--text); resize:vertical; }
+    textarea:focus { outline:none; border-color:#818cf8; }
+    .err { color:#dc2626; font-size:.78rem; margin-top:6px; }
+    .result-box { background:var(--bg); border:1px solid var(--border); border-radius:9px; padding:12px; font-family:'Consolas',monospace; font-size:.84rem; min-height:60px; white-space:pre-wrap; word-break:break-all; }
+    footer { text-align:center; padding:20px; font-size:.73rem; color:var(--muted); border-top:1px solid var(--border); margin-top:8px; }
+    footer a { color:#818cf8; text-decoration:none; }
+
+    .section-label { font-size:.8rem; font-weight:700; color:var(--text2); margin-bottom:6px; }
+    .output-wrapper { position:relative; margin-top:16px; }
+    .copy-inline { position:absolute; top:8px; right:8px; padding:4px 10px; font-size:.75rem; }
+    .copy-success { background: linear-gradient(135deg, var(--emerald), #047857) !important; color:#fff !important; border-color:transparent !important; }
+    .char-count { font-size:.73rem; color:var(--muted); text-align:right; margin-top:4px; }
+
+    /* ボタングループ */
+    .btn-group-label { font-size:.75rem; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; margin-bottom:6px; margin-top:14px; }
+    .btn-group { display:flex; gap:8px; flex-wrap:wrap; }
+    .btn-convert { padding:8px 16px; font-size:.82rem; }
+    .arrow-label { font-size:.72rem; opacity:.7; display:block; margin-top:2px; font-weight:400; }
+
+    /* Unicode レンジ表示 */
+    .range-badge { display:inline-block; font-size:.68rem; background:var(--bg); border:1px solid var(--border); border-radius:5px; padding:1px 6px; margin-left:4px; font-family:Consolas,monospace; color:var(--muted); }
+
+    /* サンプルボタン */
+    .sample-row { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px; }
+    .sample-btn { padding:4px 10px; font-size:.74rem; font-weight:600; border:1.5px solid var(--border); border-radius:7px; background:var(--surf); color:var(--text2); cursor:pointer; transition:all .12s; }
+    .sample-btn:hover { border-color:#818cf8; color:var(--indigo); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="hdr">
+    <a class="hdr-back" href="../">← ツール一覧へ戻る</a>
+    <div class="hdr-title">ひらがな ↔ カタカナ 変換</div>
+    <div class="hdr-sub">日本語のひらがな・カタカナを相互変換。全角・半角カタカナにも対応</div>
+  </div>
+</header>
+
+<main>
+
+  <!-- 入力カード -->
+  <div class="card">
+    <div class="card-title">入力テキスト</div>
+    <div style="margin-bottom:8px;">
+      <div class="section-label">サンプル</div>
+      <div class="sample-row">
+        <button class="sample-btn" onclick="setSample('hiragana')">ひらがな</button>
+        <button class="sample-btn" onclick="setSample('katakana')">全角カタカナ</button>
+        <button class="sample-btn" onclick="setSample('hankaku')">半角カタカナ</button>
+        <button class="sample-btn" onclick="setSample('mixed')">混在テキスト</button>
+      </div>
+    </div>
+    <div class="section-label">変換したいテキストを入力してください</div>
+    <textarea id="inputText" rows="5" placeholder="ここにテキストを入力...&#10;例: あいうえお、ありがとうございます"></textarea>
+    <div class="char-count"><span id="inputCount">0</span> 文字</div>
+
+    <!-- 変換ボタン群 -->
+    <div class="btn-group-label">全角変換</div>
+    <div class="btn-group">
+      <button class="btn btn-primary btn-convert" onclick="convert('hira2kata')">
+        ひらがな → カタカナ（全角）
+        <span class="arrow-label">U+3041〜 → +0x60</span>
+      </button>
+      <button class="btn btn-primary btn-convert" onclick="convert('kata2hira')">
+        カタカナ → ひらがな（全角）
+        <span class="arrow-label">U+30A1〜 → -0x60</span>
+      </button>
+    </div>
+
+    <div class="btn-group-label">半角変換</div>
+    <div class="btn-group">
+      <button class="btn btn-primary btn-convert" onclick="convert('zen2han')">
+        全角カタカナ → 半角カタカナ
+        <span class="arrow-label">ア行〜ン＋濁点・半濁点</span>
+      </button>
+      <button class="btn btn-primary btn-convert" onclick="convert('han2zen')">
+        半角カタカナ → 全角カタカナ
+        <span class="arrow-label">ｱ行〜ﾝ＋濁点結合</span>
+      </button>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="clearAll()">クリア</button>
+      <button class="btn btn-outline" onclick="swapInOut()">⇅ 入出力を入れ替え</button>
+    </div>
+    <div id="errMsg" class="err" style="display:none;"></div>
+  </div>
+
+  <!-- 出力カード -->
+  <div class="card">
+    <div class="card-title">変換結果</div>
+    <div class="output-wrapper">
+      <textarea id="outputText" rows="5" readonly placeholder="変換結果がここに表示されます..."></textarea>
+      <button class="btn btn-outline copy-inline" id="copyBtn" onclick="copyOutput()">コピー</button>
+    </div>
+    <div class="char-count"><span id="outputCount">0</span> 文字</div>
+  </div>
+
+  <!-- 説明カード -->
+  <div class="card">
+    <div class="card-title">変換の仕組み</div>
+    <p style="font-size:.82rem; color:var(--text2); line-height:1.7;">
+      <strong>ひらがな ↔ 全角カタカナ：</strong>
+      UnicodeではひらがなはU+3041〜U+3096、全角カタカナはU+30A1〜U+30F6の範囲にあり、
+      文字コードに <code style="background:var(--bg);padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;">0x60（96）</code> を加減するだけで相互変換できます。
+      <br><br>
+      <strong>全角カタカナ ↔ 半角カタカナ：</strong>
+      半角カタカナはU+FF65〜U+FF9Fの範囲にあります。濁点（゛）・半濁点（゜）の合成・分離を含む
+      変換テーブルを使用して正確に変換します。
+    </p>
+  </div>
+
+</main>
+
+<footer>
+  <a href="../">← ツール一覧</a> &nbsp;|&nbsp;
+  <a href="https://toaruseigyoya.github.io/" target="_blank" rel="noopener">ホームページ</a>
+  <br><br>
+  &copy; 2025 とある制御屋のツール集
+</footer>
+
+<script>
+  const inputEl  = document.getElementById('inputText');
+  const outputEl = document.getElementById('outputText');
+  const errEl    = document.getElementById('errMsg');
+  const inputCnt = document.getElementById('inputCount');
+  const outputCnt= document.getElementById('outputCount');
+  const copyBtn  = document.getElementById('copyBtn');
+
+  // --- サンプルテキスト ---
+  const samples = {
+    hiragana: 'あいうえお かきくけこ さしすせそ たちつてと なにぬねの\nはひふへほ まみむめも やゆよ らりるれろ わをん\nぁぃぅぇぉ っゃゅょ ゔ',
+    katakana: 'アイウエオ カキクケコ サシスセソ タチツテト ナニヌネノ\nハヒフヘホ マミムメモ ヤユヨ ラリルレロ ワヲン\nァィゥェォ ッャュョ ヴ ガギグゲゴ ザジズゼゾ',
+    hankaku:  'ｱｲｳｴｵ ｶｷｸｹｺ ｻｼｽｾｿ ﾀﾁﾂﾃﾄ ﾅﾆﾇﾈﾉ\nﾊﾋﾌﾍﾎ ﾏﾐﾑﾒﾓ ﾔﾕﾖ ﾗﾘﾙﾚﾛ ﾜｦﾝ\nｶﾞｷﾞｸﾞｹﾞｺﾞ ﾊﾞﾋﾞﾌﾞﾍﾞﾎﾞ ﾊﾟﾋﾟﾌﾟﾍﾟﾎﾟ',
+    mixed:    'この商品のなまえは「スマートフォン（ｽﾏｰﾄﾌｫﾝ）」です。\nアプリのインストールが必要です。\nご利用ありがとうございます。'
+  };
+
+  function setSample(key) {
+    inputEl.value = samples[key];
+    inputCnt.textContent = inputEl.value.length;
+    clearError();
+  }
+
+  inputEl.addEventListener('input', () => {
+    inputCnt.textContent = inputEl.value.length;
+    clearError();
+  });
+
+  function clearError() {
+    errEl.style.display = 'none';
+    errEl.textContent = '';
+  }
+
+  function showError(msg) {
+    errEl.textContent = msg;
+    errEl.style.display = 'block';
+  }
+
+  function setOutput(val) {
+    outputEl.value = val;
+    outputCnt.textContent = val.length;
+  }
+
+  // ============================
+  //  変換関数
+  // ============================
+
+  // ひらがな → 全角カタカナ (U+3041〜U+3096 → +0x60)
+  function hiraToZenKata(str) {
+    return str.replace(/[ぁ-ゖ]/g, ch =>
+      String.fromCharCode(ch.charCodeAt(0) + 0x60)
+    );
+  }
+
+  // 全角カタカナ → ひらがな (U+30A1〜U+30F6 → -0x60)
+  function zenKataToHira(str) {
+    return str.replace(/[ァ-ヶ]/g, ch =>
+      String.fromCharCode(ch.charCodeAt(0) - 0x60)
+    );
+  }
+
+  // 全角カタカナ → 半角カタカナ
+  // 濁点・半濁点付き文字は2文字に分解する
+  const ZEN2HAN_MAP = {
+    'ァ':'ｧ','ィ':'ｨ','ゥ':'ｩ','ェ':'ｪ','ォ':'ｫ',
+    'ア':'ｱ','イ':'ｲ','ウ':'ｳ','エ':'ｴ','オ':'ｵ',
+    'カ':'ｶ','キ':'ｷ','ク':'ｸ','ケ':'ｹ','コ':'ｺ',
+    'サ':'ｻ','シ':'ｼ','ス':'ｽ','セ':'ｾ','ソ':'ｿ',
+    'タ':'ﾀ','チ':'ﾁ','ツ':'ﾂ','テ':'ﾃ','ト':'ﾄ',
+    'ナ':'ﾅ','ニ':'ﾆ','ヌ':'ﾇ','ネ':'ﾈ','ノ':'ﾉ',
+    'ハ':'ﾊ','ヒ':'ﾋ','フ':'ﾌ','ヘ':'ﾍ','ホ':'ﾎ',
+    'マ':'ﾏ','ミ':'ﾐ','ム':'ﾑ','メ':'ﾒ','モ':'ﾓ',
+    'ャ':'ｬ','ユ':'ﾕ','ュ':'ｭ','ヨ':'ﾖ','ョ':'ｮ','ヤ':'ﾔ',
+    'ラ':'ﾗ','リ':'ﾘ','ル':'ﾙ','レ':'ﾚ','ロ':'ﾛ',
+    'ッ':'ｯ','ワ':'ﾜ','ヲ':'ｦ','ン':'ﾝ',
+    'ガ':'ｶﾞ','ギ':'ｷﾞ','グ':'ｸﾞ','ゲ':'ｹﾞ','ゴ':'ｺﾞ',
+    'ザ':'ｻﾞ','ジ':'ｼﾞ','ズ':'ｽﾞ','ゼ':'ｾﾞ','ゾ':'ｿﾞ',
+    'ダ':'ﾀﾞ','ヂ':'ﾁﾞ','ヅ':'ﾂﾞ','デ':'ﾃﾞ','ド':'ﾄﾞ',
+    'バ':'ﾊﾞ','ビ':'ﾋﾞ','ブ':'ﾌﾞ','ベ':'ﾍﾞ','ボ':'ﾎﾞ',
+    'パ':'ﾊﾟ','ピ':'ﾋﾟ','プ':'ﾌﾟ','ペ':'ﾍﾟ','ポ':'ﾎﾟ',
+    'ヴ':'ｳﾞ',
+    'ヵ':'ｶ','ヶ':'ｹ',
+    '。':'｡','「':'｢','」':'｣','、':'､','・':'･','ー':'ｰ','「':'｢','」':'｣'
+  };
+
+  // 半角カタカナ → 全角カタカナ (濁点・半濁点の結合処理あり)
+  const HAN2ZEN_MAP = {};
+  // 逆引きテーブルを生成（2文字→1文字の濁点付きを優先）
+  Object.entries(ZEN2HAN_MAP).forEach(([zen, han]) => {
+    if (!HAN2ZEN_MAP[han]) HAN2ZEN_MAP[han] = zen;
+  });
+
+  function zenKataToHanKata(str) {
+    return str.replace(/[ァ-ヶヴ。「」、・ー]/g, ch => ZEN2HAN_MAP[ch] || ch);
+  }
+
+  function hanKataToZenKata(str) {
+    // 濁点・半濁点の結合: 2文字を先に処理
+    return str.replace(/[｡-ﾟ][ﾞﾟ]|[｡-ﾟ]/g, match => {
+      return HAN2ZEN_MAP[match] || match;
+    });
+  }
+
+  // ============================
+  //  メイン変換ディスパッチ
+  // ============================
+  function convert(type) {
+    clearError();
+    const text = inputEl.value;
+    if (!text) { showError('テキストを入力してください。'); return; }
+
+    let result;
+    switch (type) {
+      case 'hira2kata': result = hiraToZenKata(text);    break;
+      case 'kata2hira': result = zenKataToHira(text);    break;
+      case 'zen2han':   result = zenKataToHanKata(text); break;
+      case 'han2zen':   result = hanKataToZenKata(text); break;
+      default: return;
+    }
+    setOutput(result);
+  }
+
+  function clearAll() {
+    inputEl.value = '';
+    setOutput('');
+    clearError();
+    inputCnt.textContent = '0';
+  }
+
+  function swapInOut() {
+    const tmp = inputEl.value;
+    inputEl.value = outputEl.value;
+    setOutput(tmp);
+    inputCnt.textContent = inputEl.value.length;
+    clearError();
+  }
+
+  function copyOutput() {
+    const text = outputEl.value;
+    if (!text) return;
+    navigator.clipboard.writeText(text).then(() => {
+      copyBtn.textContent = 'コピー完了！';
+      copyBtn.classList.add('copy-success');
+      setTimeout(() => {
+        copyBtn.textContent = 'コピー';
+        copyBtn.classList.remove('copy-success');
+      }, 1800);
+    }).catch(() => {
+      outputEl.select();
+      document.execCommand('copy');
+      copyBtn.textContent = 'コピー完了！';
+      setTimeout(() => { copyBtn.textContent = 'コピー'; }, 1800);
+    });
+  }
+</script>
+</body>
+</html>

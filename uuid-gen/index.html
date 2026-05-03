@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UUID生成 | ツール集</title>
+  <meta name="description" content="UUID v4をワンクリックで生成。複数件・大文字対応">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --indigo: #4f46e5; --violet: #7c3aed; --emerald: #059669; --red: #dc2626;
+      --bg: #f5f6ff; --surf: #fff;
+      --border: #e0e7ff; --text: #1e1b4b; --text2: #4c4980; --muted: #8b87c0;
+    }
+    body { font-family: 'Segoe UI','Yu Gothic UI','Hiragino Sans',sans-serif; background: var(--bg); color: var(--text); }
+    header { background: linear-gradient(135deg,#1e1b4b,#312e81); color:#fff; }
+    .hdr { max-width:860px; margin:0 auto; padding:18px 24px; }
+    .hdr-back { display:inline-flex; align-items:center; gap:5px; font-size:.78rem; color:rgba(255,255,255,.55); text-decoration:none; margin-bottom:8px; transition:color .15s; }
+    .hdr-back:hover { color:rgba(255,255,255,.9); }
+    .hdr-title { font-size:1.4rem; font-weight:900; margin-bottom:4px; }
+    .hdr-sub { font-size:.82rem; color:rgba(255,255,255,.65); }
+    main { max-width:860px; margin:0 auto; padding:24px; }
+    .card { background:var(--surf); border:1px solid var(--border); border-radius:14px; padding:20px; margin-bottom:16px; box-shadow:0 2px 10px rgba(79,70,229,.06); }
+    .card-title { font-size:.88rem; font-weight:800; color:#3730a3; margin-bottom:12px; }
+    .btn { padding:9px 18px; border:none; border-radius:9px; font-size:.84rem; font-weight:700; cursor:pointer; font-family:inherit; transition:all .15s; }
+    .btn-primary { background:linear-gradient(135deg,var(--indigo),var(--violet)); color:#fff; box-shadow:0 3px 10px rgba(79,70,229,.25); }
+    .btn-primary:hover { transform:translateY(-1px); }
+    .btn-outline { background:transparent; border:1.5px solid var(--border); color:var(--text2); }
+    .btn-outline:hover { border-color:#818cf8; color:var(--indigo); }
+    .btn-danger { background:transparent; border:1.5px solid rgba(220,38,38,.2); color:var(--red); }
+    .btn-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+    input[type=text], input[type=number] { width:100%; padding:9px 12px; border:1.5px solid var(--border); border-radius:9px; font-size:.84rem; font-family:inherit; background:var(--bg); color:var(--text); }
+    input:focus { outline:none; border-color:#818cf8; }
+    textarea { width:100%; padding:10px 12px; border:1.5px solid var(--border); border-radius:9px; font-size:.84rem; font-family:'Consolas',monospace; background:var(--bg); color:var(--text); resize:vertical; }
+    textarea:focus { outline:none; border-color:#818cf8; }
+    .form-row { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:10px; }
+    .form-label { font-size:.78rem; font-weight:700; color:var(--text2); white-space:nowrap; }
+    .result-box { background:var(--bg); border:1px solid var(--border); border-radius:9px; padding:12px; font-family:'Consolas',monospace; font-size:.9rem; word-break:break-all; }
+    .err { color:var(--red); font-size:.78rem; margin-top:6px; }
+    .ok { color:var(--emerald); font-size:.78rem; margin-top:6px; }
+    .checkbox-group { display:flex; gap:12px; flex-wrap:wrap; }
+    .checkbox-group label { display:flex; align-items:center; gap:5px; font-size:.82rem; cursor:pointer; }
+    footer { text-align:center; padding:20px; font-size:.73rem; color:var(--muted); border-top:1px solid var(--border); margin-top:8px; }
+    footer a { color:#818cf8; text-decoration:none; }
+
+    /* Tool-specific */
+    select {
+      padding:8px 12px; border:1.5px solid var(--border); border-radius:9px;
+      font-size:.84rem; font-family:inherit; background:var(--bg); color:var(--text); cursor:pointer;
+    }
+    select:focus { outline:none; border-color:#818cf8; }
+    .toggle-group { display:inline-flex; border:1.5px solid var(--border); border-radius:10px; overflow:hidden; }
+    .toggle-btn {
+      padding:7px 16px; border:none; font-size:.82rem; font-weight:700; cursor:pointer;
+      font-family:inherit; background:transparent; color:var(--text2); transition:all .15s;
+    }
+    .toggle-btn.active {
+      background:linear-gradient(135deg,var(--indigo),var(--violet));
+      color:#fff;
+    }
+    .toggle-sep { width:1px; background:var(--border); }
+    .gen-btn-wrap { text-align:center; margin:8px 0; }
+    .btn-generate {
+      padding:13px 40px; font-size:1rem; font-weight:900;
+      background:linear-gradient(135deg,var(--indigo),var(--violet)); color:#fff;
+      border:none; border-radius:12px; cursor:pointer; font-family:inherit;
+      box-shadow:0 4px 16px rgba(79,70,229,.3); transition:all .18s;
+    }
+    .btn-generate:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(79,70,229,.35); }
+    .btn-generate:active { transform:translateY(0); }
+    .copy-msg { color:var(--emerald); font-size:.78rem; margin-top:6px; display:none; }
+    .count-badge {
+      display:inline-block; background:var(--bg); border:1px solid var(--border);
+      border-radius:6px; padding:2px 8px; font-size:.75rem; color:var(--muted);
+      margin-left:8px;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="hdr">
+    <a class="hdr-back" href="../">&#8592; ツール一覧に戻る</a>
+    <div class="hdr-title">&#128195; UUID生成</div>
+    <div class="hdr-sub">UUID v4をワンクリックで生成。複数件・大文字対応</div>
+  </div>
+</header>
+
+<main>
+  <!-- Settings card -->
+  <div class="card">
+    <div class="card-title">設定</div>
+
+    <!-- Count -->
+    <div class="form-row">
+      <span class="form-label">生成件数</span>
+      <select id="uuidCount">
+        <option value="1" selected>1件</option>
+        <option value="5">5件</option>
+        <option value="10">10件</option>
+        <option value="20">20件</option>
+        <option value="50">50件</option>
+      </select>
+    </div>
+
+    <!-- Case -->
+    <div class="form-row">
+      <span class="form-label">大文字 / 小文字</span>
+      <div class="toggle-group">
+        <button class="toggle-btn active" id="btnLower" onclick="setCase('lower')">小文字</button>
+        <div class="toggle-sep"></div>
+        <button class="toggle-btn" id="btnUpper" onclick="setCase('upper')">大文字</button>
+      </div>
+    </div>
+
+    <!-- Hyphen -->
+    <div class="form-row">
+      <span class="form-label">ハイフン</span>
+      <div class="toggle-group">
+        <button class="toggle-btn active" id="btnHyphenOn" onclick="setHyphen(true)">ハイフンあり</button>
+        <div class="toggle-sep"></div>
+        <button class="toggle-btn" id="btnHyphenOff" onclick="setHyphen(false)">ハイフンなし</button>
+      </div>
+    </div>
+
+    <div class="gen-btn-wrap" style="margin-top:16px;">
+      <button class="btn-generate" onclick="generate()">&#9889; 生成</button>
+    </div>
+  </div>
+
+  <!-- Result card -->
+  <div class="card">
+    <div class="card-title">
+      生成結果
+      <span class="count-badge" id="countBadge" style="display:none;"></span>
+    </div>
+    <textarea id="resultArea" readonly rows="6" placeholder="生成ボタンを押すとここにUUIDが表示されます"></textarea>
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="copyAll()">&#128203; すべてコピー</button>
+      <button class="btn btn-outline" onclick="clearResult()">&#10005; クリア</button>
+    </div>
+    <div id="copyMsg" class="copy-msg">クリップボードにコピーしました</div>
+  </div>
+</main>
+
+<footer>
+  <a href="../">ツール一覧</a> &nbsp;|&nbsp;
+  <a href="https://toaruseigyoya.github.io/" target="_blank" rel="noopener">ホームページ</a>
+  <div style="margin-top:6px;">UUIDはブラウザ内で生成され、外部に送信されません。</div>
+</footer>
+
+<script>
+  let useUpper = false;
+  let useHyphen = true;
+
+  function setCase(mode) {
+    useUpper = (mode === 'upper');
+    document.getElementById('btnLower').classList.toggle('active', !useUpper);
+    document.getElementById('btnUpper').classList.toggle('active', useUpper);
+  }
+
+  function setHyphen(val) {
+    useHyphen = val;
+    document.getElementById('btnHyphenOn').classList.toggle('active', useHyphen);
+    document.getElementById('btnHyphenOff').classList.toggle('active', !useHyphen);
+  }
+
+  function uuidv4() {
+    if (crypto.randomUUID) {
+      return crypto.randomUUID();
+    }
+    // Fallback: manual v4 generation
+    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, function(c) {
+      return (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16);
+    });
+  }
+
+  function formatUUID(raw) {
+    let result = raw;
+    if (!useHyphen) {
+      result = result.replace(/-/g, '');
+    }
+    if (useUpper) {
+      result = result.toUpperCase();
+    }
+    return result;
+  }
+
+  function generate() {
+    const count = parseInt(document.getElementById('uuidCount').value);
+    const uuids = [];
+    for (let i = 0; i < count; i++) {
+      uuids.push(formatUUID(uuidv4()));
+    }
+    document.getElementById('resultArea').value = uuids.join('\n');
+
+    const badge = document.getElementById('countBadge');
+    badge.textContent = count + '件';
+    badge.style.display = '';
+
+    document.getElementById('copyMsg').style.display = 'none';
+  }
+
+  function copyAll() {
+    const val = document.getElementById('resultArea').value;
+    if (!val.trim()) return;
+    navigator.clipboard.writeText(val).then(() => {
+      const msg = document.getElementById('copyMsg');
+      msg.style.display = '';
+      setTimeout(() => { msg.style.display = 'none'; }, 2000);
+    });
+  }
+
+  function clearResult() {
+    document.getElementById('resultArea').value = '';
+    document.getElementById('countBadge').style.display = 'none';
+    document.getElementById('copyMsg').style.display = 'none';
+  }
+
+  // Generate one on load
+  generate();
+</script>
+</body>
+</html>

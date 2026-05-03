@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ツール集 | とある制御屋の備忘録</title>
+  <meta name="description" content="登録不要・無料で使えるWebツール集。文字数カウンター、Base64変換、JSON整形など便利なツールを揃えています。">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --indigo: #4f46e5;
+      --violet: #7c3aed;
+      --bg: #f5f6ff;
+      --surf: #fff;
+      --border: #e0e7ff;
+      --text: #1e1b4b;
+      --text2: #4c4980;
+      --muted: #8b87c0;
+      --emerald: #059669;
+      --rose: #e11d48;
+      --radius: 16px;
+      --shadow: 0 4px 24px rgba(79,70,229,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', 'Yu Gothic UI', 'Hiragino Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ===== ANIMATED BACKGROUND ORBS ===== */
+    .orb-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.18;
+      animation: float 20s infinite ease-in-out;
+    }
+
+    .orb-1 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, #a5b4fc, #4f46e5);
+      top: -200px;
+      left: -200px;
+      animation-duration: 22s;
+    }
+
+    .orb-2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, #c4b5fd, #7c3aed);
+      top: 20%;
+      right: -150px;
+      animation-duration: 18s;
+      animation-delay: -5s;
+    }
+
+    .orb-3 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, #a7f3d0, #059669);
+      bottom: 10%;
+      left: 10%;
+      animation-duration: 25s;
+      animation-delay: -10s;
+    }
+
+    .orb-4 {
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, #fda4af, #e11d48);
+      bottom: -100px;
+      right: 20%;
+      animation-duration: 20s;
+      animation-delay: -3s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(30px, -40px) scale(1.05); }
+      50% { transform: translate(-20px, 30px) scale(0.95); }
+      75% { transform: translate(40px, 20px) scale(1.02); }
+    }
+
+    /* ===== ANNOUNCEMENT BANNER ===== */
+    .announce-banner {
+      position: relative;
+      z-index: 100;
+      background: linear-gradient(135deg, var(--indigo), var(--violet));
+      color: #fff;
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    /* ===== STICKY HEADER ===== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 99;
+      background: rgba(245, 246, 255, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+    }
+
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .header-logo {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .header-logo span {
+      background: linear-gradient(135deg, var(--indigo), var(--violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header-back {
+      font-size: 0.85rem;
+      color: var(--indigo);
+      text-decoration: none;
+      font-weight: 600;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+
+    .header-back:hover { opacity: 0.7; }
+
+    /* ===== MAIN LAYOUT ===== */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .hero h1 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 .accent {
+      background: linear-gradient(135deg, var(--indigo), var(--violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      color: var(--text2);
+      font-size: 0.95rem;
+    }
+
+    /* ===== SEARCH BOX ===== */
+    .search-wrap {
+      position: relative;
+      max-width: 480px;
+      margin: 0 auto 40px;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 1rem;
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 13px 16px 13px 44px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      background: rgba(255,255,255,0.9);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      backdrop-filter: blur(8px);
+    }
+
+    .search-input::placeholder { color: var(--muted); }
+
+    .search-input:focus {
+      border-color: var(--indigo);
+      box-shadow: 0 0 0 3px rgba(79,70,229,0.12);
+    }
+
+    /* ===== TOOLS GRID ===== */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    @media (max-width: 600px) {
+      .tools-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero h1 { font-size: 1.4rem; }
+    }
+
+    /* ===== TOOL CARD ===== */
+    .tool-card {
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 22px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tool-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--card-accent, linear-gradient(90deg, var(--indigo), var(--violet)));
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(79,70,229,0.14);
+      border-color: rgba(79,70,229,0.3);
+    }
+
+    .tool-card.hidden { display: none; }
+
+    /* Category chip */
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      width: fit-content;
+      letter-spacing: 0.04em;
+    }
+
+    .chip-indigo {
+      background: rgba(79,70,229,0.1);
+      color: var(--indigo);
+    }
+
+    .chip-violet {
+      background: rgba(124,58,237,0.1);
+      color: var(--violet);
+    }
+
+    .chip-emerald {
+      background: rgba(5,150,105,0.1);
+      color: var(--emerald);
+    }
+
+    .chip-rose {
+      background: rgba(225,29,72,0.1);
+      color: var(--rose);
+    }
+
+    /* Card body */
+    .card-title-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-icon {
+      font-size: 1.5rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .card-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 0.84rem;
+      color: var(--text2);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--indigo);
+      text-decoration: none;
+      padding: 7px 14px;
+      border-radius: 8px;
+      background: rgba(79,70,229,0.07);
+      border: 1px solid rgba(79,70,229,0.15);
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+      align-self: flex-start;
+      margin-top: auto;
+    }
+
+    .card-link:hover {
+      background: var(--indigo);
+      color: #fff;
+      border-color: var(--indigo);
+    }
+
+    /* Link color variants */
+    .tool-card[data-cat="変換"] .card-link { color: var(--violet); background: rgba(124,58,237,0.07); border-color: rgba(124,58,237,0.15); }
+    .tool-card[data-cat="変換"] .card-link:hover { background: var(--violet); color: #fff; border-color: var(--violet); }
+
+    .tool-card[data-cat="計算"] .card-link { color: var(--emerald); background: rgba(5,150,105,0.07); border-color: rgba(5,150,105,0.15); }
+    .tool-card[data-cat="計算"] .card-link:hover { background: var(--emerald); color: #fff; border-color: var(--emerald); }
+
+    .tool-card[data-cat="開発"] .card-link { color: var(--rose); background: rgba(225,29,72,0.07); border-color: rgba(225,29,72,0.15); }
+    .tool-card[data-cat="開発"] .card-link:hover { background: var(--rose); color: #fff; border-color: var(--rose); }
+
+    /* Card accent lines */
+    .tool-card[data-cat="テキスト"]::before { background: linear-gradient(90deg, #4f46e5, #818cf8); }
+    .tool-card[data-cat="変換"]::before { background: linear-gradient(90deg, #7c3aed, #a78bfa); }
+    .tool-card[data-cat="計算"]::before { background: linear-gradient(90deg, #059669, #34d399); }
+    .tool-card[data-cat="開発"]::before { background: linear-gradient(90deg, #e11d48, #fb7185); }
+
+    /* ===== EMPTY STATE ===== */
+    .empty-state {
+      display: none;
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--muted);
+    }
+
+    .empty-state .empty-icon {
+      font-size: 3rem;
+      margin-bottom: 12px;
+    }
+
+    .empty-state p {
+      font-size: 1rem;
+    }
+
+    .empty-state.visible { display: block; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 24px 16px 32px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      border-top: 1px solid var(--border);
+    }
+
+    footer a {
+      color: var(--indigo);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <!-- BACKGROUND ORBS -->
+  <div class="orb-container" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+  </div>
+
+  <!-- ANNOUNCEMENT BANNER -->
+  <div class="announce-banner" role="banner">
+    ⚙️ 無料で使えるWebツール集 — 登録不要・全ブラウザ対応
+  </div>
+
+  <!-- STICKY HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="header-logo">⚙️ <span>ツール集</span> | とある制御屋の備忘録</div>
+      <a href="https://toaruseigyoya.github.io/" class="header-back">← ホームへ</a>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <h1>無料 <span class="accent">Webツール集</span></h1>
+      <p>登録不要・インストール不要。ブラウザですぐに使えるツールを揃えています。</p>
+    </section>
+
+    <!-- SEARCH -->
+    <div class="search-wrap">
+      <span class="search-icon" aria-hidden="true">🔍</span>
+      <input
+        type="search"
+        class="search-input"
+        id="searchInput"
+        placeholder="ツールを検索… (例: Base64、JSON、文字数)"
+        aria-label="ツールを検索"
+        autocomplete="off"
+      >
+    </div>
+
+    <!-- TOOLS GRID -->
+    <div class="tools-grid" id="toolsGrid" role="list">
+
+      <!-- テキスト category -->
+      <div class="tool-card" data-cat="テキスト" data-name="文字数カウンター" data-desc="テキストの文字数・行数・単語数をリアルタイム計測" role="listitem">
+        <span class="chip chip-indigo">テキスト</span>
+        <div class="card-title-row">
+          <span class="card-icon" aria-hidden="true">📝</span>
+          <span class="card-name">文字数カウンター</span>
+        </div>
+        <p class="card-desc">テキストの文字数・行数・単語数をリアルタイム計測</p>
+        <a href="./char-count/" class="card-link">開く →</a>
+      </div>
+
+      <div class="tool-card" data-cat="テキスト" data-name="大文字・小文字変換" data-desc="英字テキストの大文字・小文字を一括変換" role="listitem">
+        <span class="chip chip-indigo">テキスト</span>
+        <div class="card-title-row">
+          <span class="card-icon" aria-hidden="true">🔤</span>
+          <span class="card-name">大文字・小文字変換</span>
+        </div>
+        <p class="card-desc">英字テキストの大文字・小文字を一括変換</p>
+        <a href="./case-convert/" class="card-link">開く →</a>
+      </div>
+
+      <div class="tool-card" data-cat="テキスト" data-name="改行削除・変換" data-desc="改行の削除・変換・統一を一括処理" role="listitem">
+        <span class="chip chip-indigo">テキスト</span>
+        <div class="card-title-row">
+          <span class="card-icon" aria-hidden="true">↵</span>
+          <span class="card-name">改行削除・変換</span>
+        </div>
+        <p class="card-desc">改行の削除・変換・統一を一括処理</p>
+        <a href="./line-break/" class="card-link">開く →</a>
+      </div>
+
+      <div class="tool-card" data-cat="テキスト" data-name="ひらがな↔カタカナ変換" data-desc="日本語のひらがな・カタカナを相互変換" role="listitem">
+        <span class="chip chip-indigo">テキスト</span>
+        <div class="card-title-row">
+          <span class="card-icon" aria-hidden="true">あ</span>
+          <span class="card-name">ひらがな↔カタカナ変換</span>
+        </div>
+        <p class="card-desc">日本語のひらがな・カタカナを相互変換</p>
+        <a href="./kana-convert/" class="card-link">開く →</a>
+      </div>
+
+      <!-- 変換 category -->
+      <div class="tool-card" data-cat="変換" data-name="Base64エンコード/デコード" data-desc="テキストをBase64形式に変換・復号" role="listitem">
+        <span class="chip chip-violet">変換</span>
+        <div class="card-title-row">
+          <span class="card-icon" aria-hidden="true">🔄</span>
+          <span class="card-name">Base64エンコード/デコード</span>
+        </div>
+        <p class="card-desc">テキストをBase64形式に変換・復号</p>
+        <a href="./base64/" class="card-link">開く →</a>
+      </div>
+
+      <div class="tool-card" data-cat="変換" data-name="URLエンコード/デコード" data-desc="URLの特殊文字をパーセントエンコード・デコード" role="listitem">
+        <span class="chip chip-violet">変換</span>
+        <div class="card-title-row">
+          <span class="card-icon" aria-hidden="true">🔗</span>
+          <span class="card-name">URLエンコード/デコード</span>
+        </div>
+        <p class="card-desc">URLの特殊文字をパーセントエンコード・デコード</p>
+        <a href="./url-encode/" class="card-link">開く →</a>
+      </div>
+
+      <div class="tool-card" data-cat="変換" data-name="タイムスタンプ変換" data-desc="Unixタイムスタンプと日時を相互変換" role="listitem">
+        <span class="chip chip-violet">変換</span>
+        <div class="card-title-row">
+          <span class="card-icon" aria-hidden="true">🕐</span>
+          <span class="card-name">タイムスタンプ変換</span>
+        </div>
+        <p class="card-desc">Unixタイムスタンプと日時を相互変換</p>
+        <a href="./timestamp/" class="card-link">開く →</a>
+      </div>
+
+      <!-- 計算 category -->
+      <div class="tool-card" data-cat="計算" data-name="消費税計算" data-desc="税込・税抜価格の計算と消費税額の確認" role="listitem">
+        <span class="chip chip-emerald">計算</span>
+        <div class="card-title-row">
+          <span class="card-icon" aria-hidden="true">💴</span>
+          <span class="card-name">消費税計算</span>
+        </div>
+        <p class="card-desc">税込・税抜価格の計算と消費税額の確認</p>
+        <a href="./tax-calc/" class="card-link">開く →</a>
+      </div>
+
+      <div class="tool-card" data-cat="計算" data-name="BMI計算" data-desc="身長・体重からBMIと肥満度を計算" role="listitem">
+        <span class="chip chip-emerald">計算</span>
+        <div class="card-title-row">
+          <span class="card-icon" aria-hidden="true">⚖️</span>
+          <span class="card-name">BMI計算</span>
+        </div>
+        <p class="card-desc">身長・体重からBMIと肥満度を計算</p>
+        <a href="./bmi/" class="card-link">開く →</a>
+      </div>
+
+      <!-- 開発 category -->
+      <div class="tool-card" data-cat="開発" data-name="JSONフォーマッター" data-desc="JSONの整形・圧縮・バリデーション" role="listitem">
+        <span class="chip chip-rose">開発</span>
+        <div class="card-title-row">
+          <span class="card-icon" aria-hidden="true">{}</span>
+          <span class="card-name">JSONフォーマッター</span>
+        </div>
+        <p class="card-desc">JSONの整形・圧縮・バリデーション</p>
+        <a href="./json-format/" class="card-link">開く →</a>
+      </div>
+
+      <div class="tool-card" data-cat="開発" data-name="パスワード生成" data-desc="安全なランダムパスワードを即時生成" role="listitem">
+        <span class="chip chip-rose">開発</span>
+        <div class="card-title-row">
+          <span class="card-icon" aria-hidden="true">🔐</span>
+          <span class="card-name">パスワード生成</span>
+        </div>
+        <p class="card-desc">安全なランダムパスワードを即時生成</p>
+        <a href="./password-gen/" class="card-link">開く →</a>
+      </div>
+
+      <div class="tool-card" data-cat="開発" data-name="UUID生成" data-desc="UUID v4をワンクリックで生成・コピー" role="listitem">
+        <span class="chip chip-rose">開発</span>
+        <div class="card-title-row">
+          <span class="card-icon" aria-hidden="true">🆔</span>
+          <span class="card-name">UUID生成</span>
+        </div>
+        <p class="card-desc">UUID v4をワンクリックで生成・コピー</p>
+        <a href="./uuid-gen/" class="card-link">開く →</a>
+      </div>
+
+      <!-- EMPTY STATE -->
+      <div class="empty-state" id="emptyState" aria-live="polite">
+        <div class="empty-icon">🔍</div>
+        <p>見つかりませんでした</p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 とある制御屋の備忘録 | <a href="https://toaruseigyoya.github.io/">ホームページ</a></p>
+  </footer>
+
+  <script>
+    (function () {
+      var searchInput = document.getElementById('searchInput');
+      var grid = document.getElementById('toolsGrid');
+      var emptyState = document.getElementById('emptyState');
+      var cards = Array.from(grid.querySelectorAll('.tool-card'));
+
+      function filterCards(query) {
+        var q = query.trim().toLowerCase();
+        var visibleCount = 0;
+
+        cards.forEach(function (card) {
+          var name = (card.getAttribute('data-name') || '').toLowerCase();
+          var desc = (card.getAttribute('data-desc') || '').toLowerCase();
+          var cat  = (card.getAttribute('data-cat')  || '').toLowerCase();
+
+          var match = q === '' || name.indexOf(q) !== -1 || desc.indexOf(q) !== -1 || cat.indexOf(q) !== -1;
+
+          if (match) {
+            card.classList.remove('hidden');
+            visibleCount++;
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+
+        if (visibleCount === 0) {
+          emptyState.classList.add('visible');
+        } else {
+          emptyState.classList.remove('visible');
+        }
+      }
+
+      searchInput.addEventListener('input', function () {
+        filterCards(this.value);
+      });
+
+      // Clear search on Escape
+      searchInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          this.value = '';
+          filterCards('');
+          this.blur();
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>消費税計算 | ツール集</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --indigo: #4f46e5; --violet: #7c3aed; --emerald: #059669; --amber: #d97706; --red: #dc2626;
+  --bg: #f5f6ff; --surf: #fff;
+  --border: #e0e7ff; --text: #1e1b4b; --text2: #4c4980; --muted: #8b87c0;
+}
+body { font-family: 'Segoe UI','Yu Gothic UI','Hiragino Sans',sans-serif; background: var(--bg); color: var(--text); }
+header { background: linear-gradient(135deg,#1e1b4b,#312e81); color:#fff; }
+.hdr { max-width:860px; margin:0 auto; padding:18px 24px; }
+.hdr-back { display:inline-flex; align-items:center; gap:5px; font-size:.78rem; color:rgba(255,255,255,.55); text-decoration:none; margin-bottom:8px; transition:color .15s; }
+.hdr-back:hover { color:rgba(255,255,255,.9); }
+.hdr-title { font-size:1.4rem; font-weight:900; margin-bottom:4px; }
+.hdr-sub { font-size:.82rem; color:rgba(255,255,255,.65); }
+main { max-width:860px; margin:0 auto; padding:24px; }
+.card { background:var(--surf); border:1px solid var(--border); border-radius:14px; padding:20px; margin-bottom:16px; box-shadow:0 2px 10px rgba(79,70,229,.06); }
+.card-title { font-size:.88rem; font-weight:800; color:#3730a3; margin-bottom:14px; }
+.btn { padding:9px 18px; border:none; border-radius:9px; font-size:.84rem; font-weight:700; cursor:pointer; font-family:inherit; transition:all .15s; }
+.btn-primary { background:linear-gradient(135deg,var(--indigo),var(--violet)); color:#fff; box-shadow:0 3px 10px rgba(79,70,229,.25); }
+.btn-primary:hover { transform:translateY(-1px); }
+.btn-outline { background:transparent; border:1.5px solid var(--border); color:var(--text2); }
+.btn-outline:hover { border-color:#818cf8; color:var(--indigo); }
+.btn-danger { background:transparent; border:1.5px solid #fecaca; color:#dc2626; font-size:.78rem; padding:5px 10px; }
+.btn-danger:hover { background:#fef2f2; }
+.btn-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
+.fg2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.fgrp { display:flex; flex-direction:column; gap:4px; }
+.flbl { font-size:.76rem; font-weight:700; color:var(--text2); }
+input[type=text], input[type=number], select {
+  width:100%; padding:9px 12px; border:1.5px solid var(--border); border-radius:9px;
+  font-size:.84rem; font-family:inherit; background:var(--bg); color:var(--text);
+}
+input:focus, select:focus { outline:none; border-color:#818cf8; }
+.result-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px; margin-top:14px; }
+.result-item { background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:14px; }
+.result-label { font-size:.72rem; color:var(--muted); margin-bottom:4px; }
+.result-value { font-size:1.2rem; font-weight:800; color:var(--indigo); font-family:'Consolas',monospace; }
+.result-unit { font-size:.75rem; color:var(--text2); }
+footer { text-align:center; padding:20px; font-size:.73rem; color:var(--muted); border-top:1px solid var(--border); margin-top:8px; }
+footer a { color:#818cf8; text-decoration:none; }
+
+/* Tool-specific */
+.rate-selector {
+  background: var(--bg); border:1px solid var(--border); border-radius:12px;
+  padding:14px 18px; margin-bottom:16px; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+}
+.rate-selector .flbl { font-size:.8rem; }
+.rate-radio-row { display:flex; gap:16px; }
+.rate-radio-row label {
+  display:flex; align-items:center; gap:6px;
+  font-size:.85rem; font-weight:700; color:var(--text2); cursor:pointer;
+  padding:6px 14px; border-radius:8px; border:1.5px solid var(--border);
+  transition:all .15s;
+}
+.rate-radio-row label:has(input:checked) {
+  border-color:var(--indigo); background:rgba(79,70,229,.06); color:var(--indigo);
+}
+.rate-radio-row input[type=radio] { accent-color:var(--indigo); }
+
+.item-list { display:flex; flex-direction:column; gap:8px; margin-top:10px; }
+.item-row {
+  display:grid; grid-template-columns:1fr 120px 80px auto; gap:8px; align-items:center;
+}
+@media (max-width:600px) {
+  .item-row { grid-template-columns:1fr 100px 70px auto; gap:6px; }
+}
+.item-row input { padding:7px 10px; font-size:.82rem; }
+.item-row .item-lbl { font-size:.72rem; color:var(--muted); text-align:center; margin-bottom:2px; }
+
+.total-section {
+  background:linear-gradient(135deg,#1e1b4b,#312e81);
+  border-radius:12px; padding:18px 20px; margin-top:14px; color:#fff;
+}
+.total-row { display:flex; justify-content:space-between; align-items:center; padding:5px 0; }
+.total-row-label { font-size:.8rem; color:rgba(255,255,255,.65); }
+.total-row-val { font-size:.95rem; font-weight:700; font-family:'Consolas',monospace; }
+.total-row.grand { border-top:1px solid rgba(255,255,255,.2); margin-top:6px; padding-top:10px; }
+.total-row.grand .total-row-label { font-size:.88rem; color:rgba(255,255,255,.9); font-weight:800; }
+.total-row.grand .total-row-val { font-size:1.3rem; font-weight:900; }
+.badge-reduced {
+  font-size:.65rem; background:#dcfce7; color:#166534;
+  border-radius:4px; padding:1px 5px; font-weight:700;
+}
+.badge-standard {
+  font-size:.65rem; background:#dbeafe; color:#1e40af;
+  border-radius:4px; padding:1px 5px; font-weight:700;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr">
+    <a class="hdr-back" href="../">&#8592; ツール一覧</a>
+    <div class="hdr-title">&#128181; 消費税計算</div>
+    <div class="hdr-sub">税込・税抜価格と消費税額を計算。8%（軽減税率）・10%対応</div>
+  </div>
+</header>
+
+<main>
+
+  <!-- Tax rate selector -->
+  <div class="rate-selector">
+    <span class="flbl">税率を選択：</span>
+    <div class="rate-radio-row">
+      <label>
+        <input type="radio" name="taxRate" value="0.10" checked onchange="recalcAll()">
+        10%（標準税率）
+      </label>
+      <label>
+        <input type="radio" name="taxRate" value="0.08" onchange="recalcAll()">
+        8%（軽減税率）
+      </label>
+    </div>
+  </div>
+
+  <!-- Section 1: 税抜 -> 税込 -->
+  <div class="card">
+    <div class="card-title">税抜価格 &#8594; 税込価格</div>
+    <div class="fgrp">
+      <label class="flbl">税抜価格</label>
+      <input type="number" id="excl" placeholder="例: 1000" min="0" oninput="calcExclToIncl()">
+    </div>
+    <div class="result-grid" id="exclResult" style="display:none;">
+      <div class="result-item">
+        <div class="result-label">消費税額</div>
+        <div class="result-value" id="exclTaxAmt">-</div>
+        <div class="result-unit">円</div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">税込価格</div>
+        <div class="result-value" id="exclIncl">-</div>
+        <div class="result-unit">円</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: 税込 -> 税抜 -->
+  <div class="card">
+    <div class="card-title">税込価格 &#8594; 税抜価格（逆算）</div>
+    <div class="fgrp">
+      <label class="flbl">税込価格</label>
+      <input type="number" id="incl" placeholder="例: 1100" min="0" oninput="calcInclToExcl()">
+    </div>
+    <div class="result-grid" id="inclResult" style="display:none;">
+      <div class="result-item">
+        <div class="result-label">消費税額（内税）</div>
+        <div class="result-value" id="inclTaxAmt">-</div>
+        <div class="result-unit">円</div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">税抜価格</div>
+        <div class="result-value" id="inclExcl">-</div>
+        <div class="result-unit">円</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3: 複数商品の合計 -->
+  <div class="card">
+    <div class="card-title">複数商品の合計計算</div>
+    <div style="display:grid; grid-template-columns:1fr 120px 80px 32px; gap:8px; padding:0 0 4px 0;">
+      <span style="font-size:.72rem; color:var(--muted);">商品名</span>
+      <span style="font-size:.72rem; color:var(--muted);">単価（円）</span>
+      <span style="font-size:.72rem; color:var(--muted);">数量</span>
+      <span></span>
+    </div>
+    <div class="item-list" id="itemList"></div>
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="addItem()">+ 商品を追加</button>
+      <button class="btn btn-outline" onclick="clearItems()">リストをクリア</button>
+    </div>
+    <div class="total-section" id="totalSection">
+      <div class="total-row">
+        <span class="total-row-label">小計（税抜）</span>
+        <span class="total-row-val" id="subtotal">0 円</span>
+      </div>
+      <div class="total-row">
+        <span class="total-row-label">消費税</span>
+        <span class="total-row-val" id="taxTotal">0 円</span>
+      </div>
+      <div class="total-row grand">
+        <span class="total-row-label">合計（税込）</span>
+        <span class="total-row-val" id="grandTotal">0 円</span>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <a href="../">ツール一覧</a> &nbsp;|&nbsp;
+  <a href="https://toaruseigyoya.github.io/" target="_blank" rel="noopener">ホームページ</a>
+</footer>
+
+<script>
+function getTaxRate() {
+  return parseFloat(document.querySelector('input[name=taxRate]:checked').value);
+}
+function fmt(n) {
+  return Math.round(n).toLocaleString('ja-JP');
+}
+
+// Section 1
+function calcExclToIncl() {
+  const v = parseFloat(document.getElementById('excl').value);
+  const res = document.getElementById('exclResult');
+  if (isNaN(v) || v < 0) { res.style.display = 'none'; return; }
+  const rate = getTaxRate();
+  const tax = Math.round(v * rate);
+  const incl = v + tax;
+  document.getElementById('exclTaxAmt').textContent = fmt(tax);
+  document.getElementById('exclIncl').textContent = fmt(incl);
+  res.style.display = '';
+}
+
+// Section 2
+function calcInclToExcl() {
+  const v = parseFloat(document.getElementById('incl').value);
+  const res = document.getElementById('inclResult');
+  if (isNaN(v) || v < 0) { res.style.display = 'none'; return; }
+  const rate = getTaxRate();
+  const excl = Math.round(v / (1 + rate));
+  const tax = v - excl;
+  document.getElementById('inclTaxAmt').textContent = fmt(tax);
+  document.getElementById('inclExcl').textContent = fmt(excl);
+  res.style.display = '';
+}
+
+function recalcAll() {
+  calcExclToIncl();
+  calcInclToExcl();
+  calcTotal();
+}
+
+// Section 3
+let itemCount = 0;
+function addItem() {
+  itemCount++;
+  const id = 'item_' + itemCount;
+  const row = document.createElement('div');
+  row.className = 'item-row';
+  row.id = id;
+  row.innerHTML = `
+    <input type="text" placeholder="商品名（任意）" oninput="calcTotal()">
+    <input type="number" placeholder="単価" min="0" oninput="calcTotal()">
+    <input type="number" placeholder="数量" min="1" value="1" oninput="calcTotal()">
+    <button class="btn btn-danger" onclick="removeItem('${id}')">&#10005;</button>
+  `;
+  document.getElementById('itemList').appendChild(row);
+  calcTotal();
+}
+
+function removeItem(id) {
+  const el = document.getElementById(id);
+  if (el) el.remove();
+  calcTotal();
+}
+
+function clearItems() {
+  document.getElementById('itemList').innerHTML = '';
+  itemCount = 0;
+  calcTotal();
+}
+
+function calcTotal() {
+  const rows = document.querySelectorAll('#itemList .item-row');
+  const rate = getTaxRate();
+  let subtotal = 0;
+  rows.forEach(row => {
+    const inputs = row.querySelectorAll('input[type=number]');
+    const price = parseFloat(inputs[0].value) || 0;
+    const qty   = parseFloat(inputs[1].value) || 0;
+    subtotal += price * qty;
+  });
+  const tax = Math.round(subtotal * rate);
+  const grand = subtotal + tax;
+  document.getElementById('subtotal').textContent  = fmt(subtotal) + ' 円';
+  document.getElementById('taxTotal').textContent   = fmt(tax)      + ' 円';
+  document.getElementById('grandTotal').textContent = fmt(grand)    + ' 円';
+}
+
+// Initialize with 3 items
+addItem(); addItem(); addItem();
+</script>
+</body>
+</html>

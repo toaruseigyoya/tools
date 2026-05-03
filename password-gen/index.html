@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>パスワード生成 | ツール集</title>
+  <meta name="description" content="安全なランダムパスワードを即時生成。文字種・長さを自由にカスタマイズ">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --indigo: #4f46e5; --violet: #7c3aed; --emerald: #059669; --red: #dc2626;
+      --bg: #f5f6ff; --surf: #fff;
+      --border: #e0e7ff; --text: #1e1b4b; --text2: #4c4980; --muted: #8b87c0;
+    }
+    body { font-family: 'Segoe UI','Yu Gothic UI','Hiragino Sans',sans-serif; background: var(--bg); color: var(--text); }
+    header { background: linear-gradient(135deg,#1e1b4b,#312e81); color:#fff; }
+    .hdr { max-width:860px; margin:0 auto; padding:18px 24px; }
+    .hdr-back { display:inline-flex; align-items:center; gap:5px; font-size:.78rem; color:rgba(255,255,255,.55); text-decoration:none; margin-bottom:8px; transition:color .15s; }
+    .hdr-back:hover { color:rgba(255,255,255,.9); }
+    .hdr-title { font-size:1.4rem; font-weight:900; margin-bottom:4px; }
+    .hdr-sub { font-size:.82rem; color:rgba(255,255,255,.65); }
+    main { max-width:860px; margin:0 auto; padding:24px; }
+    .card { background:var(--surf); border:1px solid var(--border); border-radius:14px; padding:20px; margin-bottom:16px; box-shadow:0 2px 10px rgba(79,70,229,.06); }
+    .card-title { font-size:.88rem; font-weight:800; color:#3730a3; margin-bottom:12px; }
+    .btn { padding:9px 18px; border:none; border-radius:9px; font-size:.84rem; font-weight:700; cursor:pointer; font-family:inherit; transition:all .15s; }
+    .btn-primary { background:linear-gradient(135deg,var(--indigo),var(--violet)); color:#fff; box-shadow:0 3px 10px rgba(79,70,229,.25); }
+    .btn-primary:hover { transform:translateY(-1px); }
+    .btn-outline { background:transparent; border:1.5px solid var(--border); color:var(--text2); }
+    .btn-outline:hover { border-color:#818cf8; color:var(--indigo); }
+    .btn-danger { background:transparent; border:1.5px solid rgba(220,38,38,.2); color:var(--red); }
+    .btn-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+    input[type=text], input[type=number] { width:100%; padding:9px 12px; border:1.5px solid var(--border); border-radius:9px; font-size:.84rem; font-family:inherit; background:var(--bg); color:var(--text); }
+    input:focus { outline:none; border-color:#818cf8; }
+    textarea { width:100%; padding:10px 12px; border:1.5px solid var(--border); border-radius:9px; font-size:.84rem; font-family:'Consolas',monospace; background:var(--bg); color:var(--text); resize:vertical; }
+    textarea:focus { outline:none; border-color:#818cf8; }
+    .form-row { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:10px; }
+    .form-label { font-size:.78rem; font-weight:700; color:var(--text2); white-space:nowrap; }
+    .result-box { background:var(--bg); border:1px solid var(--border); border-radius:9px; padding:12px; font-family:'Consolas',monospace; font-size:.9rem; word-break:break-all; }
+    .err { color:var(--red); font-size:.78rem; margin-top:6px; }
+    .ok { color:var(--emerald); font-size:.78rem; margin-top:6px; }
+    .checkbox-group { display:flex; gap:12px; flex-wrap:wrap; }
+    .checkbox-group label { display:flex; align-items:center; gap:5px; font-size:.82rem; cursor:pointer; }
+    footer { text-align:center; padding:20px; font-size:.73rem; color:var(--muted); border-top:1px solid var(--border); margin-top:8px; }
+    footer a { color:#818cf8; text-decoration:none; }
+
+    /* Tool-specific */
+    .slider-row { display:flex; align-items:center; gap:14px; }
+    input[type=range] {
+      flex:1; height:6px; appearance:none; background:var(--border); border-radius:3px; cursor:pointer;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      appearance:none; width:18px; height:18px; border-radius:50%;
+      background:linear-gradient(135deg,var(--indigo),var(--violet));
+      box-shadow:0 2px 6px rgba(79,70,229,.35); cursor:pointer;
+    }
+    .len-badge {
+      min-width:38px; text-align:center; font-size:1rem; font-weight:900;
+      color:var(--indigo); background:var(--bg); border:1.5px solid var(--border);
+      border-radius:8px; padding:3px 8px;
+    }
+    select {
+      padding:8px 12px; border:1.5px solid var(--border); border-radius:9px;
+      font-size:.84rem; font-family:inherit; background:var(--bg); color:var(--text); cursor:pointer;
+    }
+    select:focus { outline:none; border-color:#818cf8; }
+    .pw-item {
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:10px 14px; background:var(--surf); border:1px solid var(--border);
+      border-radius:10px; margin-bottom:8px; font-family:'Consolas',monospace;
+      font-size:.88rem; word-break:break-all;
+    }
+    .pw-item:last-child { margin-bottom:0; }
+    .pw-text { flex:1; color:var(--text); }
+    .pw-copy-btn {
+      flex-shrink:0; padding:5px 12px; border:none; border-radius:7px; font-size:.75rem;
+      font-weight:700; cursor:pointer; background:var(--border); color:var(--indigo);
+      font-family:inherit; transition:all .15s;
+    }
+    .pw-copy-btn:hover { background:#c7d2fe; }
+    .pw-copy-btn.copied { background:#d1fae5; color:var(--emerald); }
+    .strength-bar {
+      height:5px; border-radius:3px; transition:width .3s, background .3s;
+      margin-top:8px;
+    }
+    .strength-label { font-size:.74rem; font-weight:700; margin-top:5px; }
+    .str-0 { width:20%; background:#fca5a5; }
+    .str-1 { width:40%; background:#fbbf24; }
+    .str-2 { width:70%; background:#34d399; }
+    .str-3 { width:100%; background:#059669; }
+    .str-label-0 { color:#dc2626; }
+    .str-label-1 { color:#d97706; }
+    .str-label-2 { color:#059669; }
+    .str-label-3 { color:#047857; }
+    .empty-hint { color:var(--muted); font-size:.82rem; text-align:center; padding:14px 0; }
+  </style>
+</head>
+<body>
+<header>
+  <div class="hdr">
+    <a class="hdr-back" href="../">&#8592; ツール一覧に戻る</a>
+    <div class="hdr-title">&#128272; パスワード生成</div>
+    <div class="hdr-sub">安全なランダムパスワードを即時生成。文字種・長さを自由にカスタマイズ</div>
+  </div>
+</header>
+
+<main>
+  <!-- Settings card -->
+  <div class="card">
+    <div class="card-title">設定</div>
+
+    <!-- Length -->
+    <div class="form-row">
+      <span class="form-label">文字数</span>
+      <div class="slider-row" style="flex:1;">
+        <input type="range" id="lenSlider" min="8" max="64" value="16">
+        <span class="len-badge" id="lenDisplay">16</span>
+      </div>
+    </div>
+
+    <!-- Char types -->
+    <div class="form-row">
+      <span class="form-label">文字種</span>
+      <div class="checkbox-group">
+        <label><input type="checkbox" id="chkUpper" checked> 大文字 (A-Z)</label>
+        <label><input type="checkbox" id="chkLower" checked> 小文字 (a-z)</label>
+        <label><input type="checkbox" id="chkDigit" checked> 数字 (0-9)</label>
+        <label><input type="checkbox" id="chkSymbol" checked> 記号 (!@#$%^&*)</label>
+      </div>
+    </div>
+
+    <!-- Count -->
+    <div class="form-row">
+      <span class="form-label">生成件数</span>
+      <select id="pwCount">
+        <option value="1" selected>1件</option>
+        <option value="3">3件</option>
+        <option value="5">5件</option>
+        <option value="10">10件</option>
+      </select>
+    </div>
+
+    <div id="charErr" class="err" style="display:none;">少なくとも1つの文字種を選択してください。</div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="generate()">&#9889; 生成</button>
+      <button class="btn btn-outline" onclick="copyAll()">&#128203; すべてコピー</button>
+    </div>
+  </div>
+
+  <!-- Results card -->
+  <div class="card">
+    <div class="card-title">生成結果</div>
+    <div id="strengthWrap" style="margin-bottom:12px;display:none;">
+      <div style="font-size:.75rem;font-weight:700;color:var(--text2);margin-bottom:4px;">パスワード強度</div>
+      <div class="strength-bar" id="strengthBar"></div>
+      <div class="strength-label" id="strengthLabel"></div>
+    </div>
+    <div id="resultList">
+      <div class="empty-hint">「生成」ボタンを押すとパスワードが表示されます</div>
+    </div>
+    <div id="copyAllMsg" class="ok" style="display:none;">クリップボードにコピーしました</div>
+  </div>
+</main>
+
+<footer>
+  <a href="../">ツール一覧</a> &nbsp;|&nbsp;
+  <a href="https://toaruseigyoya.github.io/" target="_blank" rel="noopener">ホームページ</a>
+  <div style="margin-top:6px;">パスワードはブラウザ内で生成され、外部に送信されません。</div>
+</footer>
+
+<script>
+  const lenSlider = document.getElementById('lenSlider');
+  const lenDisplay = document.getElementById('lenDisplay');
+  const UPPER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const LOWER = 'abcdefghijklmnopqrstuvwxyz';
+  const DIGIT = '0123456789';
+  const SYMBOL = '!@#$%^&*()-_=+[]{}|;:,.<>?';
+
+  lenSlider.addEventListener('input', () => {
+    lenDisplay.textContent = lenSlider.value;
+  });
+
+  function secureRandom(max) {
+    const arr = new Uint32Array(1);
+    let val;
+    do {
+      crypto.getRandomValues(arr);
+      val = arr[0];
+    } while (val >= Math.floor(0xFFFFFFFF / max) * max);
+    return val % max;
+  }
+
+  function buildCharset() {
+    let charset = '';
+    if (document.getElementById('chkUpper').checked) charset += UPPER;
+    if (document.getElementById('chkLower').checked) charset += LOWER;
+    if (document.getElementById('chkDigit').checked) charset += DIGIT;
+    if (document.getElementById('chkSymbol').checked) charset += SYMBOL;
+    return charset;
+  }
+
+  function buildRequiredChars() {
+    const required = [];
+    if (document.getElementById('chkUpper').checked) required.push(UPPER);
+    if (document.getElementById('chkLower').checked) required.push(LOWER);
+    if (document.getElementById('chkDigit').checked) required.push(DIGIT);
+    if (document.getElementById('chkSymbol').checked) required.push(SYMBOL);
+    return required;
+  }
+
+  function generateOne(len, charset, requiredSets) {
+    const arr = [];
+    // Guarantee at least one char from each required set
+    for (const set of requiredSets) {
+      arr.push(set[secureRandom(set.length)]);
+    }
+    while (arr.length < len) {
+      arr.push(charset[secureRandom(charset.length)]);
+    }
+    // Shuffle with Fisher-Yates using crypto
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = secureRandom(i + 1);
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr.join('');
+  }
+
+  function calcStrength(len, typeCount) {
+    if (len < 10 || typeCount <= 1) return 0;
+    if (len < 12 || typeCount <= 2) return 1;
+    if (len < 16 || typeCount <= 3) return 2;
+    return 3;
+  }
+
+  function generate() {
+    const errEl = document.getElementById('charErr');
+    const charset = buildCharset();
+    if (!charset) {
+      errEl.style.display = '';
+      return;
+    }
+    errEl.style.display = 'none';
+
+    const len = parseInt(lenSlider.value);
+    const count = parseInt(document.getElementById('pwCount').value);
+    const requiredSets = buildRequiredChars();
+    const typeCount = requiredSets.length;
+
+    const passwords = [];
+    for (let i = 0; i < count; i++) {
+      passwords.push(generateOne(len, charset, requiredSets));
+    }
+
+    // Strength
+    const strLevel = calcStrength(len, typeCount);
+    const strLabels = ['弱い', '普通', '強い', '非常に強い'];
+    const strengthWrap = document.getElementById('strengthWrap');
+    const strengthBar = document.getElementById('strengthBar');
+    const strengthLabel = document.getElementById('strengthLabel');
+    strengthWrap.style.display = '';
+    strengthBar.className = 'strength-bar str-' + strLevel;
+    strengthLabel.className = 'strength-label str-label-' + strLevel;
+    strengthLabel.textContent = strLabels[strLevel];
+
+    // Render
+    const list = document.getElementById('resultList');
+    list.innerHTML = '';
+    passwords.forEach((pw, idx) => {
+      const item = document.createElement('div');
+      item.className = 'pw-item';
+      item.innerHTML = `
+        <span class="pw-text" id="pw${idx}">${escapeHtml(pw)}</span>
+        <button class="pw-copy-btn" onclick="copyOne(${idx}, this)">コピー</button>
+      `;
+      list.appendChild(item);
+    });
+
+    document.getElementById('copyAllMsg').style.display = 'none';
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function copyOne(idx, btn) {
+    const text = document.getElementById('pw' + idx).textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = 'コピー済';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = orig;
+        btn.classList.remove('copied');
+      }, 1500);
+    });
+  }
+
+  function copyAll() {
+    const items = document.querySelectorAll('.pw-text');
+    if (!items.length) return;
+    const text = Array.from(items).map(el => el.textContent).join('\n');
+    navigator.clipboard.writeText(text).then(() => {
+      const msg = document.getElementById('copyAllMsg');
+      msg.style.display = '';
+      setTimeout(() => { msg.style.display = 'none'; }, 2000);
+    });
+  }
+
+  // Generate on load
+  generate();
+</script>
+</body>
+</html>

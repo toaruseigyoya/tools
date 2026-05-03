@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>タイムスタンプ変換 | ツール集</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --indigo: #4f46e5; --violet: #7c3aed; --emerald: #059669; --amber: #d97706; --red: #dc2626;
+  --bg: #f5f6ff; --surf: #fff;
+  --border: #e0e7ff; --text: #1e1b4b; --text2: #4c4980; --muted: #8b87c0;
+}
+body { font-family: 'Segoe UI','Yu Gothic UI','Hiragino Sans',sans-serif; background: var(--bg); color: var(--text); }
+header { background: linear-gradient(135deg,#1e1b4b,#312e81); color:#fff; }
+.hdr { max-width:860px; margin:0 auto; padding:18px 24px; }
+.hdr-back { display:inline-flex; align-items:center; gap:5px; font-size:.78rem; color:rgba(255,255,255,.55); text-decoration:none; margin-bottom:8px; transition:color .15s; }
+.hdr-back:hover { color:rgba(255,255,255,.9); }
+.hdr-title { font-size:1.4rem; font-weight:900; margin-bottom:4px; }
+.hdr-sub { font-size:.82rem; color:rgba(255,255,255,.65); }
+main { max-width:860px; margin:0 auto; padding:24px; }
+.card { background:var(--surf); border:1px solid var(--border); border-radius:14px; padding:20px; margin-bottom:16px; box-shadow:0 2px 10px rgba(79,70,229,.06); }
+.card-title { font-size:.88rem; font-weight:800; color:#3730a3; margin-bottom:14px; }
+.btn { padding:9px 18px; border:none; border-radius:9px; font-size:.84rem; font-weight:700; cursor:pointer; font-family:inherit; transition:all .15s; }
+.btn-primary { background:linear-gradient(135deg,var(--indigo),var(--violet)); color:#fff; box-shadow:0 3px 10px rgba(79,70,229,.25); }
+.btn-primary:hover { transform:translateY(-1px); }
+.btn-outline { background:transparent; border:1.5px solid var(--border); color:var(--text2); }
+.btn-outline:hover { border-color:#818cf8; color:var(--indigo); }
+.btn-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
+.fg2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.fgrp { display:flex; flex-direction:column; gap:4px; }
+.flbl { font-size:.76rem; font-weight:700; color:var(--text2); }
+input[type=text], input[type=number], input[type=datetime-local], select {
+  width:100%; padding:9px 12px; border:1.5px solid var(--border); border-radius:9px;
+  font-size:.84rem; font-family:inherit; background:var(--bg); color:var(--text);
+}
+input:focus, select:focus { outline:none; border-color:#818cf8; }
+.result-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px; margin-top:14px; }
+.result-item { background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:14px; }
+.result-label { font-size:.72rem; color:var(--muted); margin-bottom:4px; }
+.result-value { font-size:1.1rem; font-weight:800; color:var(--indigo); font-family:'Consolas',monospace; word-break:break-all; }
+.result-unit { font-size:.75rem; color:var(--text2); }
+.status-bar { border-radius:10px; padding:12px 16px; font-size:.84rem; font-weight:700; margin-top:14px; }
+.status-normal { background:rgba(5,150,105,.1); color:#047857; border:1px solid rgba(5,150,105,.2); }
+.status-warn { background:rgba(217,119,6,.1); color:#b45309; border:1px solid rgba(217,119,6,.2); }
+.status-danger { background:rgba(220,38,38,.1); color:#b91c1c; border:1px solid rgba(220,38,38,.2); }
+footer { text-align:center; padding:20px; font-size:.73rem; color:var(--muted); border-top:1px solid var(--border); margin-top:8px; }
+footer a { color:#818cf8; text-decoration:none; }
+
+/* Tool-specific */
+.live-ts { display:flex; gap:12px; flex-wrap:wrap; }
+.live-box {
+  flex:1; min-width:200px; background:linear-gradient(135deg,#1e1b4b,#312e81);
+  color:#fff; border-radius:12px; padding:16px 20px;
+}
+.live-box-label { font-size:.7rem; color:rgba(255,255,255,.55); margin-bottom:6px; }
+.live-box-val { font-size:1.5rem; font-weight:900; font-family:'Consolas',monospace; letter-spacing:.04em; }
+.radio-row { display:flex; gap:16px; align-items:center; flex-wrap:wrap; }
+.radio-row label { display:flex; align-items:center; gap:5px; font-size:.83rem; font-weight:600; color:var(--text2); cursor:pointer; }
+.radio-row input[type=radio] { accent-color:var(--indigo); width:15px; height:15px; }
+.copied-toast {
+  position:fixed; bottom:24px; right:24px;
+  background:#1e1b4b; color:#fff; padding:10px 18px;
+  border-radius:10px; font-size:.82rem; font-weight:700;
+  opacity:0; pointer-events:none; transition:opacity .2s;
+  z-index:999;
+}
+.copied-toast.show { opacity:1; }
+.full-result { grid-column:1/-1; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr">
+    <a class="hdr-back" href="../">&#8592; ツール一覧</a>
+    <div class="hdr-title">&#128336; タイムスタンプ変換</div>
+    <div class="hdr-sub">Unixタイムスタンプと日時を相互変換。ミリ秒対応・現在時刻取得付き</div>
+  </div>
+</header>
+
+<main>
+
+  <!-- Section 1: 現在のUnixタイムスタンプ -->
+  <div class="card">
+    <div class="card-title">現在のUnixタイムスタンプ</div>
+    <div class="live-ts">
+      <div class="live-box">
+        <div class="live-box-label">秒（Unix timestamp）</div>
+        <div class="live-box-val" id="liveSeconds">---</div>
+      </div>
+      <div class="live-box">
+        <div class="live-box-label">ミリ秒（Unix timestamp ms）</div>
+        <div class="live-box-val" id="liveMillis">---</div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="copyTs('sec')">コピー（秒）</button>
+      <button class="btn btn-outline" onclick="copyTs('ms')">コピー（ミリ秒）</button>
+    </div>
+  </div>
+
+  <!-- Section 2: Unixタイムスタンプ → 日時変換 -->
+  <div class="card">
+    <div class="card-title">Unixタイムスタンプ &#8594; 日時変換</div>
+    <div class="fg2">
+      <div class="fgrp" style="grid-column:1/-1">
+        <label class="flbl">Unixタイムスタンプ</label>
+        <input type="number" id="tsInput" placeholder="例: 1700000000" />
+      </div>
+    </div>
+    <div style="margin-top:10px;">
+      <div class="radio-row">
+        <span class="flbl">単位：</span>
+        <label><input type="radio" name="tsUnit" value="sec" checked> 秒</label>
+        <label><input type="radio" name="tsUnit" value="ms"> ミリ秒</label>
+        <button class="btn btn-outline" onclick="fillNow()" style="margin-left:auto; padding:5px 12px; font-size:.77rem;">現在時刻を入力</button>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="convertTsToDate()">変換</button>
+      <button class="btn btn-outline" onclick="clearTsResult()">クリア</button>
+    </div>
+    <div id="tsResult" style="display:none;">
+      <div class="result-grid">
+        <div class="result-item">
+          <div class="result-label">ローカル時刻</div>
+          <div class="result-value" id="resLocal" style="font-size:.9rem;">-</div>
+        </div>
+        <div class="result-item">
+          <div class="result-label">UTC時刻</div>
+          <div class="result-value" id="resUTC" style="font-size:.9rem;">-</div>
+        </div>
+        <div class="result-item full-result">
+          <div class="result-label">ISO 8601</div>
+          <div class="result-value" id="resISO" style="font-size:.9rem;">-</div>
+        </div>
+        <div class="result-item">
+          <div class="result-label">曜日</div>
+          <div class="result-value" id="resWeekday">-</div>
+        </div>
+        <div class="result-item">
+          <div class="result-label">経過時間（現在から）</div>
+          <div class="result-value" id="resElapsed" style="font-size:.85rem;">-</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3: 日時 → Unixタイムスタンプ変換 -->
+  <div class="card">
+    <div class="card-title">日時 &#8594; Unixタイムスタンプ変換</div>
+    <div class="fgrp">
+      <label class="flbl">日時を入力</label>
+      <input type="datetime-local" id="dtInput" />
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="convertDateToTs()">変換</button>
+      <button class="btn btn-outline" onclick="setDtNow()">現在時刻をセット</button>
+      <button class="btn btn-outline" onclick="clearDtResult()">クリア</button>
+    </div>
+    <div id="dtResult" style="display:none;">
+      <div class="result-grid">
+        <div class="result-item">
+          <div class="result-label">Unix秒</div>
+          <div class="result-value" id="resUnixSec">-</div>
+          <div class="result-unit">seconds</div>
+        </div>
+        <div class="result-item">
+          <div class="result-label">Unixミリ秒</div>
+          <div class="result-value" id="resUnixMs">-</div>
+          <div class="result-unit">milliseconds</div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-outline" onclick="copyVal('resUnixSec')">秒をコピー</button>
+        <button class="btn btn-outline" onclick="copyVal('resUnixMs')">ミリ秒をコピー</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <a href="../">ツール一覧</a> &nbsp;|&nbsp;
+  <a href="https://toaruseigyoya.github.io/" target="_blank" rel="noopener">ホームページ</a>
+</footer>
+
+<div class="copied-toast" id="toast">コピーしました</div>
+
+<script>
+const WEEKDAYS = ['日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日'];
+
+// Live timestamp display
+let liveSec = 0, liveMs = 0;
+function updateLive() {
+  const now = Date.now();
+  liveSec = Math.floor(now / 1000);
+  liveMs = now;
+  document.getElementById('liveSeconds').textContent = liveSec;
+  document.getElementById('liveMillis').textContent = liveMs;
+}
+updateLive();
+setInterval(updateLive, 1000);
+
+function copyTs(type) {
+  const val = type === 'sec' ? String(liveSec) : String(liveMs);
+  navigator.clipboard.writeText(val).then(() => showToast('コピーしました: ' + val));
+}
+
+function copyVal(id) {
+  const val = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(val).then(() => showToast('コピーしました: ' + val));
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// Section 2: Timestamp -> Date
+function fillNow() {
+  const unit = document.querySelector('input[name=tsUnit]:checked').value;
+  document.getElementById('tsInput').value = unit === 'ms' ? Date.now() : Math.floor(Date.now()/1000);
+}
+
+function convertTsToDate() {
+  const raw = document.getElementById('tsInput').value.trim();
+  if (!raw) { alert('タイムスタンプを入力してください'); return; }
+  const unit = document.querySelector('input[name=tsUnit]:checked').value;
+  const ts = Number(raw);
+  if (isNaN(ts)) { alert('数値を入力してください'); return; }
+  const ms = unit === 'ms' ? ts : ts * 1000;
+  const d = new Date(ms);
+  if (isNaN(d.getTime())) { alert('無効なタイムスタンプです'); return; }
+
+  document.getElementById('resLocal').textContent = d.toLocaleString('ja-JP', {
+    year:'numeric', month:'2-digit', day:'2-digit',
+    hour:'2-digit', minute:'2-digit', second:'2-digit'
+  });
+  document.getElementById('resUTC').textContent = d.toUTCString();
+  document.getElementById('resISO').textContent = d.toISOString();
+  document.getElementById('resWeekday').textContent = WEEKDAYS[d.getDay()];
+
+  // Elapsed time
+  const diffMs = Date.now() - ms;
+  const absDiff = Math.abs(diffMs);
+  const past = diffMs >= 0;
+  const sec = Math.floor(absDiff / 1000);
+  const min = Math.floor(sec / 60);
+  const hr  = Math.floor(min / 60);
+  const day = Math.floor(hr / 24);
+  let elapsed = '';
+  if (day > 0) elapsed = day + '日' + (hr%24) + '時間';
+  else if (hr > 0) elapsed = hr + '時間' + (min%60) + '分';
+  else if (min > 0) elapsed = min + '分' + (sec%60) + '秒';
+  else elapsed = sec + '秒';
+  document.getElementById('resElapsed').textContent = past ? elapsed + ' 前' : elapsed + ' 後';
+
+  document.getElementById('tsResult').style.display = '';
+}
+
+function clearTsResult() {
+  document.getElementById('tsInput').value = '';
+  document.getElementById('tsResult').style.display = 'none';
+}
+
+// Section 3: Date -> Timestamp
+function setDtNow() {
+  const now = new Date();
+  const local = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+  document.getElementById('dtInput').value = local.toISOString().slice(0,16);
+}
+
+// Set default on load
+(function() {
+  const now = new Date();
+  const local = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+  document.getElementById('dtInput').value = local.toISOString().slice(0,16);
+})();
+
+function convertDateToTs() {
+  const val = document.getElementById('dtInput').value;
+  if (!val) { alert('日時を入力してください'); return; }
+  const d = new Date(val);
+  if (isNaN(d.getTime())) { alert('無効な日時です'); return; }
+  const ms = d.getTime();
+  const sec = Math.floor(ms / 1000);
+  document.getElementById('resUnixSec').textContent = sec;
+  document.getElementById('resUnixMs').textContent = ms;
+  document.getElementById('dtResult').style.display = '';
+}
+
+function clearDtResult() {
+  document.getElementById('dtResult').style.display = 'none';
+}
+</script>
+</body>
+</html>

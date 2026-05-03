@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文字数カウンター | ツール集</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --indigo: #4f46e5; --violet: #7c3aed; --emerald: #059669;
+      --bg: #f5f6ff; --surf: #fff;
+      --border: #e0e7ff; --text: #1e1b4b; --text2: #4c4980; --muted: #8b87c0;
+    }
+    body { font-family: 'Segoe UI','Yu Gothic UI','Hiragino Sans',sans-serif; background: var(--bg); color: var(--text); }
+    header { background: linear-gradient(135deg,#1e1b4b,#312e81); color:#fff; }
+    .hdr { max-width:860px; margin:0 auto; padding:18px 24px; }
+    .hdr-back { display:inline-flex; align-items:center; gap:5px; font-size:.78rem; color:rgba(255,255,255,.55); text-decoration:none; margin-bottom:8px; transition:color .15s; }
+    .hdr-back:hover { color:rgba(255,255,255,.9); }
+    .hdr-title { font-size:1.4rem; font-weight:900; margin-bottom:4px; }
+    .hdr-sub { font-size:.82rem; color:rgba(255,255,255,.65); }
+    main { max-width:860px; margin:0 auto; padding:24px; }
+    .card { background:var(--surf); border:1px solid var(--border); border-radius:14px; padding:20px; margin-bottom:16px; box-shadow:0 2px 10px rgba(79,70,229,.06); }
+    .card-title { font-size:.88rem; font-weight:800; color:#3730a3; margin-bottom:12px; }
+    .btn { padding:9px 18px; border:none; border-radius:9px; font-size:.84rem; font-weight:700; cursor:pointer; font-family:inherit; transition:all .15s; }
+    .btn-primary { background:linear-gradient(135deg,var(--indigo),var(--violet)); color:#fff; box-shadow:0 3px 10px rgba(79,70,229,.25); }
+    .btn-primary:hover { transform:translateY(-1px); }
+    .btn-outline { background:transparent; border:1.5px solid var(--border); color:var(--text2); }
+    .btn-outline:hover { border-color:#818cf8; color:var(--indigo); }
+    .btn-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+    textarea { width:100%; padding:10px 12px; border:1.5px solid var(--border); border-radius:9px; font-size:.84rem; font-family:'Consolas',monospace; background:var(--bg); color:var(--text); resize:vertical; }
+    textarea:focus { outline:none; border-color:#818cf8; }
+    .stat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px; margin-top:12px; }
+    .stat-box { background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:12px; text-align:center; }
+    .stat-val { font-size:1.5rem; font-weight:900; color:var(--indigo); font-family:'Consolas',monospace; }
+    .stat-lbl { font-size:.72rem; color:var(--muted); margin-top:2px; }
+    .result-box { background:var(--bg); border:1px solid var(--border); border-radius:9px; padding:12px; font-family:'Consolas',monospace; font-size:.84rem; min-height:80px; white-space:pre-wrap; word-break:break-all; }
+    .copy-msg { font-size:.75rem; color:var(--emerald); display:none; margin-left:8px; }
+    footer { text-align:center; padding:20px; font-size:.73rem; color:var(--muted); border-top:1px solid var(--border); margin-top:8px; }
+    footer a { color:#818cf8; text-decoration:none; }
+
+    .hint { font-size:.77rem; color:var(--muted); margin-top:6px; }
+    textarea#inputText { line-height: 1.6; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="hdr">
+    <a href="../" class="hdr-back">← ツール一覧</a>
+    <div class="hdr-title">文字数カウンター</div>
+    <div class="hdr-sub">テキストの文字数・行数・単語数・バイト数をリアルタイムで計測</div>
+  </div>
+</header>
+
+<main>
+  <div class="card">
+    <div class="card-title">テキスト入力</div>
+    <textarea id="inputText" rows="8" placeholder="ここにテキストを入力してください。入力と同時に各種カウントが更新されます。" oninput="updateStats()"></textarea>
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="clearText()">クリア</button>
+    </div>
+    <p class="hint">テキストを入力すると自動的に計測されます。</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">計測結果</div>
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="stat-val" id="statTotal">0</div>
+        <div class="stat-lbl">文字数（スペース含む）</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="statNoSpace">0</div>
+        <div class="stat-lbl">文字数（スペース除く）</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="statLines">0</div>
+        <div class="stat-lbl">行数</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="statWords">0</div>
+        <div class="stat-lbl">単語数</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="statBytes">0</div>
+        <div class="stat-lbl">バイト数（UTF-8）</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <a href="../">← ツール一覧へ戻る</a>
+  &nbsp;|&nbsp;
+  <a href="../../index.html">ホームへ</a>
+  <br style="margin-bottom:4px">
+  文字数カウンター &mdash; 無料テキスト解析ツール
+</footer>
+
+<script>
+  function updateStats() {
+    const text = document.getElementById('inputText').value;
+
+    // 文字数（スペース含む）
+    const total = text.length;
+    document.getElementById('statTotal').textContent = total.toLocaleString();
+
+    // 文字数（スペース除く）：全角・半角スペース、タブを除外
+    const noSpace = text.replace(/[\s　]/g, '').length;
+    document.getElementById('statNoSpace').textContent = noSpace.toLocaleString();
+
+    // 行数：空テキストでも1行とカウント
+    const lines = text === '' ? 0 : text.split('\n').length;
+    document.getElementById('statLines').textContent = lines.toLocaleString();
+
+    // 単語数：半角スペース区切り（連続スペースを1つに）
+    const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+    document.getElementById('statWords').textContent = words.toLocaleString();
+
+    // バイト数（UTF-8）
+    const bytes = new TextEncoder().encode(text).length;
+    document.getElementById('statBytes').textContent = bytes.toLocaleString();
+  }
+
+  function clearText() {
+    document.getElementById('inputText').value = '';
+    updateStats();
+  }
+</script>
+</body>
+</html>

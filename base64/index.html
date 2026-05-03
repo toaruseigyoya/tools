@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Base64エンコード/デコード | ツール集</title>
+  <meta name="description" content="テキストをBase64形式に変換・復号。日本語（UTF-8）対応">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --indigo: #4f46e5; --violet: #7c3aed; --emerald: #059669;
+      --bg: #f5f6ff; --surf: #fff;
+      --border: #e0e7ff; --text: #1e1b4b; --text2: #4c4980; --muted: #8b87c0;
+    }
+    body { font-family: 'Segoe UI','Yu Gothic UI','Hiragino Sans',sans-serif; background: var(--bg); color: var(--text); }
+    header { background: linear-gradient(135deg,#1e1b4b,#312e81); color:#fff; }
+    .hdr { max-width:860px; margin:0 auto; padding:18px 24px; }
+    .hdr-back { display:inline-flex; align-items:center; gap:5px; font-size:.78rem; color:rgba(255,255,255,.55); text-decoration:none; margin-bottom:8px; transition:color .15s; }
+    .hdr-back:hover { color:rgba(255,255,255,.9); }
+    .hdr-title { font-size:1.4rem; font-weight:900; margin-bottom:4px; }
+    .hdr-sub { font-size:.82rem; color:rgba(255,255,255,.65); }
+    main { max-width:860px; margin:0 auto; padding:24px; }
+    .card { background:var(--surf); border:1px solid var(--border); border-radius:14px; padding:20px; margin-bottom:16px; box-shadow:0 2px 10px rgba(79,70,229,.06); }
+    .card-title { font-size:.88rem; font-weight:800; color:#3730a3; margin-bottom:12px; }
+    .btn { padding:9px 18px; border:none; border-radius:9px; font-size:.84rem; font-weight:700; cursor:pointer; font-family:inherit; transition:all .15s; }
+    .btn-primary { background:linear-gradient(135deg,var(--indigo),var(--violet)); color:#fff; box-shadow:0 3px 10px rgba(79,70,229,.25); }
+    .btn-primary:hover { transform:translateY(-1px); }
+    .btn-outline { background:transparent; border:1.5px solid var(--border); color:var(--text2); }
+    .btn-outline:hover { border-color:#818cf8; color:var(--indigo); }
+    .btn-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+    textarea { width:100%; padding:10px 12px; border:1.5px solid var(--border); border-radius:9px; font-size:.84rem; font-family:'Consolas',monospace; background:var(--bg); color:var(--text); resize:vertical; }
+    textarea:focus { outline:none; border-color:#818cf8; }
+    .err { color:#dc2626; font-size:.78rem; margin-top:6px; }
+    .result-box { background:var(--bg); border:1px solid var(--border); border-radius:9px; padding:12px; font-family:'Consolas',monospace; font-size:.84rem; min-height:60px; white-space:pre-wrap; word-break:break-all; }
+    footer { text-align:center; padding:20px; font-size:.73rem; color:var(--muted); border-top:1px solid var(--border); margin-top:8px; }
+    footer a { color:#818cf8; text-decoration:none; }
+
+    .section-label { font-size:.8rem; font-weight:700; color:var(--text2); margin-bottom:6px; }
+    .output-wrapper { position:relative; margin-top:16px; }
+    .copy-inline { position:absolute; top:8px; right:8px; padding:4px 10px; font-size:.75rem; }
+    .copy-success { background: linear-gradient(135deg, var(--emerald), #047857) !important; }
+    .char-count { font-size:.73rem; color:var(--muted); text-align:right; margin-top:4px; }
+    .swap-arrow { display:flex; justify-content:center; align-items:center; color:var(--muted); font-size:1.2rem; margin:4px 0; user-select:none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="hdr">
+    <a class="hdr-back" href="../">← ツール一覧へ戻る</a>
+    <div class="hdr-title">Base64 エンコード / デコード</div>
+    <div class="hdr-sub">テキストをBase64形式に変換・復号。日本語（UTF-8）対応</div>
+  </div>
+</header>
+
+<main>
+
+  <!-- 入力カード -->
+  <div class="card">
+    <div class="card-title">入力テキスト</div>
+    <div class="section-label">変換したいテキストを入力してください</div>
+    <textarea id="inputText" rows="5" placeholder="ここにテキストを入力...&#10;例: こんにちは、世界！ / Hello, World!"></textarea>
+    <div class="char-count"><span id="inputCount">0</span> 文字</div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="doEncode()">エンコード（Base64へ）</button>
+      <button class="btn btn-primary" onclick="doDecode()">デコード（Base64から）</button>
+      <button class="btn btn-outline" onclick="clearAll()">クリア</button>
+      <button class="btn btn-outline" onclick="swapInOut()">⇅ 入出力を入れ替え</button>
+    </div>
+    <div id="errMsg" class="err" style="display:none;"></div>
+  </div>
+
+  <!-- 出力カード -->
+  <div class="card">
+    <div class="card-title">変換結果</div>
+    <div class="section-label">結果</div>
+    <div class="output-wrapper">
+      <textarea id="outputText" rows="5" readonly placeholder="変換結果がここに表示されます..."></textarea>
+      <button class="btn btn-outline copy-inline" id="copyBtn" onclick="copyOutput()">コピー</button>
+    </div>
+    <div class="char-count"><span id="outputCount">0</span> 文字</div>
+  </div>
+
+  <!-- 説明カード -->
+  <div class="card">
+    <div class="card-title">Base64 について</div>
+    <p style="font-size:.82rem; color:var(--text2); line-height:1.7;">
+      Base64は、バイナリデータをASCII文字列で表現するエンコード方式です。メールの添付ファイル、
+      データURIスキーム、JWTトークンなどで広く使われています。<br><br>
+      このツールはJavaScriptの <code style="background:var(--bg);padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;">btoa()</code> / <code style="background:var(--bg);padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;">atob()</code> を使用し、
+      UTF-8エンコードで日本語を含む全Unicodeテキストに対応しています。
+    </p>
+  </div>
+
+</main>
+
+<footer>
+  <a href="../">← ツール一覧</a> &nbsp;|&nbsp;
+  <a href="https://toaruseigyoya.github.io/" target="_blank" rel="noopener">ホームページ</a>
+  <br><br>
+  &copy; 2025 とある制御屋のツール集
+</footer>
+
+<script>
+  const inputEl  = document.getElementById('inputText');
+  const outputEl = document.getElementById('outputText');
+  const errEl    = document.getElementById('errMsg');
+  const inputCnt = document.getElementById('inputCount');
+  const outputCnt= document.getElementById('outputCount');
+  const copyBtn  = document.getElementById('copyBtn');
+
+  inputEl.addEventListener('input', () => {
+    inputCnt.textContent = inputEl.value.length;
+    clearError();
+  });
+
+  function clearError() {
+    errEl.style.display = 'none';
+    errEl.textContent = '';
+  }
+
+  function showError(msg) {
+    errEl.textContent = msg;
+    errEl.style.display = 'block';
+  }
+
+  function setOutput(val) {
+    outputEl.value = val;
+    outputCnt.textContent = val.length;
+  }
+
+  function doEncode() {
+    clearError();
+    const text = inputEl.value;
+    if (!text) { showError('テキストを入力してください。'); return; }
+    try {
+      // UTF-8 対応エンコード
+      const encoded = btoa(unescape(encodeURIComponent(text)));
+      setOutput(encoded);
+    } catch (e) {
+      showError('エンコードに失敗しました: ' + e.message);
+    }
+  }
+
+  function doDecode() {
+    clearError();
+    const text = inputEl.value.trim();
+    if (!text) { showError('Base64テキストを入力してください。'); return; }
+    try {
+      // UTF-8 対応デコード
+      const decoded = decodeURIComponent(escape(atob(text)));
+      setOutput(decoded);
+    } catch (e) {
+      if (e instanceof DOMException || e.message.includes('atob')) {
+        showError('無効なBase64文字列です。入力内容を確認してください。');
+      } else {
+        showError('デコードに失敗しました: ' + e.message);
+      }
+    }
+  }
+
+  function clearAll() {
+    inputEl.value = '';
+    setOutput('');
+    clearError();
+    inputCnt.textContent = '0';
+  }
+
+  function swapInOut() {
+    const tmp = inputEl.value;
+    inputEl.value = outputEl.value;
+    setOutput(tmp);
+    inputCnt.textContent = inputEl.value.length;
+    clearError();
+  }
+
+  function copyOutput() {
+    const text = outputEl.value;
+    if (!text) return;
+    navigator.clipboard.writeText(text).then(() => {
+      copyBtn.textContent = 'コピー完了！';
+      copyBtn.classList.add('copy-success');
+      setTimeout(() => {
+        copyBtn.textContent = 'コピー';
+        copyBtn.classList.remove('copy-success');
+      }, 1800);
+    }).catch(() => {
+      // fallback
+      outputEl.select();
+      document.execCommand('copy');
+      copyBtn.textContent = 'コピー完了！';
+      setTimeout(() => { copyBtn.textContent = 'コピー'; }, 1800);
+    });
+  }
+</script>
+</body>
+</html>
