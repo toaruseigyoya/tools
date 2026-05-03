@@ -20,12 +20,15 @@
     .hero { text-align:center; margin-bottom:28px; }
     .hero h1 { font-size:1.8rem; font-weight:800; line-height:1.3; margin-bottom:10px; }
     .hero p { color:var(--text2); font-size:.95rem; }
-    .top-tools { display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:18px; align-items:start; margin-bottom:18px; }
+    .top-tools { display:grid; grid-template-columns:minmax(0,1fr) 360px; gap:18px; align-items:start; margin-bottom:18px; }
     .panel-title { font-size:.82rem; font-weight:800; color:var(--text2); margin-bottom:8px; }
     .category-panel, .ranking-panel { background:rgba(255,255,255,.6); border:1px solid var(--border); border-radius:12px; padding:12px; }
     .category-bar { display:flex; flex-wrap:wrap; gap:8px; }
     .category-btn { border:1px solid var(--border); background:rgba(255,255,255,.82); color:var(--text2); border-radius:999px; padding:7px 12px; font:inherit; font-size:.82rem; font-weight:700; cursor:pointer; transition:background .15s,border-color .15s,color .15s; }
     .category-btn:hover, .category-btn.active { background:var(--indigo); border-color:var(--indigo); color:#fff; }
+    .ranking-tabs { display:grid; grid-template-columns:repeat(5,1fr); gap:4px; margin-bottom:8px; }
+    .ranking-tab { border:1px solid var(--border); background:rgba(255,255,255,.82); color:var(--text2); border-radius:7px; padding:5px 4px; font:inherit; font-size:.7rem; font-weight:800; cursor:pointer; }
+    .ranking-tab.active { background:var(--indigo); border-color:var(--indigo); color:#fff; }
     .ranking-list { list-style:none; display:grid; gap:6px; }
     .ranking-item { display:grid; grid-template-columns:22px minmax(0,1fr) auto; align-items:center; gap:8px; min-height:28px; color:var(--text2); font-size:.8rem; }
     .ranking-rank { width:22px; height:22px; border-radius:999px; display:inline-grid; place-items:center; background:rgba(79,70,229,.1); color:var(--indigo); font-size:.72rem; font-weight:800; }
@@ -33,6 +36,7 @@
     .ranking-link:hover { color:var(--indigo); }
     .ranking-count { color:var(--muted); font-size:.72rem; white-space:nowrap; }
     .tools-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    .category-heading { grid-column:1/-1; padding:18px 4px 4px; font-size:1rem; font-weight:900; color:var(--text); border-bottom:1px solid var(--border); scroll-margin-top:84px; }
     .tool-card { background:rgba(255,255,255,.78); border:1px solid var(--border); border-radius:10px; padding:12px 14px; display:block; box-shadow:0 2px 10px rgba(79,70,229,.06); transition:transform .15s,box-shadow .15s,border-color .15s; position:relative; overflow:hidden; min-height:74px; cursor:pointer; }
     .tool-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--indigo),var(--violet)); }
     .tool-card:hover, .tool-card:focus-visible { transform:translateY(-1px); box-shadow:0 5px 18px rgba(79,70,229,.12); border-color:rgba(79,70,229,.35); outline:none; }
@@ -76,6 +80,7 @@
     </section>
     <section class="ranking-panel" aria-labelledby="rankingTitle">
       <div class="panel-title" id="rankingTitle">アクセスランキング</div>
+      <div class="ranking-tabs" id="rankingTabs" aria-label="ランキング期間"></div>
       <ol class="ranking-list" id="rankingList"></ol>
     </section>
   </div>
@@ -3820,11 +3825,30 @@
   (function () {
     var grid = document.getElementById('toolsGrid');
     var categoryBar = document.getElementById('categoryBar');
+    var rankingTabs = document.getElementById('rankingTabs');
     var rankingList = document.getElementById('rankingList');
     var emptyState = document.getElementById('emptyState');
     var cards = Array.from(grid.querySelectorAll('.tool-card'));
-    var activeCat = '';
     var rankKey = 'tools-access-ranking';
+    var currentPeriod = 'today';
+    var categoryOrder = [
+      '文章作成系',
+      'テキスト整形系',
+      'データ変換系',
+      '開発・コード系',
+      '計算・単位換算系',
+      '画像・メディア系',
+      'SEO・Web運用系',
+      '時間管理・タスク系',
+      'ランダム・便利系'
+    ];
+    var periods = [
+      ['today', '当日'],
+      ['week', '週間'],
+      ['month', '月間'],
+      ['year', '年間'],
+      ['total', '累計']
+    ];
     var defaultRanking = [
       '文字数カウンター',
       'CSV・TSV変換',
@@ -3844,21 +3868,60 @@
       var link = card.querySelector('.card-link');
       return {
         name: card.getAttribute('data-name') || 'ツール',
-        href: link ? link.getAttribute('href') : '#'
+        href: link ? link.getAttribute('href') : '#',
+        desc: card.getAttribute('data-desc') || ''
       };
+    }
+    function todayKey(offset) {
+      var date = new Date();
+      date.setDate(date.getDate() - (offset || 0));
+      return date.toISOString().slice(0, 10);
+    }
+    function monthKey() {
+      return new Date().toISOString().slice(0, 7);
+    }
+    function yearKey() {
+      return String(new Date().getFullYear());
+    }
+    function entryCount(entry, period) {
+      if (typeof entry === 'number') return period === 'total' ? entry : 0;
+      if (!entry) return 0;
+      if (period === 'total') return entry.total || 0;
+      if (period === 'today') return (entry.days || {})[todayKey()] || 0;
+      if (period === 'month') return (entry.months || {})[monthKey()] || 0;
+      if (period === 'year') return (entry.years || {})[yearKey()] || 0;
+      if (period === 'week') {
+        var days = entry.days || {};
+        var total = 0;
+        for (var i = 0; i < 7; i++) total += days[todayKey(i)] || 0;
+        return total;
+      }
+      return 0;
+    }
+    function classify(card) {
+      var info = cardInfo(card);
+      var text = (info.name + ' ' + info.desc).toLowerCase();
+      if (/メール|挨拶|催促|お礼|謝罪|議事録|報告|文章|文書|word|要約|敬語|レビュー|指摘|表紙|本文|テンプレ|メモ/.test(text)) return '文章作成系';
+      if (/json|csv|tsv|xml|yaml|base64|url|html|markdown|ascii|unicode|punycode|エンコード|デコード|変換|整形|フォーマッター|圧縮|エスケープ/.test(text)) return 'データ変換系';
+      if (/sql|css|js|javascript|typescript|php|go|zod|graphql|jwt|hmac|hash|sha|crc|uuid|正規|regex|api|openapi|env|cron|chmod|ip|cidr|http|curl|コード|ログ|rsa/.test(text)) return '開発・コード系';
+      if (/画像|png|jpg|jpeg|webp|gif|svg|色|カラー|バナー|サムネ|動画|音声|pdf|exif|favicon|ピッチ|イコライザー|ノイズ/.test(text)) return '画像・メディア系';
+      if (/seo|og|meta|メタ|utm|canonical|robots|sitemap|whois|リンク切れ/.test(text)) return 'SEO・Web運用系';
+      if (/日付|時間|タイマー|ポモドーロ|タスク|todo|進捗|期限|カウントダウン|曜日|営業日|セッション|ルーチン|アラーム/.test(text)) return '時間管理・タスク系';
+      if (/計算|換算|単位|税|bmi|ローン|割り勘|割合|平均|合計|最大|最小|面積|体積|速度|温度|圧力|電気|燃費|金利|単価|ポイント|bpm|周波数|アスペクト/.test(text)) return '計算・単位換算系';
+      if (/文字|テキスト|行|空白|スペース|句読点|カッコ|引用|ソート|重複|単語|頻度|ひらがな|カタカナ|ローマ字|タイポ|禁止語/.test(text)) return 'テキスト整形系';
+      return 'ランダム・便利系';
     }
     function renderRanking() {
       var ranking = loadRanking();
       var items = cards.map(function (card) {
         var info = cardInfo(card);
+        var count = entryCount(ranking[info.href], currentPeriod);
         return {
           name: info.name,
           href: info.href,
-          count: ranking[info.href] || 0,
+          count: count,
           fallback: defaultRanking.indexOf(info.name)
         };
-      }).filter(function (item) {
-        return item.count > 0 || item.fallback !== -1;
       }).sort(function (a, b) {
         if (b.count !== a.count) return b.count - a.count;
         return (a.fallback === -1 ? 999 : a.fallback) - (b.fallback === -1 ? 999 : b.fallback);
@@ -3879,7 +3942,7 @@
         });
         var count = document.createElement('span');
         count.className = 'ranking-count';
-        count.textContent = item.count ? item.count + '回' : '定番';
+        count.textContent = item.count + '回';
         li.appendChild(rank);
         li.appendChild(link);
         li.appendChild(count);
@@ -3888,30 +3951,71 @@
     }
     function recordAccess(href) {
       var ranking = loadRanking();
-      ranking[href] = (ranking[href] || 0) + 1;
+      var old = ranking[href];
+      var entry = typeof old === 'number'
+        ? { total: old, days: {}, months: {}, years: {} }
+        : (old || { total: 0, days: {}, months: {}, years: {} });
+      entry.total = (entry.total || 0) + 1;
+      entry.days = entry.days || {};
+      entry.months = entry.months || {};
+      entry.years = entry.years || {};
+      entry.days[todayKey()] = (entry.days[todayKey()] || 0) + 1;
+      entry.months[monthKey()] = (entry.months[monthKey()] || 0) + 1;
+      entry.years[yearKey()] = (entry.years[yearKey()] || 0) + 1;
+      ranking[href] = entry;
       saveRanking(ranking);
       renderRanking();
     }
-    var categories = Array.from(new Set(cards.map(function (card) {
-      return card.getAttribute('data-cat') || '';
-    }).filter(Boolean))).sort(function (a, b) { return a.localeCompare(b, 'ja'); });
-    function makeCategoryButton(label, value) {
+    cards.forEach(function (card) {
+      card.setAttribute('data-group', classify(card));
+    });
+    var groupedCards = categoryOrder.map(function (category) {
+      return {
+        category: category,
+        cards: cards.filter(function (card) { return card.getAttribute('data-group') === category; })
+      };
+    }).filter(function (group) { return group.cards.length > 0; });
+    grid.innerHTML = '';
+    groupedCards.forEach(function (group) {
+      var heading = document.createElement('h2');
+      heading.className = 'category-heading';
+      heading.id = 'category-' + categoryOrder.indexOf(group.category);
+      heading.textContent = group.category;
+      grid.appendChild(heading);
+      group.cards.sort(function (a, b) {
+        return (a.getAttribute('data-name') || '').localeCompare(b.getAttribute('data-name') || '', 'ja');
+      }).forEach(function (card) {
+        grid.appendChild(card);
+      });
+    });
+    grid.appendChild(emptyState);
+    function makeCategoryButton(label, targetId) {
       var button = document.createElement('button');
       button.type = 'button';
-      button.className = 'category-btn' + (value === activeCat ? ' active' : '');
+      button.className = 'category-btn';
       button.textContent = label;
       button.addEventListener('click', function () {
-        activeCat = value;
-        Array.from(categoryBar.querySelectorAll('.category-btn')).forEach(function (btn) {
-          btn.classList.toggle('active', btn === button);
-        });
-        filterCards();
+        var target = document.getElementById(targetId);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
       return button;
     }
-    categoryBar.appendChild(makeCategoryButton('すべて', ''));
-    categories.forEach(function (category) {
-      categoryBar.appendChild(makeCategoryButton(category, category));
+    groupedCards.forEach(function (group) {
+      categoryBar.appendChild(makeCategoryButton(group.category, 'category-' + categoryOrder.indexOf(group.category)));
+    });
+    periods.forEach(function (period) {
+      var button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'ranking-tab' + (period[0] === currentPeriod ? ' active' : '');
+      button.textContent = period[1];
+      button.addEventListener('click', function () {
+        currentPeriod = period[0];
+        Array.from(rankingTabs.querySelectorAll('.ranking-tab')).forEach(function (tab) {
+          tab.classList.toggle('active', tab === button);
+        });
+        renderRanking();
+      });
+      rankingTabs.appendChild(button);
     });
     cards.forEach(function (card) {
       var link = card.querySelector('.card-link');
@@ -3934,16 +4038,7 @@
       });
     });
     renderRanking();
-    function filterCards() {
-      var count = 0;
-      cards.forEach(function (card) {
-        var cat = card.getAttribute('data-cat') || '';
-        var match = activeCat === '' || cat === activeCat;
-        card.classList.toggle('hidden', !match);
-        if (match) count++;
-      });
-      emptyState.classList.toggle('visible', count === 0);
-    }
+    emptyState.classList.remove('visible');
   })();
 </script>
 </body>
