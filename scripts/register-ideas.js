@@ -270,6 +270,7 @@ function pageTemplate(tool) {
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = TOOL.slug + '.txt'; a.click(); URL.revokeObjectURL(a.href);
   }
 </script>
+<script src="../tool-enhancer.js"></script>
 </body>
 </html>
 `;

@@ -207,6 +207,7 @@ function clearAll(){$('input').value='';$('opt1').value='';$('opt2').value='';$(
 async function copy(){const text=$('output').value;try{await navigator.clipboard.writeText(text)}catch(e){$('output').focus();$('output').select();document.execCommand('copy')}}
 function download(){const blob=new Blob([$('output').value],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=TOOL.slug+'.txt';a.click();URL.revokeObjectURL(a.href)}
 </script>
+<script src="../tool-enhancer.js"></script>
 </body>
 </html>
 `;
