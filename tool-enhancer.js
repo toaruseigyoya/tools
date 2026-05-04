@@ -42,7 +42,8 @@
       '.tool-diff-row:last-child{border-bottom:0}',
       '.tool-diff-row.added{background:#ecfdf5}.tool-diff-row.removed{background:#fff1f2}.tool-diff-row.changed{background:#fffbeb}.tool-diff-row.same{background:#fff}',
       '.tool-diff-tag{font-weight:900}.tool-diff-mark{border-radius:4px;padding:0 2px;background:#fde68a;color:#92400e}.tool-diff-cell{background:#fde68a;border-radius:4px;padding:1px 3px}',
-      '@media(max-width:760px){.tool-diff-grid{grid-template-columns:1fr}.tool-diff-row{grid-template-columns:42px 70px minmax(0,1fr);font-size:.76rem}}'
+      '.tool-inline-diff{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.tool-inline-pane{border:1px solid #e0e7ff;border-radius:12px;background:#fff;overflow:auto}.tool-inline-head{position:sticky;top:0;background:#f8fafc;border-bottom:1px solid #e0e7ff;padding:8px 10px;font-weight:900;color:#1e1b4b}.tool-inline-body{padding:12px;font-family:Consolas,monospace;font-size:.9rem;line-height:1.7;white-space:pre-wrap;word-break:break-word}.tool-diff-added{background:#bbf7d0;color:#14532d;border-radius:4px;padding:1px 2px}.tool-diff-removed{background:#fecaca;color:#7f1d1d;border-radius:4px;padding:1px 2px;text-decoration:line-through}.tool-diff-equal{color:#1e1b4b}.tool-diff-gap{opacity:.35}.tool-diff-mode{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 4px;color:#1e1b4b;font-size:.84rem;font-weight:900}.tool-diff-mode label{display:inline-flex;align-items:center;gap:4px;margin:0}',
+      '@media(max-width:760px){.tool-diff-grid,.tool-inline-diff{grid-template-columns:1fr}.tool-diff-row{grid-template-columns:42px 70px minmax(0,1fr);font-size:.76rem}}'
     ].join('\n');
     document.head.appendChild(style);
   }
@@ -265,10 +266,90 @@
     box.innerHTML = '<label><input id="diffIgnoreSpaces" type="checkbox">空白無視</label><label><input id="diffIgnoreCase" type="checkbox">大小文字無視</label><label><input id="diffTrim" type="checkbox">前後空白無視</label><label><input id="diffIgnoreBlank" type="checkbox">空行無視</label>';
     host.appendChild(box);
   }
+  function normalizeToken(value, opts) {
+    value = String(value == null ? '' : value);
+    if (opts.trim) value = value.trim();
+    if (opts.ignoreSpaces) value = value.replace(/\s+/g, '');
+    if (opts.ignoreCase) value = value.toLowerCase();
+    return value;
+  }
+  function tokenizeDiffText(text, mode, opts) {
+    var source = String(text || '');
+    if (mode === 'line') {
+      var rawLines = source.replace(/\r\n/g, '\n').split('\n');
+      return rawLines.map(function (line, i) {
+        return { text: line + (i < rawLines.length - 1 ? '\n' : ''), key: normalizeToken(line, opts) };
+      }).filter(function (token) { return !opts.ignoreBlank || token.key.trim(); });
+    }
+    if (mode === 'word') {
+      return source.split(/(\s+|[、。,.!?！？;:：；()[\]{}「」『』"'])/).filter(function (part) { return part !== ''; }).map(function (part) {
+        return { text: part, key: /^\s+$/.test(part) && opts.ignoreSpaces ? '' : normalizeToken(part, opts) };
+      }).filter(function (token) { return token.key !== '' || !opts.ignoreSpaces; });
+    }
+    return Array.from(source).map(function (ch) {
+      return { text: ch, key: normalizeToken(ch, opts) };
+    }).filter(function (token) { return token.key !== '' || !opts.ignoreSpaces; });
+  }
+  function tokenDiff(aTokens, bTokens) {
+    var m = aTokens.length, n = bTokens.length;
+    var dp = Array(m + 1).fill(null).map(function () { return Array(n + 1).fill(0); });
+    for (var i = 1; i <= m; i++) {
+      for (var j = 1; j <= n; j++) {
+        dp[i][j] = aTokens[i - 1].key === bTokens[j - 1].key ? dp[i - 1][j - 1] + 1 : Math.max(dp[i - 1][j], dp[i][j - 1]);
+      }
+    }
+    var ops = [], x = m, y = n;
+    while (x > 0 || y > 0) {
+      if (x > 0 && y > 0 && aTokens[x - 1].key === bTokens[y - 1].key) {
+        ops.unshift({ type: 'equal', a: aTokens[x - 1].text, b: bTokens[y - 1].text });
+        x--; y--;
+      } else if (y > 0 && (x === 0 || dp[x][y - 1] >= dp[x - 1][y])) {
+        ops.unshift({ type: 'added', a: '', b: bTokens[y - 1].text });
+        y--;
+      } else {
+        ops.unshift({ type: 'removed', a: aTokens[x - 1].text, b: '' });
+        x--;
+      }
+    }
+    return ops;
+  }
+  function renderInlineDiff(ops, mode) {
+    var added = 0, removed = 0, same = 0;
+    var left = [], right = [];
+    ops.forEach(function (op) {
+      if (op.type === 'equal') {
+        same++;
+        left.push('<span class="tool-diff-equal">' + esc(op.a) + '</span>');
+        right.push('<span class="tool-diff-equal">' + esc(op.b) + '</span>');
+      } else if (op.type === 'added') {
+        added++;
+        left.push('<span class="tool-diff-gap">' + (mode === 'line' ? '\n' : '') + '</span>');
+        right.push('<span class="tool-diff-added">' + esc(op.b) + '</span>');
+      } else {
+        removed++;
+        left.push('<span class="tool-diff-removed">' + esc(op.a) + '</span>');
+        right.push('<span class="tool-diff-gap">' + (mode === 'line' ? '\n' : '') + '</span>');
+      }
+    });
+    return {
+      added: added,
+      removed: removed,
+      same: same,
+      text: '差分サマリー: 追加 ' + added + ' / 削除 ' + removed + ' / 一致 ' + same,
+      html: '<div class="tool-enhanced-summary">差分サマリー: 追加 ' + added + ' / 削除 ' + removed + ' / 一致 ' + same + '</div><div class="tool-inline-diff"><div class="tool-inline-pane"><div class="tool-inline-head">テキスト1（比較元） 削除箇所を赤で表示</div><div class="tool-inline-body">' + left.join('') + '</div></div><div class="tool-inline-pane"><div class="tool-inline-head">テキスト2（比較先） 追加箇所を緑で表示</div><div class="tool-inline-body">' + right.join('') + '</div></div></div>'
+    };
+  }
   function installStandaloneDiffTool() {
     var textA = document.getElementById('textA'), textB = document.getElementById('textB'), result = document.getElementById('resultContainer');
     if (!textA || !textB || !result) return;
     var card = textA.closest('.card') || document.querySelector('main');
+    if (!document.getElementById('diffModeChar')) {
+      var modeBox = document.createElement('div');
+      modeBox.className = 'tool-diff-mode';
+      modeBox.innerHTML = '<label><input id="diffModeChar" name="diffMode" type="radio" value="char" checked>文字単位</label><label><input name="diffMode" type="radio" value="word">単語単位</label><label><input name="diffMode" type="radio" value="line">行単位</label>';
+      var buttonGroup = card.querySelector('.button-group');
+      card.insertBefore(modeBox, buttonGroup || card.firstChild);
+    }
     ensureDiffControls(card);
     var buttons = card.querySelector('.button-group');
     if (buttons && !document.getElementById('standaloneDiffSample')) {
@@ -286,11 +367,14 @@
     }
     window.compareDiff = function () {
       if (!textA.value && !textB.value) { result.innerHTML = '<div class="tool-enhanced-error" style="display:block">比較するテキストを入力してください。</div>'; return; }
-      var diff = buildDiff(textA.value, textB.value, diffOptions(), false);
+      var modeInput = document.querySelector('input[name="diffMode"]:checked');
+      var mode = modeInput ? modeInput.value : 'char';
+      var opts = diffOptions();
+      var diff = renderInlineDiff(tokenDiff(tokenizeDiffText(textA.value, mode, opts), tokenizeDiffText(textB.value, mode, opts)), mode);
       var summary = document.getElementById('summarySection');
       if (summary) summary.style.display = 'none';
-      result.innerHTML = diffPreview(diff, false) + '<div class="button-group" style="margin-top:12px"><button class="btn-secondary" onclick="navigator.clipboard.writeText(window.__lastDiffText || \'\')">結果コピー</button></div>';
-      window.__lastDiffText = diffText(diff, false);
+      result.innerHTML = diff.html + '<div class="button-group" style="margin-top:12px"><button class="btn-secondary" onclick="navigator.clipboard.writeText(window.__lastDiffText || \'\')">結果コピー</button></div>';
+      window.__lastDiffText = diff.text + '\n\nテキスト1:\n' + textA.value + '\n\nテキスト2:\n' + textB.value;
     };
   }
   async function imageProcess() {
