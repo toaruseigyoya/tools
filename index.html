@@ -3,8 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ツール集 | とある制御屋の備忘録</title>
-  <meta name="description" content="登録不要・無料で使えるWebツール集。文字、変換、計算、開発、文章補助、表作成など533件のツールを揃えています。">
+  <title>無料Webツール集 | 文字・変換・計算・開発ツール533件</title>
+  <meta name="description" content="登録不要・無料で使えるWebツール集。文字数、変換、計算、開発、文章補助、表作成など533件のツールをブラウザで利用できます。">
+  <link rel="canonical" href="https://toaruseigyoya.github.io/tools/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="とある制御屋の備忘録">
+  <meta property="og:title" content="無料Webツール集 | 登録不要で使える533件">
+  <meta property="og:description" content="文字数、変換、計算、開発、文章補助、表作成などの無料Webツールをブラウザで利用できます。">
+  <meta property="og:url" content="https://toaruseigyoya.github.io/tools/">
+  <meta name="twitter:card" content="summary">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "無料Webツール集",
+    "url": "https://toaruseigyoya.github.io/tools/",
+    "description": "登録不要で使える無料Webツール一覧。",
+    "inLanguage": "ja",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "とある制御屋の備忘録",
+      "url": "https://toaruseigyoya.github.io/"
+    }
+  }
+  </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root { --indigo:#4f46e5; --violet:#7c3aed; --emerald:#059669; --rose:#e11d48; --bg:#f5f6ff; --surf:#fff; --border:#e0e7ff; --text:#1e1b4b; --text2:#4c4980; --muted:#8b87c0; --radius:16px; --shadow:0 4px 24px rgba(79,70,229,.08); }
@@ -20,6 +42,10 @@
     .hero { text-align:center; margin-bottom:28px; }
     .hero h1 { font-size:1.8rem; font-weight:800; line-height:1.3; margin-bottom:10px; }
     .hero p { color:var(--text2); font-size:.95rem; }
+    .search-panel { background:rgba(255,255,255,.72); border:1px solid var(--border); border-radius:12px; padding:12px; margin-bottom:18px; display:grid; grid-template-columns:minmax(0,1fr) 168px auto; gap:10px; align-items:center; }
+    .search-panel input, .search-panel select { min-width:0; width:100%; border:1px solid var(--border); border-radius:9px; background:#fff; color:var(--text); font:inherit; font-size:.86rem; font-weight:700; padding:9px 11px; }
+    .search-panel input:focus, .search-panel select:focus { outline:3px solid rgba(79,70,229,.18); border-color:rgba(79,70,229,.45); }
+    .result-count { color:var(--muted); font-size:.78rem; font-weight:800; white-space:nowrap; }
     .top-tools { display:grid; grid-template-columns:minmax(0,1fr) 360px; gap:18px; align-items:start; margin-bottom:18px; }
     .panel-title { font-size:.82rem; font-weight:800; color:var(--text2); margin-bottom:8px; }
     .category-panel, .ranking-panel { background:rgba(255,255,255,.6); border:1px solid var(--border); border-radius:12px; padding:12px; }
@@ -58,7 +84,7 @@
     .empty-state.visible { display:block; }
     footer { text-align:center; padding:24px 16px 32px; color:var(--muted); font-size:.82rem; border-top:1px solid var(--border); }
     footer a { color:var(--indigo); text-decoration:none; font-weight:600; }
-    @media (max-width:760px) { .top-tools { grid-template-columns:1fr; } }
+    @media (max-width:760px) { .top-tools { grid-template-columns:1fr; } .search-panel { grid-template-columns:1fr; } .result-count { white-space:normal; } }
     @media (max-width:600px) { main { padding:28px 16px 48px; } .hero h1 { font-size:1.42rem; } .tools-grid { grid-template-columns:1fr; } .tool-card { min-height:68px; } }
   </style>
 </head>
@@ -74,6 +100,16 @@
   <section class="hero">
     <h1>無料 <span class="accent">Webツール集</span></h1>
     <p>登録不要・インストール不要。ブラウザですぐに使えるツールを揃えています。</p>
+  </section>
+  <section class="search-panel" aria-label="ツール検索と並び替え">
+    <input id="toolSearch" type="search" placeholder="ツール名・説明で検索">
+    <select id="sortMode" aria-label="ツールの並び替え">
+      <option value="default">カテゴリ順</option>
+      <option value="popular">人気順</option>
+      <option value="new">新着順</option>
+      <option value="name">五十音順</option>
+    </select>
+    <span class="result-count" id="resultCount">533件</span>
   </section>
   <div class="top-tools">
     <section class="category-panel" aria-labelledby="categoryTitle">
@@ -3832,6 +3868,9 @@
     var rankingTabs = document.getElementById('rankingTabs');
     var rankingList = document.getElementById('rankingList');
     var emptyState = document.getElementById('emptyState');
+    var toolSearch = document.getElementById('toolSearch');
+    var sortMode = document.getElementById('sortMode');
+    var resultCount = document.getElementById('resultCount');
     var cards = Array.from(grid.querySelectorAll('.tool-card'));
     var rankKey = 'tools-access-ranking';
     var currentPeriod = 'today';
@@ -3979,20 +4018,45 @@
         cards: cards.filter(function (card) { return card.getAttribute('data-group') === category; })
       };
     }).filter(function (group) { return group.cards.length > 0; });
-    grid.innerHTML = '';
-    groupedCards.forEach(function (group) {
-      var heading = document.createElement('h2');
-      heading.className = 'category-heading';
-      heading.id = 'category-' + categoryOrder.indexOf(group.category);
-      heading.textContent = group.category;
-      grid.appendChild(heading);
-      group.cards.sort(function (a, b) {
+    function cardMatches(card) {
+      var q = (toolSearch && toolSearch.value ? toolSearch.value : '').trim().toLowerCase();
+      if (!q) return true;
+      var info = cardInfo(card);
+      return (info.name + ' ' + info.desc + ' ' + (card.getAttribute('data-group') || '')).toLowerCase().indexOf(q) !== -1;
+    }
+    function sortCardList(list) {
+      var mode = sortMode ? sortMode.value : 'default';
+      var ranking = loadRanking();
+      return list.slice().sort(function (a, b) {
+        if (mode === 'popular') {
+          var ac = entryCount(ranking[cardInfo(a).href], 'total');
+          var bc = entryCount(ranking[cardInfo(b).href], 'total');
+          if (bc !== ac) return bc - ac;
+        }
+        if (mode === 'new') return cards.indexOf(b) - cards.indexOf(a);
         return (a.getAttribute('data-name') || '').localeCompare(b.getAttribute('data-name') || '', 'ja');
-      }).forEach(function (card) {
-        grid.appendChild(card);
       });
-    });
-    grid.appendChild(emptyState);
+    }
+    function renderToolList() {
+      var shown = 0;
+      grid.innerHTML = '';
+      groupedCards.forEach(function (group) {
+        var visibleCards = sortCardList(group.cards.filter(cardMatches));
+        if (!visibleCards.length) return;
+        var heading = document.createElement('h2');
+        heading.className = 'category-heading';
+        heading.id = 'category-' + categoryOrder.indexOf(group.category);
+        heading.textContent = group.category;
+        grid.appendChild(heading);
+        visibleCards.forEach(function (card) {
+          grid.appendChild(card);
+          shown++;
+        });
+      });
+      emptyState.classList.toggle('visible', shown === 0);
+      grid.appendChild(emptyState);
+      if (resultCount) resultCount.textContent = shown + '件 / ' + cards.length + '件';
+    }
     function setActiveCategory(button) {
       Array.from(categoryBar.querySelectorAll('.category-btn')).forEach(function (tab) {
         var isActive = tab === button;
@@ -4055,8 +4119,10 @@
         }
       });
     });
+    if (toolSearch) toolSearch.addEventListener('input', renderToolList);
+    if (sortMode) sortMode.addEventListener('change', renderToolList);
+    renderToolList();
     renderRanking();
-    emptyState.classList.remove('visible');
   })();
 </script>
 </body>
