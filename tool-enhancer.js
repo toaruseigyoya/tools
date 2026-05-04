@@ -10,20 +10,77 @@
   var slug = (window.TOOL && window.TOOL.slug) || location.pathname.split('/').filter(Boolean).pop() || 'tool';
   var input = $('input') || $('inputText');
   var output = $('output') || $('outputText');
+  installSharedStyles();
+  installStandaloneDiffTool();
   if (!output || !document.querySelector('.tool-guide')) return;
 
   var opt1 = $('opt1') || $('optionA');
   var opt2 = $('opt2') || $('optionB');
   var fileBox = null;
   var selectedFiles = [];
+  var summaryBox = null;
+  var errorBox = null;
+  var lastResult = '';
 
   function lines(s) { return String(s || '').replace(/\r\n/g, '\n').split('\n'); }
   function nonempty(s) { return lines(s).map(function (v) { return v.trim(); }).filter(Boolean); }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]; }); }
   function nums(s) { return (String(s || '').match(/-?\d+(?:\.\d+)?/g) || []).map(Number); }
-  function setOut(text) {
-    output.value = String(text == null ? '' : text);
+  function installSharedStyles() {
+    if (document.getElementById('tool-enhancer-style')) return;
+    var style = document.createElement('style');
+    style.id = 'tool-enhancer-style';
+    style.textContent = [
+      '.tool-enhanced-summary{margin:0 0 10px;padding:10px;border:1px solid #e0e7ff;border-radius:10px;background:#f8fafc;color:#1e1b4b;font-size:.82rem;line-height:1.6;font-weight:700}',
+      '.tool-enhanced-error{display:none;margin:0 0 10px;padding:10px;border:1px solid #fecdd3;border-radius:10px;background:#fff1f2;color:#be123c;font-size:.82rem;line-height:1.6;font-weight:800}',
+      '.tool-enhanced-preview{margin-top:12px;padding:12px;border:1px solid #e0e7ff;border-radius:10px;background:#fff;overflow:auto}',
+      '.tool-diff-controls{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0;color:#4c4980;font-size:.8rem;font-weight:800}',
+      '.tool-diff-controls label{display:inline-flex;align-items:center;gap:4px;margin:0}',
+      '.tool-diff-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}',
+      '.tool-diff-pane{border:1px solid #e0e7ff;border-radius:10px;overflow:auto;background:#fff}',
+      '.tool-diff-row{display:grid;grid-template-columns:52px 82px minmax(0,1fr);gap:8px;align-items:start;padding:5px 8px;border-bottom:1px solid #eef2ff;font-family:Consolas,monospace;font-size:.82rem;white-space:pre-wrap;word-break:break-word}',
+      '.tool-diff-row:last-child{border-bottom:0}',
+      '.tool-diff-row.added{background:#ecfdf5}.tool-diff-row.removed{background:#fff1f2}.tool-diff-row.changed{background:#fffbeb}.tool-diff-row.same{background:#fff}',
+      '.tool-diff-tag{font-weight:900}.tool-diff-mark{border-radius:4px;padding:0 2px;background:#fde68a;color:#92400e}.tool-diff-cell{background:#fde68a;border-radius:4px;padding:1px 3px}',
+      '@media(max-width:760px){.tool-diff-grid{grid-template-columns:1fr}.tool-diff-row{grid-template-columns:42px 70px minmax(0,1fr);font-size:.76rem}}'
+    ].join('\n');
+    document.head.appendChild(style);
+  }
+  function ensureResultUi() {
+    if (!output || summaryBox) return;
+    errorBox = document.createElement('div');
+    errorBox.className = 'tool-enhanced-error';
+    summaryBox = document.createElement('div');
+    summaryBox.className = 'tool-enhanced-summary';
+    summaryBox.textContent = 'サンプルを入れるか、入力して実行してください。';
+    output.parentElement.insertBefore(errorBox, output);
+    output.parentElement.insertBefore(summaryBox, output);
+  }
+  function setOut(text, summary) {
+    ensureResultUi();
+    if (errorBox) errorBox.style.display = 'none';
+    lastResult = String(text == null ? '' : text);
+    output.value = lastResult;
+    if (summaryBox) summaryBox.textContent = summary || summarize(lastResult);
     output.dispatchEvent(new Event('input', { bubbles: true }));
+  }
+  function setError(message) {
+    ensureResultUi();
+    var text = '入力エラー: ' + message;
+    lastResult = text;
+    output.value = text;
+    if (errorBox) {
+      errorBox.textContent = message;
+      errorBox.style.display = 'block';
+    }
+    if (summaryBox) summaryBox.textContent = '処理を実行できませんでした。入力形式を確認してください。';
+    output.dispatchEvent(new Event('input', { bubbles: true }));
+  }
+  function summarize(text) {
+    var rowCount = text ? lines(text).length : 0;
+    var source = getInput ? getInput() : '';
+    var changed = source ? Math.abs(String(source).length - String(text).length) : 0;
+    return '結果サマリー: ' + text.length.toLocaleString() + '文字 / ' + rowCount.toLocaleString() + '行 / UTF-8 ' + new TextEncoder().encode(text).length.toLocaleString() + ' bytes' + (source ? ' / 入力との差分 ' + changed.toLocaleString() + '文字' : '');
   }
   function getInput() { return input ? input.value : ''; }
   function getA() { return opt1 ? opt1.value : ''; }
@@ -119,13 +176,135 @@
       img.src = src;
     });
   }
+  function normalizeDiffLine(value, opts) {
+    value = String(value == null ? '' : value);
+    if (opts.trim) value = value.trim();
+    if (opts.ignoreSpaces) value = value.replace(/\s+/g, ' ');
+    if (opts.ignoreCase) value = value.toLowerCase();
+    return value;
+  }
+  function inlineDiff(a, b) {
+    a = String(a == null ? '' : a);
+    b = String(b == null ? '' : b);
+    var start = 0;
+    while (start < a.length && start < b.length && a[start] === b[start]) start++;
+    var endA = a.length - 1, endB = b.length - 1;
+    while (endA >= start && endB >= start && a[endA] === b[endB]) { endA--; endB--; }
+    function mark(text, from, to) {
+      if (from > to) return esc(text);
+      return esc(text.slice(0, from)) + '<span class="tool-diff-mark">' + esc(text.slice(from, to + 1)) + '</span>' + esc(text.slice(to + 1));
+    }
+    return { a: mark(a, start, endA), b: mark(b, start, endB) };
+  }
+  function diffOptions() {
+    return {
+      ignoreSpaces: !!document.getElementById('diffIgnoreSpaces') && document.getElementById('diffIgnoreSpaces').checked,
+      ignoreCase: !!document.getElementById('diffIgnoreCase') && document.getElementById('diffIgnoreCase').checked,
+      trim: !!document.getElementById('diffTrim') && document.getElementById('diffTrim').checked,
+      ignoreBlank: !!document.getElementById('diffIgnoreBlank') && document.getElementById('diffIgnoreBlank').checked
+    };
+  }
+  function splitDiffInput(text, a, b) {
+    var parts = String(text || '').split(/^---+$/m);
+    var left = parts[0] || '';
+    var right = parts.length > 1 ? parts.slice(1).join('---') : (a || b || '');
+    return { left: left, right: right };
+  }
+  function buildDiff(left, right, opts, csvMode) {
+    var A = csvMode ? csvRows(left).map(function (r) { return r.join(','); }) : lines(left);
+    var B = csvMode ? csvRows(right).map(function (r) { return r.join(','); }) : lines(right);
+    if (opts.ignoreBlank) {
+      A = A.filter(function (l) { return l.trim(); });
+      B = B.filter(function (l) { return l.trim(); });
+    }
+    var max = Math.max(A.length, B.length), rows = [], added = 0, removed = 0, changed = 0, same = 0;
+    for (var i = 0; i < max; i++) {
+      var av = A[i], bv = B[i];
+      if (av == null) { added++; rows.push({ type: 'added', line: i + 1, a: '', b: bv }); continue; }
+      if (bv == null) { removed++; rows.push({ type: 'removed', line: i + 1, a: av, b: '' }); continue; }
+      if (normalizeDiffLine(av, opts) === normalizeDiffLine(bv, opts)) { same++; rows.push({ type: 'same', line: i + 1, a: av, b: bv }); }
+      else { changed++; rows.push({ type: 'changed', line: i + 1, a: av, b: bv }); }
+    }
+    return { rows: rows, added: added, removed: removed, changed: changed, same: same };
+  }
+  function diffPreview(diff, csvMode) {
+    var left = ['<div class="tool-diff-pane">'];
+    var right = ['<div class="tool-diff-pane">'];
+    diff.rows.forEach(function (row) {
+      var label = row.type === 'same' ? '一致' : row.type === 'added' ? '追加' : row.type === 'removed' ? '削除' : '変更';
+      var marked = row.type === 'changed' ? inlineDiff(row.a, row.b) : { a: esc(row.a), b: esc(row.b) };
+      if (csvMode && row.type === 'changed') {
+        var ar = csvRows(row.a)[0] || [], br = csvRows(row.b)[0] || [];
+        marked.a = ar.map(function (cell, i) { return normalizeDiffLine(cell, {}) === normalizeDiffLine(br[i], {}) ? esc(cell) : '<span class="tool-diff-cell">' + esc(cell) + '</span>'; }).join(',');
+        marked.b = br.map(function (cell, i) { return normalizeDiffLine(cell, {}) === normalizeDiffLine(ar[i], {}) ? esc(cell) : '<span class="tool-diff-cell">' + esc(cell) + '</span>'; }).join(',');
+      }
+      left.push('<div class="tool-diff-row ' + row.type + '"><span>' + row.line + '</span><span class="tool-diff-tag">' + label + '</span><span>' + marked.a + '</span></div>');
+      right.push('<div class="tool-diff-row ' + row.type + '"><span>' + row.line + '</span><span class="tool-diff-tag">' + label + '</span><span>' + marked.b + '</span></div>');
+    });
+    left.push('</div>'); right.push('</div>');
+    return '<div class="tool-enhanced-summary">差分サマリー: 追加' + diff.added + ' / 削除' + diff.removed + ' / 変更' + diff.changed + ' / 一致' + diff.same + '</div><div class="tool-diff-grid">' + left.join('') + right.join('') + '</div>';
+  }
+  function diffText(diff, patchMode) {
+    if (patchMode) {
+      return ['--- before.txt', '+++ after.txt', '@@ -1 +1 @@'].concat(diff.rows.map(function (row) {
+        if (row.type === 'added') return '+' + row.b;
+        if (row.type === 'removed') return '-' + row.a;
+        if (row.type === 'changed') return '-' + row.a + '\n+' + row.b;
+        return ' ' + row.a;
+      })).join('\n');
+    }
+    return ['差分サマリー: 追加' + diff.added + ', 削除' + diff.removed + ', 変更' + diff.changed + ', 一致' + diff.same]
+      .concat(diff.rows.filter(function (row) { return row.type !== 'same'; }).map(function (row) {
+        return row.line + '行目 [' + row.type + ']\nA: ' + row.a + '\nB: ' + row.b;
+      })).join('\n\n');
+  }
+  function ensureDiffControls(host) {
+    if (document.getElementById('diffIgnoreSpaces')) return;
+    var box = document.createElement('div');
+    box.className = 'tool-diff-controls';
+    box.innerHTML = '<label><input id="diffIgnoreSpaces" type="checkbox">空白無視</label><label><input id="diffIgnoreCase" type="checkbox">大小文字無視</label><label><input id="diffTrim" type="checkbox">前後空白無視</label><label><input id="diffIgnoreBlank" type="checkbox">空行無視</label>';
+    host.appendChild(box);
+  }
+  function installStandaloneDiffTool() {
+    var textA = document.getElementById('textA'), textB = document.getElementById('textB'), result = document.getElementById('resultContainer');
+    if (!textA || !textB || !result) return;
+    var card = textA.closest('.card') || document.querySelector('main');
+    ensureDiffControls(card);
+    var buttons = card.querySelector('.button-group');
+    if (buttons && !document.getElementById('standaloneDiffSample')) {
+      var sample = document.createElement('button');
+      sample.id = 'standaloneDiffSample';
+      sample.className = 'btn-secondary';
+      sample.type = 'button';
+      sample.textContent = 'サンプル';
+      sample.addEventListener('click', function () {
+        textA.value = 'ABC\nDEF\nGHI';
+        textB.value = 'ABC\nDEx\nGHI\nJKL';
+        window.compareDiff();
+      });
+      buttons.appendChild(sample);
+    }
+    window.compareDiff = function () {
+      if (!textA.value && !textB.value) { result.innerHTML = '<div class="tool-enhanced-error" style="display:block">比較するテキストを入力してください。</div>'; return; }
+      var diff = buildDiff(textA.value, textB.value, diffOptions(), false);
+      var summary = document.getElementById('summarySection');
+      if (summary) summary.style.display = 'none';
+      result.innerHTML = diffPreview(diff, false) + '<div class="button-group" style="margin-top:12px"><button class="btn-secondary" onclick="navigator.clipboard.writeText(window.__lastDiffText || \'\')">結果コピー</button></div>';
+      window.__lastDiffText = diffText(diff, false);
+    };
+  }
   async function imageProcess() {
     if (!selectedFiles.length && !getInput()) return null;
     if (/qrコード生成/i.test(title)) {
-      var data = encodeURIComponent(getInput() || 'https://toaruseigyoya.github.io/tools/');
-      var url = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' + data;
-      preview('<img alt="QRコード" src="' + url + '" style="max-width:220px;border:1px solid #e0e7ff;border-radius:8px">');
-      return 'QRコード生成URL:\n' + url + '\n入力データ:\n' + decodeURIComponent(data);
+      var raw = getInput().trim();
+      if (!raw) { setError('QRコードにするテキストまたはURLを入力してください。'); return ''; }
+      var size = Math.min(800, Math.max(120, nums(getA())[0] || 240));
+      var data = encodeURIComponent(raw);
+      var png = 'https://api.qrserver.com/v1/create-qr-code/?size=' + size + 'x' + size + '&margin=10&data=' + data;
+      var svg = png + '&format=svg';
+      var isUrl = /^https?:\/\//i.test(raw);
+      preview('<div style="display:flex;flex-wrap:wrap;gap:14px;align-items:flex-start"><img alt="QRコード" src="' + png + '" style="width:' + size + 'px;max-width:100%;border:1px solid #e0e7ff;border-radius:8px;background:#fff;padding:8px"><div><p style="font-weight:800;margin:0 0 8px">QRコードを生成しました</p><p style="margin:0 0 8px;color:#4c4980;font-size:.84rem">サイズ: ' + size + 'px / 種別: ' + (isUrl ? 'URL' : 'テキスト') + '</p><a href="' + png + '" download="qr-code.png">PNG保存</a><br><a href="' + svg + '" download="qr-code.svg">SVG保存</a></div></div>');
+      return 'QRコード生成完了\n種別: ' + (isUrl ? 'URL' : 'テキスト') + '\nサイズ: ' + size + 'px\n入力データ:\n' + raw + '\n\nPNG:\n' + png + '\nSVG:\n' + svg;
     }
     var file = selectedFiles[0];
     if (!file) return null;
@@ -185,7 +364,7 @@
     if (!box) {
       box = document.createElement('div');
       box.id = 'toolEnhancedPreview';
-      box.style.cssText = 'margin-top:12px;padding:12px;border:1px solid #e0e7ff;border-radius:10px;background:#fff';
+      box.className = 'tool-enhanced-preview';
       output.parentElement.appendChild(box);
     }
     box.innerHTML = html;
@@ -193,7 +372,22 @@
   }
   async function runEnhanced() {
     addFileInput();
+    ensureResultUi();
     var s = getInput(), a = getA(), b = getB(), t = title;
+    var requiresInput = !/lorem|ダミー|uuid|パスワード|タイマー|ポモドーロ|カウントダウン|ラップ/i.test(t);
+    if (requiresInput && !s.trim() && !selectedFiles.length) {
+      return setError('入力欄が空です。サンプルを入れるか、処理したい内容を入力してください。');
+    }
+    if (/差分|diff/i.test(t)) {
+      var parts = splitDiffInput(s, a, b);
+      if (!parts.left.trim() || !parts.right.trim()) return setError('比較元と比較先を入力してください。入力欄では --- の行で区切るか、補助入力に比較先を入れてください。');
+      var csvMode = /csv/i.test(t);
+      var patchMode = /パッチ|patch/i.test(t);
+      ensureDiffControls(input.parentElement || document.querySelector('main'));
+      var diff = buildDiff(parts.left, parts.right, diffOptions(), csvMode);
+      preview(diffPreview(diff, csvMode));
+      return setOut(diffText(diff, patchMode), '差分サマリー: 追加' + diff.added + ' / 削除' + diff.removed + ' / 変更' + diff.changed + ' / 一致' + diff.same);
+    }
     var media = await imageProcess();
     if (media != null) return setOut(media);
     try {
@@ -261,7 +455,9 @@
   function sampleEnhanced() {
     addFileInput();
     if (!input) return;
-    if (/json/i.test(title)) input.value = '{"name":"sample","count":1}';
+    if (/差分|diff/i.test(title)) input.value = 'ABC\nDEF\nGHI\n---\nABC\nDEx\nGHI\nJKL';
+    else if (/qrコード生成/i.test(title)) input.value = 'https://toaruseigyoya.github.io/tools/';
+    else if (/json/i.test(title)) input.value = '{"name":"sample","count":1}';
     else if (/csv|表/i.test(title)) input.value = 'name,value\na,1\nb,2';
     else if (/url|whois|http|qr/i.test(title)) input.value = 'https://example.com/?a=1&b=2';
     else if (/計算|税|bmi|ローン|割り勘|単位|日数/i.test(title)) input.value = '1000\n2026-05-04';
@@ -271,7 +467,7 @@
     runEnhanced();
   }
   async function copyEnhanced() {
-    try { await navigator.clipboard.writeText(output.value); }
+    try { await navigator.clipboard.writeText(output.value || lastResult); }
     catch (e) { output.focus(); output.select(); document.execCommand('copy'); }
   }
   function downloadEnhanced() { downloadText(slug + '.txt', output.value); }
@@ -285,4 +481,6 @@
   window.download = downloadEnhanced;
   window.downloadResult = downloadEnhanced;
   addFileInput();
+  ensureResultUi();
+  if (/差分|diff/i.test(title) && input) ensureDiffControls(input.parentElement || document.querySelector('main'));
 }());
