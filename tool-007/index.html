@@ -34,6 +34,13 @@
     .stat-lbl { font-size:.72rem; color:var(--muted); margin-top:2px; }
     footer { text-align:center; padding:20px; font-size:.73rem; color:var(--muted); border-top:1px solid var(--border); margin-top:8px; }
     footer a { color:#818cf8; text-decoration:none; }
+      .tool-guide { background:var(--surf,#fff); border:1px solid var(--border,#e0e7ff); border-radius:14px; padding:18px; margin-bottom:16px; box-shadow:0 2px 10px rgba(79,70,229,.06); }
+    .tool-guide h2 { font-size:.95rem; color:#3730a3; margin:0 0 10px; }
+    .tool-guide-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:10px; }
+    .tool-guide-item { background:var(--bg,#f5f6ff); border:1px solid var(--border,#e0e7ff); border-radius:10px; padding:10px; font-size:.8rem; line-height:1.55; color:var(--text2,#4c4980); }
+    .tool-guide-item strong { display:block; color:var(--text,#1e1b4b); font-size:.76rem; margin-bottom:3px; }
+    .tool-guide-links { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+    .tool-guide-links a { color:#4f46e5; background:#eef2ff; border:1px solid #e0e7ff; border-radius:999px; padding:5px 10px; font-size:.76rem; font-weight:800; text-decoration:none; }
   </style>
 </head>
 <body>
@@ -45,6 +52,18 @@
   </div>
 </header>
 <main>
+  <section class="tool-guide" aria-label="このツールの説明">
+    <h2>このツールでできること</h2>
+    <div class="tool-guide-grid">
+      <div class="tool-guide-item"><strong>用途</strong>余分なスペースを1つにまとめる。</div>
+      <div class="tool-guide-item"><strong>向いている人</strong>文章やリストを整えたい人</div>
+      <div class="tool-guide-item"><strong>入力例</strong>複数行テキスト、単語リスト、メモ</div>
+      <div class="tool-guide-item"><strong>出力例</strong>整形済みテキスト、件数、差分</div>
+      <div class="tool-guide-item"><strong>使い方</strong>入力する → 実行する → 結果をコピーまたは保存します。</div>
+      <div class="tool-guide-item"><strong>注意点</strong>入力内容はブラウザ内で処理します。専門用語や形式が必要な場合は入力例を参考にしてください。</div>
+    </div>
+    <div class="tool-guide-links"><a href="../char-count/">char-count</a><a href="../line-break/">line-break</a><a href="../text-diff/">text-diff</a></div>
+  </section>
   <div class="card">
     <div class="card-title">入力</div>
     <textarea id="inputText" placeholder="ここにテキスト、CSV、メモ、数値、日付などを入力してください。"></textarea>

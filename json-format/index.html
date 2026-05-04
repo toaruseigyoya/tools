@@ -71,6 +71,13 @@
     }
     .action-btns { display:flex; gap:8px; flex-wrap:wrap; margin:12px 0; }
     .col-label { font-size:.78rem; font-weight:700; color:var(--text2); margin-bottom:6px; }
+      .tool-guide { background:var(--surf,#fff); border:1px solid var(--border,#e0e7ff); border-radius:14px; padding:18px; margin-bottom:16px; box-shadow:0 2px 10px rgba(79,70,229,.06); }
+    .tool-guide h2 { font-size:.95rem; color:#3730a3; margin:0 0 10px; }
+    .tool-guide-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:10px; }
+    .tool-guide-item { background:var(--bg,#f5f6ff); border:1px solid var(--border,#e0e7ff); border-radius:10px; padding:10px; font-size:.8rem; line-height:1.55; color:var(--text2,#4c4980); }
+    .tool-guide-item strong { display:block; color:var(--text,#1e1b4b); font-size:.76rem; margin-bottom:3px; }
+    .tool-guide-links { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+    .tool-guide-links a { color:#4f46e5; background:#eef2ff; border:1px solid #e0e7ff; border-radius:999px; padding:5px 10px; font-size:.76rem; font-weight:800; text-decoration:none; }
   </style>
 </head>
 <body>
@@ -83,6 +90,18 @@
 </header>
 
 <main>
+  <section class="tool-guide" aria-label="このツールの説明">
+    <h2>このツールでできること</h2>
+    <div class="tool-guide-grid">
+      <div class="tool-guide-item"><strong>用途</strong>JSONの整形・圧縮・バリデーション。構文エラーの詳細表示付き</div>
+      <div class="tool-guide-item"><strong>向いている人</strong>Excelや表データを整理したい人</div>
+      <div class="tool-guide-item"><strong>入力例</strong>name,value または 作業名,担当,期限</div>
+      <div class="tool-guide-item"><strong>出力例</strong>CSV、表、台帳形式のテキスト</div>
+      <div class="tool-guide-item"><strong>使い方</strong>入力する → 実行する → 結果をコピーまたは保存します。</div>
+      <div class="tool-guide-item"><strong>注意点</strong>入力内容はブラウザ内で処理します。専門用語や形式が必要な場合は入力例を参考にしてください。</div>
+    </div>
+    <div class="tool-guide-links"><a href="../csv-tsv/">csv-tsv</a><a href="../json-format/">json-format</a><a href="../text-diff/">text-diff</a></div>
+  </section>
   <!-- Status bar -->
   <div class="status-bar status-idle" id="statusBar">
     <span id="statusText">JSONを入力してください</span>

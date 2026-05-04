@@ -46,6 +46,10 @@
     .search-panel input, .search-panel select { min-width:0; width:100%; border:1px solid var(--border); border-radius:9px; background:#fff; color:var(--text); font:inherit; font-size:.86rem; font-weight:700; padding:9px 11px; }
     .search-panel input:focus, .search-panel select:focus { outline:3px solid rgba(79,70,229,.18); border-color:rgba(79,70,229,.45); }
     .result-count { color:var(--muted); font-size:.78rem; font-weight:800; white-space:nowrap; }
+    .recommend-panel { margin-bottom:18px; background:rgba(255,255,255,.72); border:1px solid var(--border); border-radius:12px; padding:12px; }
+    .recommend-list { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:8px; margin-top:8px; }
+    .recommend-link { min-width:0; color:var(--text); text-decoration:none; border:1px solid var(--border); border-radius:9px; background:#fff; padding:9px 10px; font-size:.78rem; font-weight:850; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .recommend-link:hover { color:var(--indigo); border-color:rgba(79,70,229,.35); }
     .top-tools { display:grid; grid-template-columns:minmax(0,1fr) 360px; gap:18px; align-items:start; margin-bottom:18px; }
     .panel-title { font-size:.82rem; font-weight:800; color:var(--text2); margin-bottom:8px; }
     .category-panel, .ranking-panel { background:rgba(255,255,255,.6); border:1px solid var(--border); border-radius:12px; padding:12px; }
@@ -65,7 +69,7 @@
     .panel-note { margin-top:8px; color:var(--muted); font-size:.72rem; line-height:1.45; }
     .tools-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
     .category-heading { grid-column:1/-1; padding:18px 4px 4px; font-size:1rem; font-weight:900; color:var(--text); border-bottom:1px solid var(--border); scroll-margin-top:84px; }
-    .tool-card { background:rgba(255,255,255,.78); border:1px solid var(--border); border-radius:10px; padding:12px 14px; display:block; box-shadow:0 2px 10px rgba(79,70,229,.06); transition:transform .15s,box-shadow .15s,border-color .15s; position:relative; overflow:hidden; min-height:74px; cursor:pointer; }
+    .tool-card { background:rgba(255,255,255,.78); border:1px solid var(--border); border-radius:10px; padding:12px 14px; display:block; box-shadow:0 2px 10px rgba(79,70,229,.06); transition:transform .15s,box-shadow .15s,border-color .15s; position:relative; overflow:hidden; min-height:132px; cursor:pointer; }
     .tool-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--indigo),var(--violet)); }
     .tool-card:hover, .tool-card:focus-visible { transform:translateY(-1px); box-shadow:0 5px 18px rgba(79,70,229,.12); border-color:rgba(79,70,229,.35); outline:none; }
     .tool-card.hidden { display:none; }
@@ -78,13 +82,17 @@
     .card-icon { display:none; }
     .card-name { display:block; font-size:.94rem; font-weight:800; line-height:1.35; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; padding-top:3px; }
     .card-desc { display:block; font-size:.8rem; color:var(--text2); line-height:1.35; margin-top:5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .card-detail { display:grid; gap:3px; margin-top:8px; color:var(--muted); font-size:.69rem; line-height:1.35; }
+    .card-detail span { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .card-tags { display:flex; flex-wrap:wrap; gap:4px; margin-top:7px; }
+    .card-tag { border:1px solid rgba(79,70,229,.15); border-radius:999px; background:rgba(79,70,229,.06); color:var(--text2); padding:2px 6px; font-size:.62rem; font-weight:850; }
     .card-link { display:none; }
     .card-link:hover { background:var(--indigo); color:#fff; border-color:var(--indigo); }
     .empty-state { display:none; grid-column:1/-1; text-align:center; padding:60px 20px; color:var(--muted); }
     .empty-state.visible { display:block; }
     footer { text-align:center; padding:24px 16px 32px; color:var(--muted); font-size:.82rem; border-top:1px solid var(--border); }
     footer a { color:var(--indigo); text-decoration:none; font-weight:600; }
-    @media (max-width:760px) { .top-tools { grid-template-columns:1fr; } .search-panel { grid-template-columns:1fr; } .result-count { white-space:normal; } }
+    @media (max-width:760px) { .top-tools { grid-template-columns:1fr; } .search-panel { grid-template-columns:1fr; } .result-count { white-space:normal; } .recommend-list { grid-template-columns:1fr 1fr; } }
     @media (max-width:600px) { main { padding:28px 16px 48px; } .hero h1 { font-size:1.42rem; } .tools-grid { grid-template-columns:1fr; } .tool-card { min-height:68px; } }
   </style>
 </head>
@@ -110,6 +118,11 @@
       <option value="name">五十音順</option>
     </select>
     <span class="result-count" id="resultCount">533件</span>
+  </section>
+  <section class="recommend-panel" aria-labelledby="recommendTitle">
+    <div class="panel-title" id="recommendTitle">おすすめツール</div>
+    <div class="recommend-list" id="recommendList"></div>
+    <p class="panel-note">実アクセス解析が整うまでは、初見でも使いやすい基本ツールと業務向けツールを手動で表示します。</p>
   </section>
   <div class="top-tools">
     <section class="category-panel" aria-labelledby="categoryTitle">
@@ -3867,6 +3880,7 @@
     var categoryBar = document.getElementById('categoryBar');
     var rankingTabs = document.getElementById('rankingTabs');
     var rankingList = document.getElementById('rankingList');
+    var recommendList = document.getElementById('recommendList');
     var emptyState = document.getElementById('emptyState');
     var toolSearch = document.getElementById('toolSearch');
     var sortMode = document.getElementById('sortMode');
@@ -3875,15 +3889,16 @@
     var rankKey = 'tools-access-ranking';
     var currentPeriod = 'today';
     var categoryOrder = [
-      '文章作成系',
-      'テキスト整形系',
-      'データ変換系',
-      '開発・コード系',
-      '計算・単位換算系',
-      '画像・メディア系',
-      'SEO・Web運用系',
-      '時間管理・タスク系',
-      'ランダム・便利系'
+      '文章・メール作成',
+      '文字・テキスト整形',
+      '表・Excel・CSV',
+      '画像・QR・色',
+      '日付・時間・計算',
+      '開発者向け',
+      'SEO・ブログ',
+      '制御・PLC・現地作業',
+      '生活・便利',
+      'ランダム・遊び'
     ];
     var periods = [
       ['today', '当日'],
@@ -3899,6 +3914,30 @@
       'URLエンコード・デコード',
       'パスワード生成'
     ];
+    var nameOverrides = {
+      'canonical判定': 'SEO用：正規URLチェック',
+      'UTMパラメータ生成': '広告・流入分析用URL作成',
+      'Punycode変換メモ': '日本語ドメイン変換メモ',
+      'Unix chmod計算': 'Linux権限番号変換',
+      'JWT生成メモ': 'Web認証用JWTメモ生成',
+      'CRC32チェックサム生成': 'ファイル確認用CRC32生成',
+      'OGP確認メモ作成': 'SNS表示用OGP確認メモ',
+      'デバイス割付表作成': 'PLC用デバイス割付表作成',
+      'ラダーコメント整形': 'PLCラダーコメント表記統一',
+      'Punycode変換メモ': '日本語ドメイン変換メモ'
+    };
+    var manualRecommendations = [
+      '文字数カウンター',
+      'JSONフォーマッター',
+      'CSV・TSV変換',
+      'URLエンコード・デコード',
+      'パスワード生成',
+      '重複行削除',
+      '敬語変換メモ',
+      'SQLフォーマッター',
+      'QRコード生成',
+      'PLC用デバイス割付表作成'
+    ];
     function loadRanking() {
       try { return JSON.parse(localStorage.getItem(rankKey) || '{}'); }
       catch (e) { return {}; }
@@ -3909,11 +3948,86 @@
     }
     function cardInfo(card) {
       var link = card.querySelector('.card-link');
+      var originalName = card.getAttribute('data-name') || 'ツール';
       return {
-        name: card.getAttribute('data-name') || 'ツール',
+        name: card.getAttribute('data-display-name') || nameOverrides[originalName] || originalName,
+        originalName: originalName,
         href: link ? link.getAttribute('href') : '#',
         desc: card.getAttribute('data-desc') || ''
       };
+    }
+    function buildMeta(card) {
+      var info = cardInfo(card);
+      var text = (info.name + ' ' + info.originalName + ' ' + info.desc).toLowerCase();
+      var meta = {
+        category: '生活・便利',
+        audience: '日常・業務で整理したい人',
+        input: 'メモ、数値、URL、一覧など',
+        output: 'コピーしやすいテキスト結果',
+        tags: ['汎用', '無料', 'ブラウザ内']
+      };
+      if (/plc|ラダー|デバイス|i\/o|io|アラーム|試運転|制御|現地|fa|got|cc-link|盤|入出力/.test(text)) {
+        meta.category = '制御・PLC・現地作業';
+        meta.audience = 'PLC設計・デバッグ・現地作業担当者';
+        meta.input = 'X0 非常停止、Y10 運転、D100 生産数';
+        meta.output = 'Excelに貼り付けやすい整理表';
+        meta.tags = ['制御・PLC', '業務向け', '専門'];
+      } else if (/メール|挨拶|催促|お礼|謝罪|議事録|報告|文章|文書|word|要約|敬語|レビュー|指摘|本文|テンプレ/.test(text)) {
+        meta.category = '文章・メール作成';
+        meta.audience = 'メール・報告書を整えたい人';
+        meta.input = '箇条書き、要点、相手先、依頼内容';
+        meta.output = 'そのまま使える文章・文面';
+        meta.tags = ['文章', '業務向け', '初心者'];
+      } else if (/csv|tsv|excel|表|台帳|関数|残項目|進捗表|一覧|テーブル/.test(text)) {
+        meta.category = '表・Excel・CSV';
+        meta.audience = 'Excelや表データを整理したい人';
+        meta.input = 'name,value / 作業名,担当,期限';
+        meta.output = 'CSV、表、台帳形式のテキスト';
+        meta.tags = ['Excel', 'CSV', '業務向け'];
+      } else if (/画像|png|jpg|jpeg|webp|gif|svg|qr|色|カラー|バナー|サムネ|動画|音声|pdf|exif|favicon|コントラスト/.test(text)) {
+        meta.category = '画像・QR・色';
+        meta.audience = '画像・色・QRを扱う人';
+        meta.input = '画像名、色コード、URL、サイズ';
+        meta.output = '確認用メモ、CSS、変換結果';
+        meta.tags = ['画像', '色', 'QR'];
+      } else if (/日付|時間|営業日|タイマー|ポモドーロ|カウントダウン|計算|換算|単位|税|bmi|ローン|割り勘|割合|平均|合計|面積|体積|速度|温度|圧力|燃費|金利|単価|ポイント|bpm|周波数|アスペクト/.test(text)) {
+        meta.category = '日付・時間・計算';
+        meta.audience = '数値や日付をすぐ確認したい人';
+        meta.input = '1000円、2026-05-04、m/kmなど';
+        meta.output = '計算結果、換算値、日数';
+        meta.tags = ['計算', '日付', '初心者'];
+      } else if (/seo|og|meta|メタ|utm|canonical|robots|sitemap|whois|スラッグ|ディスクリプション|タイトル/.test(text)) {
+        meta.category = 'SEO・ブログ';
+        meta.audience = 'ブログ・サイト運営者';
+        meta.input = 'URL、タイトル案、説明文、キーワード';
+        meta.output = 'SEO確認メモ、タグ、URL案';
+        meta.tags = ['SEO', 'ブログ', '専門'];
+      } else if (/json|base64|url|html|markdown|ascii|unicode|punycode|sql|css|js|javascript|typescript|php|go|zod|graphql|jwt|hmac|hash|sha|crc|uuid|正規|regex|api|openapi|env|cron|chmod|ip|cidr|http|curl|コード|ログ|rsa/.test(text)) {
+        meta.category = '開発者向け';
+        meta.audience = 'Web開発・システム確認をする人';
+        meta.input = '{"name":"sample"}、URL、コード、ログ';
+        meta.output = '整形済みコード、検証結果、コマンド雛形';
+        meta.tags = ['開発', '専門', 'ブラウザ内'];
+      } else if (/文字|テキスト|行|空白|スペース|句読点|カッコ|引用|ソート|重複|単語|頻度|ひらがな|カタカナ|ローマ字|タイポ|禁止語|改行/.test(text)) {
+        meta.category = '文字・テキスト整形';
+        meta.audience = '文章やリストを整えたい人';
+        meta.input = '複数行テキスト、単語リスト、メモ';
+        meta.output = '整形済みテキスト、件数、差分';
+        meta.tags = ['テキスト', '初心者', '無料'];
+      } else if (/献立|買い物|賞味期限|荷物|家事|生活|メモ帳|タスク|todo|ルーチン/.test(text)) {
+        meta.category = '生活・便利';
+        meta.audience = '日常のメモや準備を楽にしたい人';
+        meta.input = '買う物、予定、持ち物、メモ';
+        meta.output = 'チェックリストや整理済みメモ';
+        meta.tags = ['生活', '便利', '初心者'];
+      } else if (/ランダム|抽選|ルーレット|あみだ|おみくじ|診断|シャッフル/.test(text)) {
+        meta.category = 'ランダム・遊び';
+        meta.audience = '抽選や候補決めをしたい人';
+        meta.input = '候補A、候補B、候補C';
+        meta.output = 'ランダム結果、抽選結果';
+        meta.tags = ['ランダム', '遊び', '簡単'];
+      }
+      return meta;
     }
     function todayKey(offset) {
       var date = new Date();
@@ -3942,17 +4056,52 @@
       return 0;
     }
     function classify(card) {
+      return buildMeta(card).category;
+    }
+    function enrichCard(card) {
       var info = cardInfo(card);
-      var text = (info.name + ' ' + info.desc).toLowerCase();
-      if (/メール|挨拶|催促|お礼|謝罪|議事録|報告|文章|文書|word|要約|敬語|レビュー|指摘|表紙|本文|テンプレ|メモ/.test(text)) return '文章作成系';
-      if (/json|csv|tsv|xml|yaml|base64|url|html|markdown|ascii|unicode|punycode|エンコード|デコード|変換|整形|フォーマッター|圧縮|エスケープ/.test(text)) return 'データ変換系';
-      if (/sql|css|js|javascript|typescript|php|go|zod|graphql|jwt|hmac|hash|sha|crc|uuid|正規|regex|api|openapi|env|cron|chmod|ip|cidr|http|curl|コード|ログ|rsa/.test(text)) return '開発・コード系';
-      if (/画像|png|jpg|jpeg|webp|gif|svg|色|カラー|バナー|サムネ|動画|音声|pdf|exif|favicon|ピッチ|イコライザー|ノイズ/.test(text)) return '画像・メディア系';
-      if (/seo|og|meta|メタ|utm|canonical|robots|sitemap|whois|リンク切れ/.test(text)) return 'SEO・Web運用系';
-      if (/日付|時間|タイマー|ポモドーロ|タスク|todo|進捗|期限|カウントダウン|曜日|営業日|セッション|ルーチン|アラーム/.test(text)) return '時間管理・タスク系';
-      if (/計算|換算|単位|税|bmi|ローン|割り勘|割合|平均|合計|最大|最小|面積|体積|速度|温度|圧力|電気|燃費|金利|単価|ポイント|bpm|周波数|アスペクト/.test(text)) return '計算・単位換算系';
-      if (/文字|テキスト|行|空白|スペース|句読点|カッコ|引用|ソート|重複|単語|頻度|ひらがな|カタカナ|ローマ字|タイポ|禁止語/.test(text)) return 'テキスト整形系';
-      return 'ランダム・便利系';
+      var meta = buildMeta(card);
+      var displayName = nameOverrides[info.originalName] || info.originalName;
+      card.setAttribute('data-display-name', displayName);
+      card.setAttribute('data-group', meta.category);
+      card.setAttribute('data-search', [displayName, info.originalName, info.desc, meta.category, meta.audience, meta.input, meta.output, meta.tags.join(' ')].join(' '));
+      var nameEl = card.querySelector('.card-name');
+      if (nameEl) nameEl.textContent = displayName;
+      var descEl = card.querySelector('.card-desc');
+      if (descEl && info.desc) descEl.textContent = info.desc;
+      if (!card.querySelector('.card-detail')) {
+        var detail = document.createElement('div');
+        detail.className = 'card-detail';
+        detail.innerHTML = '<span>向いている人: ' + meta.audience + '</span><span>入力例: ' + meta.input + '</span><span>出力: ' + meta.output + '</span>';
+        card.appendChild(detail);
+        var tags = document.createElement('div');
+        tags.className = 'card-tags';
+        [meta.category].concat(meta.tags).slice(0, 4).forEach(function (tag) {
+          var pill = document.createElement('span');
+          pill.className = 'card-tag';
+          pill.textContent = tag;
+          tags.appendChild(pill);
+        });
+        card.appendChild(tags);
+      }
+    }
+    function renderRecommendations() {
+      if (!recommendList) return;
+      recommendList.innerHTML = '';
+      manualRecommendations.forEach(function (name) {
+        var card = cards.find(function (item) {
+          var info = cardInfo(item);
+          return info.name === name || info.originalName === name;
+        });
+        if (!card) return;
+        var info = cardInfo(card);
+        var link = document.createElement('a');
+        link.className = 'recommend-link';
+        link.href = info.href;
+        link.textContent = info.name;
+        link.addEventListener('click', function () { recordAccess(info.href); });
+        recommendList.appendChild(link);
+      });
     }
     function renderRanking() {
       var ranking = loadRanking();
@@ -4010,7 +4159,7 @@
       renderRanking();
     }
     cards.forEach(function (card) {
-      card.setAttribute('data-group', classify(card));
+      enrichCard(card);
     });
     var groupedCards = categoryOrder.map(function (category) {
       return {
@@ -4022,7 +4171,7 @@
       var q = (toolSearch && toolSearch.value ? toolSearch.value : '').trim().toLowerCase();
       if (!q) return true;
       var info = cardInfo(card);
-      return (info.name + ' ' + info.desc + ' ' + (card.getAttribute('data-group') || '')).toLowerCase().indexOf(q) !== -1;
+      return (card.getAttribute('data-search') || '').toLowerCase().indexOf(q) !== -1;
     }
     function sortCardList(list) {
       var mode = sortMode ? sortMode.value : 'default';
@@ -4121,6 +4270,7 @@
     });
     if (toolSearch) toolSearch.addEventListener('input', renderToolList);
     if (sortMode) sortMode.addEventListener('change', renderToolList);
+    renderRecommendations();
     renderToolList();
     renderRanking();
   })();
