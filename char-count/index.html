@@ -1,151 +1,74 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>文字数カウンター | ツール集</title>
+  <title>文字数カウンター | 汎用ツール集</title>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --indigo: #4f46e5; --violet: #7c3aed; --emerald: #059669;
-      --bg: #f5f6ff; --surf: #fff;
-      --border: #e0e7ff; --text: #1e1b4b; --text2: #4c4980; --muted: #8b87c0;
-    }
-    body { font-family: 'Segoe UI','Yu Gothic UI','Hiragino Sans',sans-serif; background: var(--bg); color: var(--text); }
-    header { background: linear-gradient(135deg,#1e1b4b,#312e81); color:#fff; }
-    .hdr { max-width:860px; margin:0 auto; padding:18px 24px; }
-    .hdr-back { display:inline-flex; align-items:center; gap:5px; font-size:.78rem; color:rgba(255,255,255,.55); text-decoration:none; margin-bottom:8px; transition:color .15s; }
-    .hdr-back:hover { color:rgba(255,255,255,.9); }
-    .hdr-title { font-size:1.4rem; font-weight:900; margin-bottom:4px; }
-    .hdr-sub { font-size:.82rem; color:rgba(255,255,255,.65); }
-    main { max-width:860px; margin:0 auto; padding:24px; }
-    .card { background:var(--surf); border:1px solid var(--border); border-radius:14px; padding:20px; margin-bottom:16px; box-shadow:0 2px 10px rgba(79,70,229,.06); }
-    .card-title { font-size:.88rem; font-weight:800; color:#3730a3; margin-bottom:12px; }
-    .btn { padding:9px 18px; border:none; border-radius:9px; font-size:.84rem; font-weight:700; cursor:pointer; font-family:inherit; transition:all .15s; }
-    .btn-primary { background:linear-gradient(135deg,var(--indigo),var(--violet)); color:#fff; box-shadow:0 3px 10px rgba(79,70,229,.25); }
-    .btn-primary:hover { transform:translateY(-1px); }
-    .btn-outline { background:transparent; border:1.5px solid var(--border); color:var(--text2); }
-    .btn-outline:hover { border-color:#818cf8; color:var(--indigo); }
-    .btn-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
-    textarea { width:100%; padding:10px 12px; border:1.5px solid var(--border); border-radius:9px; font-size:.84rem; font-family:'Consolas',monospace; background:var(--bg); color:var(--text); resize:vertical; }
-    textarea:focus { outline:none; border-color:#818cf8; }
-    .stat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px; margin-top:12px; }
-    .stat-box { background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:12px; text-align:center; }
-    .stat-val { font-size:1.5rem; font-weight:900; color:var(--indigo); font-family:'Consolas',monospace; }
-    .stat-lbl { font-size:.72rem; color:var(--muted); margin-top:2px; }
-    .result-box { background:var(--bg); border:1px solid var(--border); border-radius:9px; padding:12px; font-family:'Consolas',monospace; font-size:.84rem; min-height:80px; white-space:pre-wrap; word-break:break-all; }
-    .copy-msg { font-size:.75rem; color:var(--emerald); display:none; margin-left:8px; }
-    footer { text-align:center; padding:20px; font-size:.73rem; color:var(--muted); border-top:1px solid var(--border); margin-top:8px; }
-    footer a { color:#818cf8; text-decoration:none; }
-
-    .hint { font-size:.77rem; color:var(--muted); margin-top:6px; }
-    textarea#inputText { line-height: 1.6; }
-      .tool-guide { background:var(--surf,#fff); border:1px solid var(--border,#e0e7ff); border-radius:14px; padding:18px; margin-bottom:16px; box-shadow:0 2px 10px rgba(79,70,229,.06); }
-    .tool-guide h2 { font-size:.95rem; color:#3730a3; margin:0 0 10px; }
-    .tool-guide-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:10px; }
-    .tool-guide-item { background:var(--bg,#f5f6ff); border:1px solid var(--border,#e0e7ff); border-radius:10px; padding:10px; font-size:.8rem; line-height:1.55; color:var(--text2,#4c4980); }
-    .tool-guide-item strong { display:block; color:var(--text,#1e1b4b); font-size:.76rem; margin-bottom:3px; }
-    .tool-guide-links { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
-    .tool-guide-links a { color:#4f46e5; background:#eef2ff; border:1px solid #e0e7ff; border-radius:999px; padding:5px 10px; font-size:.76rem; font-weight:800; text-decoration:none; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--blue:#3b82f6;--green:#10b981;--ink:#1f2937;--sub:#667085;--bg:#f6f8fc;--card:#fff;--line:#d9e3f0}
+    body{font-family:'Segoe UI','Yu Gothic UI','Hiragino Sans',sans-serif;background:var(--bg);color:var(--ink);line-height:1.75}
+    header{background:#fff;border-bottom:1px solid var(--line)}.hdr{max-width:980px;margin:auto;padding:18px 20px}.back{color:#2563eb;text-decoration:none;font-weight:800;font-size:.84rem}.hdr h1{font-size:1.55rem;margin-top:8px}
+    main{max-width:980px;margin:auto;padding:24px 20px 60px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px}
+    .lead{color:var(--sub);margin-bottom:10px}.safe{background:#ecfdf5;border:1px solid #bbf7d0;color:#047857;border-radius:10px;padding:10px 12px;font-weight:800;font-size:.9rem;margin-bottom:12px}
+    textarea{width:100%;min-height:260px;resize:vertical;border:1px solid var(--line);border-radius:12px;padding:14px;font:15px/1.7 Consolas,'Yu Gothic UI',monospace}
+    .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}.stat{background:#f8fbff;border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center}.num{font-size:1.8rem;font-weight:900;color:var(--blue);font-family:Consolas,monospace}.lbl{font-size:.8rem;color:var(--sub)}
+    .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.btn{border:0;border-radius:10px;padding:9px 14px;font-weight:900;cursor:pointer}.clear{background:#e5e7eb}.copy{background:var(--blue);color:#fff}
+    h2{font-size:1.05rem;margin:18px 0 8px}.article p,.article li{color:#4b5563}.article ul{padding-left:1.2em}.article .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.mini{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
   </style>
 </head>
 <body>
-
-<header>
-  <div class="hdr">
-    <a href="../" class="hdr-back">← ツール一覧</a>
-    <div class="hdr-title">文字数カウンター</div>
-    <div class="hdr-sub">テキストの文字数・行数・単語数・バイト数をリアルタイムで計測</div>
-  </div>
-</header>
-
+<header><div class="hdr"><a class="back" href="../">← 汎用ツール集へ</a><h1>文字数カウンター</h1></div></header>
 <main>
-  <section class="tool-guide" aria-label="このツールの説明">
-    <h2>このツールでできること</h2>
-    <div class="tool-guide-grid">
-      <div class="tool-guide-item"><strong>用途</strong>テキストの文字数・行数・単語数・バイト数をリアルタイムで計測</div>
-      <div class="tool-guide-item"><strong>向いている人</strong>文章やリストを整えたい人</div>
-      <div class="tool-guide-item"><strong>入力例</strong>複数行テキスト、単語リスト、メモ</div>
-      <div class="tool-guide-item"><strong>出力例</strong>整形済みテキスト、件数、差分</div>
-      <div class="tool-guide-item"><strong>使い方</strong>入力する → 実行する → 結果をコピーまたは保存します。</div>
-      <div class="tool-guide-item"><strong>注意点</strong>入力内容はブラウザ内で処理します。専門用語や形式が必要な場合は入力例を参考にしてください。</div>
-    </div>
-    <div class="tool-guide-links"><a href="../char-count/">char-count</a><a href="../line-break/">line-break</a><a href="../text-diff/">text-diff</a></div>
+  <section class="card">
+    <p class="lead">文章を貼り付けるだけで、文字数・行数・バイト数などをリアルタイムに計測します。</p>
+    <p class="safe">入力した文章はインターネットに一切送信されません。すべてブラウザ内で処理します。</p>
+    <textarea id="text" placeholder="ここに文章を入力または貼り付けてください。"></textarea>
+    <div class="actions"><button class="btn clear" id="clear">入力を消す</button><button class="btn copy" id="copy">結果をコピー</button></div>
   </section>
-  <div class="card">
-    <div class="card-title">テキスト入力</div>
-    <textarea id="inputText" rows="8" placeholder="ここにテキストを入力してください。入力と同時に各種カウントが更新されます。" oninput="updateStats()"></textarea>
-    <div class="btn-row">
-      <button class="btn btn-outline" onclick="clearText()">クリア</button>
+  <section class="card">
+    <div class="stats">
+      <div class="stat"><div class="num" id="chars">0</div><div class="lbl">文字数</div></div>
+      <div class="stat"><div class="num" id="noBreak">0</div><div class="lbl">改行除く</div></div>
+      <div class="stat"><div class="num" id="noSpace">0</div><div class="lbl">改行・空白除く</div></div>
+      <div class="stat"><div class="num" id="lines">0</div><div class="lbl">行数</div></div>
+      <div class="stat"><div class="num" id="manuscript">0</div><div class="lbl">原稿用紙目安</div></div>
+      <div class="stat"><div class="num" id="bytes">0</div><div class="lbl">UTF-8バイト</div></div>
     </div>
-    <p class="hint">テキストを入力すると自動的に計測されます。</p>
-  </div>
-
-  <div class="card">
-    <div class="card-title">計測結果</div>
-    <div class="stat-grid">
-      <div class="stat-box">
-        <div class="stat-val" id="statTotal">0</div>
-        <div class="stat-lbl">文字数（スペース含む）</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-val" id="statNoSpace">0</div>
-        <div class="stat-lbl">文字数（スペース除く）</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-val" id="statLines">0</div>
-        <div class="stat-lbl">行数</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-val" id="statWords">0</div>
-        <div class="stat-lbl">単語数</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-val" id="statBytes">0</div>
-        <div class="stat-lbl">バイト数（UTF-8）</div>
-      </div>
+  </section>
+  <section class="card article">
+    <h2>文字数カウントの見方</h2>
+    <div class="cols">
+      <div class="mini"><strong>文字数</strong><p>改行や空白も含めた総文字数です。SNS投稿、説明文、申請文の上限確認に使います。</p></div>
+      <div class="mini"><strong>改行除く</strong><p>改行を除外した文字数です。本文そのものの長さを把握したいときに使います。</p></div>
+      <div class="mini"><strong>改行・空白除く</strong><p>空白やタブも除外します。実質的な文字量の目安になります。</p></div>
+      <div class="mini"><strong>原稿用紙目安</strong><p>400字詰め原稿用紙に換算した概算です。レポートや原稿量の目安に使えます。</p></div>
     </div>
-  </div>
+    <h2>用途例</h2>
+    <ul>
+      <li>SNS投稿やInstagramキャプションの長さ確認</li>
+      <li>ブログ本文、タイトル、説明文のボリューム確認</li>
+      <li>フォーム入力や問い合わせ文の文字数調整</li>
+      <li>レポート、作文、原稿の分量チェック</li>
+    </ul>
+    <h2>安心して使うために</h2>
+    <p>このページは入力内容をサーバーへ送信しません。機密情報を含む文章でも、ネットワーク通信なしで計測できます。ただし、共有PCではブラウザの履歴やクリップボード管理に注意してください。</p>
+  </section>
 </main>
-
-<footer>
-  <a href="../">← ツール一覧へ戻る</a>
-  &nbsp;|&nbsp;
-  <a href="../../index.html">ホームへ</a>
-  <br style="margin-bottom:4px">
-  文字数カウンター &mdash; 無料テキスト解析ツール
-</footer>
-
 <script>
-  function updateStats() {
-    const text = document.getElementById('inputText').value;
-
-    // 文字数（スペース含む）
-    const total = text.length;
-    document.getElementById('statTotal').textContent = total.toLocaleString();
-
-    // 文字数（スペース除く）：全角・半角スペース、タブを除外
-    const noSpace = text.replace(/[\s　]/g, '').length;
-    document.getElementById('statNoSpace').textContent = noSpace.toLocaleString();
-
-    // 行数：空テキストでも1行とカウント
-    const lines = text === '' ? 0 : text.split('\n').length;
-    document.getElementById('statLines').textContent = lines.toLocaleString();
-
-    // 単語数：半角スペース区切り（連続スペースを1つに）
-    const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
-    document.getElementById('statWords').textContent = words.toLocaleString();
-
-    // バイト数（UTF-8）
-    const bytes = new TextEncoder().encode(text).length;
-    document.getElementById('statBytes').textContent = bytes.toLocaleString();
-  }
-
-  function clearText() {
-    document.getElementById('inputText').value = '';
-    updateStats();
-  }
+const t=document.getElementById('text'), ids=['chars','noBreak','noSpace','lines','manuscript','bytes'];
+function fmt(n){return n.toLocaleString('ja-JP')}
+function calc(){const s=t.value; const vals={
+ chars:s.length,
+ noBreak:s.replace(/\r?\n/g,'').length,
+ noSpace:s.replace(/[\s　]/g,'').length,
+ lines:s? s.split(/\r?\n/).length:0,
+ manuscript:Math.ceil(s.length/400),
+ bytes:new TextEncoder().encode(s).length
+}; ids.forEach(id=>document.getElementById(id).textContent=fmt(vals[id])); return vals}
+t.addEventListener('input',calc); document.getElementById('clear').onclick=()=>{t.value='';calc();t.focus()};
+document.getElementById('copy').onclick=()=>{const v=calc(); navigator.clipboard.writeText(`文字数:${v.chars}\n改行除く:${v.noBreak}\n改行・空白除く:${v.noSpace}\n行数:${v.lines}\n原稿用紙目安:${v.manuscript}\nUTF-8バイト:${v.bytes}`)};
+calc();
 </script>
-  <script src="../tool-enhancer.js"></script>
 </body>
 </html>
