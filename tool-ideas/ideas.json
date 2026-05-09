@@ -1,8 +1,8 @@
 {
   "generatedAt": "2026-05-03T11:21:01.4466533Z",
   "sourceTotal": 400,
-  "registered": 383,
-  "omittedExisting": 17,
+  "registered": 360,
+  "omittedExisting": 16,
   "ideas": [
     {
       "no": 2,
@@ -341,28 +341,12 @@
       "link": "tool-051"
     },
     {
-      "no": 52,
-      "title": "ビジネス挨拶文生成",
-      "desc": "「お世話になっております」系の定型文を生成する。",
-      "category": "汎用ツール",
-      "status": "idea",
-      "link": "tool-052"
-    },
-    {
       "no": 53,
       "title": "催促文テンプレ作成",
       "desc": "柔らかい催促文を作る。",
       "category": "汎用ツール",
       "status": "idea",
       "link": "tool-053"
-    },
-    {
-      "no": 54,
-      "title": "お礼文テンプレ作成",
-      "desc": "社内/社外向けのお礼文を生成する。",
-      "category": "汎用ツール",
-      "status": "idea",
-      "link": "tool-054"
     },
     {
       "no": 55,
@@ -773,14 +757,6 @@
       "link": "tool-112"
     },
     {
-      "no": 113,
-      "title": "1文の長さチェック",
-      "desc": "長すぎる文章を検出",
-      "category": "文章補助",
-      "status": "idea",
-      "link": "tool-113"
-    },
-    {
       "no": 114,
       "title": "読点多すぎチェック",
       "desc": "「、」が多い文章を検出",
@@ -893,14 +869,6 @@
       "link": "tool-127"
     },
     {
-      "no": 128,
-      "title": "お詫び＋再依頼文生成",
-      "desc": "謝罪しつつ再依頼する文章を作成",
-      "category": "文章補助",
-      "status": "idea",
-      "link": "tool-128"
-    },
-    {
       "no": 129,
       "title": "社内連絡文テンプレ",
       "desc": "社内向けの短い連絡文を作成",
@@ -949,14 +917,6 @@
       "link": "tool-134"
     },
     {
-      "no": 135,
-      "title": "トラブル報告テンプレ",
-      "desc": "現象・原因・対策の枠を作成",
-      "category": "文章補助",
-      "status": "idea",
-      "link": "tool-135"
-    },
-    {
       "no": 136,
       "title": "問い合わせ文作成",
       "desc": "メーカー・社内向け問い合わせ文を作成",
@@ -987,14 +947,6 @@
       "category": "文章補助",
       "status": "idea",
       "link": "tool-139"
-    },
-    {
-      "no": 140,
-      "title": "メール改行整形",
-      "desc": "読みやすい位置で改行を入れる",
-      "category": "文章補助",
-      "status": "idea",
-      "link": "tool-140"
     },
     {
       "no": 141,
@@ -1677,14 +1629,6 @@
       "link": "tool-226"
     },
     {
-      "no": 227,
-      "title": "HTML色確認",
-      "desc": "HTMLカラーコードをプレビュー",
-      "category": "Web制作・HTML/CSS系",
-      "status": "idea",
-      "link": "tool-227"
-    },
-    {
       "no": 228,
       "title": "CSSグラデーション生成",
       "desc": "2色からグラデーションCSSを作成",
@@ -1827,14 +1771,6 @@
       "category": "GitHub・開発作業系",
       "status": "idea",
       "link": "tool-245"
-    },
-    {
-      "no": 246,
-      "title": "Issueテンプレ生成",
-      "desc": "バグ報告・要望のテンプレを作成",
-      "category": "GitHub・開発作業系",
-      "status": "idea",
-      "link": "tool-246"
     },
     {
       "no": 247,
@@ -2269,22 +2205,6 @@
       "link": "tool-300"
     },
     {
-      "no": 301,
-      "title": "Word文章下書き生成",
-      "desc": "タイトル・目的から本文のたたき台を作成",
-      "category": "Word文章作成・整形系",
-      "status": "idea",
-      "link": "tool-301"
-    },
-    {
-      "no": 302,
-      "title": "Word見出し構成作成",
-      "desc": "内容から1章、2章、3章の構成を作成",
-      "category": "Word文章作成・整形系",
-      "status": "idea",
-      "link": "tool-302"
-    },
-    {
       "no": 303,
       "title": "見出し番号整形",
       "desc": "1.、1.1、(1)などを統一",
@@ -2419,14 +2339,6 @@
       "category": "Word文章作成・整形系",
       "status": "idea",
       "link": "tool-319"
-    },
-    {
-      "no": 320,
-      "title": "Word貼り付け用テキスト整形",
-      "desc": "余計な改行・空白を整えて貼り付けやすくする",
-      "category": "Word文章作成・整形系",
-      "status": "idea",
-      "link": "tool-320"
     },
     {
       "no": 321,
@@ -2773,38 +2685,6 @@
       "link": "tool-363"
     },
     {
-      "no": 364,
-      "title": "Excel貼り付け用TSV生成",
-      "desc": "WordやメモからExcel貼り付け用に整形",
-      "category": "Excel文章・表作成補助系",
-      "status": "idea",
-      "link": "tool-364"
-    },
-    {
-      "no": 365,
-      "title": "セル内改行整形",
-      "desc": "長い文章をセル内で読みやすく改行",
-      "category": "Excel文章・表作成補助系",
-      "status": "idea",
-      "link": "tool-365"
-    },
-    {
-      "no": 366,
-      "title": "セル文章短縮",
-      "desc": "長すぎるセル内容を短くする",
-      "category": "Excel文章・表作成補助系",
-      "status": "idea",
-      "link": "tool-366"
-    },
-    {
-      "no": 367,
-      "title": "セル文章丁寧化",
-      "desc": "メモ調の文章を表向きに整える",
-      "category": "Excel文章・表作成補助系",
-      "status": "idea",
-      "link": "tool-367"
-    },
-    {
       "no": 368,
       "title": "状態欄候補生成",
       "desc": "未/済/保留/確認中などの候補を作る",
@@ -2989,70 +2869,6 @@
       "link": "tool-390"
     },
     {
-      "no": 391,
-      "title": "Word表→Excel整形",
-      "desc": "Wordの表をExcelに貼りやすい形へ変換",
-      "category": "Excel文書管理・台帳系",
-      "status": "idea",
-      "link": "tool-391"
-    },
-    {
-      "no": 392,
-      "title": "Excel表→Word文章化",
-      "desc": "Excel表の内容を文章説明に変換",
-      "category": "Excel文書管理・台帳系",
-      "status": "idea",
-      "link": "tool-392"
-    },
-    {
-      "no": 393,
-      "title": "Excel表→Word表紙文生成",
-      "desc": "台帳情報からWord表紙文言を作成",
-      "category": "Excel文書管理・台帳系",
-      "status": "idea",
-      "link": "tool-393"
-    },
-    {
-      "no": 394,
-      "title": "Excel一覧→メール本文化",
-      "desc": "表の内容をメール文に変換",
-      "category": "Excel文書管理・台帳系",
-      "status": "idea",
-      "link": "tool-394"
-    },
-    {
-      "no": 395,
-      "title": "Excel一覧→報告文生成",
-      "desc": "残項目表から進捗報告文を作成",
-      "category": "Excel文書管理・台帳系",
-      "status": "idea",
-      "link": "tool-395"
-    },
-    {
-      "no": 396,
-      "title": "Word本文→Excel抽出",
-      "desc": "Word文章から項目・内容を表に抽出",
-      "category": "Excel文書管理・台帳系",
-      "status": "idea",
-      "link": "tool-396"
-    },
-    {
-      "no": 397,
-      "title": "Word手順→Excelチェック表",
-      "desc": "手順書を確認チェック表に変換",
-      "category": "Excel文書管理・台帳系",
-      "status": "idea",
-      "link": "tool-397"
-    },
-    {
-      "no": 398,
-      "title": "Excelチェック表→Word報告書",
-      "desc": "チェック結果から報告書文章を作成",
-      "category": "Excel文書管理・台帳系",
-      "status": "idea",
-      "link": "tool-398"
-    },
-    {
       "no": 399,
       "title": "文書レビュー指摘表生成",
       "desc": "Wordレビュー結果を指摘一覧に変換",
@@ -3189,14 +3005,6 @@
       "category": "汎用ツール",
       "status": "implemented",
       "link": "unit-convert"
-    },
-    {
-      "no": 98,
-      "title": "ダミーテキスト生成",
-      "desc": "テスト用文章を生成する。",
-      "category": "汎用ツール",
-      "status": "implemented",
-      "link": "lorem-ipsum"
     },
     {
       "no": 186,
