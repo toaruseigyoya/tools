@@ -152,6 +152,11 @@ const sourceTools = [
   ['エンタメ・雑学', '絵文字ミキサー', '複数絵文字をテキスト合成表示'],
 ];
 
+const removedToolTitles = new Set([
+  'メールアドレス空きチェック',
+  'OG画像プレビュー',
+]);
+
 function htmlEscape(value) {
   return String(value)
     .replace(/&/g, '&amp;')
@@ -320,6 +325,7 @@ const normalizedExisting = existingNames.map(normalize).filter(Boolean);
 const additions = [];
 for (let i = 0; i < sourceTools.length; i += 1) {
   const [sourceCategory, title, desc] = sourceTools[i];
+  if (removedToolTitles.has(title)) continue;
   const n = normalize(title);
   const duplicate = normalizedExisting.some((x) => x && n && (x.includes(n) || n.includes(x)));
   if (duplicate) continue;

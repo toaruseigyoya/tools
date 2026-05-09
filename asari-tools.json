@@ -1,7 +1,7 @@
 {
   "source": "https://tools.studioasari.co.jp/",
   "sourceTotal": 146,
-  "added": 93,
+  "added": 91,
   "skippedAsExisting": 53,
   "additions": [
     {
@@ -138,14 +138,6 @@
       "sourceCategory": "Web・開発者向け",
       "category": "開発",
       "slug": "asari-039",
-      "icon": "{}"
-    },
-    {
-      "title": "メールアドレス空きチェック",
-      "desc": "メール形式とDNS確認コマンドを生成",
-      "sourceCategory": "Web・開発者向け",
-      "category": "開発",
-      "slug": "asari-040",
       "icon": "{}"
     },
     {
@@ -347,14 +339,6 @@
       "category": "開発",
       "slug": "asari-076",
       "icon": "{}"
-    },
-    {
-      "title": "OG画像プレビュー",
-      "desc": "SNSカード用のOGPを確認",
-      "sourceCategory": "SEO・Web解析",
-      "category": "開発",
-      "slug": "asari-077",
-      "icon": "▣"
     },
     {
       "title": "タイトル文字数チェッカー",
@@ -748,5 +732,9 @@
       "slug": "asari-146",
       "icon": "★"
     }
+  ],
+  "removedByInstructionSlugs": [
+    "asari-040",
+    "asari-077"
   ]
 }

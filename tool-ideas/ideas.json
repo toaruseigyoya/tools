@@ -1,7 +1,7 @@
 {
   "generatedAt": "2026-05-03T11:21:01.4466533Z",
   "sourceTotal": 400,
-  "registered": 360,
+  "registered": 349,
   "omittedExisting": 16,
   "ideas": [
     {
@@ -331,14 +331,6 @@
       "category": "汎用ツール",
       "status": "idea",
       "link": "tool-050"
-    },
-    {
-      "no": 51,
-      "title": "メール件名作成",
-      "desc": "用件から件名候補を作る。",
-      "category": "汎用ツール",
-      "status": "idea",
-      "link": "tool-051"
     },
     {
       "no": 53,
@@ -693,22 +685,6 @@
       "link": "tool-104"
     },
     {
-      "no": 105,
-      "title": "箇条書き変換",
-      "desc": "文章を箇条書きに整形",
-      "category": "文章補助",
-      "status": "idea",
-      "link": "tool-105"
-    },
-    {
-      "no": 106,
-      "title": "箇条書き文章化",
-      "desc": "箇条書きを自然な文章に変換",
-      "category": "文章補助",
-      "status": "idea",
-      "link": "tool-106"
-    },
-    {
       "no": 107,
       "title": "表記ゆれチェック",
       "desc": "「サーバ/サーバー」などを検出",
@@ -789,22 +765,6 @@
       "link": "tool-117"
     },
     {
-      "no": 118,
-      "title": "URL抽出",
-      "desc": "文章中のURLだけ抜き出す",
-      "category": "文章補助",
-      "status": "idea",
-      "link": "tool-118"
-    },
-    {
-      "no": 119,
-      "title": "メールアドレス抽出",
-      "desc": "文章中のメールアドレスを抽出",
-      "category": "文章補助",
-      "status": "idea",
-      "link": "tool-119"
-    },
-    {
       "no": 120,
       "title": "電話番号抽出",
       "desc": "文章中の電話番号を抽出",
@@ -819,14 +779,6 @@
       "category": "文章補助",
       "status": "idea",
       "link": "tool-121"
-    },
-    {
-      "no": 122,
-      "title": "宛名テンプレ作成",
-      "desc": "会社名・氏名から宛名を生成",
-      "category": "文章補助",
-      "status": "idea",
-      "link": "tool-122"
     },
     {
       "no": 123,
@@ -939,14 +891,6 @@
       "category": "文章補助",
       "status": "idea",
       "link": "tool-138"
-    },
-    {
-      "no": 139,
-      "title": "メール敬称チェック",
-      "desc": "「様」「御中」などの使い方を確認",
-      "category": "文章補助",
-      "status": "idea",
-      "link": "tool-139"
     },
     {
       "no": 141,
@@ -1453,14 +1397,6 @@
       "link": "tool-204"
     },
     {
-      "no": 205,
-      "title": "依頼内容抽出",
-      "desc": "長文メールから依頼事項だけ抽出",
-      "category": "AI・文章補助系",
-      "status": "idea",
-      "link": "tool-205"
-    },
-    {
       "no": 206,
       "title": "期限抽出",
       "desc": "文章中の日付・期限だけ抜き出す",
@@ -1555,14 +1491,6 @@
       "category": "AI・文章補助系",
       "status": "idea",
       "link": "tool-217"
-    },
-    {
-      "no": 218,
-      "title": "メモから報告書構成化",
-      "desc": "雑メモを背景・結果・課題に分類",
-      "category": "AI・文章補助系",
-      "status": "idea",
-      "link": "tool-218"
     },
     {
       "no": 219,
@@ -1899,14 +1827,6 @@
       "category": "セキュリティ・チェック系",
       "status": "idea",
       "link": "tool-262"
-    },
-    {
-      "no": 263,
-      "title": "メール誤送信チェック",
-      "desc": "宛先・添付・敬称の確認リストを作成",
-      "category": "セキュリティ・チェック系",
-      "status": "idea",
-      "link": "tool-263"
     },
     {
       "no": 264,
@@ -2419,14 +2339,6 @@
       "category": "ビジネス文書・報告書系",
       "status": "idea",
       "link": "tool-330"
-    },
-    {
-      "no": 331,
-      "title": "完了報告文生成",
-      "desc": "作業完了時の報告文を作成",
-      "category": "ビジネス文書・報告書系",
-      "status": "idea",
-      "link": "tool-331"
     },
     {
       "no": 332,
