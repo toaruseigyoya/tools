@@ -3,44 +3,79 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>汎用ツール集 | 今日もあいネコ</title>
-  <meta name="description" content="動作確認済みの汎用Webツール集。文字数カウンター、色辞典、OGP確認、URL抽出、メールアドレス確認などを無料で利用できます。">
+  <title>公開ツール一覧 | 今日もあいネコ</title>
+  <meta name="description" content="今日もあいネコの公開ツール一覧です。PDF、文字抽出、メール文面作成、タスク管理、文章・Web・画像まわりの便利ツールをまとめています。">
   <link rel="canonical" href="https://toaruseigyoya.github.io/tools/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="今日もあいネコ">
+  <meta property="og:title" content="公開ツール一覧 | 今日もあいネコ">
+  <meta property="og:description" content="PDF、文字抽出、メール文面作成、タスク管理、文章・Web・画像まわりの便利ツールをまとめています。">
+  <meta property="og:url" content="https://toaruseigyoya.github.io/tools/">
+  <meta property="og:image" content="https://toaruseigyoya.github.io/assets/images/aineko-banner.png">
+  <meta name="twitter:card" content="summary_large_image">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--mint:#36c49f;--pink:#ff8cb3;--sky:#5fb5ff;--ink:#273044;--sub:#667085;--bg:#f7fbff;--card:#fff;--line:#dbe8f4;--shadow:0 10px 30px rgba(45,70,100,.09)}
-    body{font-family:'Segoe UI','Yu Gothic UI','Hiragino Sans',sans-serif;background:linear-gradient(180deg,#fffaf0,#f7fbff);color:var(--ink);line-height:1.7;min-height:100vh}
-    header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
-    .head{max-width:1040px;margin:auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px}
-    .logo{font-weight:900}.home{color:#2581c4;text-decoration:none;font-weight:800;font-size:.86rem}
-    main{max-width:1040px;margin:auto;padding:34px 20px 64px}
-    .hero{margin-bottom:24px}.hero h1{font-size:1.75rem;margin-bottom:6px}.hero p{color:var(--sub)}
-    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-    .card{display:grid;grid-template-columns:52px minmax(0,1fr);gap:14px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;color:var(--ink);text-decoration:none;box-shadow:var(--shadow);transition:transform .15s,border-color .15s}
-    .card:hover{transform:translateY(-2px);border-color:rgba(54,196,159,.55)}
-    .icon{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;color:#fff;font-size:1.25rem;font-weight:900;background:linear-gradient(135deg,var(--mint),var(--sky))}
-    .title{font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.desc{color:var(--sub);font-size:.86rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .note{margin-top:22px;color:var(--sub);font-size:.85rem}
-    @media(max-width:700px){.grid{grid-template-columns:1fr}.head{align-items:flex-start;flex-direction:column}}
+    :root{--mint:#36c49f;--sky:#5fb5ff;--pink:#ff8cb3;--ink:#273044;--sub:#65708a;--line:#f0dccb;--shadow:0 14px 38px rgba(85,70,50,.12)}
+    body{font-family:'Segoe UI','Yu Gothic UI','Hiragino Sans',sans-serif;background:linear-gradient(180deg,#fff7df,#f7fbff 58%,#fff7fb);color:var(--ink);line-height:1.75;min-height:100vh}
+    .site-banner{max-width:1120px;margin:18px auto 0;padding:0 20px}.site-banner img{width:100%;max-height:300px;object-fit:contain;background:#fff;border-radius:18px;border:3px solid #fff;box-shadow:var(--shadow);display:block}
+    main{max-width:1040px;margin:0 auto;padding:24px 20px 70px}.crumb{display:inline-flex;min-height:40px;align-items:center;color:#0f7f68;font-size:.9rem;font-weight:900;text-decoration:none;margin-bottom:14px}
+    .hero,.section{background:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.9);border-radius:18px;box-shadow:var(--shadow);padding:22px;margin-bottom:16px}
+    h1{font-size:clamp(1.8rem,5vw,2.8rem);line-height:1.2;letter-spacing:0;margin-bottom:10px}.lead{color:var(--sub);max-width:720px;font-size:1rem}
+    .category-title{margin:22px 0 4px;font-size:1.12rem}.tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:14px}
+    .tool-card{display:flex;flex-direction:column;gap:10px;min-height:180px;padding:18px;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);text-decoration:none}.tool-card h2{font-size:1.05rem;line-height:1.4}.tool-card p{color:var(--sub);font-size:.9rem;flex:1}
+    .status{align-self:flex-start;border-radius:999px;padding:4px 10px;font-size:.78rem;font-weight:900}.live{background:#eaf8f3;color:#0f7f68;border:1px solid #c8efe3}.dev{background:#fff7d6;color:#8a6a12;border:1px solid #f3d982}.checking{background:#edf4ff;color:#315f9a;border:1px solid #cfe0f7}.pr{background:#fff0df;color:#9a551a;border:1px solid #f2cfad}.open{color:#0f7f68;font-weight:900;font-size:.88rem}
+    footer{text-align:center;color:#8a7890;font-size:.9rem;padding:24px}.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-bottom:10px}.footer-links a{display:inline-flex;align-items:center;min-height:42px;padding:8px 12px;border-radius:12px;background:#f6fbff;border:1px solid #dcecf7;color:#526179;text-decoration:none;font-size:.92rem;font-weight:900}
+    @media(max-width:700px){.site-banner,main{padding-inline:14px}.hero,.section{padding:18px}}
   </style>
+  <script defer src="/assets/share-buttons.js"></script>
 </head>
 <body>
-<header><div class="head"><div class="logo">汎用ツール集</div><a class="home" href="https://toaruseigyoya.github.io/">ホームへ</a></div></header>
-<main>
-  <section class="hero">
-    <h1>汎用ツール集</h1>
-    <p>よく使うものから動作確認して正式公開しています。旧ツール群は「汎用ツール集(動作確認中)」に分けています。</p>
-  </section>
-  <section class="grid" aria-label="ツール一覧">
-    <a class="card" href="./char-count/"><span class="icon">字</span><span><span class="title">文字数カウンター</span><br><span class="desc">文字数・行数・バイト数をブラウザ内で計測</span></span></a>
-    <a class="card" href="./color-dictionary/"><span class="icon">色</span><span><span class="title">色辞典</span><br><span class="desc">色名・カラーコードを一覧で確認</span></span></a>
-    <a class="card" href="./ogp-check/"><span class="icon">OG</span><span><span class="title">OGP確認</span><br><span class="desc">URLやHTMLからSNS表示用メタ情報を確認</span></span></a>
-    <a class="card" href="./url-extract/"><span class="icon">URL</span><span><span class="title">URL抽出</span><br><span class="desc">入力文からURLだけを抽出</span></span></a>
-    <a class="card" href="./email-check/"><span class="icon">@</span><span><span class="title">メールアドレス確認</span><br><span class="desc">形式・重複・ドメインをまとめて確認</span></span></a>
-    <a class="card" href="./email-extract/"><span class="icon">@</span><span><span class="title">メールアドレス抽出</span><br><span class="desc">入力文からメールアドレスだけを抽出</span></span></a>
-    <a class="card" href="./checking/"><span class="icon">旧</span><span><span class="title">汎用ツール集(動作確認中)</span><br><span class="desc">旧496件ツール一覧の確認用ページ</span></span></a>
-  </section>
-  <p class="note">入力内容は各ツールの画面で処理します。外部通信が必要なツールでは画面内に明記します。</p>
-</main>
+  <div class="site-banner"><img src="/assets/images/aineko-banner.png" alt="今日もあいネコ"></div>
+  <main>
+    <a class="crumb" href="/">← ホームへ戻る</a>
+    <section class="hero">
+      <h1>公開ツール一覧</h1>
+      <p class="lead">PDF、文字抽出、メール文面作成、タスク管理など、今日もあいネコで公開しているツールをまとめています。動作確認中のものは下部に分けて掲載します。</p>
+    </section>
+    <section class="section">
+      <h2 class="category-title">よく使うツール</h2>
+      <div class="tool-grid">
+        <a class="tool-card" href="/utilities/pdf/"><span class="status live">公開中</span><h2>PDF結合・分割</h2><p>PDFの分割・結合など、日常作業で使う処理をまとめます。</p><span class="open">開く</span></a>
+        <a class="tool-card" href="/utilities/text-extract/"><span class="status live">公開中</span><h2>文字抽出・OCR</h2><p>画像やPDFから文字を取り出すための文字抽出ツールです。</p><span class="open">開く</span></a>
+        <a class="tool-card" href="/utilities/mail-generator/"><span class="status live">公開中</span><h2>メール文面自動作成</h2><p>用途に合わせてメール文面のたたき台を作るツールです。</p><span class="open">開く</span></a>
+        <a class="tool-card" href="/tasks/"><span class="status live">公開中</span><h2>タスク管理</h2><p>期限や進捗を整理しながら、作業を見える化するためのページです。</p><span class="open">開く</span></a>
+      </div>
+      <h2 class="category-title">文章・テキスト</h2>
+      <div class="tool-grid">
+        <a class="tool-card" href="./char-count/"><span class="status live">公開中</span><h2>文字数カウンター</h2><p>文字数・行数・バイト数をブラウザ内で計測します。</p><span class="open">開く</span></a>
+        <a class="tool-card" href="./url-extract/"><span class="status live">公開中</span><h2>URL抽出</h2><p>入力文からURLだけを抽出して整理します。</p><span class="open">開く</span></a>
+        <a class="tool-card" href="./email-check/"><span class="status live">公開中</span><h2>メールアドレス確認</h2><p>形式・重複・ドメインをまとめて確認します。</p><span class="open">開く</span></a>
+      </div>
+      <h2 class="category-title">Web・画像</h2>
+      <div class="tool-grid">
+        <a class="tool-card" href="./ogp-check/"><span class="status live">公開中</span><h2>OGP確認</h2><p>URLやHTMLからSNS表示用メタ情報を確認します。</p><span class="open">開く</span></a>
+        <a class="tool-card" href="/utilities/image-maker/"><span class="status live">公開中</span><h2>SNS画像作成</h2><p>SNSや記事で使う画像づくりを補助するツールです。</p><span class="open">開く</span></a>
+        <a class="tool-card" href="/utilities/url-shortener/"><span class="status live">公開中</span><h2>URL短縮</h2><p>長いURLを扱いやすくするための小さな便利ツールです。</p><span class="open">開く</span></a>
+      </div>
+      <h2 class="category-title">紹介・広告関連</h2>
+      <div class="tool-grid">
+        <a class="tool-card" href="/affiliate/"><span class="status pr">PR準備</span><h2>おすすめツール紹介</h2><p>作業効率化や便利サービスを紹介する、広告掲載テスト用のページです。</p><span class="open">開く</span></a>
+      </div>
+    </section>
+    <section class="section" id="checking">
+      <h2>動作確認中ツール</h2>
+      <div class="tool-grid">
+        <a class="tool-card" href="./checking/"><span class="status checking">確認中</span><h2>旧ツール置き場</h2><p>旧ツールや動作確認中のツールは、初見の方が迷わないよう下部にまとめます。</p><span class="open">開く</span></a>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <nav class="footer-links" aria-label="サイト情報">
+      <a href="/contact/">お問い合わせ</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/disclaimer/">免責事項</a>
+    </nav>
+    © 2026 今日もあいネコ
+  </footer>
 </body>
 </html>
