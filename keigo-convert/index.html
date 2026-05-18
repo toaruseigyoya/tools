@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>敬語変換ツール | 公開ツール一覧</title>
+  <meta name="description" content="文章を丁寧語、敬語なし、尊敬語、謙譲語の方向へ整える敬語変換ツールです。入力内容はブラウザ内で処理します。">
+  <style>
+    *{box-sizing:border-box}body{font-family:'Segoe UI','Yu Gothic UI',sans-serif;background:#f6f8fc;color:#1f2937;margin:0;line-height:1.7}header,main{max-width:980px;margin:auto;padding:20px}.back{color:#2563eb;text-decoration:none;font-weight:900}.lead,.muted{color:#667085}.card{background:#fff;border:1px solid #d9e3f0;border-radius:14px;padding:18px;margin:14px 0}label{display:block;font-weight:900;margin-bottom:6px}textarea{width:100%;min-height:220px;border:1px solid #d9e3f0;border-radius:12px;padding:12px;font:15px/1.7 'Yu Gothic UI',sans-serif;resize:vertical}.mode{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0 14px}.mode button,.btn{border:0;border-radius:10px;padding:10px 12px;font-weight:900;cursor:pointer}.mode button{background:#eaf1ff;color:#315f9a}.mode button.active{background:#2563eb;color:#fff}.btn{background:#2563eb;color:#fff}.sub{background:#eef2f7;color:#3f4d63}.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.out{white-space:pre-wrap;min-height:180px;background:#f8fbff;border:1px solid #d9e3f0;border-radius:12px;padding:12px}.note{font-size:.86rem;color:#667085;margin-top:8px}@media(max-width:720px){.mode{grid-template-columns:1fr 1fr}header,main{padding:16px}}
+  </style>
+</head>
+<body>
+  <header>
+    <a class="back" href="../">← 公開ツール一覧へ</a>
+    <h1>敬語変換ツール</h1>
+    <p class="lead">文章を、丁寧語・敬語なし・尊敬語・謙譲語の方向へ整えます。入力内容はブラウザ内で処理します。</p>
+  </header>
+  <main>
+    <section class="card">
+      <label for="input">変換したい文章</label>
+      <textarea id="input" placeholder="例：明日、資料を見てください。こちらで確認します。"></textarea>
+      <div class="mode" aria-label="変換モード">
+        <button type="button" class="active" data-mode="polite">丁寧語</button>
+        <button type="button" data-mode="plain">敬語なし</button>
+        <button type="button" data-mode="respect">尊敬語</button>
+        <button type="button" data-mode="humble">謙譲語</button>
+      </div>
+      <div class="row">
+        <button class="btn" id="convert">変換する</button>
+        <button class="btn sub" id="sample">例文を入れる</button>
+        <button class="btn sub" id="clear">クリア</button>
+      </div>
+      <p class="note">機械的な変換なので、社外文書や重要文書では最終確認してください。</p>
+    </section>
+    <section class="card">
+      <h2>変換結果</h2>
+      <div class="out" id="output"></div>
+      <div class="row"><button class="btn" id="copy">結果をコピー</button></div>
+    </section>
+  </main>
+<script>
+const input=document.getElementById('input'),output=document.getElementById('output');let mode='polite';
+document.querySelectorAll('[data-mode]').forEach(btn=>btn.onclick=()=>{mode=btn.dataset.mode;document.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('active',b===btn));convert()});
+function base(s){return s.replace(/\r\n/g,'\n').trim()}
+function polite(s){return base(s)
+ .replace(/だ。/g,'です。').replace(/だった。/g,'でした。').replace(/する。/g,'します。').replace(/した。/g,'しました。')
+ .replace(/できる。/g,'できます。').replace(/ある。/g,'あります。').replace(/ない。/g,'ありません。')
+ .replace(/ください。?/g,'ください。').replace(/見て/g,'確認して').replace(/言って/g,'伝えて')}
+function plain(s){return base(s)
+ .replace(/いたします/g,'する').replace(/いたしました/g,'した').replace(/しております/g,'している').replace(/ございます/g,'ある')
+ .replace(/です。/g,'だ。').replace(/でした。/g,'だった。').replace(/します。/g,'する。').replace(/しました。/g,'した。')
+ .replace(/ください。/g,'して。').replace(/お願いいたします/g,'お願いする').replace(/お願いします/g,'お願いする')}
+function respect(s){return polite(s)
+ .replace(/見てください/g,'ご覧ください').replace(/確認してください/g,'ご確認ください').replace(/来てください/g,'お越しください')
+ .replace(/行ってください/g,'いらしてください').replace(/言ってください/g,'おっしゃってください')
+ .replace(/しています/g,'されています').replace(/します/g,'なさいます').replace(/しました/g,'なさいました')}
+function humble(s){return polite(s)
+ .replace(/確認します/g,'確認いたします').replace(/送ります/g,'お送りいたします').replace(/連絡します/g,'ご連絡いたします')
+ .replace(/説明します/g,'ご説明いたします').replace(/対応します/g,'対応いたします').replace(/行きます/g,'伺います')
+ .replace(/見ます/g,'拝見します').replace(/聞きます/g,'伺います').replace(/します/g,'いたします')}
+function convert(){const text=input.value;if(!text.trim()){output.textContent='';return}output.textContent=({polite,plain,respect,humble}[mode]||polite)(text)}
+document.getElementById('convert').onclick=convert;
+document.getElementById('sample').onclick=()=>{input.value='明日、資料を見てください。\nこちらで内容を確認します。\n問題があれば連絡します。';convert()};
+document.getElementById('clear').onclick=()=>{input.value='';output.textContent=''};
+document.getElementById('copy').onclick=async()=>{if(output.textContent)await navigator.clipboard.writeText(output.textContent)};
+input.addEventListener('input',convert);
+</script>
+</body>
+</html>
